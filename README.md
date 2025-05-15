@@ -56,3 +56,11 @@ A clean and user-friendly Flutter application to convert gold weight between tra
    ```bash
    git clone https://github.com/your-username/gold_converter_flutter.git
    cd gold_converter_flutter
+
+
+2. **🧪 Trigger Build**
+
+To run this workflow, simply tag and push:
+  ```bash
+  git tag v1.0.0
+  git push origin v1.0.0
