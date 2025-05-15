@@ -1,0 +1,65 @@
+name: Build Universal & Split APKs + GitHub Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers on version tags like v1.0.0
+
+jobs:
+  build:
+    name: Build APKs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🔧 Set up Flutter (latest stable)
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: 🔍 Flutter doctor
+        run: flutter doctor -v
+
+      - name: 📦 Install dependencies
+        run: flutter pub get
+
+      - name: 🛠 Build Universal APK
+        run: flutter build apk --release
+
+      - name: 🛠 Build Split APKs
+        run: flutter build apk --split-per-abi
+
+      - name: 📁 Rename and organize APKs
+        run: |
+          mkdir -p build/apks
+          cp build/app/outputs/flutter-apk/app-release.apk build/apks/app-universal.apk
+          cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk build/apks/
+          cp build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk build/apks/
+          cp build/app/outputs/flutter-apk/app-x86_64-release.apk build/apks/
+
+      - name: 📂 List all APKs
+        run: ls -lh build/apks
+
+      - name: 🚀 Create GitHub Release and Upload APKs
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          body: |
+            🔄 Auto-generated build from CI.
+            📅 Build Date: ${{ github.event.head_commit.timestamp }}
+            📦 Includes: Universal + Split APKs.
+          files: |
+            build/apks/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🧹 Cleanup old releases 
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          keep_latest: 3
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
