@@ -22,11 +22,9 @@ A clean and user-friendly Flutter application to convert gold weight between tra
 
 ## 📸 Screenshots
 
-> _Replace these placeholders with real screenshots once available._
-
-| Input Form | Conversion Result | Gold Price |
-|------------|-------------------|------------|
-| ![input](screenshots/input.png) | ![result](screenshots/result.png) | ![price](screenshots/price.png) |
+| Input Form | Conversion Results |
+|------------|-------------------|
+| <img width="300" alt="Gold Weight Converter Input Form" src="https://github.com/user-attachments/assets/a5eed981-32aa-4001-b9a1-f3fbb0b6ced5" /> | <img width="300" alt="Gold Weight Converter Results" src="https://github.com/user-attachments/assets/7374c7a3-97bb-47c2-b5c5-916dfbcc589a" /> |
 
 ---
 
@@ -34,9 +32,9 @@ A clean and user-friendly Flutter application to convert gold weight between tra
 
 | Unit    | Gram Equivalent | Notes                          |
 | ------- | --------------- | ------------------------------ |
-| 1 Tola  | 11.66 g         | = 12 Masha = 96 Ratti = 16 Ana |
-| 1 Masha | 0.972 g         | = 8 Ratti                      |
-| 1 Ana   | 0.72875 g       |                                |
+| 1 Tola  | 11.66 g         | = 12 Masha = 16 Ana = 96 Ratti |
+| 1 Masha | 0.972 g         | = 1.333 Ana = 8 Ratti          |
+| 1 Ana   | 0.72875 g       | = 6 Ratti                      |
 | 1 Ratti | 0.1215 g        |                                |
 
 ---
