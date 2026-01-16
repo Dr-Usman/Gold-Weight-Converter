@@ -1,4 +1,4 @@
-package com.example.gold_weight_converter
+package com.avenzor.gold_weight_converter
 
 import io.flutter.embedding.android.FlutterActivity
 
