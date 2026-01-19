@@ -1,6 +1,6 @@
 # 📱 Gold Weight Converter App
 
-A clean and user-friendly Flutter application to convert gold weight between traditional South Asian units (Tola, Masha, Ana, Ratti) and metric units (Gram). It also provides real-time gold price estimation based on current rates.
+A clean, open source and user-friendly Flutter application to convert gold weight between traditional South Asian units (Tola, Masha, Ana, Ratti) and metric units (Gram). It also provides real-time gold price estimation based on current rates.
 
 ---
 
@@ -25,6 +25,19 @@ A clean and user-friendly Flutter application to convert gold weight between tra
 | Input Form | Conversion Results |
 |------------|-------------------|
 | <img width="300" alt="Gold Weight Converter Input Form" src="https://github.com/user-attachments/assets/a5eed981-32aa-4001-b9a1-f3fbb0b6ced5" /> | <img width="300" alt="Gold Weight Converter Results" src="https://github.com/user-attachments/assets/7374c7a3-97bb-47c2-b5c5-916dfbcc589a" /> |
+
+---
+
+# Download
+* Pleass choose one source for android apk. you won't be able to update from cross build apk source.
+
+<a href="https://github.com/Dr-Usman/Gold-Weight-Converter/releases/latest">
+  <img src="https://github.com/user-attachments/assets/7f24e68f-1bee-4cab-a0ec-5a5ec66632c2" width="250" />
+</a>
+<a href="https://play.google.com/store/apps/details?id=com.avenzor.gold_weight_converter">
+  <img src="https://github.com/user-attachments/assets/2038fc47-dd6c-488c-b423-598723600d6e" width="250" />
+</a>
+
 
 ---
 
