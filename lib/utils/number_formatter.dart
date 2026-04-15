@@ -1,9 +1,8 @@
 import 'package:flutter/services.dart';
+import 'package:gold_weight_converter/constants/app_constants.dart';
 import 'package:intl/intl.dart';
 
 class ThousandsSeparatorInputFormatter extends TextInputFormatter {
-  static final NumberFormat _formatter = NumberFormat('#,##0.####');
-
   @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
@@ -16,7 +15,7 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
 
     // Remove all non-digit and non-decimal characters except the first decimal point
     String cleanText = newValue.text.replaceAll(RegExp(r'[^\d.]'), '');
-    
+
     // Handle multiple decimal points - keep only the first one
     List<String> parts = cleanText.split('.');
     if (parts.length > 2) {
@@ -42,7 +41,7 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
         formattedText = '0.';
       }
     } else if (value != null) {
-      formattedText = _formatter.format(value);
+      formattedText = AppConstants.thousandNumberFormat.format(value);
     } else {
       formattedText = cleanText;
     }
@@ -75,7 +74,7 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
     // Count commas before the cursor in the old and new text
     int oldCommas = _countCommasBefore(oldText, originalCursor);
     int newCommas = _countCommasBefore(formattedText, originalCursor);
-    
+
     // Adjust cursor position based on comma difference
     int adjustment = newCommas - oldCommas;
     int newPosition = originalCursor + adjustment;
@@ -87,25 +86,5 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
   int _countCommasBefore(String text, int position) {
     if (position > text.length) position = text.length;
     return text.substring(0, position).split(',').length - 1;
-  }
-}
-
-class NumberHelper {
-  static final NumberFormat _formatter = NumberFormat('#,##0.####');
-  
-  /// Formats a number with thousand separators
-  static String formatNumber(double number) {
-    return _formatter.format(number);
-  }
-  
-  /// Removes formatting and returns clean number string
-  static String cleanNumber(String formattedNumber) {
-    return formattedNumber.replaceAll(',', '');
-  }
-  
-  /// Parses a formatted number string to double
-  static double? parseFormattedNumber(String formattedNumber) {
-    String clean = cleanNumber(formattedNumber);
-    return double.tryParse(clean);
   }
 }
