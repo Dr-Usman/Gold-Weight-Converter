@@ -26,6 +26,8 @@ jobs:
         run: flutter pub get
 
       - name: 🔑 Decode Keystore & Key Properties
+        # For Copy file to base64 (macOS)
+        # base64 -i key.properties | pbcopy
         run: |
           echo "${{ secrets.KEYPROPERTIES_BASE64 }}" | base64 --decode > android/key.properties
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/gwc_release_key.jks
