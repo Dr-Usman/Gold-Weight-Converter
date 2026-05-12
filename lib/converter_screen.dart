@@ -245,8 +245,8 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           gradient: LinearGradient(
             colors: [
               AppColors.background,
-              Color(0xFFFFF2D4),
-              Color(0xFFFFFCF3),
+              AppColors.backgroundMid,
+              AppColors.backgroundFade,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -505,7 +505,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                   color: AppColors.primaryDark.withValues(alpha: 0.55),
                   width: 1.5,
                 ),
-                color: const Color(0xFFFFF9F4),
+                color: AppColors.clearButtonBackground,
               ),
               child: ElevatedButton(
                 onPressed: _clearAll,
@@ -547,7 +547,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         gradient: const LinearGradient(
-          colors: [Color(0xFFFFF9D9), Color(0xFFFFFEFA)],
+          colors: [AppColors.resultCardStart, AppColors.resultCardEnd],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -605,7 +605,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         gradient: const LinearGradient(
-          colors: [Color(0xFFFFF0B8), Color(0xFFF9C74F)],
+          colors: [AppColors.priceCardStart, AppColors.priceCardEnd],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -623,7 +623,11 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       ),
       child: Row(
         children: [
-          const Icon(Icons.monetization_on, color: Color(0xFF8B5E15), size: 28),
+          const Icon(
+            Icons.monetization_on,
+            color: AppColors.goldDeep,
+            size: 28,
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
