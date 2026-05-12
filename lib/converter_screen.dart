@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gold_weight_converter/constants/app_colors.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
 import 'package:gold_weight_converter/providers/unit_provider.dart';
 import 'package:gold_weight_converter/providers/weight_provider.dart';
@@ -213,21 +214,25 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 72,
         title: const Text(
           'Gold Weight Converter',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 21,
+            letterSpacing: 0.2,
+          ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.amber[600],
         foregroundColor: Colors.white,
         elevation: 0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [
-                Colors.amber[400]!,
-                Colors.amber[600]!,
-                Colors.amber[800]!,
+                AppColors.primaryDark,
+                AppColors.primary,
+                AppColors.secondary,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -235,139 +240,202 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           ),
         ),
       ),
-      backgroundColor: Colors.grey[50],
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.amber[50]!, Colors.white],
+            colors: [
+              AppColors.background,
+              Color(0xFFFFF2D4),
+              Color(0xFFFFFCF3),
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
-        child: SingleChildScrollView(
-          controller: scrollController,
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 10),
-              GoldTextField(
-                label: 'Tola',
-                info: '1 Tola = 11.66 grams = 12 Masha = 16 Ana = 96 Ratti',
-                controller: tolaController,
-                semanticLabel: 'Tola weight input field',
-                validator: _validateInput,
-                onChanged: _calculate,
-                hintText: 'e.g. 2.5',
+        child: Stack(
+          children: [
+            Positioned(
+              top: -120,
+              left: -80,
+              child: Container(
+                width: 260,
+                height: 260,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.secondary.withValues(alpha: 0.18),
+                ),
               ),
-              GoldTextField(
-                label: 'Masha',
-                info: '1 Masha = 0.972 grams = 1.333 Ana = 8 Ratti',
-                controller: mashaController,
-                semanticLabel: 'Masha weight input field',
-                validator: _validateInput,
-                onChanged: _calculate,
-                hintText: 'e.g. 12.5',
+            ),
+            Positioned(
+              right: -90,
+              top: 180,
+              child: Container(
+                width: 220,
+                height: 220,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primary.withValues(alpha: 0.12),
+                ),
               ),
-              GoldTextField(
-                label: 'Ana',
-                info: '1 Ana = 0.72875 grams = 6 Ratti',
-                controller: anaController,
-                semanticLabel: 'Ana weight input field',
-                validator: _validateInput,
-                onChanged: _calculate,
-                hintText: 'e.g. 16.25',
-              ),
-              GoldTextField(
-                label: 'Ratti',
-                info: '1 Ratti = 0.1215 grams',
-                controller: rattiController,
-                semanticLabel: 'Ratti weight input field',
-                validator: _validateInput,
-                onChanged: _calculate,
-                hintText: 'e.g. 96.75',
-              ),
-              GoldTextField(
-                label: 'Gram',
-                info: 'Direct gram input',
-                controller: gramController,
-                semanticLabel: 'Gram weight input field',
-                validator: _validateInput,
-                onChanged: _calculate,
-                hintText: 'e.g. 11.66',
-              ),
-              Consumer(
-                builder: (context, ref, child) {
-                  final selectedUnit = ref.watch(rateUnitProvider);
+            ),
+            SafeArea(
+              child: SingleChildScrollView(
+                controller: scrollController,
+                padding: const EdgeInsets.fromLTRB(16, 18, 16, 24),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 760),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(18, 20, 18, 18),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24),
+                            color: Colors.white.withValues(alpha: 0.95),
+                            border: Border.all(
+                              color: AppColors.cardBorder.withValues(
+                                alpha: 0.9,
+                              ),
+                              width: 1.4,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.primaryDark.withValues(
+                                  alpha: 0.12,
+                                ),
+                                blurRadius: 20,
+                                offset: const Offset(0, 8),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              GoldTextField(
+                                label: 'Tola',
+                                info:
+                                    '1 Tola = 11.66 grams = 12 Masha = 16 Ana = 96 Ratti',
+                                controller: tolaController,
+                                semanticLabel: 'Tola weight input field',
+                                validator: _validateInput,
+                                onChanged: _calculate,
+                                hintText: 'e.g. 2.5',
+                              ),
+                              GoldTextField(
+                                label: 'Masha',
+                                info:
+                                    '1 Masha = 0.972 grams = 1.333 Ana = 8 Ratti',
+                                controller: mashaController,
+                                semanticLabel: 'Masha weight input field',
+                                validator: _validateInput,
+                                onChanged: _calculate,
+                                hintText: 'e.g. 12.5',
+                              ),
+                              GoldTextField(
+                                label: 'Ana',
+                                info: '1 Ana = 0.72875 grams = 6 Ratti',
+                                controller: anaController,
+                                semanticLabel: 'Ana weight input field',
+                                validator: _validateInput,
+                                onChanged: _calculate,
+                                hintText: 'e.g. 16.25',
+                              ),
+                              GoldTextField(
+                                label: 'Ratti',
+                                info: '1 Ratti = 0.1215 grams',
+                                controller: rattiController,
+                                semanticLabel: 'Ratti weight input field',
+                                validator: _validateInput,
+                                onChanged: _calculate,
+                                hintText: 'e.g. 96.75',
+                              ),
+                              GoldTextField(
+                                label: 'Gram',
+                                info: 'Direct gram input',
+                                controller: gramController,
+                                semanticLabel: 'Gram weight input field',
+                                validator: _validateInput,
+                                onChanged: _calculate,
+                                hintText: 'e.g. 11.66',
+                              ),
+                              Consumer(
+                                builder: (context, ref, child) {
+                                  final selectedUnit = ref.watch(
+                                    rateUnitProvider,
+                                  );
 
-                  return GoldTextField(
-                    label: 'Gold Rate',
-                    info: 'Current market rate per unit',
-                    controller: goldRateController,
-                    semanticLabel: 'Gold rate input field',
-                    validator: _validateInput,
-                    onChanged: _calculate,
-                    hintText: 'e.g. 150,000',
-                    hasDropdown: true,
-                    dropdownValue: selectedUnit.name,
-                    dropdownItems:
-                        UnitEnum.values.map<String>((e) => e.name).toList(),
-                    // dropdownItems: const ['Tola', '10 Gram', '1 Gram'],
-                    onDropdownChanged: (value) {
-                      if (value == null) return;
+                                  return GoldTextField(
+                                    label: 'Gold Rate',
+                                    info: 'Current market rate per unit',
+                                    controller: goldRateController,
+                                    semanticLabel: 'Gold rate input field',
+                                    validator: _validateInput,
+                                    onChanged: _calculate,
+                                    hintText: 'e.g. 150,000',
+                                    hasDropdown: true,
+                                    dropdownValue: selectedUnit.name,
+                                    dropdownItems:
+                                        UnitEnum.values
+                                            .map<String>((e) => e.name)
+                                            .toList(),
+                                    onDropdownChanged: (value) {
+                                      if (value == null) return;
 
-                      final UnitEnum newUnit = UnitEnum.fromString(value);
-                      ref.read(rateUnitProvider.notifier).state = newUnit;
+                                      final UnitEnum newUnit =
+                                          UnitEnum.fromString(value);
+                                      ref
+                                          .read(rateUnitProvider.notifier)
+                                          .state = newUnit;
+                                      _calculate();
+                                    },
+                                  );
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                              _buildCalculateAndClearButtons(),
+                              Consumer(
+                                builder: (context, ref, child) {
+                                  final resultText = ref.watch(
+                                    goldResultNotifierProvider.select(
+                                      (model) => model.weightsText,
+                                    ),
+                                  );
 
-                      // setState(() {
-                      //   goldRateUnit = value;
-                      // });
-                      _calculate();
-                    },
-                  );
-                },
-              ),
-              const SizedBox(height: 10),
-              // Calculate and Clear Buttons
-              _buildCalculateAndClearButtons(),
+                                  if (resultText == null ||
+                                      resultText.isEmpty) {
+                                    return const SizedBox.shrink();
+                                  }
 
-              // Weights Results Section
-              Consumer(
-                builder: (context, ref, child) {
-                  final resultText = ref.watch(
-                    goldResultNotifierProvider.select(
-                      (model) => model.weightsText,
+                                  return _buildWeightsResultSection(resultText);
+                                },
+                              ),
+                              Consumer(
+                                builder: (context, ref, child) {
+                                  final priceText = ref.watch(
+                                    goldResultNotifierProvider.select(
+                                      (model) => model.priceText,
+                                    ),
+                                  );
+
+                                  if (priceText == null || priceText.isEmpty) {
+                                    return const SizedBox.shrink();
+                                  }
+
+                                  return _buildPriceResultSection(priceText);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  );
-
-                  if (resultText == null || resultText.isEmpty) {
-                    return const SizedBox.shrink();
-                  }
-
-                  return _buildWeightsResultSection(resultText);
-                },
+                  ),
+                ),
               ),
-
-              // Price Section
-              Consumer(
-                builder: (context, ref, child) {
-                  final priceText = ref.watch(
-                    goldResultNotifierProvider.select(
-                      (model) => model.priceText,
-                    ),
-                  );
-
-                  if (priceText == null || priceText.isEmpty) {
-                    return const SizedBox.shrink();
-                  }
-
-                  return _buildPriceResultSection(priceText);
-                },
-              ),
-
-              SizedBox(height: 10),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -383,15 +451,15 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                gradient: LinearGradient(
-                  colors: [Colors.amber[400]!, Colors.amber[600]!],
+                gradient: const LinearGradient(
+                  colors: [AppColors.primaryDark, AppColors.primary],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.amber.withValues(alpha: 0.3),
-                    blurRadius: 8,
+                    color: AppColors.primaryDark.withValues(alpha: 0.24),
+                    blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
                 ],
@@ -433,13 +501,17 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.red[300]!, width: 1.5),
+                border: Border.all(
+                  color: AppColors.primaryDark.withValues(alpha: 0.55),
+                  width: 1.5,
+                ),
+                color: const Color(0xFFFFF9F4),
               ),
               child: ElevatedButton(
                 onPressed: _clearAll,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.red[600],
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: AppColors.primaryDark,
                   shadowColor: Colors.transparent,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
@@ -470,19 +542,22 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
 
   Widget _buildWeightsResultSection(String resultText) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        gradient: LinearGradient(
-          colors: [Colors.amber[50]!, Colors.white],
+        borderRadius: BorderRadius.circular(18),
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFFF9D9), Color(0xFFFFFEFA)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        border: Border.all(color: Colors.amber[200]!, width: 1.5),
+        border: Border.all(
+          color: AppColors.cardBorder.withValues(alpha: 0.9),
+          width: 1.5,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.amber.withValues(alpha: 0.1),
+            color: AppColors.primaryDark.withValues(alpha: 0.11),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -495,7 +570,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
             children: [
               Icon(
                 Icons.analytics_outlined,
-                color: Colors.amber[700],
+                color: AppColors.primaryDark,
                 size: 24,
               ),
               const SizedBox(width: 8),
@@ -504,7 +579,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.amber[800],
+                  color: AppColors.ink,
                 ),
               ),
             ],
@@ -514,7 +589,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
             resultText,
             style: const TextStyle(
               fontSize: 14,
-              color: Colors.black87,
+              color: AppColors.ink,
               height: 1.5,
             ),
           ),
@@ -528,16 +603,19 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       margin: const EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        gradient: LinearGradient(
-          colors: [Colors.green[50]!, Colors.green[100]!],
+        borderRadius: BorderRadius.circular(18),
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFFF0B8), Color(0xFFF9C74F)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        border: Border.all(color: Colors.green[300]!, width: 1.5),
+        border: Border.all(
+          color: AppColors.primaryDark.withValues(alpha: 0.4),
+          width: 1.5,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.green.withValues(alpha: 0.2),
+            color: AppColors.primaryDark.withValues(alpha: 0.2),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -545,15 +623,15 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       ),
       child: Row(
         children: [
-          Icon(Icons.monetization_on, color: Colors.green[700], size: 28),
+          const Icon(Icons.monetization_on, color: Color(0xFF8B5E15), size: 28),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
               priceText,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.green[800],
+                color: AppColors.ink,
               ),
             ),
           ),
