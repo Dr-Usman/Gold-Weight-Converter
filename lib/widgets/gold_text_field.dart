@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gold_weight_converter/constants/app_colors.dart';
+
 import '../utils/number_formatter.dart';
 
 class GoldTextField extends StatelessWidget {
@@ -33,6 +35,8 @@ class GoldTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
@@ -40,17 +44,17 @@ class GoldTextField extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
+            style: textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w700,
               fontSize: 16,
-              color: Colors.amber[800],
+              color: AppColors.primaryDark,
             ),
           ),
           const SizedBox(height: 6),
           Text(
             info,
-            style: TextStyle(
-              color: Colors.grey[600],
+            style: textTheme.bodySmall?.copyWith(
+              color: AppColors.ink.withValues(alpha: 0.62),
               fontSize: 12,
               fontStyle: FontStyle.italic,
             ),
@@ -72,9 +76,9 @@ class GoldTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.amber.withValues(alpha: 0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
+              color: AppColors.primary.withValues(alpha: 0.12),
+              blurRadius: 10,
+              offset: const Offset(0, 3),
             ),
           ],
         ),
@@ -106,9 +110,9 @@ class GoldTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.amber.withValues(alpha: 0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
+                  color: AppColors.primary.withValues(alpha: 0.12),
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
@@ -142,9 +146,15 @@ class GoldTextField extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.amber[300]!, width: 1.5),
+              border: Border.all(
+                color: AppColors.cardBorder.withValues(alpha: 0.95),
+                width: 1.5,
+              ),
               gradient: LinearGradient(
-                colors: [Colors.amber[50]!, Colors.amber[100]!],
+                colors: [
+                  AppColors.primary.withValues(alpha: 0.08),
+                  AppColors.secondaryLight.withValues(alpha: 0.95),
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -156,14 +166,14 @@ class GoldTextField extends StatelessWidget {
                   value: dropdownValue,
                   isExpanded: true,
                   style: TextStyle(
-                    color: Colors.amber[800],
+                    color: AppColors.ink,
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
                   ),
-                  dropdownColor: Colors.amber[50],
-                  icon: Icon(
+                  dropdownColor: AppColors.surface,
+                  icon: const Icon(
                     Icons.keyboard_arrow_down,
-                    color: Colors.amber[700],
+                    color: AppColors.primaryDark,
                   ),
                   items:
                       dropdownItems
@@ -187,25 +197,6 @@ class GoldTextField extends StatelessWidget {
   InputDecoration _getInputDecoration() {
     return InputDecoration(
       hintText: hintText ?? 'Enter $label value',
-      hintStyle: TextStyle(
-        color: Colors.grey[400],
-        fontWeight: FontWeight.w400,
-      ),
-      filled: true,
-      fillColor: Colors.white,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: Colors.amber[200]!, width: 1.5),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: Colors.amber[200]!, width: 1.5),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: Colors.amber[600]!, width: 2),
-      ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: Colors.red, width: 1.5),
