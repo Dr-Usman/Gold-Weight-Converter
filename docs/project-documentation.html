@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gold Weight Converter — Project Documentation</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --amber-50:  #fffbeb;
+      --amber-100: #fef3c7;
+      --amber-200: #fde68a;
+      --amber-300: #fcd34d;
+      --amber-400: #fbbf24;
+      --amber-500: #f59e0b;
+      --amber-600: #d97706;
+      --amber-700: #b45309;
+      --amber-800: #92400e;
+      --amber-900: #78350f;
+      --green-50:  #f0fdf4;
+      --green-700: #15803d;
+      --grey-50:   #f9fafb;
+      --grey-100:  #f3f4f6;
+      --grey-200:  #e5e7eb;
+      --grey-400:  #9ca3af;
+      --grey-600:  #4b5563;
+      --grey-700:  #374151;
+      --grey-800:  #1f2937;
+      --grey-900:  #111827;
+      --white:     #ffffff;
+      --red-500:   #ef4444;
+      --sidebar-w: 280px;
+      --radius:    8px;
+      --font-mono: 'Courier New', Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--grey-800);
+      background: var(--grey-50);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar / TOC ───────────────────────────────────────────────── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: linear-gradient(160deg, var(--amber-800) 0%, var(--amber-900) 100%);
+      color: var(--amber-100);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--amber-600) transparent;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--amber-600); border-radius: 4px; }
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      margin-bottom: 12px;
+    }
+    .sidebar-logo .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--amber-400);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .sidebar-logo .logo-text { font-size: 13px; font-weight: 700; line-height: 1.3; }
+    .sidebar-logo .logo-version { font-size: 11px; color: var(--amber-300); margin-top: 2px; }
+    .toc-group { margin-bottom: 4px; }
+    .toc-group-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--amber-400);
+      padding: 10px 20px 4px;
+    }
+    .toc-link {
+      display: block;
+      padding: 6px 20px 6px 28px;
+      font-size: 13px;
+      color: var(--amber-200);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .toc-link:hover {
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      border-left-color: var(--amber-400);
+    }
+    .toc-link.sub { padding-left: 40px; font-size: 12px; color: var(--amber-300); }
+
+    /* ── Main Content ────────────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      min-width: 0;
+      padding: 40px 48px 80px;
+      max-width: 960px;
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--amber-600) 0%, var(--amber-800) 100%);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 40px 40px 36px;
+      margin-bottom: 40px;
+    }
+    .hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+    .hero .subtitle { font-size: 16px; opacity: 0.9; margin-bottom: 20px; max-width: 600px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    /* ── Sections ───────────────────────────────────────────────────── */
+    section { margin-bottom: 56px; }
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--amber-800);
+      border-bottom: 2px solid var(--amber-200);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--grey-800);
+      margin: 24px 0 10px;
+    }
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--amber-700);
+      margin: 16px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    p { margin-bottom: 12px; }
+    a { color: var(--amber-700); text-decoration: underline; }
+    a:hover { color: var(--amber-900); }
+
+    /* ── Code ───────────────────────────────────────────────────────── */
+    pre {
+      background: var(--grey-900);
+      color: #e2e8f0;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 12px 0 20px;
+      border-left: 4px solid var(--amber-500);
+    }
+    pre.ascii {
+      background: var(--grey-800);
+      color: #a3e635;
+      border-left-color: #a3e635;
+    }
+    pre.diagram {
+      background: var(--grey-50);
+      color: var(--grey-800);
+      border: 1px solid var(--grey-200);
+      border-left: 4px solid var(--amber-400);
+    }
+    code {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--amber-100);
+      color: var(--amber-900);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    pre code { background: transparent; color: inherit; padding: 0; font-size: inherit; }
+
+    /* ── Tables ─────────────────────────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: 14px;
+    }
+    th {
+      background: var(--amber-600);
+      color: var(--white);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td { padding: 9px 14px; border-bottom: 1px solid var(--grey-200); vertical-align: top; }
+    tr:nth-child(even) td { background: var(--amber-50); }
+    tr:hover td { background: var(--amber-100); }
+
+    /* ── Cards / Callouts ───────────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 12px 0 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .callout {
+      border-left: 4px solid var(--amber-400);
+      background: var(--amber-50);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    .callout.note { border-left-color: #60a5fa; background: #eff6ff; }
+    .callout.warning { border-left-color: var(--red-500); background: #fef2f2; }
+    .callout.success { border-left-color: var(--green-700); background: var(--green-50); }
+    .callout strong { display: block; margin-bottom: 4px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ── File Pill ──────────────────────────────────────────────────── */
+    .file-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--grey-100);
+      border: 1px solid var(--grey-200);
+      border-radius: 20px;
+      padding: 3px 12px 3px 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--grey-700);
+      margin: 2px;
+    }
+    .file-pill .icon { font-size: 13px; }
+
+    /* ── File Section ───────────────────────────────────────────────── */
+    .file-block {
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    .file-block-header {
+      background: linear-gradient(90deg, var(--amber-700), var(--amber-800));
+      color: var(--white);
+      padding: 10px 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .file-block-body { padding: 16px 20px; background: var(--white); }
+    .file-block-body p { margin-bottom: 8px; }
+    .file-block-body ul { padding-left: 20px; }
+    .file-block-body li { margin-bottom: 4px; font-size: 14px; }
+
+    /* ── Lists ──────────────────────────────────────────────────────── */
+    ul, ol { padding-left: 22px; margin-bottom: 12px; }
+    li { margin-bottom: 5px; }
+
+    /* ── Inline Emphasis ────────────────────────────────────────────── */
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tag-amber { background: var(--amber-200); color: var(--amber-800); }
+    .tag-green { background: #d1fae5; color: #065f46; }
+    .tag-blue  { background: #dbeafe; color: #1e40af; }
+    .tag-red   { background: #fee2e2; color: #991b1b; }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      background: var(--grey-800);
+      color: var(--grey-400);
+      text-align: center;
+      padding: 24px 40px;
+      font-size: 13px;
+      margin-top: 40px;
+      border-radius: var(--radius);
+    }
+    footer strong { color: var(--amber-400); }
+
+    /* ── Responsive ─────────────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; padding: 16px 0; }
+      .toc-link, .toc-link.sub { padding-left: 16px; display: inline-block; }
+      .main { padding: 24px 20px 60px; }
+      .hero { padding: 28px 24px; }
+      .hero h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!--  SIDEBAR / TABLE OF CONTENTS                                      -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<nav class="sidebar" aria-label="Table of Contents">
+  <div class="sidebar-logo">
+    <div class="logo-icon">⚖️</div>
+    <div>
+      <div class="logo-text">Gold Weight<br>Converter</div>
+      <div class="logo-version">v1.2.0+2 · Documentation</div>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Introduction</div>
+    <a class="toc-link" href="#overview">Project Overview</a>
+    <a class="toc-link" href="#features">Features</a>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Architecture</div>
+    <a class="toc-link" href="#architecture">Architecture Overview</a>
+    <a class="toc-link" href="#project-structure">Project Structure</a>
+    <a class="toc-link" href="#data-flow">Data Flow</a>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Technologies</div>
+    <a class="toc-link" href="#technologies">Libraries &amp; Tools</a>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Modules &amp; Files</div>
+    <a class="toc-link" href="#modules">All Modules</a>
+    <a class="toc-link sub" href="#mod-main">main.dart</a>
+    <a class="toc-link sub" href="#mod-converter">converter_screen.dart</a>
+    <a class="toc-link sub" href="#mod-constants">constants/</a>
+    <a class="toc-link sub" href="#mod-models">models/</a>
+    <a class="toc-link sub" href="#mod-providers">providers/</a>
+    <a class="toc-link sub" href="#mod-utils">utils/</a>
+    <a class="toc-link sub" href="#mod-widgets">widgets/</a>
+    <a class="toc-link sub" href="#mod-l10n">l10n/</a>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Logic &amp; Patterns</div>
+    <a class="toc-link" href="#conversion-logic">Conversion Logic</a>
+    <a class="toc-link" href="#key-functions">Key Functions</a>
+    <a class="toc-link" href="#design-patterns">Design Patterns</a>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Setup &amp; Build</div>
+    <a class="toc-link" href="#setup">Setup &amp; Running</a>
+    <a class="toc-link" href="#build-release">Build &amp; Release</a>
+    <a class="toc-link" href="#localization">Localization</a>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Reference</div>
+    <a class="toc-link" href="#assumptions">Assumptions</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!--  MAIN CONTENT                                                     -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<main class="main">
+
+  <!-- HERO ─────────────────────────────────────────────────────────── -->
+  <header class="hero">
+    <h1>⚖️ Gold Weight Converter</h1>
+    <p class="subtitle">
+      A clean, open-source Flutter application to convert gold weight between
+      traditional South Asian units (Tola, Masha, Ana, Ratti) and metric grams,
+      with a built-in real-time gold price estimator.
+    </p>
+    <div class="badges">
+      <span class="badge">Flutter 3.x</span>
+      <span class="badge">Dart ^3.7.2</span>
+      <span class="badge">Riverpod 3.3.1</span>
+      <span class="badge">Version 1.2.0+2</span>
+      <span class="badge">Open Source</span>
+      <span class="badge">Android · iOS · Web · Desktop</span>
+    </div>
+  </header>
+
+
+  <!-- ═══ 1. PROJECT OVERVIEW ══════════════════════════════════════ -->
+  <section id="overview">
+    <h2>1. Project Overview</h2>
+    <p>
+      The <strong>Gold Weight Converter</strong> is a Flutter mobile (and multi-platform) application
+      that solves a practical problem for gold traders, jewellers, and consumers in South Asia:
+      traditional gold measurement units — <em>Tola, Masha, Ana, Ratti</em> — coexist with the
+      metric system (grams), and converting between them by hand is error-prone.
+    </p>
+    <p>
+      The app lets users enter any combination of the five units, instantly see the full
+      weight breakdown in every unit, and optionally calculate the monetary value of that
+      gold based on a live or manually entered market rate (per Tola, per 10 g, or per gram).
+    </p>
+
+    <div class="card">
+      <h4>Target Audience</h4>
+      <ul>
+        <li>Gold traders and jewellers in Pakistan, India, Bangladesh, and the wider South Asian diaspora</li>
+        <li>Customers buying or selling gold jewellery who need a quick weight/price check</li>
+        <li>General users curious about traditional weight-unit equivalencies</li>
+      </ul>
+    </div>
+
+    <h3>Supported Platforms</h3>
+    <table>
+      <thead><tr><th>Platform</th><th>Status</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Android</td><td><span class="tag tag-green">Primary</span></td><td>Published on Google Play Store</td></tr>
+        <tr><td>iOS</td><td><span class="tag tag-amber">Supported</span></td><td>Build config present; not listed on App Store</td></tr>
+        <tr><td>Web</td><td><span class="tag tag-amber">Supported</span></td><td><code>web/index.html</code> present</td></tr>
+        <tr><td>macOS / Linux / Windows</td><td><span class="tag tag-blue">Scaffolded</span></td><td>Platform folders present; not primary targets</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ═══ 2. FEATURES ══════════════════════════════════════════════ -->
+  <section id="features">
+    <h2>2. Features</h2>
+    <ul>
+      <li>🔁 <strong>Bi-directional conversion</strong> — enter any unit(s); all others calculate automatically</li>
+      <li>💰 <strong>Gold price calculator</strong> — enter a rate per Tola, per 10 g, or per 1 g to get the total value in Pakistani Rupees</li>
+      <li>📊 <strong>Detailed result breakdown</strong> — shows the calculation steps, not just the final answer</li>
+      <li>🎯 <strong>Real-time calculation</strong> — results update as you type (no need to press Calculate)</li>
+      <li>🧼 <strong>One-tap reset</strong> — Clear All button wipes all inputs and results</li>
+      <li>🧮 <strong>Smart number formatting</strong> — input fields auto-format with thousand separators</li>
+      <li>♿ <strong>Accessibility</strong> — all interactive elements have semantic labels; results are selectable text</li>
+      <li>🌍 <strong>Localization-ready</strong> — ARB file and <code>l10n.yaml</code> configured for future multi-language support</li>
+    </ul>
+  </section>
+
+
+  <!-- ═══ 3. ARCHITECTURE ═══════════════════════════════════════════ -->
+  <section id="architecture">
+    <h2>3. Architecture Overview</h2>
+    <p>
+      The app follows an <strong>MVVM-lite (Model-View-ViewModel)</strong> pattern adapted for Flutter
+      and Riverpod. Because this is a single-screen application, the architecture is deliberately
+      kept lean — there is no routing layer or repository layer — but the separation of concerns
+      is still clear.
+    </p>
+
+    <table>
+      <thead><tr><th>Layer</th><th>Role</th><th>Files</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Model</strong></td>
+          <td>Immutable data classes; no logic</td>
+          <td><code>models/gold_result_model.dart</code></td>
+        </tr>
+        <tr>
+          <td><strong>ViewModel (Notifier)</strong></td>
+          <td>Business logic; state mutations; exposed via Riverpod providers</td>
+          <td><code>providers/weight_provider.dart</code><br><code>providers/unit_provider.dart</code></td>
+        </tr>
+        <tr>
+          <td><strong>View</strong></td>
+          <td>Flutter widgets; reads providers; triggers calculations</td>
+          <td><code>converter_screen.dart</code><br><code>widgets/gold_text_field.dart</code></td>
+        </tr>
+        <tr>
+          <td><strong>Constants</strong></td>
+          <td>Shared conversion constants and enums</td>
+          <td><code>constants/app_constants.dart</code><br><code>constants/unit_enum.dart</code></td>
+        </tr>
+        <tr>
+          <td><strong>Utils</strong></td>
+          <td>Pure utility classes; no Flutter/UI dependencies</td>
+          <td><code>utils/number_formatter.dart</code><br><code>utils/number_helper.dart</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Architecture Diagram</h3>
+<pre class="ascii">
+┌─────────────────────────────────────────────────────────────────┐
+│                        Flutter App                              │
+│                                                                 │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │                        VIEW LAYER                        │  │
+│  │                                                          │  │
+│  │   GoldConverterScreen  ◄──────  GoldTextField            │  │
+│  │   (ConsumerStatefulWidget)       (StatelessWidget)       │  │
+│  │          │                                               │  │
+│  │          │  reads / writes                               │  │
+│  └──────────┼───────────────────────────────────────────────┘  │
+│             │                                                   │
+│  ┌──────────▼───────────────────────────────────────────────┐  │
+│  │                    PROVIDER LAYER  (Riverpod)             │  │
+│  │                                                          │  │
+│  │   rateUnitProvider          goldResultNotifierProvider   │  │
+│  │   StateProvider<UnitEnum>   NotifierProvider<GoldResult> │  │
+│  │          │                           │                   │  │
+│  └──────────┼───────────────────────────┼───────────────────┘  │
+│             │                           │                       │
+│  ┌──────────▼───────────────────────────▼───────────────────┐  │
+│  │                      MODEL LAYER                         │  │
+│  │                                                          │  │
+│  │   UnitEnum                  GoldResultModel              │  │
+│  │   (tola │ tenGram │ oneGram) (weightsText, priceText)    │  │
+│  └──────────────────────────────────────────────────────────┘  │
+│                                                                 │
+│  ── SHARED ───────────────────────────────────────────────────  │
+│   AppConstants  ·  NumberHelper  ·  ThousandsSeparatorFormatter │
+└─────────────────────────────────────────────────────────────────┘
+</pre>
+
+    <div class="callout note">
+      <strong>Note</strong>
+      The calculation logic (<code>_calculate()</code>) currently lives inside
+      <code>GoldConverterScreen</code> rather than inside a Notifier. This is intentional for
+      simplicity given the single-screen scope, but it means the View layer carries more logic
+      than pure MVVM would prescribe. A future refactor could move it into
+      <code>GoldResultNotifier</code>.
+    </div>
+  </section>
+
+
+  <!-- ═══ 4. PROJECT STRUCTURE ══════════════════════════════════════ -->
+  <section id="project-structure">
+    <h2>4. Project Structure</h2>
+<pre class="ascii">
+gold_weight_converter/
+├── lib/                           ← All Dart source code
+│   ├── main.dart                  ← App entry point; MaterialApp + theme
+│   ├── converter_screen.dart      ← Single screen; all UI + calculation logic
+│   │
+│   ├── constants/
+│   │   ├── app_constants.dart     ← Conversion ratios + shared NumberFormat
+│   │   └── unit_enum.dart         ← UnitEnum (tola, tenGram, oneGram)
+│   │
+│   ├── models/
+│   │   └── gold_result_model.dart ← Immutable result model (copyWith)
+│   │
+│   ├── providers/
+│   │   ├── unit_provider.dart     ← rateUnitProvider (StateProvider)
+│   │   └── weight_provider.dart   ← goldResultNotifierProvider (NotifierProvider)
+│   │
+│   ├── utils/
+│   │   ├── number_formatter.dart  ← ThousandsSeparatorInputFormatter
+│   │   └── number_helper.dart     ← NumberHelper static utilities
+│   │
+│   ├── widgets/
+│   │   └── gold_text_field.dart   ← Reusable GoldTextField widget
+│   │
+│   └── l10n/
+│       ├── app_en.arb             ← English localization strings (ARB)
+│       ├── app_localizations.dart ← Generated localization base class
+│       └── app_localizations_en.dart ← Generated English delegate
+│
+├── android/                       ← Android platform project (Gradle)
+├── ios/                           ← iOS platform project (Xcode)
+├── web/                           ← Web entrypoint (index.html)
+├── macos/                         ← macOS desktop platform
+├── linux/                         ← Linux desktop platform
+├── windows/                       ← Windows desktop platform
+├── test/
+│   └── widget_test.dart           ← Default Flutter widget test scaffold
+│
+├── pubspec.yaml                   ← Dependencies, version, asset config
+├── l10n.yaml                      ← Localization generation config
+└── analysis_options.yaml          ← Dart linting rules (flutter_lints)
+</pre>
+  </section>
+
+
+  <!-- ═══ 5. DATA FLOW ════════════════════════════════════════════ -->
+  <section id="data-flow">
+    <h2>5. Data Flow</h2>
+    <p>
+      The diagram below shows how data moves from user input through to the displayed result
+      for a typical weight conversion.
+    </p>
+
+<pre class="diagram">
+  ┌──────────────────────────────────────────────────────────────────┐
+  │                        User Action                               │
+  │              Types a number in a GoldTextField                   │
+  └───────────────────────────┬──────────────────────────────────────┘
+                              │  TextEditingController.onChanged
+                              ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │                   ThousandsSeparatorInputFormatter               │
+  │   Intercepts raw input → strips non-numeric chars →             │
+  │   re-formats with thousand separators → updates cursor position │
+  └───────────────────────────┬──────────────────────────────────────┘
+                              │  formatted text stored in controller
+                              ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │                    _calculate() [converter_screen.dart]          │
+  │                                                                  │
+  │   1. Read all 5 weight controllers via NumberHelper.parse()      │
+  │   2. Aggregate to totalGrams (sum of each unit × conversion rate)│
+  │   3. Convert totalGrams back to each unit                        │
+  │   4. If goldRate > 0 → compute price using rateUnitProvider      │
+  │   5. Build result strings (weightsText, priceText)               │
+  └───────────────────────────┬──────────────────────────────────────┘
+                              │  calls Notifier methods
+                              ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │               GoldResultNotifier (Riverpod Notifier)             │
+  │                                                                  │
+  │   setGoldWeights(weightsText)  →  state = state.copyWith(...)   │
+  │   setGoldPrice(priceText)      →  state = state.copyWith(...)   │
+  └───────────────────────────┬──────────────────────────────────────┘
+                              │  Riverpod notifies listeners
+                              ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │                Consumer widgets [converter_screen.dart]          │
+  │                                                                  │
+  │   ref.watch(goldResultNotifierProvider.select(...))              │
+  │   → Widget rebuilds only when its specific field changes         │
+  │   → Displays weightsText in _buildWeightsResultSection()         │
+  │   → Displays priceText in _buildPriceResultSection()             │
+  └──────────────────────────────────────────────────────────────────┘
+</pre>
+
+    <h3>Unit Selection Flow</h3>
+<pre class="diagram">
+  User picks "10 Gram" in dropdown
+          │
+          ▼
+  onDropdownChanged callback fires
+          │
+          ▼
+  UnitEnum.fromString("10 Gram")  →  UnitEnum.tenGram
+          │
+          ▼
+  ref.read(rateUnitProvider.notifier).state = UnitEnum.tenGram
+          │  (StateProvider — direct state mutation)
+          ▼
+  _calculate() is called → recomputes price using new unit
+          │
+          ▼
+  GoldResultNotifier.setGoldPrice() → UI rebuilds
+</pre>
+  </section>
+
+
+  <!-- ═══ 6. TECHNOLOGIES & LIBRARIES ══════════════════════════════ -->
+  <section id="technologies">
+    <h2>6. Technologies &amp; Libraries</h2>
+    <table>
+      <thead>
+        <tr><th>Library / Tool</th><th>Version</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Flutter SDK</strong></td>
+          <td>≥ 3.x</td>
+          <td>UI framework; widget rendering; platform bridges for Android, iOS, Web, Desktop</td>
+        </tr>
+        <tr>
+          <td><strong>Dart SDK</strong></td>
+          <td>^3.7.2</td>
+          <td>Programming language; null-safety; records and pattern matching</td>
+        </tr>
+        <tr>
+          <td><code>flutter_riverpod</code></td>
+          <td>^3.3.1</td>
+          <td>Reactive state management. Provides <code>ProviderScope</code>, <code>StateProvider</code>, <code>NotifierProvider</code>, <code>ConsumerWidget</code>, <code>ConsumerStatefulWidget</code></td>
+        </tr>
+        <tr>
+          <td><code>flutter_localizations</code></td>
+          <td>SDK bundle</td>
+          <td>Multi-language support infrastructure; required for ARB-based localization</td>
+        </tr>
+        <tr>
+          <td><code>intl</code></td>
+          <td>^0.20.2</td>
+          <td>Number formatting (<code>NumberFormat.currency</code>, <code>NumberFormat('#,##0.####')</code>)</td>
+        </tr>
+        <tr>
+          <td><code>cupertino_icons</code></td>
+          <td>^1.0.9</td>
+          <td>iOS-style icon assets (available but not actively used; Material Icons are used instead)</td>
+        </tr>
+        <tr>
+          <td><code>flutter_lints</code> <em>(dev)</em></td>
+          <td>^6.0.0</td>
+          <td>Recommended Dart/Flutter lint rules; enforced via <code>analysis_options.yaml</code></td>
+        </tr>
+        <tr>
+          <td><code>flutter_test</code> <em>(dev)</em></td>
+          <td>SDK bundle</td>
+          <td>Widget and unit testing framework</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout success">
+      <strong>Zero runtime external dependencies</strong>
+      All dependencies except <code>flutter_riverpod</code> and <code>intl</code> are either
+      Flutter SDK bundles or dev-only tools. The app has a minimal, focused dependency graph.
+    </div>
+  </section>
+
+
+  <!-- ═══ 7. MODULES & FILES ════════════════════════════════════════ -->
+  <section id="modules">
+    <h2>7. Modules &amp; File Descriptions</h2>
+
+    <!-- main.dart -->
+    <div class="file-block" id="mod-main">
+      <div class="file-block-header">
+        <span>📄</span> lib/main.dart
+      </div>
+      <div class="file-block-body">
+        <p><strong>Role:</strong> Application entry point and theme configuration.</p>
+        <p>
+          <code>main()</code> calls <code>runApp(MyApp())</code>. <code>MyApp</code> is a
+          <code>StatelessWidget</code> that wraps the entire widget tree in
+          <code>ProviderScope</code> (required by Riverpod) and configures a
+          <code>MaterialApp</code> with:
+        </p>
+        <ul>
+          <li>An amber/gold <code>ColorScheme</code> derived from <code>Colors.amber</code></li>
+          <li>Global <code>AppBarTheme</code> (amber gradient background, white text)</li>
+          <li>Global <code>ElevatedButtonThemeData</code> (amber, rounded corners)</li>
+          <li>Global <code>InputDecorationTheme</code> (rounded borders, amber focus ring)</li>
+          <li><code>debugShowCheckedModeBanner: false</code></li>
+        </ul>
+        <p>The single <code>home</code> is <code>GoldConverterScreen()</code>.</p>
+      </div>
+    </div>
+
+    <!-- converter_screen.dart -->
+    <div class="file-block" id="mod-converter">
+      <div class="file-block-header">
+        <span>📄</span> lib/converter_screen.dart
+      </div>
+      <div class="file-block-body">
+        <p>
+          <strong>Role:</strong> The single screen of the app. Extends
+          <code>ConsumerStatefulWidget</code> so it can both hold mutable controller state and
+          read/write Riverpod providers.
+        </p>
+        <h4>Controllers managed</h4>
+        <ul>
+          <li><code>tolaController</code>, <code>mashaController</code>, <code>anaController</code>,
+          <code>rattiController</code>, <code>gramController</code> — weight input fields</li>
+          <li><code>goldRateController</code> — market rate input</li>
+          <li><code>scrollController</code> — auto-scrolls to results after Calculate is pressed</li>
+        </ul>
+        <h4>Key methods</h4>
+        <ul>
+          <li><code>_calculate()</code> — core conversion logic; called on every keystroke</li>
+          <li><code>calculateAll()</code> — unfocuses keyboard, calls <code>_calculate()</code>, then animates scroll to results</li>
+          <li><code>_clearAll()</code> — clears all controllers and resets provider state</li>
+          <li><code>_getDouble(controller)</code> — safely parses a formatted text field value</li>
+          <li><code>_validateInput(value)</code> — returns an error string for invalid/negative input</li>
+        </ul>
+        <h4>UI structure (build method)</h4>
+        <ul>
+          <li>Gradient <code>AppBar</code> with amber-to-deep-amber gradient</li>
+          <li>Gradient scaffold body (<code>SingleChildScrollView</code>)</li>
+          <li>Six <code>GoldTextField</code> widgets (Tola, Masha, Ana, Ratti, Gram, Gold Rate)</li>
+          <li>Gold Rate field uses the <code>hasDropdown: true</code> variant with a <code>UnitEnum</code> selector</li>
+          <li>Calculate + Clear All button row</li>
+          <li>Two lazy <code>Consumer</code> widgets for results (weights section + price section)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- constants -->
+    <div class="file-block" id="mod-constants">
+      <div class="file-block-header">
+        <span>📁</span> lib/constants/
+      </div>
+      <div class="file-block-body">
+
+        <h4>app_constants.dart</h4>
+        <p>Holds all shared conversion constants as <code>static const double</code> fields on <code>AppConstants</code>:</p>
+        <table>
+          <thead><tr><th>Constant</th><th>Value</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>tolaToGram</code></td><td>11.66</td><td>Grams in 1 Tola</td></tr>
+            <tr><td><code>mashaToGram</code></td><td>0.972</td><td>Grams in 1 Masha</td></tr>
+            <tr><td><code>anaToGram</code></td><td>0.72875</td><td>Grams in 1 Ana</td></tr>
+            <tr><td><code>rattiToGram</code></td><td>0.1215</td><td>Grams in 1 Ratti</td></tr>
+          </tbody>
+        </table>
+        <p>Also exposes <code>AppConstants.thousandNumberFormat</code> — a shared <code>NumberFormat('#,##0.####')</code> instance used by <code>NumberHelper</code> and <code>ThousandsSeparatorInputFormatter</code>.</p>
+
+        <div class="callout warning">
+          <strong>Duplication Note</strong>
+          The same four conversion constants are also defined inline as <code>static const double</code>
+          fields inside <code>_GoldConverterScreenState</code> in <code>converter_screen.dart</code>.
+          This is redundant. A future refactor should remove the inline duplicates and use
+          <code>AppConstants.*</code> exclusively.
+        </div>
+
+        <h4>unit_enum.dart</h4>
+        <p>
+          Defines <code>UnitEnum</code>, an enhanced Dart enum with a human-readable <code>name</code>
+          string field. This avoids stringly-typed comparisons throughout the codebase.
+        </p>
+<pre><code>enum UnitEnum {
+  tola('Tola'),
+  tenGram('10 Gram'),
+  oneGram('1 Gram');
+
+  final String name;
+  const UnitEnum(this.name);
+
+  static UnitEnum fromString(String? value) { ... }
+}</code></pre>
+        <p>
+          <code>fromString()</code> safely converts a dropdown string back to an enum value,
+          defaulting to <code>UnitEnum.tola</code> if no match is found (safe fallback).
+        </p>
+      </div>
+    </div>
+
+    <!-- models -->
+    <div class="file-block" id="mod-models">
+      <div class="file-block-header">
+        <span>📁</span> lib/models/
+      </div>
+      <div class="file-block-body">
+        <h4>gold_result_model.dart</h4>
+        <p>
+          A simple immutable data class holding the two displayable result strings.
+          Both fields are nullable — <code>null</code> means "not yet calculated / cleared".
+        </p>
+<pre><code>class GoldResultModel {
+  final String? weightsText;  // Multi-line conversion breakdown
+  final String? priceText;    // Formatted price string or null
+
+  GoldResultModel({this.weightsText, this.priceText});
+
+  GoldResultModel copyWith({String? weightsText, String? priceText}) { ... }
+}</code></pre>
+        <p>
+          The <code>copyWith()</code> method enables immutable state updates inside
+          <code>GoldResultNotifier</code> without replacing the entire object unnecessarily.
+        </p>
+      </div>
+    </div>
+
+    <!-- providers -->
+    <div class="file-block" id="mod-providers">
+      <div class="file-block-header">
+        <span>📁</span> lib/providers/
+      </div>
+      <div class="file-block-body">
+
+        <h4>unit_provider.dart — <code>rateUnitProvider</code></h4>
+        <p>
+          A <code>StateProvider&lt;UnitEnum&gt;</code> that tracks which pricing unit the user
+          has selected in the Gold Rate dropdown. Default is <code>UnitEnum.tola</code>.
+        </p>
+        <p>
+          <code>StateProvider</code> is appropriate here because the state is a single
+          primitive value with no derived logic — it is written directly via
+          <code>ref.read(rateUnitProvider.notifier).state = newUnit</code>.
+        </p>
+        <p>
+          The file also contains commented-out alternative implementations
+          (<code>NotifierProvider</code> and the legacy <code>StateNotifierProvider</code>)
+          that serve as educational reference for the developer.
+        </p>
+
+        <h4>weight_provider.dart — <code>goldResultNotifierProvider</code></h4>
+        <p>
+          A <code>NotifierProvider&lt;GoldResultNotifier, GoldResultModel&gt;</code>.
+          The <code>GoldResultNotifier</code> class manages three state mutations:
+        </p>
+        <ul>
+          <li><code>setGoldWeights(String? weights)</code> — updates the conversion breakdown text</li>
+          <li><code>setGoldPrice(String? price)</code> — updates the price text</li>
+          <li><code>clearResults()</code> — resets to a fresh <code>GoldResultModel()</code></li>
+        </ul>
+        <p>
+          Consumers use <code>.select()</code> to subscribe to individual fields, avoiding
+          unnecessary rebuilds when only one of the two fields changes.
+        </p>
+<pre><code>// Example selective watch in the UI:
+ref.watch(goldResultNotifierProvider.select(
+  (model) => model.weightsText,
+));</code></pre>
+      </div>
+    </div>
+
+    <!-- utils -->
+    <div class="file-block" id="mod-utils">
+      <div class="file-block-header">
+        <span>📁</span> lib/utils/
+      </div>
+      <div class="file-block-body">
+
+        <h4>number_formatter.dart — <code>ThousandsSeparatorInputFormatter</code></h4>
+        <p>
+          Implements <code>TextInputFormatter</code> (Flutter's interface for intercepting and
+          transforming text field input). Applied to every numeric input field in the app.
+        </p>
+        <p>Key responsibilities:</p>
+        <ul>
+          <li>Strip all non-digit and non-decimal characters</li>
+          <li>Ensure only one decimal point is present</li>
+          <li>Re-format the integer part with <code>#,##0</code> thousand separators using <code>intl</code></li>
+          <li>Preserve trailing decimal points while the user is mid-typing (e.g. <code>"1,234."</code>)</li>
+          <li>Accurately recalculate cursor position accounting for added/removed commas</li>
+        </ul>
+
+        <h4>number_helper.dart — <code>NumberHelper</code></h4>
+        <p>A stateless utility class with three static methods:</p>
+        <table>
+          <thead><tr><th>Method</th><th>Signature</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>formatNumber</code></td><td><code>double → String</code></td><td>Formats using <code>AppConstants.thousandNumberFormat</code></td></tr>
+            <tr><td><code>cleanNumber</code></td><td><code>String → String</code></td><td>Removes all commas from a formatted string</td></tr>
+            <tr><td><code>parseFormattedNumber</code></td><td><code>String → double?</code></td><td>Cleans then calls <code>double.tryParse()</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- widgets -->
+    <div class="file-block" id="mod-widgets">
+      <div class="file-block-header">
+        <span>📁</span> lib/widgets/
+      </div>
+      <div class="file-block-body">
+        <h4>gold_text_field.dart — <code>GoldTextField</code></h4>
+        <p>
+          The single reusable UI component in the app. Every input field (Tola, Masha, Ana, Ratti,
+          Gram, Gold Rate) is rendered via this widget. It is a <code>StatelessWidget</code> that
+          receives all its configuration through constructor parameters.
+        </p>
+        <h4>Props</h4>
+        <table>
+          <thead><tr><th>Prop</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>label</code></td><td><code>String</code></td><td>✅</td><td>Bold label above the field</td></tr>
+            <tr><td><code>info</code></td><td><code>String</code></td><td>✅</td><td>Small italic hint below the label</td></tr>
+            <tr><td><code>controller</code></td><td><code>TextEditingController</code></td><td>✅</td><td>Parent-owned controller</td></tr>
+            <tr><td><code>semanticLabel</code></td><td><code>String?</code></td><td>—</td><td>Accessibility label for screen readers</td></tr>
+            <tr><td><code>onChanged</code></td><td><code>VoidCallback?</code></td><td>—</td><td>Called after every valid keystroke</td></tr>
+            <tr><td><code>validator</code></td><td><code>String? Function(String?)?</code></td><td>—</td><td>Validation logic for <code>TextFormField</code></td></tr>
+            <tr><td><code>hintText</code></td><td><code>String?</code></td><td>—</td><td>Placeholder text in the field</td></tr>
+            <tr><td><code>hasDropdown</code></td><td><code>bool</code></td><td>—</td><td>If true, renders a <code>DropdownButton</code> beside the field</td></tr>
+            <tr><td><code>dropdownValue</code></td><td><code>String?</code></td><td>—</td><td>Currently selected dropdown item</td></tr>
+            <tr><td><code>dropdownItems</code></td><td><code>List&lt;String&gt;?</code></td><td>—</td><td>All dropdown options</td></tr>
+            <tr><td><code>onDropdownChanged</code></td><td><code>ValueChanged&lt;String?&gt;?</code></td><td>—</td><td>Callback when user selects a different unit</td></tr>
+          </tbody>
+        </table>
+        <p>
+          When <code>hasDropdown</code> is <code>false</code>, the widget renders a full-width
+          <code>TextFormField</code>. When <code>true</code>, it renders a 2:1 row split between
+          the text field and an amber-styled <code>DropdownButton</code>.
+        </p>
+        <p>
+          All text fields apply <code>ThousandsSeparatorInputFormatter</code> and use
+          <code>TextInputType.numberWithOptions(decimal: true)</code> for a numeric keyboard.
+          Tapping outside any field calls <code>FocusScope.of(context).unfocus()</code> via
+          <code>onTapOutside</code>.
+        </p>
+      </div>
+    </div>
+
+    <!-- l10n -->
+    <div class="file-block" id="mod-l10n">
+      <div class="file-block-header">
+        <span>📁</span> lib/l10n/
+      </div>
+      <div class="file-block-body">
+        <p>
+          Contains the localization infrastructure for the app. The <strong>ARB file</strong>
+          (<code>app_en.arb</code>) defines every user-facing string in English with metadata
+          descriptions. <code>app_localizations.dart</code> and
+          <code>app_localizations_en.dart</code> are auto-generated by the Flutter tool from the ARB file.
+        </p>
+        <h4>Strings defined in app_en.arb</h4>
+        <ul>
+          <li>App title, all field labels (Tola, Masha, Ana, Ratti, Gram, Gold Rate)</li>
+          <li>Info/hint text for each field</li>
+          <li>Validation messages (<code>validationValidNumber</code>, <code>validationPositiveNumber</code>)</li>
+          <li>Button labels (Calculate, Clear All)</li>
+          <li>Result section titles and formatted conversion result templates</li>
+          <li>All semantic accessibility labels</li>
+        </ul>
+        <div class="callout warning">
+          <strong>Assumption</strong>
+          Although the ARB file and generated <code>AppLocalizations</code> class are fully
+          configured, the UI in <code>converter_screen.dart</code> currently uses
+          <strong>hardcoded English strings</strong> rather than consuming
+          <code>AppLocalizations.of(context)</code>. The localization infrastructure is in place
+          for future use (e.g., adding Urdu or Hindi translations) but is not yet wired to the UI.
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ 8. CONVERSION LOGIC ════════════════════════════════════════ -->
+  <section id="conversion-logic">
+    <h2>8. Conversion Logic</h2>
+
+    <h3>Unit Conversion Constants</h3>
+    <table>
+      <thead>
+        <tr><th>Unit</th><th>Grams</th><th>Sub-units</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1 Tola</td><td>11.66 g</td><td>= 12 Masha = 16 Ana = 96 Ratti</td></tr>
+        <tr><td>1 Masha</td><td>0.972 g</td><td>= 1.333 Ana = 8 Ratti</td></tr>
+        <tr><td>1 Ana</td><td>0.72875 g</td><td>= 6 Ratti</td></tr>
+        <tr><td>1 Ratti</td><td>0.1215 g</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Weight Aggregation Formula</h3>
+    <p>
+      The gram is used as the universal intermediate unit. All entered units are converted
+      to grams and summed:
+    </p>
+<pre><code>totalGrams = (tola  × 11.66)
+           + (masha × 0.972)
+           + (ana   × 0.72875)
+           + (ratti × 0.1215)
+           + gram</code></pre>
+    <p>Then the total is converted back to every unit:</p>
+<pre><code>tolaResult  = totalGrams / 11.66
+mashaResult = totalGrams / 0.972
+anaResult   = totalGrams / 0.72875
+rattiResult = totalGrams / 0.1215</code></pre>
+
+    <h3>Gold Price Formula</h3>
+    <p>
+      The user enters a <em>rate</em> and selects which unit the rate applies to.
+      The rate is normalised to grams first, then multiplied by the total weight:
+    </p>
+<pre><code>// If rate is per Tola:
+gramRate = rate / 11.66
+
+// If rate is per 10 Gram:
+gramRate = rate / 10
+
+// If rate is per 1 Gram:
+gramRate = rate
+
+// Final price:
+price = totalGrams × gramRate</code></pre>
+    <p>
+      The price is formatted using <code>NumberFormat.currency(locale: 'en_PK', symbol: 'Rs. ', decimalDigits: 2)</code>,
+      producing output like <strong>Rs. 1,50,000.00</strong>.
+    </p>
+  </section>
+
+
+  <!-- ═══ 9. KEY FUNCTIONS ══════════════════════════════════════════ -->
+  <section id="key-functions">
+    <h2>9. Key Functions</h2>
+
+    <h3><code>_calculate()</code> — converter_screen.dart</h3>
+    <div class="card">
+      <p><strong>Called by:</strong> every <code>GoldTextField.onChanged</code> callback and by <code>calculateAll()</code></p>
+      <p><strong>Does not</strong> unfocus the keyboard (to avoid disrupting the user while typing).</p>
+      <ol>
+        <li>Reads all 6 controllers via <code>_getDouble()</code></li>
+        <li>If all weight values are zero → calls <code>clearResults()</code> and returns early</li>
+        <li>Aggregates inputs to <code>totalGrams</code> and builds a human-readable <code>StringBuffer</code></li>
+        <li>Reads <code>rateUnitProvider</code>, normalises rate to per-gram, computes price</li>
+        <li>Compares new strings to existing state — only calls notifier if changed (avoids needless rebuilds)</li>
+      </ol>
+    </div>
+
+    <h3><code>calculateAll()</code> — converter_screen.dart</h3>
+    <div class="card">
+      <p><strong>Called by:</strong> the Calculate button</p>
+      <ol>
+        <li>Calls <code>FocusScope.of(context).unfocus()</code> to dismiss the keyboard</li>
+        <li>Calls <code>_calculate()</code></li>
+        <li>After the current frame renders (<code>addPostFrameCallback</code>), animates the scroll controller to the bottom so the results are visible</li>
+      </ol>
+    </div>
+
+    <h3><code>_clearAll()</code> — converter_screen.dart</h3>
+    <div class="card">
+      <ol>
+        <li>Unfocuses any active text field</li>
+        <li>Calls <code>.clear()</code> on all 6 controllers</li>
+        <li>Calls <code>goldResultNotifierProvider.notifier.clearResults()</code> to reset provider state to <code>GoldResultModel()</code></li>
+      </ol>
+    </div>
+
+    <h3><code>_getDouble(TextEditingController)</code> — converter_screen.dart</h3>
+    <div class="card">
+      <p>Safe parser: trims whitespace, returns <code>0.0</code> for empty/invalid/negative values by delegating to <code>NumberHelper.parseFormattedNumber()</code>.</p>
+    </div>
+
+    <h3><code>ThousandsSeparatorInputFormatter.formatEditUpdate()</code> — utils/number_formatter.dart</h3>
+    <div class="card">
+      <ol>
+        <li>Returns the value unchanged if empty</li>
+        <li>Strips all characters except digits and <code>.</code></li>
+        <li>Collapses multiple <code>.</code> into one</li>
+        <li>If the cleaned string ends with <code>.</code>, formats the integer part only and re-appends <code>.</code></li>
+        <li>Otherwise, formats the full number via <code>AppConstants.thousandNumberFormat</code></li>
+        <li>Recalculates cursor position by counting comma deltas between old and new text</li>
+      </ol>
+    </div>
+
+    <h3><code>NumberHelper.parseFormattedNumber(String)</code> — utils/number_helper.dart</h3>
+    <div class="card">
+      <p>Strips commas via <code>cleanNumber()</code>, then calls <code>double.tryParse()</code>. Returns <code>null</code> for invalid input — never throws.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══ 10. DESIGN PATTERNS ═══════════════════════════════════════ -->
+  <section id="design-patterns">
+    <h2>10. Design Patterns &amp; Best Practices</h2>
+
+    <h3>Reactive State Management (Riverpod)</h3>
+    <p>
+      State is owned by Riverpod providers, not by <code>setState</code>. The UI never
+      mutates state directly — it calls notifier methods. This makes state changes
+      predictable and testable independently of the widget tree.
+    </p>
+    <p>
+      The commented-out <code>setState</code> blocks left in <code>converter_screen.dart</code>
+      show the migration history from <code>setState</code> to Riverpod and serve as a useful
+      learning reference.
+    </p>
+
+    <h3>Selective Rebuilds with <code>.select()</code></h3>
+    <p>
+      The two result sections use <code>ref.watch(provider.select(...))</code> to subscribe
+      only to the specific field they display. This means updating <code>priceText</code> does
+      not rebuild the weights section and vice versa — an important performance optimisation
+      for forms with many fields.
+    </p>
+
+    <h3>Immutable State with <code>copyWith()</code></h3>
+    <p>
+      <code>GoldResultModel</code> is immutable. The notifier always produces a new model
+      via <code>copyWith()</code> rather than mutating fields in place. This enables Riverpod's
+      equality-based rebuild optimisation.
+    </p>
+
+    <h3>Composition over Inheritance</h3>
+    <p>
+      <code>GoldTextField</code> is a composable widget that accepts a <code>hasDropdown</code>
+      flag to switch between two internal layouts. Rather than having separate
+      <code>GoldTextFieldWithDropdown</code> and <code>GoldTextField</code> classes, a single
+      widget handles both cases via conditional branching — keeping the parent screen simple.
+    </p>
+
+    <h3>Accessibility (Semantics)</h3>
+    <p>
+      Every interactive element is wrapped in a <code>Semantics</code> widget with a
+      <code>label</code> (and <code>button: true</code> for buttons). This ensures screen
+      readers (TalkBack on Android, VoiceOver on iOS) can describe each element to users
+      with visual impairments.
+    </p>
+    <p>
+      Results use <code>SelectableText</code> instead of plain <code>Text</code>, allowing
+      users to copy conversion details or prices to the clipboard.
+    </p>
+
+    <h3>Input Safety</h3>
+    <p>
+      All raw text field values are sanitised through <code>NumberHelper.parseFormattedNumber()</code>
+      before any arithmetic is performed. Negative values and non-parseable strings return
+      <code>0.0</code> via <code>_getDouble()</code>, preventing crashes or nonsensical results.
+    </p>
+
+    <h3>Defensive Enum Parsing</h3>
+    <p>
+      <code>UnitEnum.fromString()</code> uses <code>firstWhere</code> with an
+      <code>orElse</code> fallback (<code>UnitEnum.tola</code>) instead of throwing an exception.
+      This prevents the app from crashing if a dropdown sends an unexpected string value.
+    </p>
+
+    <h3>Post-Frame Scroll</h3>
+    <p>
+      After calculating, the app calls <code>WidgetsBinding.instance.addPostFrameCallback()</code>
+      to defer the scroll animation until after the result widgets have been built and laid out.
+      Without this, <code>scrollController.position.maxScrollExtent</code> would return a stale value.
+    </p>
+  </section>
+
+
+  <!-- ═══ 11. SETUP & RUNNING ═══════════════════════════════════════ -->
+  <section id="setup">
+    <h2>11. Setup &amp; Running the Project</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+      <li><a href="https://flutter.dev/docs/get-started/install" target="_blank">Flutter SDK</a> (≥ 3.x, includes Dart)</li>
+      <li>Android Studio or VS Code with the Flutter/Dart extensions</li>
+      <li>A connected Android/iOS device, or an emulator/simulator</li>
+      <li>For Android builds: Java 17+ and Android SDK (API 21+)</li>
+    </ul>
+
+    <h3>1. Clone the repository</h3>
+<pre><code>git clone https://github.com/Dr-Usman/Gold-Weight-Converter.git
+cd Gold-Weight-Converter</code></pre>
+
+    <h3>2. Install dependencies</h3>
+<pre><code>flutter pub get</code></pre>
+
+    <h3>3. Generate localization files</h3>
+    <p>
+      The generated files (<code>app_localizations.dart</code>,
+      <code>app_localizations_en.dart</code>) are included in the repo, but if you edit
+      <code>app_en.arb</code> you must regenerate them:
+    </p>
+<pre><code>flutter gen-l10n</code></pre>
+
+    <h3>4. Run the app</h3>
+<pre><code># List connected devices
+flutter devices
+
+# Run on a specific device
+flutter run -d &lt;device-id&gt;
+
+# Run in release mode
+flutter run --release</code></pre>
+
+    <h3>5. Run tests</h3>
+<pre><code>flutter test</code></pre>
+
+    <h3>6. Analyze for lint issues</h3>
+<pre><code>flutter analyze</code></pre>
+  </section>
+
+
+  <!-- ═══ 12. BUILD & RELEASE ════════════════════════════════════════ -->
+  <section id="build-release">
+    <h2>12. Build &amp; Release</h2>
+
+    <h3>Android APK</h3>
+<pre><code># Debug APK
+flutter build apk --debug
+
+# Release APK (requires a signing key in android/key.properties)
+flutter build apk --release
+
+# Split APKs by ABI (smaller file sizes)
+flutter build apk --split-per-abi --release</code></pre>
+
+    <h3>Android App Bundle (Play Store)</h3>
+<pre><code>flutter build appbundle --release</code></pre>
+
+    <h3>iOS (requires macOS + Xcode)</h3>
+<pre><code>flutter build ipa --release</code></pre>
+
+    <h3>Web</h3>
+<pre><code>flutter build web --release</code></pre>
+
+    <h3>CI / Automated Release via Git Tags</h3>
+    <p>
+      The project uses a Git tag-based CI pipeline (details in the GitHub Actions workflow).
+      To trigger an automated build and release:
+    </p>
+<pre><code>git tag v1.2.0
+git push origin v1.2.0</code></pre>
+    <p>
+      This publishes a release to <strong>GitHub Releases</strong> and optionally to
+      <strong>Google Play Store</strong> (via a configured internal track).
+    </p>
+
+    <h3>Signing</h3>
+    <p>
+      Android signing configuration is read from <code>android/key.properties</code> (not
+      committed to version control). This file must be created locally or injected by the CI
+      environment:
+    </p>
+<pre><code># android/key.properties
+storePassword=&lt;your-store-password&gt;
+keyPassword=&lt;your-key-password&gt;
+keyAlias=&lt;your-key-alias&gt;
+storeFile=&lt;path-to-keystore.jks&gt;</code></pre>
+  </section>
+
+
+  <!-- ═══ 13. LOCALIZATION ═══════════════════════════════════════════ -->
+  <section id="localization">
+    <h2>13. Localization</h2>
+    <p>
+      The app uses Flutter's official <code>flutter_localizations</code> + ARB-based
+      localization system, configured via <code>l10n.yaml</code>:
+    </p>
+<pre><code># l10n.yaml
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart</code></pre>
+
+    <h3>How to add a new language</h3>
+    <ol>
+      <li>Copy <code>lib/l10n/app_en.arb</code> to <code>lib/l10n/app_ur.arb</code> (for Urdu)</li>
+      <li>Translate all string values (keep the keys identical)</li>
+      <li>Run <code>flutter gen-l10n</code> — this generates <code>app_localizations_ur.dart</code></li>
+      <li>Add the locale to <code>MaterialApp.supportedLocales</code> in <code>main.dart</code></li>
+      <li>Replace hardcoded strings in <code>converter_screen.dart</code> with <code>AppLocalizations.of(context).fieldName</code></li>
+    </ol>
+
+    <div class="callout note">
+      <strong>Current Status</strong>
+      The ARB file covers 100% of the UI strings. The generated <code>AppLocalizations</code>
+      class is available but not yet consumed by the UI. Wiring it in is a small, well-scoped
+      task — every hardcoded string in <code>converter_screen.dart</code> has a corresponding
+      ARB key ready to use.
+    </div>
+  </section>
+
+
+  <!-- ═══ 14. ASSUMPTIONS ════════════════════════════════════════════ -->
+  <section id="assumptions">
+    <h2>14. Assumptions &amp; Notes</h2>
+
+    <div class="callout warning">
+      <strong>Assumption 1 — Localization not yet wired to UI</strong>
+      The <code>app_en.arb</code> file and generated <code>AppLocalizations</code> class are
+      fully configured, but all strings in <code>converter_screen.dart</code> are currently
+      hardcoded in English. The localization system is infrastructure-ready for adding more
+      languages in the future.
+    </div>
+
+    <div class="callout warning">
+      <strong>Assumption 2 — Duplicate conversion constants</strong>
+      The four conversion ratios are defined in both <code>AppConstants</code> and as inline
+      <code>static const</code> values inside <code>_GoldConverterScreenState</code>. The
+      inline copies are the ones actually used in <code>_calculate()</code>. The
+      <code>AppConstants</code> values are used only by <code>NumberHelper</code> and
+      <code>ThousandsSeparatorInputFormatter</code> (for the <code>NumberFormat</code>).
+      A future cleanup should remove the inline copies from <code>converter_screen.dart</code>
+      and use <code>AppConstants</code> everywhere.
+    </div>
+
+    <div class="callout note">
+      <strong>Note — Calculation logic in the View layer</strong>
+      The <code>_calculate()</code> method lives in <code>_GoldConverterScreenState</code>
+      (the View) rather than in a Notifier (the ViewModel). This works correctly and keeps
+      the code simple for a single-screen app, but it means the calculation logic is coupled
+      to the widget lifecycle and cannot easily be unit-tested in isolation. A future refactor
+      could move this logic into <code>GoldResultNotifier</code>.
+    </div>
+
+    <div class="callout note">
+      <strong>Note — Currency locale</strong>
+      The price is formatted with <code>locale: 'en_PK'</code> and <code>symbol: 'Rs. '</code>.
+      This assumes the primary user base is in Pakistan. For a fully internationalised price
+      display, the currency symbol and locale should be configurable.
+    </div>
+
+    <div class="callout success">
+      <strong>Confirmed — No external network calls</strong>
+      The app is entirely offline. There are no HTTP requests, no API keys, and no analytics
+      SDKs. Gold rates are entered manually by the user.
+    </div>
+  </section>
+
+
+  <!-- FOOTER ──────────────────────────────────────────────────────── -->
+  <footer>
+    <p>
+      <strong>Gold Weight Converter</strong> — v1.2.0+2 &nbsp;·&nbsp;
+      Open Source &nbsp;·&nbsp;
+      Built with Flutter &amp; Riverpod
+    </p>
+    <p style="margin-top:8px;">
+      Generated on <strong>6 May 2026</strong>.
+      Documentation covers all source files in <code>lib/</code>, configuration files,
+      and build infrastructure.
+    </p>
+  </footer>
+
+</main>
+</body>
+</html>

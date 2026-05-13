@@ -1,0 +1,333 @@
+{
+  "@@locale": "en",
+  "appTitle": "Gold Weight Converter",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "validationValidNumber": "Please enter a valid number",
+  "@validationValidNumber": {
+    "description": "Validation message when input is not a valid number"
+  },
+  "validationPositiveNumber": "Please enter a positive number",
+  "@validationPositiveNumber": {
+    "description": "Validation message when input is negative"
+  },
+  "tolaLabel": "Tola",
+  "@tolaLabel": {
+    "description": "Label for Tola weight unit"
+  },
+  "tolaInfo": "1 Tola = 11.66 grams = 12 Masha = 16 Ana = 96 Ratti",
+  "@tolaInfo": {
+    "description": "Information about Tola conversion"
+  },
+  "tolaHint": "e.g. 2.5",
+  "@tolaHint": {
+    "description": "Hint text for Tola input field"
+  },
+  "tolaSemanticLabel": "Tola weight input field",
+  "@tolaSemanticLabel": {
+    "description": "Semantic label for Tola input field"
+  },
+  "mashaLabel": "Masha",
+  "@mashaLabel": {
+    "description": "Label for Masha weight unit"
+  },
+  "mashaInfo": "1 Masha = 0.972 grams = 1.333 Ana = 8 Ratti",
+  "@mashaInfo": {
+    "description": "Information about Masha conversion"
+  },
+  "mashaHint": "e.g. 12.5",
+  "@mashaHint": {
+    "description": "Hint text for Masha input field"
+  },
+  "mashaSemanticLabel": "Masha weight input field",
+  "@mashaSemanticLabel": {
+    "description": "Semantic label for Masha input field"
+  },
+  "anaLabel": "Ana",
+  "@anaLabel": {
+    "description": "Label for Ana weight unit"
+  },
+  "anaInfo": "1 Ana = 0.72875 grams = 6 Ratti",
+  "@anaInfo": {
+    "description": "Information about Ana conversion"
+  },
+  "anaHint": "e.g. 16.25",
+  "@anaHint": {
+    "description": "Hint text for Ana input field"
+  },
+  "anaSemanticLabel": "Ana weight input field",
+  "@anaSemanticLabel": {
+    "description": "Semantic label for Ana input field"
+  },
+  "rattiLabel": "Ratti",
+  "@rattiLabel": {
+    "description": "Label for Ratti weight unit"
+  },
+  "rattiInfo": "1 Ratti = 0.1215 grams",
+  "@rattiInfo": {
+    "description": "Information about Ratti conversion"
+  },
+  "rattiHint": "e.g. 96.75",
+  "@rattiHint": {
+    "description": "Hint text for Ratti input field"
+  },
+  "rattiSemanticLabel": "Ratti weight input field",
+  "@rattiSemanticLabel": {
+    "description": "Semantic label for Ratti input field"
+  },
+  "gramLabel": "Gram",
+  "@gramLabel": {
+    "description": "Label for Gram weight unit"
+  },
+  "gramInfo": "Direct gram input",
+  "@gramInfo": {
+    "description": "Information about Gram input"
+  },
+  "gramHint": "e.g. 11.66",
+  "@gramHint": {
+    "description": "Hint text for Gram input field"
+  },
+  "gramSemanticLabel": "Gram weight input field",
+  "@gramSemanticLabel": {
+    "description": "Semantic label for Gram input field"
+  },
+  "goldRateLabel": "Gold Rate",
+  "@goldRateLabel": {
+    "description": "Label for Gold Rate input field"
+  },
+  "goldRateInfo": "Current market rate per unit",
+  "@goldRateInfo": {
+    "description": "Information about Gold Rate input"
+  },
+  "goldRateHint": "e.g. 150,000",
+  "@goldRateHint": {
+    "description": "Hint text for Gold Rate input field"
+  },
+  "goldRateSemanticLabel": "Gold rate input field",
+  "@goldRateSemanticLabel": {
+    "description": "Semantic label for Gold Rate input field"
+  },
+  "calculateButton": "Calculate",
+  "@calculateButton": {
+    "description": "Label for Calculate button"
+  },
+  "calculateSemanticLabel": "Calculate gold weight conversion",
+  "@calculateSemanticLabel": {
+    "description": "Semantic label for Calculate button"
+  },
+  "clearAllButton": "Clear All",
+  "@clearAllButton": {
+    "description": "Label for Clear All button"
+  },
+  "clearAllSemanticLabel": "Clear all input fields",
+  "@clearAllSemanticLabel": {
+    "description": "Semantic label for Clear All button"
+  },
+  "conversionDetails": "Conversion Details",
+  "@conversionDetails": {
+    "description": "Title for conversion results section"
+  },
+  "tolaConversion": "Tola: {value} × {factor} = {result} grams",
+  "@tolaConversion": {
+    "description": "Tola conversion result text",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "2.5"
+      },
+      "factor": {
+        "type": "String",
+        "example": "11.66"
+      },
+      "result": {
+        "type": "String",
+        "example": "29.15"
+      }
+    }
+  },
+  "mashaConversion": "Masha: {value} × {factor} = {result} grams",
+  "@mashaConversion": {
+    "description": "Masha conversion result text",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "12.5"
+      },
+      "factor": {
+        "type": "String",
+        "example": "0.972"
+      },
+      "result": {
+        "type": "String",
+        "example": "12.15"
+      }
+    }
+  },
+  "anaConversion": "Ana: {value} × {factor} = {result} grams",
+  "@anaConversion": {
+    "description": "Ana conversion result text",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "16.25"
+      },
+      "factor": {
+        "type": "String",
+        "example": "0.72875"
+      },
+      "result": {
+        "type": "String",
+        "example": "11.842"
+      }
+    }
+  },
+  "rattiConversion": "Ratti: {value} × {factor} = {result} grams",
+  "@rattiConversion": {
+    "description": "Ratti conversion result text",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "96.75"
+      },
+      "factor": {
+        "type": "String",
+        "example": "0.1215"
+      },
+      "result": {
+        "type": "String",
+        "example": "11.755"
+      }
+    }
+  },
+  "gramConversion": "Gram: {value} grams",
+  "@gramConversion": {
+    "description": "Gram conversion result text",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "11.66"
+      }
+    }
+  },
+  "totalWeight": "Total Weight: {value} grams",
+  "@totalWeight": {
+    "description": "Total weight calculation result",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "29.15"
+      }
+    }
+  },
+  "convertedTo": "Converted to:",
+  "@convertedTo": {
+    "description": "Header for converted values section"
+  },
+  "tolaResult": "Tola: {value}",
+  "@tolaResult": {
+    "description": "Tola result after conversion",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "2.5"
+      }
+    }
+  },
+  "mashaResult": "Masha: {value}",
+  "@mashaResult": {
+    "description": "Masha result after conversion",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "30"
+      }
+    }
+  },
+  "anaResult": "Ana: {value}",
+  "@anaResult": {
+    "description": "Ana result after conversion",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "40"
+      }
+    }
+  },
+  "rattiResult": "Ratti: {value}",
+  "@rattiResult": {
+    "description": "Ratti result after conversion",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "240"
+      }
+    }
+  },
+  "goldPrice": "Gold Price: {price}",
+  "@goldPrice": {
+    "description": "Gold price calculation result",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "Rs. 150,000"
+      }
+    }
+  },
+  "rateInfo": "(Rate: {rate} per {unit})",
+  "@rateInfo": {
+    "description": "Rate information for gold price",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "Rs. 150,000"
+      },
+      "unit": {
+        "type": "String",
+        "example": "Tola"
+      }
+    }
+  },
+  "unitTola": "Tola",
+  "@unitTola": {
+    "description": "Unit name for Tola"
+  },
+  "unitTenGram": "10 Gram",
+  "@unitTenGram": {
+    "description": "Unit name for 10 Gram"
+  },
+  "unitOneGram": "1 Gram",
+  "@unitOneGram": {
+    "description": "Unit name for 1 Gram"
+  },
+  "enterValueHint": "Enter {label} value",
+  "@enterValueHint": {
+    "description": "Hint text for entering a value",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "Tola"
+      }
+    }
+  },
+  "inputFieldSemantic": "{label} input field",
+  "@inputFieldSemantic": {
+    "description": "Semantic label for input field",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "Tola"
+      }
+    }
+  },
+  "unitSelectorSemantic": "{label} unit selector",
+  "@unitSelectorSemantic": {
+    "description": "Semantic label for unit selector dropdown",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "Gold Rate"
+      }
+    }
+  }
+}
