@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gold_weight_converter/constants/app_colors.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
+import 'package:gold_weight_converter/l10n/app_localizations.dart';
 import 'package:gold_weight_converter/providers/unit_provider.dart';
 import 'package:gold_weight_converter/providers/weight_provider.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
 import 'package:intl/intl.dart';
 
+import 'widgets/app_drawer.dart';
 import 'widgets/gold_text_field.dart';
 
 class GoldConverterScreen extends ConsumerStatefulWidget {
@@ -76,10 +78,12 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     }
     final number = NumberHelper.parseFormattedNumber(value);
     if (number == null) {
-      return 'Please enter a valid number';
+      final l10n = AppLocalizations.of(context)!;
+      return l10n.validationValidNumber;
     }
     if (number < 0) {
-      return 'Please enter a positive number';
+      final l10n = AppLocalizations.of(context)!;
+      return l10n.validationPositiveNumber;
     }
     return null;
   }
@@ -212,12 +216,15 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 72,
-        title: const Text(
-          'Gold Weight Converter',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.appTitle,
+          style: const TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 21,
             letterSpacing: 0.2,
@@ -240,14 +247,21 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           ),
         ),
       ),
+      drawer: const AppDrawer(),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              AppColors.background,
-              AppColors.backgroundMid,
-              AppColors.backgroundFade,
-            ],
+            colors: isDark
+                ? const [
+                    Color(0xFF171310),
+                    Color(0xFF211A14),
+                    Color(0xFF2A2118),
+                  ]
+                : const [
+                    AppColors.background,
+                    AppColors.backgroundMid,
+                    AppColors.backgroundFade,
+                  ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -293,18 +307,24 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                           padding: const EdgeInsets.fromLTRB(18, 20, 18, 18),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(24),
-                            color: Colors.white.withValues(alpha: 0.95),
+                            color: isDark
+                                ? scheme.surfaceContainer.withValues(
+                                    alpha: 0.95,
+                                  )
+                                : Colors.white.withValues(alpha: 0.95),
                             border: Border.all(
-                              color: AppColors.cardBorder.withValues(
-                                alpha: 0.9,
-                              ),
+                              color: isDark
+                                  ? scheme.outlineVariant
+                                  : AppColors.cardBorder.withValues(alpha: 0.9),
                               width: 1.4,
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: AppColors.primaryDark.withValues(
-                                  alpha: 0.12,
-                                ),
+                                color: isDark
+                                    ? Colors.black.withValues(alpha: 0.26)
+                                    : AppColors.primaryDark.withValues(
+                                        alpha: 0.12,
+                                      ),
                                 blurRadius: 20,
                                 offset: const Offset(0, 8),
                               ),
@@ -314,51 +334,67 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               GoldTextField(
-                                label: 'Tola',
-                                info:
-                                    '1 Tola = 11.66 grams = 12 Masha = 16 Ana = 96 Ratti',
+                                label: AppLocalizations.of(context)!.tolaLabel,
+                                info: AppLocalizations.of(context)!.tolaInfo,
                                 controller: tolaController,
-                                semanticLabel: 'Tola weight input field',
+                                semanticLabel: AppLocalizations.of(
+                                  context,
+                                )!.tolaSemanticLabel,
                                 validator: _validateInput,
                                 onChanged: _calculate,
-                                hintText: 'e.g. 2.5',
+                                hintText: AppLocalizations.of(
+                                  context,
+                                )!.tolaHint,
                               ),
                               GoldTextField(
-                                label: 'Masha',
-                                info:
-                                    '1 Masha = 0.972 grams = 1.333 Ana = 8 Ratti',
+                                label: AppLocalizations.of(context)!.mashaLabel,
+                                info: AppLocalizations.of(context)!.mashaInfo,
                                 controller: mashaController,
-                                semanticLabel: 'Masha weight input field',
+                                semanticLabel: AppLocalizations.of(
+                                  context,
+                                )!.mashaSemanticLabel,
                                 validator: _validateInput,
                                 onChanged: _calculate,
-                                hintText: 'e.g. 12.5',
+                                hintText: AppLocalizations.of(
+                                  context,
+                                )!.mashaHint,
                               ),
                               GoldTextField(
-                                label: 'Ana',
-                                info: '1 Ana = 0.72875 grams = 6 Ratti',
+                                label: AppLocalizations.of(context)!.anaLabel,
+                                info: AppLocalizations.of(context)!.anaInfo,
                                 controller: anaController,
-                                semanticLabel: 'Ana weight input field',
+                                semanticLabel: AppLocalizations.of(
+                                  context,
+                                )!.anaSemanticLabel,
                                 validator: _validateInput,
                                 onChanged: _calculate,
-                                hintText: 'e.g. 16.25',
+                                hintText: AppLocalizations.of(context)!.anaHint,
                               ),
                               GoldTextField(
-                                label: 'Ratti',
-                                info: '1 Ratti = 0.1215 grams',
+                                label: AppLocalizations.of(context)!.rattiLabel,
+                                info: AppLocalizations.of(context)!.rattiInfo,
                                 controller: rattiController,
-                                semanticLabel: 'Ratti weight input field',
+                                semanticLabel: AppLocalizations.of(
+                                  context,
+                                )!.rattiSemanticLabel,
                                 validator: _validateInput,
                                 onChanged: _calculate,
-                                hintText: 'e.g. 96.75',
+                                hintText: AppLocalizations.of(
+                                  context,
+                                )!.rattiHint,
                               ),
                               GoldTextField(
-                                label: 'Gram',
-                                info: 'Direct gram input',
+                                label: AppLocalizations.of(context)!.gramLabel,
+                                info: AppLocalizations.of(context)!.gramInfo,
                                 controller: gramController,
-                                semanticLabel: 'Gram weight input field',
+                                semanticLabel: AppLocalizations.of(
+                                  context,
+                                )!.gramSemanticLabel,
                                 validator: _validateInput,
                                 onChanged: _calculate,
-                                hintText: 'e.g. 11.66',
+                                hintText: AppLocalizations.of(
+                                  context,
+                                )!.gramHint,
                               ),
                               Consumer(
                                 builder: (context, ref, child) {
@@ -367,27 +403,35 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                                   );
 
                                   return GoldTextField(
-                                    label: 'Gold Rate',
-                                    info: 'Current market rate per unit',
+                                    label: AppLocalizations.of(
+                                      context,
+                                    )!.goldRateLabel,
+                                    info: AppLocalizations.of(
+                                      context,
+                                    )!.goldRateInfo,
                                     controller: goldRateController,
-                                    semanticLabel: 'Gold rate input field',
+                                    semanticLabel: AppLocalizations.of(
+                                      context,
+                                    )!.goldRateSemanticLabel,
                                     validator: _validateInput,
                                     onChanged: _calculate,
-                                    hintText: 'e.g. 150,000',
+                                    hintText: AppLocalizations.of(
+                                      context,
+                                    )!.goldRateHint,
                                     hasDropdown: true,
                                     dropdownValue: selectedUnit.name,
-                                    dropdownItems:
-                                        UnitEnum.values
-                                            .map<String>((e) => e.name)
-                                            .toList(),
+                                    dropdownItems: UnitEnum.values
+                                        .map<String>((e) => e.name)
+                                        .toList(),
                                     onDropdownChanged: (value) {
                                       if (value == null) return;
 
                                       final UnitEnum newUnit =
                                           UnitEnum.fromString(value);
                                       ref
-                                          .read(rateUnitProvider.notifier)
-                                          .state = newUnit;
+                                              .read(rateUnitProvider.notifier)
+                                              .state =
+                                          newUnit;
                                       _calculate();
                                     },
                                   );
@@ -475,14 +519,14 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.calculate, size: 20),
-                    SizedBox(width: 8),
+                    const Icon(Icons.calculate, size: 20),
+                    const SizedBox(width: 8),
                     Text(
-                      'Calculate',
-                      style: TextStyle(
+                      AppLocalizations.of(context)!.calculateButton,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -518,14 +562,14 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.clear_all, size: 20),
-                    SizedBox(width: 8),
+                    const Icon(Icons.clear_all, size: 20),
+                    const SizedBox(width: 8),
                     Text(
-                      'Clear All',
-                      style: TextStyle(
+                      AppLocalizations.of(context)!.clearAllButton,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -541,23 +585,32 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   }
 
   Widget _buildWeightsResultSection(String resultText) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        gradient: const LinearGradient(
-          colors: [AppColors.resultCardStart, AppColors.resultCardEnd],
+        gradient: LinearGradient(
+          colors: isDark
+              ? [scheme.surfaceContainerHigh, scheme.surfaceContainer]
+              : [AppColors.resultCardStart, AppColors.resultCardEnd],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         border: Border.all(
-          color: AppColors.cardBorder.withValues(alpha: 0.9),
+          color: isDark
+              ? scheme.outlineVariant
+              : AppColors.cardBorder.withValues(alpha: 0.9),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primaryDark.withValues(alpha: 0.11),
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.18)
+                : AppColors.primaryDark.withValues(alpha: 0.11),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -575,11 +628,11 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
               ),
               const SizedBox(width: 8),
               Text(
-                'Conversion Details',
+                AppLocalizations.of(context)!.conversionDetails,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.ink,
+                  color: scheme.onSurface,
                 ),
               ),
             ],
@@ -587,9 +640,9 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           const SizedBox(height: 12),
           SelectableText(
             resultText,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
-              color: AppColors.ink,
+              color: scheme.onSurface,
               height: 1.5,
             ),
           ),
@@ -599,23 +652,35 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   }
 
   Widget _buildPriceResultSection(String priceText) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       margin: const EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        gradient: const LinearGradient(
-          colors: [AppColors.priceCardStart, AppColors.priceCardEnd],
+        gradient: LinearGradient(
+          colors: isDark
+              ? [
+                  scheme.primaryContainer.withValues(alpha: 0.62),
+                  scheme.surfaceContainerHigh,
+                ]
+              : [AppColors.priceCardStart, AppColors.priceCardEnd],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         border: Border.all(
-          color: AppColors.primaryDark.withValues(alpha: 0.4),
+          color: isDark
+              ? scheme.outlineVariant
+              : AppColors.primaryDark.withValues(alpha: 0.4),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primaryDark.withValues(alpha: 0.2),
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.22)
+                : AppColors.primaryDark.withValues(alpha: 0.2),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -632,10 +697,10 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           Expanded(
             child: Text(
               priceText,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: AppColors.ink,
+                color: scheme.onSurface,
               ),
             ),
           ),

@@ -329,5 +329,85 @@
         "example": "Gold Rate"
       }
     }
+  },
+  "converterTabLabel": "Converter",
+  "@converterTabLabel": {
+    "description": "Label for converter navigation tab"
+  },
+  "settingsTabLabel": "Settings",
+  "@settingsTabLabel": {
+    "description": "Label for settings navigation tab"
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title of the settings screen"
+  },
+  "settingsThemeLabel": "Theme",
+  "@settingsThemeLabel": {
+    "description": "Label for theme settings section"
+  },
+  "themeLight": "Light",
+  "@themeLight": {
+    "description": "Light theme option"
+  },
+  "themeDark": "Dark",
+  "@themeDark": {
+    "description": "Dark theme option"
+  },
+  "darkModeLabel": "Dark Mode",
+  "@darkModeLabel": {
+    "description": "Label for dark mode toggle"
+  },
+  "darkModeSubtitle": "Switch between dark and light themes",
+  "@darkModeSubtitle": {
+    "description": "Subtitle for dark mode toggle"
+  },
+  "themeSystem": "System",
+  "@themeSystem": {
+    "description": "System theme option"
+  },
+  "settingsLanguageLabel": "Language",
+  "@settingsLanguageLabel": {
+    "description": "Label for language settings section"
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "English language option"
+  },
+  "languageUrdu": "Urdu",
+  "@languageUrdu": {
+    "description": "Urdu language option"
+  },
+  "languageArabic": "Arabic",
+  "@languageArabic": {
+    "description": "Arabic language option"
+  },
+  "languageHindi": "Hindi",
+  "@languageHindi": {
+    "description": "Hindi language option"
+  },
+  "languageTurkish": "Turkish",
+  "@languageTurkish": {
+    "description": "Turkish language option"
+  },
+  "languageNote": "More languages coming soon",
+  "@languageNote": {
+    "description": "Note about future language support"
+  },
+  "settingsAboutLabel": "About",
+  "@settingsAboutLabel": {
+    "description": "Label for about section"
+  },
+  "aboutVersion": "Version",
+  "@aboutVersion": {
+    "description": "Version label in about section"
+  },
+  "aboutDescription": "Gold Weight Converter is a simple and efficient tool for converting between various traditional gold weight units and grams.",
+  "@aboutDescription": {
+    "description": "Description of the app"
+  },
+  "unknownLabel": "Unknown",
+  "@unknownLabel": {
+    "description": "Fallback text for unknown values"
   }
 }

@@ -36,6 +36,8 @@ class GoldTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
@@ -47,14 +49,16 @@ class GoldTextField extends StatelessWidget {
             style: textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w700,
               fontSize: 16,
-              color: AppColors.primaryDark,
+              color: isDark ? scheme.primary : AppColors.primaryDark,
             ),
           ),
           const SizedBox(height: 6),
           Text(
             info,
             style: textTheme.bodySmall?.copyWith(
-              color: AppColors.ink.withValues(alpha: 0.62),
+              color: isDark
+                  ? scheme.onSurface.withValues(alpha: 0.72)
+                  : AppColors.ink.withValues(alpha: 0.62),
               fontSize: 12,
               fontStyle: FontStyle.italic,
             ),
@@ -69,6 +73,9 @@ class GoldTextField extends StatelessWidget {
   }
 
   Widget _buildTextField(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Semantics(
       label: semanticLabel ?? 'Enter $label value',
       child: Container(
@@ -76,7 +83,9 @@ class GoldTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withValues(alpha: 0.12),
+              color: isDark
+                  ? Colors.black.withValues(alpha: 0.18)
+                  : AppColors.primary.withValues(alpha: 0.12),
               blurRadius: 10,
               offset: const Offset(0, 3),
             ),
@@ -93,7 +102,11 @@ class GoldTextField extends StatelessWidget {
               onChanged!();
             }
           },
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: scheme.onSurface,
+          ),
           decoration: _getInputDecoration(),
         ),
       ),
@@ -101,6 +114,9 @@ class GoldTextField extends StatelessWidget {
   }
 
   Widget _buildTextFieldWithDropdown(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       children: [
         Expanded(
@@ -110,7 +126,9 @@ class GoldTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.12),
+                  color: isDark
+                      ? Colors.black.withValues(alpha: 0.18)
+                      : AppColors.primary.withValues(alpha: 0.12),
                   blurRadius: 10,
                   offset: const Offset(0, 3),
                 ),
@@ -131,9 +149,10 @@ class GoldTextField extends StatelessWidget {
                     onChanged!();
                   }
                 },
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
+                  color: scheme.onSurface,
                 ),
                 decoration: _getInputDecoration(),
               ),
@@ -147,14 +166,18 @@ class GoldTextField extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: AppColors.cardBorder.withValues(alpha: 0.95),
+                color: isDark
+                    ? scheme.outlineVariant
+                    : AppColors.cardBorder.withValues(alpha: 0.95),
                 width: 1.5,
               ),
               gradient: LinearGradient(
-                colors: [
-                  AppColors.primary.withValues(alpha: 0.08),
-                  AppColors.secondaryLight.withValues(alpha: 0.95),
-                ],
+                colors: isDark
+                    ? [scheme.surfaceContainerHigh, scheme.surfaceContainer]
+                    : [
+                        AppColors.primary.withValues(alpha: 0.08),
+                        AppColors.secondaryLight.withValues(alpha: 0.95),
+                      ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -166,24 +189,25 @@ class GoldTextField extends StatelessWidget {
                   value: dropdownValue,
                   isExpanded: true,
                   style: TextStyle(
-                    color: AppColors.ink,
+                    color: scheme.onSurface,
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
                   ),
-                  dropdownColor: AppColors.surface,
-                  icon: const Icon(
+                  dropdownColor: isDark
+                      ? scheme.surfaceContainerHigh
+                      : AppColors.surface,
+                  icon: Icon(
                     Icons.keyboard_arrow_down,
-                    color: AppColors.primaryDark,
+                    color: isDark ? scheme.primary : AppColors.primaryDark,
                   ),
-                  items:
-                      dropdownItems
-                          ?.map(
-                            (item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(item),
-                            ),
-                          )
-                          .toList(),
+                  items: dropdownItems
+                      ?.map(
+                        (item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(item),
+                        ),
+                      )
+                      .toList(),
                   onChanged: onDropdownChanged,
                 ),
               ),

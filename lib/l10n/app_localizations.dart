@@ -399,6 +399,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{label} unit selector'**
   String unitSelectorSemantic(String label);
+
+  /// Label for converter navigation tab
+  ///
+  /// In en, this message translates to:
+  /// **'Converter'**
+  String get converterTabLabel;
+
+  /// Label for settings navigation tab
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTabLabel;
+
+  /// Title of the settings screen
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// Label for theme settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsThemeLabel;
+
+  /// Light theme option
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// Dark theme option
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// Label for dark mode toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkModeLabel;
+
+  /// Subtitle for dark mode toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Switch between dark and light themes'**
+  String get darkModeSubtitle;
+
+  /// System theme option
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// Label for language settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguageLabel;
+
+  /// English language option
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
+
+  /// Urdu language option
+  ///
+  /// In en, this message translates to:
+  /// **'Urdu'**
+  String get languageUrdu;
+
+  /// Arabic language option
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get languageArabic;
+
+  /// Hindi language option
+  ///
+  /// In en, this message translates to:
+  /// **'Hindi'**
+  String get languageHindi;
+
+  /// Turkish language option
+  ///
+  /// In en, this message translates to:
+  /// **'Turkish'**
+  String get languageTurkish;
+
+  /// Note about future language support
+  ///
+  /// In en, this message translates to:
+  /// **'More languages coming soon'**
+  String get languageNote;
+
+  /// Label for about section
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsAboutLabel;
+
+  /// Version label in about section
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get aboutVersion;
+
+  /// Description of the app
+  ///
+  /// In en, this message translates to:
+  /// **'Gold Weight Converter is a simple and efficient tool for converting between various traditional gold weight units and grams.'**
+  String get aboutDescription;
+
+  /// Fallback text for unknown values
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknownLabel;
 }
 
 class _AppLocalizationsDelegate

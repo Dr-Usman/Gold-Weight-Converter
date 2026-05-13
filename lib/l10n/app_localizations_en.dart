@@ -190,4 +190,65 @@ class AppLocalizationsEn extends AppLocalizations {
   String unitSelectorSemantic(String label) {
     return '$label unit selector';
   }
+
+  @override
+  String get converterTabLabel => 'Converter';
+
+  @override
+  String get settingsTabLabel => 'Settings';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsThemeLabel => 'Theme';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get darkModeLabel => 'Dark Mode';
+
+  @override
+  String get darkModeSubtitle => 'Switch between dark and light themes';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get settingsLanguageLabel => 'Language';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get languageUrdu => 'Urdu';
+
+  @override
+  String get languageArabic => 'Arabic';
+
+  @override
+  String get languageHindi => 'Hindi';
+
+  @override
+  String get languageTurkish => 'Turkish';
+
+  @override
+  String get languageNote => 'More languages coming soon';
+
+  @override
+  String get settingsAboutLabel => 'About';
+
+  @override
+  String get aboutVersion => 'Version';
+
+  @override
+  String get aboutDescription =>
+      'Gold Weight Converter is a simple and efficient tool for converting between various traditional gold weight units and grams.';
+
+  @override
+  String get unknownLabel => 'Unknown';
 }
