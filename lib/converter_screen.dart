@@ -221,12 +221,12 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 72,
+        toolbarHeight: 60,
         title: Text(
           AppLocalizations.of(context)!.appTitle,
           style: const TextStyle(
             fontWeight: FontWeight.w700,
-            fontSize: 21,
+            fontSize: 18,
             letterSpacing: 0.2,
           ),
         ),
