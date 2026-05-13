@@ -23,128 +23,139 @@ class AppDrawer extends ConsumerWidget {
     return Drawer(
       backgroundColor: scheme.surface,
       child: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Header
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(18, 20, 18, 18),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [scheme.primary, scheme.secondary],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Icon(Icons.settings, color: Colors.white, size: 30),
-                    const SizedBox(height: 8),
-                    Text(
-                      l10n.settingsTitle,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                    // Header
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.fromLTRB(18, 20, 18, 18),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [scheme.primary, scheme.secondary],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.settings,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            l10n.settingsTitle,
+                            style: Theme.of(context).textTheme.titleLarge
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ],
                       ),
                     ),
+                    const SizedBox(height: 14),
+
+                    // Theme Section
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Card(
+                        color: scheme.surfaceContainerHighest,
+                        child: SwitchListTile.adaptive(
+                          secondary: Icon(
+                            darkModeEnabled
+                                ? Icons.dark_mode
+                                : Icons.light_mode,
+                            color: scheme.primary,
+                          ),
+                          title: Text(l10n.darkModeLabel),
+                          value: darkModeEnabled,
+                          onChanged: (enabled) {
+                            ref
+                                .read(themeModeProvider.notifier)
+                                .setThemeMode(
+                                  enabled ? ThemeMode.dark : ThemeMode.light,
+                                );
+                          },
+                          activeThumbColor: scheme.primary,
+                          activeTrackColor: scheme.primaryContainer,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+
+                    // Language Section
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Card(
+                        color: scheme.surfaceContainerHighest,
+                        child: ListTile(
+                          leading: Icon(Icons.language, color: scheme.primary),
+                          title: Text(l10n.settingsLanguageLabel),
+                          trailing: const Icon(
+                            Icons.arrow_forward_ios,
+                            size: 16,
+                          ),
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (context) => const LanguageBottomSheet(),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(24),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
-              const SizedBox(height: 14),
-
-              // Theme Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Card(
-                  color: scheme.surfaceContainerHighest,
-                  child: SwitchListTile.adaptive(
-                    secondary: Icon(
-                      darkModeEnabled ? Icons.dark_mode : Icons.light_mode,
-                      color: scheme.primary,
-                    ),
-                    title: Text(l10n.darkModeLabel),
-                    value: darkModeEnabled,
-                    onChanged: (enabled) {
-                      ref
-                          .read(themeModeProvider.notifier)
-                          .setThemeMode(
-                            enabled ? ThemeMode.dark : ThemeMode.light,
-                          );
-                    },
-                    activeThumbColor: scheme.primary,
-                    activeTrackColor: scheme.primaryContainer,
+            ),
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+              child: versionAsync.when(
+                data: (version) => Text(
+                  '${l10n.aboutVersion} $version',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                  ),
+                ),
+                loading: () => Text(
+                  '${l10n.aboutVersion} ...',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                  ),
+                ),
+                error: (_, _) => Text(
+                  '${l10n.aboutVersion} ${l10n.unknownLabel}',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: scheme.onSurfaceVariant,
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-
-              // Language Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Card(
-                  color: scheme.surfaceContainerHighest,
-                  child: ListTile(
-                    leading: Icon(Icons.language, color: scheme.primary),
-                    title: Text(l10n.settingsLanguageLabel),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (context) => const LanguageBottomSheet(),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(24),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-
-              // About Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Card(
-                  color: scheme.surfaceContainerHighest,
-                  child: ListTile(
-                    leading: Icon(Icons.info_outline, color: scheme.primary),
-                    title: Text(l10n.aboutVersion),
-                    trailing: versionAsync.when(
-                      data: (version) => Text(
-                        version,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: scheme.onSurface,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      loading: () => const SizedBox(
-                        width: 18,
-                        height: 18,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      ),
-                      error: (_, stackTrace) => Text(
-                        l10n.unknownLabel,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: scheme.onSurface,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
