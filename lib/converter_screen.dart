@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gold_weight_converter/constants/app_colors.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
@@ -248,15 +247,12 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           ),
         ),
       ),
+      drawer: const AppDrawer(),
       onDrawerChanged: (isOpened) {
         if (isOpened) {
-          // Unfocus the current focus node
-          FocusScope.of(context).unfocus();
-          // Directly hide the keyboard through platform channel
-          SystemChannels.textInput.invokeMethod('TextInput.hide');
+          FocusManager.instance.primaryFocus?.unfocus();
         }
       },
-      drawer: const AppDrawer(),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
