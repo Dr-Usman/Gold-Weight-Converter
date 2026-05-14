@@ -19,7 +19,7 @@ class _TestPreferencesService extends PreferencesService {
   Future<void> saveThemeMode(ThemeMode mode) async {}
 
   @override
-  Future<void> saveLanguage(String languageCode) async {}
+  Future<void> saveLocale(Locale locale) async {}
 
   @override
   Future<void> clearAll() async {}
