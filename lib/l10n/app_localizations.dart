@@ -5,7 +5,18 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_ar.dart';
+import 'app_localizations_bn.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_fa.dart';
+import 'app_localizations_hi.dart';
+import 'app_localizations_id.dart';
+import 'app_localizations_ms.dart';
+import 'app_localizations_ps.dart';
+import 'app_localizations_rmu.dart';
+import 'app_localizations_sd.dart';
+import 'app_localizations_tr.dart';
+import 'app_localizations_ur.dart';
 
 // ignore_for_file: type=lint
 
@@ -92,7 +103,20 @@ abstract class AppLocalizations {
       ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
+    Locale('bn'),
+    Locale('en'),
+    Locale('fa'),
+    Locale('hi'),
+    Locale('id'),
+    Locale('ms'),
+    Locale('ps'),
+    Locale('rmu'),
+    Locale('sd'),
+    Locale('tr'),
+    Locale('ur'),
+  ];
 
   /// The title of the application
   ///
@@ -460,6 +484,12 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get settingsLanguageLabel;
 
+  /// Heading shown on language selection bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Please select your language'**
+  String get languageSelectionPrompt;
+
   /// English language option
   ///
   /// In en, this message translates to:
@@ -531,8 +561,20 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'ar',
+    'bn',
+    'en',
+    'fa',
+    'hi',
+    'id',
+    'ms',
+    'ps',
+    'rmu',
+    'sd',
+    'tr',
+    'ur',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -541,8 +583,30 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'bn':
+      return AppLocalizationsBn();
     case 'en':
       return AppLocalizationsEn();
+    case 'fa':
+      return AppLocalizationsFa();
+    case 'hi':
+      return AppLocalizationsHi();
+    case 'id':
+      return AppLocalizationsId();
+    case 'ms':
+      return AppLocalizationsMs();
+    case 'ps':
+      return AppLocalizationsPs();
+    case 'rmu':
+      return AppLocalizationsRmu();
+    case 'sd':
+      return AppLocalizationsSd();
+    case 'tr':
+      return AppLocalizationsTr();
+    case 'ur':
+      return AppLocalizationsUr();
   }
 
   throw FlutterError(
