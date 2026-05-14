@@ -111,7 +111,9 @@ class AppDrawer extends ConsumerWidget {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
+                              useSafeArea: true,
                               isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
                               builder: (context) => const LanguageBottomSheet(),
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.vertical(

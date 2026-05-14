@@ -15,9 +15,11 @@ class LocaleNotifier extends Notifier<Locale> {
   }
 
   /// Change the app locale and save it
-  Future<void> setLocale(String languageCode) async {
-    state = Locale(languageCode);
-    await ref.read(preferencesServiceProvider).saveLanguage(languageCode);
+  Future<void> setLocale(Locale? locale) async {
+    final prefs = ref.read(preferencesServiceProvider);
+    final newLocale = locale ?? Locale('en');
+    state = newLocale;
+    await prefs.saveLocale(newLocale);
   }
 
   /// Get the current language code

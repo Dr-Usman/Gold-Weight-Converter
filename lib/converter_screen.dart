@@ -572,11 +572,15 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                   children: [
                     const Icon(Icons.clear_all, size: 20),
                     const SizedBox(width: 8),
-                    Text(
-                      AppLocalizations.of(context)!.clearAllButton,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                    Flexible(
+                      child: FittedBox(
+                        child: Text(
+                          AppLocalizations.of(context)!.clearAllButton,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                     ),
                   ],

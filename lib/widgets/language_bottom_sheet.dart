@@ -4,72 +4,114 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/locale_provider.dart';
 
-class LanguageBottomSheet extends ConsumerStatefulWidget {
+class LanguageBottomSheet extends ConsumerWidget {
   const LanguageBottomSheet({super.key});
 
   @override
-  ConsumerState<LanguageBottomSheet> createState() => _LanguageBottomSheetState();
-}
-
-class _LanguageBottomSheetState extends ConsumerState<LanguageBottomSheet> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final currentLocale = ref.watch(localeProvider);
     final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
 
-    final List<({String code, String label})> languages = [
-      (code: 'en', label: l10n.languageEnglish),
-      (code: 'ur', label: l10n.languageUrdu),
-      (code: 'ar', label: l10n.languageArabic),
-      (code: 'hi', label: l10n.languageHindi),
-      (code: 'tr', label: l10n.languageTurkish),
+    // List of supported locales with their native labels (Named Record Type)
+    final List<({Locale locale, String nativeLabel})> localeLanguages = [
+      (locale: Locale('en'), nativeLabel: 'English'),
+      (locale: Locale('ur', 'RO'), nativeLabel: 'Roman Urdu'),
+      (locale: Locale('ur'), nativeLabel: 'اردو'),
+      (locale: Locale('sd'), nativeLabel: 'سنڌي'),
+      (locale: Locale('ar'), nativeLabel: 'العربية'),
+      (locale: Locale('fa'), nativeLabel: 'فارسی'),
+      (locale: Locale('ps'), nativeLabel: 'پښتو'),
+      (locale: Locale('hi'), nativeLabel: 'हिंदी'),
+      (locale: Locale('bn'), nativeLabel: 'বাংলা'),
+      (locale: Locale('ms'), nativeLabel: 'Melayu'),
+      (locale: Locale('id'), nativeLabel: 'Indonesia'),
+      (locale: Locale('tr'), nativeLabel: 'Türkçe'),
     ];
 
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 18, 16, 16),
+      top: false,
+      child: Container(
+        width: double.infinity,
+        // constraints: BoxConstraints(maxHeight: maxSheetHeight),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: scheme.surface,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              l10n.settingsLanguageLabel,
-              style: Theme.of(context).textTheme.titleLarge,
+            // const SizedBox(height: 6),
+            Center(
+              child: Container(
+                width: screenWidth * 0.15,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: scheme.outlineVariant,
+                  borderRadius: BorderRadius.circular(99),
+                ),
+              ),
             ),
             const SizedBox(height: 8),
             Text(
-              l10n.languageNote,
-              style: Theme.of(context).textTheme.bodySmall,
+              l10n.languageSelectionPrompt,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: isDark ? Colors.white : scheme.onSurface,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 8),
             Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                for (final language in languages)
-                  ChoiceChip(
-                    label: Text(language.label),
-                    selected: currentLocale.languageCode == language.code,
-                    onSelected: (_) async {
-                      await ref.read(localeProvider.notifier).setLocale(language.code);
-                    },
-                    avatar: currentLocale.languageCode == language.code
-                        ? Icon(Icons.check, size: 16, color: scheme.onPrimary)
-                        : null,
-                    selectedColor: scheme.primary,
-                    labelStyle: TextStyle(
-                      color: currentLocale.languageCode == language.code
-                          ? scheme.onPrimary
-                          : scheme.onSurface,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    side: BorderSide(color: scheme.outlineVariant),
-                    showCheckmark: false,
+              spacing: 6.0, // Space between chips
+              runSpacing: 0.0, // Space between lines
+              alignment: WrapAlignment.start,
+              children: localeLanguages.map((language) {
+                final bool isSelected =
+                    currentLocale.languageCode ==
+                        language.locale.languageCode &&
+                    currentLocale.countryCode == language.locale.countryCode;
+
+                return ChoiceChip(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 8,
                   ),
-              ],
+                  labelPadding: const EdgeInsets.symmetric(horizontal: 2),
+                  label: SizedBox(
+                    width: screenWidth * 0.25,
+                    child: Center(
+                      child: FittedBox(child: Text(language.nativeLabel)),
+                    ),
+                  ),
+                  selected: isSelected,
+                  selectedColor: scheme.primary,
+                  backgroundColor: isDark
+                      ? scheme.surfaceContainerHighest
+                      : scheme.surface,
+                  showCheckmark: false,
+                  side: BorderSide(color: scheme.outlineVariant),
+                  labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: isSelected
+                        ? scheme.onPrimary
+                        : (isDark ? Colors.white : scheme.onSurface),
+                    fontWeight: FontWeight.w700,
+                  ),
+                  onSelected: (_) async {
+                    await ref
+                        .read(localeProvider.notifier)
+                        .setLocale(language.locale);
+                    await Future.delayed(const Duration(milliseconds: 200));
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
+                  },
+                );
+              }).toList(),
             ),
-            const SizedBox(height: 16),
           ],
         ),
       ),

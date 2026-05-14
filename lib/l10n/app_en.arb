@@ -370,6 +370,10 @@
   "@settingsLanguageLabel": {
     "description": "Label for language settings section"
   },
+  "languageSelectionPrompt": "Please select your language",
+  "@languageSelectionPrompt": {
+    "description": "Heading shown on language selection bottom sheet"
+  },
   "languageEnglish": "English",
   "@languageEnglish": {
     "description": "English language option"
