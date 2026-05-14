@@ -222,6 +222,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageLabel => 'Language';
 
   @override
+  String get languageSelectionPrompt => 'Please select your language';
+
+  @override
   String get languageEnglish => 'English';
 
   @override

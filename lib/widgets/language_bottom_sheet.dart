@@ -15,19 +15,20 @@ class LanguageBottomSheet extends ConsumerWidget {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final double screenWidth = MediaQuery.sizeOf(context).width;
 
-    final List<({String code, String nativeLabel})> languages = [
-      (code: 'en', nativeLabel: 'English'),
-      (code: 'rmu', nativeLabel: 'Roman Urdu'),
-      (code: 'ur', nativeLabel: 'اردو'),
-      (code: 'hi', nativeLabel: 'हिंदी'),
-      (code: 'bn', nativeLabel: 'বাংলা'),
-      (code: 'sd', nativeLabel: 'سنڌي'),
-      (code: 'ar', nativeLabel: 'العربية'),
-      (code: 'fa', nativeLabel: 'فارسی'),
-      (code: 'ps', nativeLabel: 'پښتو'),
-      (code: 'ms', nativeLabel: 'Melayu'),
-      (code: 'id', nativeLabel: 'Indonesia'),
-      (code: 'tr', nativeLabel: 'Türkçe'),
+    // List of supported locales with their native labels (Named Record Type)
+    final List<({Locale locale, String nativeLabel})> localeLanguages = [
+      (locale: Locale('en'), nativeLabel: 'English'),
+      (locale: Locale('ur', 'RO'), nativeLabel: 'Roman Urdu'),
+      (locale: Locale('ur'), nativeLabel: 'اردو'),
+      (locale: Locale('sd'), nativeLabel: 'سنڌي'),
+      (locale: Locale('ar'), nativeLabel: 'العربية'),
+      (locale: Locale('fa'), nativeLabel: 'فارسی'),
+      (locale: Locale('ps'), nativeLabel: 'پښتو'),
+      (locale: Locale('hi'), nativeLabel: 'हिंदी'),
+      (locale: Locale('bn'), nativeLabel: 'বাংলা'),
+      (locale: Locale('ms'), nativeLabel: 'Melayu'),
+      (locale: Locale('id'), nativeLabel: 'Indonesia'),
+      (locale: Locale('tr'), nativeLabel: 'Türkçe'),
     ];
 
     return SafeArea(
@@ -68,9 +69,11 @@ class LanguageBottomSheet extends ConsumerWidget {
               spacing: 6.0, // Space between chips
               runSpacing: 0.0, // Space between lines
               alignment: WrapAlignment.start,
-              children: languages.map((language) {
+              children: localeLanguages.map((language) {
                 final bool isSelected =
-                    currentLocale.languageCode == language.code;
+                    currentLocale.languageCode ==
+                        language.locale.languageCode &&
+                    currentLocale.countryCode == language.locale.countryCode;
 
                 return ChoiceChip(
                   padding: const EdgeInsets.symmetric(
@@ -100,7 +103,7 @@ class LanguageBottomSheet extends ConsumerWidget {
                   onSelected: (_) async {
                     await ref
                         .read(localeProvider.notifier)
-                        .setLocale(language.code);
+                        .setLocale(language.locale);
                     await Future.delayed(const Duration(milliseconds: 200));
                     if (context.mounted) {
                       Navigator.of(context).pop();

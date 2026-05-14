@@ -38,17 +38,35 @@ class PreferencesService {
     return _prefs.getString(_languageKey) ?? 'en';
   }
 
-  /// Save language code to disk
-  Future<void> saveLanguage(String languageCode) async {
-    await _prefs.setString(_languageKey, languageCode);
+  /// Save locale to disk
+  Future<void> saveLocale(Locale locale) async {
+    final String localeString = locale.toString();
+    await _prefs.setString(_languageKey, localeString);
   }
 
-  /// Get the locale based on saved language code
+  /// Get the saved locale, defaults to 'en'
   Locale getLocale() {
-    final code = getLanguageCode();
-    return Locale(code);
+    final code = _prefs.getString(_languageKey) ?? 'en';
+    return _localeFromString(code);
   }
 
+  /// Helper: Parse string to Locale
+  Locale _localeFromString(String code) {
+    final parts = code.split('_');
+    if (parts.length == 1) {
+      return Locale(parts[0]);
+    } else if (parts.length == 2) {
+      return Locale(parts[0], parts[1]);
+    } else if (parts.length == 3) {
+      return Locale.fromSubtags(
+        languageCode: parts[0],
+        countryCode: parts[1],
+        scriptCode: parts[2],
+      );
+    } else {
+      return Locale('en'); // Fallback
+    }
+  }
   // ============ Helper Methods ============
 
   ThemeMode _themeModeFromString(String? value) {

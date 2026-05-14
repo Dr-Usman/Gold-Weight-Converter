@@ -1,57 +1,223 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:gold_weight_converter/main.dart';
+import 'package:gold_weight_converter/services/preferences_service.dart';
+
+class _TestPreferencesService extends PreferencesService {
+  @override
+  ThemeMode getThemeMode() {
+    return ThemeMode.light;
+  }
+
+  @override
+  Locale getLocale() {
+    return const Locale('en');
+  }
+
+  @override
+  Future<void> saveThemeMode(ThemeMode mode) async {}
+
+  @override
+  Future<void> saveLanguage(String languageCode) async {}
+
+  @override
+  Future<void> clearAll() async {}
+}
+
+Future<void> pumpConverterApp(WidgetTester tester) async {
+  await tester.pumpWidget(
+    ProviderScope(
+      overrides: [
+        preferencesServiceProvider.overrideWithValue(_TestPreferencesService()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+  await tester.pumpAndSettle();
+}
+
+Finder fieldAt(int index) => find.byType(TextFormField).at(index);
+
+Future<void> enterField(WidgetTester tester, int index, String value) async {
+  await tester.enterText(fieldAt(index), value);
+  await tester.pumpAndSettle();
+}
+
+Future<void> tapCalculate(WidgetTester tester) async {
+  final Finder button = find.text('Calculate');
+  await tester.ensureVisible(button);
+  await tester.tap(button);
+  await tester.pumpAndSettle();
+}
+
+Future<void> tapClearAll(WidgetTester tester) async {
+  final Finder button = find.text('Clear All');
+  await tester.ensureVisible(button);
+  await tester.tap(button);
+  await tester.pumpAndSettle();
+}
+
+Future<void> selectRateUnit(WidgetTester tester, String unitLabel) async {
+  final Finder dropdown = find.byType(DropdownButton<String>);
+  await tester.ensureVisible(dropdown);
+  await tester.tap(dropdown);
+  await tester.pumpAndSettle();
+  await tester.tap(find.text(unitLabel).last);
+  await tester.pumpAndSettle();
+}
+
+double totalGramsFor(List<double> weights) {
+  const double tolaToGram = 11.66;
+  const double mashaToGram = 0.972;
+  const double anaToGram = 0.72875;
+  const double rattiToGram = 0.1215;
+
+  return weights[0] * tolaToGram +
+      weights[1] * mashaToGram +
+      weights[2] * anaToGram +
+      weights[3] * rattiToGram +
+      weights[4];
+}
 
 void main() {
-  testWidgets('Gold converter app loads correctly', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('loads the converter screen and primary actions', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
 
-    // Verify that the app title is displayed.
     expect(find.text('Gold Weight Converter'), findsOneWidget);
-
-    // Verify that input field labels are present.
     expect(find.text('Tola'), findsAtLeastNWidgets(1));
     expect(find.text('Masha'), findsAtLeastNWidgets(1));
     expect(find.text('Ana'), findsAtLeastNWidgets(1));
     expect(find.text('Ratti'), findsAtLeastNWidgets(1));
     expect(find.text('Gram'), findsAtLeastNWidgets(1));
-
-    // Verify that buttons are present.
     expect(find.text('Calculate'), findsOneWidget);
     expect(find.text('Clear All'), findsOneWidget);
   });
 
-  testWidgets('Calculate button works with tola input', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
+  testWidgets('converts a single tola input into grams', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
 
-    // Enter 1 in tola field
-    await tester.enterText(find.byType(TextFormField).first, '1');
-    
-    // Verify conversion result appears automatically due to onChanged
-    await tester.pump();
+    await enterField(tester, 0, '1');
+    await tapCalculate(tester);
+
     expect(find.text('Conversion Details'), findsOneWidget);
-    expect(find.textContaining('Total Weight:'), findsOneWidget);
+    expect(
+      find.textContaining('Tola: 1.0 × 11.66 = 11.6600 grams'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('Total Weight: 11.6600 grams'), findsOneWidget);
+    expect(find.textContaining('Tola: 1.0000'), findsOneWidget);
   });
 
-  testWidgets('Input validation works', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
+  testWidgets('sums multiple weight units before converting', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
 
-    // Enter invalid text
-    await tester.enterText(find.byType(TextFormField).first, 'invalid');
-    
-    // Trigger validation
-    await tester.pump();
-    
-    // Should not show conversion results for invalid input
+    await enterField(tester, 0, '1');
+    await enterField(tester, 1, '2');
+    await enterField(tester, 2, '3');
+    await enterField(tester, 3, '4');
+    await enterField(tester, 4, '5');
+    await tapCalculate(tester);
+
+    final double expectedGrams = totalGramsFor([1, 2, 3, 4, 5]);
+    final String expectedTotal = expectedGrams.toStringAsFixed(4);
+
+    expect(
+      find.textContaining('Masha: 2.0 × 0.972 = 1.9440 grams'),
+      findsOneWidget,
+    );
+    expect(
+      find.textContaining('Ana: 3.0 × 0.72875 = 2.1863 grams'),
+      findsOneWidget,
+    );
+    expect(
+      find.textContaining('Ratti: 4.0 × 0.1215 = 0.4860 grams'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('Gram: 5.0 grams'), findsOneWidget);
+    expect(
+      find.textContaining('Total Weight: $expectedTotal grams'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('calculates gold price using the tola rate unit', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await enterField(tester, 0, '1');
+    await enterField(tester, 5, '1166');
+    await selectRateUnit(tester, 'Tola');
+    await tapCalculate(tester);
+
+    expect(find.textContaining('Gold Price: Rs. 1,166.00'), findsOneWidget);
+    expect(
+      find.textContaining('(Rate: Rs. 1,166.00 per Tola)'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('calculates gold price using the 10 Gram rate unit', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await enterField(tester, 4, '10');
+    await enterField(tester, 5, '2000');
+    await selectRateUnit(tester, '10 Gram');
+    await tapCalculate(tester);
+
+    expect(find.textContaining('Gold Price: Rs. 2,000.00'), findsOneWidget);
+    expect(
+      find.textContaining('(Rate: Rs. 2,000.00 per 10 Gram)'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('calculates gold price using the 1 Gram rate unit', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await enterField(tester, 4, '5');
+    await enterField(tester, 5, '3000');
+    await selectRateUnit(tester, '1 Gram');
+    await tapCalculate(tester);
+
+    expect(find.textContaining('Gold Price: Rs. 15,000.00'), findsOneWidget);
+    expect(
+      find.textContaining('(Rate: Rs. 3,000.00 per 1 Gram)'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('clear all removes entered values and hides results', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await enterField(tester, 0, '1');
+    await enterField(tester, 5, '1166');
+    await tapCalculate(tester);
+    expect(find.text('Conversion Details'), findsOneWidget);
+    expect(find.textContaining('Gold Price:'), findsOneWidget);
+
+    await tapClearAll(tester);
+
+    for (final int index in List<int>.generate(6, (value) => value)) {
+      expect(fieldAt(index), findsOneWidget);
+      final TextFormField field = tester.widget<TextFormField>(fieldAt(index));
+      expect(field.controller?.text ?? '', isEmpty);
+    }
+
     expect(find.text('Conversion Details'), findsNothing);
+    expect(find.textContaining('Gold Price:'), findsNothing);
   });
 }

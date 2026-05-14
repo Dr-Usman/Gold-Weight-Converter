@@ -28,41 +28,6 @@ void main() async {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  /// Resolve locales that aren't supported by Flutter's Material/Cupertino
-  /// localizations to appropriate fallbacks
-  Locale? _resolveLocale(List<Locale>? locales, Iterable<Locale> supported) {
-    if (locales == null || locales.isEmpty) return null;
-
-    final preferredLocale = locales.first;
-    final code = preferredLocale.languageCode;
-
-    // Map unsupported locales to fallback locales that Flutter supports
-    const Map<String, String> fallbackMap = {
-      'ur': 'ar', // Urdu → Arabic
-      'rmu': 'ar', // Roman Urdu → Arabic
-      'sd': 'ar', // Sindhi → Arabic
-      'ps': 'ar', // Pashto → Arabic
-      'bn': 'hi', // Bengali → Hindi
-      'ms': 'id', // Malay → Indonesian
-    };
-
-    // If locale is unsupported, use fallback
-    if (fallbackMap.containsKey(code)) {
-      final fallbackCode = fallbackMap[code]!;
-      return Locale(fallbackCode);
-    }
-
-    // Otherwise check if it's directly supported
-    for (final supportedLocale in supported) {
-      if (supportedLocale.languageCode == code) {
-        return supportedLocale;
-      }
-    }
-
-    // Default to English
-    return const Locale('en');
-  }
-
   ThemeData _buildTheme({required ColorScheme colorScheme}) {
     final ThemeData baseTheme = ThemeData(useMaterial3: true);
     final TextTheme bodyText = GoogleFonts.manropeTextTheme(
@@ -186,9 +151,14 @@ class MyApp extends ConsumerWidget {
       onSurface: Colors.white,
     );
 
-    final locale = ref.watch(localeProvider);
+    final Locale? locale = ref.watch(localeProvider);
+    //  Decide effective locale (fix unsupported sd)
+    final Locale effectiveLocale = (locale?.languageCode == 'sd')
+        ? const Locale('ur') // fallback for system widgets
+        : (locale ?? const Locale('en'));
+
     return MaterialApp(
-      title: 'Gold Weight Converter',
+      title: AppLocalizations.of(context)?.appTitle ?? 'Gold Weight Converter',
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -196,12 +166,25 @@ class MyApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      locale: effectiveLocale,
       supportedLocales: AppLocalizations.supportedLocales,
-      localeListResolutionCallback: _resolveLocale,
       theme: _buildTheme(colorScheme: lightColorScheme),
       darkTheme: _buildTheme(colorScheme: darkColorScheme),
       themeMode: themeMode,
-      locale: locale,
+      builder: (context, child) {
+        final isRomanUrdu =
+            effectiveLocale.languageCode == 'ur' &&
+            effectiveLocale.countryCode == 'RO';
+
+        final direction = isRomanUrdu
+            ? TextDirection.ltr
+            : Directionality.maybeOf(context) ?? TextDirection.ltr;
+
+        return Directionality(
+          textDirection: direction,
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
       home: const GoldConverterScreen(),
     );
   }

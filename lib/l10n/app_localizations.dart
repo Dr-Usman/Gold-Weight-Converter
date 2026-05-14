@@ -13,7 +13,6 @@ import 'app_localizations_hi.dart';
 import 'app_localizations_id.dart';
 import 'app_localizations_ms.dart';
 import 'app_localizations_ps.dart';
-import 'app_localizations_rmu.dart';
 import 'app_localizations_sd.dart';
 import 'app_localizations_tr.dart';
 import 'app_localizations_ur.dart';
@@ -112,10 +111,10 @@ abstract class AppLocalizations {
     Locale('id'),
     Locale('ms'),
     Locale('ps'),
-    Locale('rmu'),
     Locale('sd'),
     Locale('tr'),
     Locale('ur'),
+    Locale('ur', 'RO'),
   ];
 
   /// The title of the application
@@ -570,7 +569,6 @@ class _AppLocalizationsDelegate
     'id',
     'ms',
     'ps',
-    'rmu',
     'sd',
     'tr',
     'ur',
@@ -581,6 +579,18 @@ class _AppLocalizationsDelegate
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when language+country codes are specified.
+  switch (locale.languageCode) {
+    case 'ur':
+      {
+        switch (locale.countryCode) {
+          case 'RO':
+            return AppLocalizationsUrRo();
+        }
+        break;
+      }
+  }
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'ar':
@@ -599,8 +609,6 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsMs();
     case 'ps':
       return AppLocalizationsPs();
-    case 'rmu':
-      return AppLocalizationsRmu();
     case 'sd':
       return AppLocalizationsSd();
     case 'tr':
