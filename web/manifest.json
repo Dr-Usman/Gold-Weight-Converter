@@ -1,11 +1,11 @@
 {
-    "name": "gold_weight_converter",
-    "short_name": "gold_weight_converter",
+    "name": "Gold Weight Converter",
+    "short_name": "Gold Converter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Convert gold weight between Tola, Masha, Ana, Ratti, and Gram, with gold price estimation.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

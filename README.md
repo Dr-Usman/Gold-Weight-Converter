@@ -2,6 +2,8 @@
 
 A clean, open-source Flutter app to convert gold weight between traditional South Asian units (Tola, Masha, Ana, Ratti) and metric units (Gram), with integrated gold price estimation.
 
+**[Try the live demo](https://dr-usman.github.io/Gold-Weight-Converter/)**
+
 ## Features
 
 - Convert weights between Tola, Masha, Ana, Ratti, and Gram
@@ -127,6 +129,7 @@ flutter build apk --debug
 flutter build apk --release
 flutter build apk --split-per-abi
 flutter build appbundle
+flutter build web --release --base-href "/Gold-Weight-Converter/"
 ```
 
 ## Architecture At A Glance
@@ -143,6 +146,7 @@ flutter build appbundle
 - Version is maintained in pubspec.yaml (current: 1.3.0+3).
 - Change history is tracked in CHANGELOG.md.
 - GitHub release workflow is tag-driven and runs on tags matching v*.
+- The same v* tags also deploy the web build to GitHub Pages (`.github/workflows/deploy-pages.yml`), live at https://dr-usman.github.io/Gold-Weight-Converter/. The Pages deploy can also be run manually via workflow_dispatch.
 
 Example release flow:
 
@@ -153,7 +157,7 @@ git tag vX.Y.Z
 git push origin main --tags
 ```
 
-CI then builds universal and split APKs and attaches them to the GitHub Release.
+CI then builds universal and split APKs and attaches them to the GitHub Release, and publishes the web build to GitHub Pages.
 
 ## Contributing
 
