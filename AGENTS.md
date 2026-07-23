@@ -132,3 +132,13 @@ AnalyticsService.instance?.track('event_name', properties: {
 - **Do not hardcode a second Mixpanel project token** — use `AnalyticsService.projectToken` / `--dart-define=MIXPANEL_TOKEN`.
 - **Do not skip `mixpanel.reset()` on logout** if auth is added later — failing to reset merges the next user's events with the previous profile.
 - **Do not call `mixpanel.identify()` before the user is authenticated** — premature identification creates orphaned Mixpanel profiles.
+
+---
+
+## Release notes
+
+When creating a new app release:
+
+1. Add developer-facing notes under `## [X.Y.Z]` in `CHANGELOG.md` (`### Added` / `### Changed` / `### Fixed`). GitHub Releases use this section automatically (title `GWC vX.Y.Z`); the `### Play Store` block is excluded from the GitHub body.
+2. Add a short **user-facing** `### Play Store (en-US)` section under that version (paste into Google Play Console). Keep it ≤500 characters, plain language, no SDK/API jargon. Do not create a separate what’s-new file unless asked.
+3. Tag `vX.Y.Z` to trigger per-platform release workflows and GitHub Pages.

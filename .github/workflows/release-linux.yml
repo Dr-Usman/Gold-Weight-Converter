@@ -1,0 +1,56 @@
+name: Release Linux
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+
+      - uses: ./.github/actions/setup-flutter
+
+      - name: Verify pubspec version matches tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          VERSION="${TAG#v}"
+          PUBSPEC_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d'+' -f1)
+          if [ "$PUBSPEC_VERSION" != "$VERSION" ]; then
+            echo "Tag version ($VERSION) does not match pubspec version ($PUBSPEC_VERSION)"
+            exit 1
+          fi
+
+      - name: Prepare release notes from CHANGELOG.md
+        id: release_notes
+        uses: ./.github/actions/release-notes
+
+      - name: Build Linux release
+        run: flutter build linux --release
+
+      - name: Package Linux bundle
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          cd build/linux/x64/release/bundle
+          tar -czf "../../../../gwc-linux-${VERSION}-x64.tar.gz" .
+
+      - name: Upload Linux bundle to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ steps.release_notes.outputs.release_name }}
+          body_path: release-notes.md
+          files: |
+            build/gwc-linux-*.tar.gz

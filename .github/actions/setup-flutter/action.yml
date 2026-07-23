@@ -1,0 +1,36 @@
+name: Setup Flutter
+description: Install Flutter SDK, cache pub dependencies, and run pub get
+
+inputs:
+  flutter-version:
+    description: Flutter SDK version
+    required: false
+    default: '3.44.5'
+  channel:
+    description: Flutter channel
+    required: false
+    default: stable
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ inputs.flutter-version }}
+        channel: ${{ inputs.channel }}
+        cache: true
+
+    - name: Cache pub dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.pub-cache
+          .dart_tool
+        key: pub-${{ runner.os }}-${{ hashFiles('pubspec.lock') }}
+        restore-keys: |
+          pub-${{ runner.os }}-
+
+    - name: flutter pub get
+      shell: bash
+      run: flutter pub get
