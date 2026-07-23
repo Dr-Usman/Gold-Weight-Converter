@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../services/analytics_service.dart';
 import '../services/preferences_service.dart';
 
 final localeProvider = NotifierProvider<LocaleNotifier, Locale>(() {
@@ -17,9 +18,20 @@ class LocaleNotifier extends Notifier<Locale> {
   /// Change the app locale and save it
   Future<void> setLocale(Locale? locale) async {
     final prefs = ref.read(preferencesServiceProvider);
-    final newLocale = locale ?? Locale('en');
+    final newLocale = locale ?? const Locale('en');
+    final Locale previousLocale = state;
+
+    final bool isSameLocale =
+        previousLocale.languageCode == newLocale.languageCode &&
+        previousLocale.countryCode == newLocale.countryCode;
+    if (isSameLocale) return;
+
     state = newLocale;
     await prefs.saveLocale(newLocale);
+    AnalyticsService.trackLanguageChanged(
+      language: newLocale,
+      previousLanguage: previousLocale,
+    );
   }
 
   /// Get the current language code

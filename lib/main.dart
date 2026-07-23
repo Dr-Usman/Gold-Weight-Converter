@@ -8,12 +8,20 @@ import 'converter_screen.dart';
 import 'l10n/app_localizations.dart';
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
+import 'services/analytics_service.dart';
 import 'services/preferences_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final preferencesService = PreferencesService();
   await preferencesService.init();
+
+  // Initialize analytics service
+  await AnalyticsService.init();
+  AnalyticsService.syncUserPreferences(
+    locale: preferencesService.getLocale(),
+    themeMode: preferencesService.getThemeMode(),
+  );
 
   runApp(
     ProviderScope(

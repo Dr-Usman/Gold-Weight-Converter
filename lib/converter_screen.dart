@@ -5,6 +5,7 @@ import 'package:gold_weight_converter/constants/unit_enum.dart';
 import 'package:gold_weight_converter/l10n/app_localizations.dart';
 import 'package:gold_weight_converter/providers/unit_provider.dart';
 import 'package:gold_weight_converter/providers/weight_provider.dart';
+import 'package:gold_weight_converter/services/analytics_service.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
 import 'package:intl/intl.dart';
 
@@ -200,7 +201,38 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   // Public method for button presses (includes unfocus)
   void calculateAll() {
     FocusScope.of(context).unfocus();
+
+    final double tola = _getDouble(tolaController);
+    final double masha = _getDouble(mashaController);
+    final double ana = _getDouble(anaController);
+    final double ratti = _getDouble(rattiController);
+    final double gram = _getDouble(gramController);
+    final double rate = _getDouble(goldRateController);
+    final bool hasInput =
+        tola > 0 || masha > 0 || ana > 0 || ratti > 0 || gram > 0;
+
     _calculate();
+
+    if (hasInput) {
+      final List<String> inputUnitsUsed = <String>[
+        if (tola > 0) 'tola',
+        if (masha > 0) 'masha',
+        if (ana > 0) 'ana',
+        if (ratti > 0) 'ratti',
+        if (gram > 0) 'gram',
+      ];
+      final UnitEnum rateUnit = ref.read(rateUnitProvider);
+
+      AnalyticsService.trackConversionCompleted(
+        inputUnitsUsed: inputUnitsUsed,
+        rateUnit: switch (rateUnit) {
+          UnitEnum.tola => 'tola',
+          UnitEnum.tenGram => 'ten_gram',
+          UnitEnum.oneGram => 'one_gram',
+        },
+        hasGoldRate: rate > 0,
+      );
+    }
 
     // Scroll to bottom after calculation
     WidgetsBinding.instance.addPostFrameCallback((_) {
