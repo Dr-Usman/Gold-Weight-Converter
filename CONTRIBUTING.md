@@ -61,8 +61,8 @@ If you add or change user-facing text:
 For release-related changes:
 
 - Update pubspec.yaml version.
-- Update CHANGELOG.md.
-- Use a version tag format like v1.3.0 to trigger release builds.
+- Update CHANGELOG.md (developer notes + optional `### Play Store (en-US)` for Play Console).
+- Use a version tag format like `v1.3.0` to trigger per-platform GitHub Releases titled `GWC v1.3.0`.
 
 ## Code Style
 

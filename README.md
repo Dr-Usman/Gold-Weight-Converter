@@ -146,19 +146,29 @@ flutter build web --release --base-href "/Gold-Weight-Converter/"
 
 - Version is maintained in pubspec.yaml (current: 1.4.0+4).
 - Change history is tracked in CHANGELOG.md.
-- GitHub release workflow is tag-driven and runs on tags matching v*.
-- The same v* tags also deploy the web build to GitHub Pages (`.github/workflows/deploy-pages.yml`), live at https://dr-usman.github.io/Gold-Weight-Converter/. The Pages deploy can also be run manually via workflow_dispatch.
+- For each release, add developer notes under `## [X.Y.Z]` plus a short **user-facing** `### Play Store (en-US)` section (paste into Google Play Console). Keep Play Store copy plain-language; no separate what’s-new file.
+- Tagging `v*` creates a GitHub Release titled **GWC vX.Y.Z**. Release body is generated from that CHANGELOG section (Play Store subsection excluded) with a Full Changelog link at the bottom.
+- Per-platform workflows attach versioned assets:
+  - Android: `gwc-android-X.Y.Z-universal.apk` + ABI splits
+  - Web: `gwc-web-X.Y.Z.zip`
+  - macOS: `gwc-macos-X.Y.Z.zip`
+  - Linux: `gwc-linux-X.Y.Z-x64.tar.gz`
+  - Windows: `gwc-windows-X.Y.Z-x64.zip`
+  - iOS: manual `workflow_dispatch` only (signing secrets required)
+- The same `v*` tags also deploy the web build to GitHub Pages (`.github/workflows/deploy-pages.yml`), live at https://dr-usman.github.io/Gold-Weight-Converter/.
 
 Example release flow:
 
 ```bash
-git add pubspec.yaml CHANGELOG.md
+# 1. Bump pubspec.yaml version (e.g. 1.4.0+4)
+# 2. Update CHANGELOG.md (developer notes + ### Play Store section)
+git add pubspec.yaml CHANGELOG.md README.md
 git commit -m "release: vX.Y.Z+N"
 git tag vX.Y.Z
 git push origin main --tags
 ```
 
-CI then builds universal and split APKs and attaches them to the GitHub Release, and publishes the web build to GitHub Pages.
+Then paste the Play Store section from CHANGELOG.md into Google Play Console → Release → Release notes.
 
 ## Contributing
 

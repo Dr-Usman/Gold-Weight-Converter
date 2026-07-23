@@ -1,0 +1,93 @@
+name: Prepare release notes
+description: Extract the tagged version section from CHANGELOG.md for GitHub Releases
+
+outputs:
+  version:
+    description: Version without the leading v
+    value: ${{ steps.extract.outputs.version }}
+  release_name:
+    description: Display name for the GitHub Release
+    value: ${{ steps.extract.outputs.release_name }}
+
+runs:
+  using: composite
+  steps:
+    - id: extract
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        VERSION="${GITHUB_REF_NAME#v}"
+        NOTES_FILE="${GITHUB_WORKSPACE}/release-notes.md"
+
+        if [ ! -f CHANGELOG.md ]; then
+          echo "CHANGELOG.md not found"
+          exit 1
+        fi
+
+        {
+          echo "## What's new in ${VERSION}"
+          echo
+          # Skip the version heading and Play Store subsection; keep Added/Changed/Fixed.
+          awk -v ver="$VERSION" '
+            $0 ~ "^## \\[" ver "\\]" {found=1; next}
+            found && /^## / {exit}
+            found {
+              if ($0 ~ /^### Play Store/) { in_play=1; next }
+              if (in_play) {
+                if ($0 ~ /^### / && $0 !~ /^### Play Store/) { in_play=0 }
+                else next
+              }
+              if ($0 ~ /^---[[:space:]]*$/) next
+              if (!started) {
+                if ($0 ~ /^[[:space:]]*$/) next
+                started=1
+              }
+              print
+            }
+          ' CHANGELOG.md
+        } > "$NOTES_FILE"
+
+        # Require at least one changelog bullet for this version.
+        if ! grep -q '^- ' "$NOTES_FILE"; then
+          echo "No CHANGELOG.md section found for version ${VERSION}"
+          echo "Add a ## [${VERSION}] section before tagging."
+          exit 1
+        fi
+
+        # Drop trailing blank lines.
+        while [ -s "$NOTES_FILE" ] && [ -z "$(tail -n 1 "$NOTES_FILE")" ]; do
+          sed -i.bak '$ d' "$NOTES_FILE"
+          rm -f "${NOTES_FILE}.bak"
+        done
+        printf '\n' >> "$NOTES_FILE"
+
+        # Prefer remote tags so shallow checkouts still find the previous release.
+        PREV_TAG="$(
+          git ls-remote --tags --refs origin 2>/dev/null \
+            | awk -F/ '{print $NF}' \
+            | sort -V \
+            | awk -v t="${GITHUB_REF_NAME}" '$0 == t { print prev } { prev = $0 }'
+        )"
+        if [ -z "${PREV_TAG}" ]; then
+          git fetch --tags --force origin 2>/dev/null || true
+          PREV_TAG="$(
+            git tag --sort=version:refname \
+              | awk -v t="${GITHUB_REF_NAME}" '$0 == t { print prev } { prev = $0 }'
+          )"
+        fi
+
+        if [ -n "${PREV_TAG}" ]; then
+          printf '\n**Full Changelog**: https://github.com/%s/compare/%s...%s\n' \
+            "${GITHUB_REPOSITORY}" "${PREV_TAG}" "${GITHUB_REF_NAME}" >> "$NOTES_FILE"
+        else
+          printf '\n**Full Changelog**: https://github.com/%s/commits/%s\n' \
+            "${GITHUB_REPOSITORY}" "${GITHUB_REF_NAME}" >> "$NOTES_FILE"
+        fi
+
+        {
+          echo "version=${VERSION}"
+          echo "release_name=GWC v${VERSION}"
+        } >> "$GITHUB_OUTPUT"
+        echo "Prepared release notes:"
+        cat "$NOTES_FILE"

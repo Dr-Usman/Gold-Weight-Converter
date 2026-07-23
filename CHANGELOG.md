@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Mixpanel `zakat_calculated` event (`item_count`, `rate_unit`, `is_gold_rate_set`)
 - Shared `WeightConverter` / `ZakatCalculator` services with unit tests
 
+### Changed
+- GitHub Releases now use CHANGELOG-driven notes (title `GWC vX.Y.Z`, Play Store section excluded) and versioned multi-platform assets (`gwc-android-*`, `gwc-web-*`, `gwc-macos-*`, `gwc-linux-*`, `gwc-windows-*`)
+
 ---
 
 ## [1.4.0] - 2026-07-23
@@ -28,6 +31,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - People profile properties: `preferred_language`, `theme_mode`
 - `AGENTS.md` Mixpanel tracking guidance for future contributors
 - Mixpanel web SDK script for Flutter web builds
+
+### Play Store (en-US)
+```
+What's new in 1.4.0
+• Settings now shows version and build number for easier support
+• Under-the-hood improvements so we can keep making the converter better
+```
 
 ---
 
