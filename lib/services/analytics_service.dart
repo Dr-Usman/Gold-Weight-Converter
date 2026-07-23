@@ -74,11 +74,14 @@ class AnalyticsService {
     Locale? previousLanguage,
   }) {
     final String languageCode = localeToAnalyticsCode(language);
-    _mixpanel?.track('language_changed', properties: {
-      'language': languageCode,
-      if (previousLanguage != null)
-        'previous_language': localeToAnalyticsCode(previousLanguage),
-    });
+    _mixpanel?.track(
+      'language_changed',
+      properties: {
+        'language': languageCode,
+        if (previousLanguage != null)
+          'previous_language': localeToAnalyticsCode(previousLanguage),
+      },
+    );
     _mixpanel?.getPeople().set('preferred_language', languageCode);
   }
 
@@ -87,11 +90,14 @@ class AnalyticsService {
     ThemeMode? previousThemeMode,
   }) {
     final String themeValue = themeModeToAnalyticsValue(themeMode);
-    _mixpanel?.track('theme_changed', properties: {
-      'theme_mode': themeValue,
-      if (previousThemeMode != null)
-        'previous_theme_mode': themeModeToAnalyticsValue(previousThemeMode),
-    });
+    _mixpanel?.track(
+      'theme_changed',
+      properties: {
+        'theme_mode': themeValue,
+        if (previousThemeMode != null)
+          'previous_theme_mode': themeModeToAnalyticsValue(previousThemeMode),
+      },
+    );
     _mixpanel?.getPeople().set('theme_mode', themeValue);
   }
 

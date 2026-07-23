@@ -199,7 +199,10 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
         margin: const EdgeInsets.only(bottom: 10),
         color: isDark ? scheme.surfaceContainerHighest : AppColors.surface,
         child: ListTile(
-          title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+          title: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
           subtitle: Text(
             l10n.zakatItemDetail(
               weightText,
@@ -447,9 +450,9 @@ class _SummaryCard extends StatelessWidget {
           if (!hasItems)
             Text(
               l10n.zakatEmptyItems,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
             )
           else ...[
             Text(

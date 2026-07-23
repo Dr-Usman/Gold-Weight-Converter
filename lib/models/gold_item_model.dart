@@ -8,6 +8,7 @@ class GoldItemModel {
   final double weight;
   final WeightUnitEnum unit;
   final PurityEnum purity;
+
   /// Used when [purity] is [PurityEnum.custom] (1–24).
   final int? customKarat;
 
