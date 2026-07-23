@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gold_weight_converter/constants/app_colors.dart';
+import 'package:gold_weight_converter/constants/app_constants.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
 import 'package:gold_weight_converter/l10n/app_localizations.dart';
 import 'package:gold_weight_converter/providers/unit_provider.dart';
 import 'package:gold_weight_converter/providers/weight_provider.dart';
 import 'package:gold_weight_converter/services/analytics_service.dart';
+import 'package:gold_weight_converter/services/weight_converter.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
 import 'package:intl/intl.dart';
 
@@ -29,14 +31,10 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   final TextEditingController goldRateController = TextEditingController();
   final ScrollController scrollController = ScrollController();
 
-  // String goldRateUnit = 'Tola'; // Unused - now using State Provider
-  // String resultText = ''; // Unused - now using Notifier Provider
-  // String priceText = ''; // Unused - now using Notifier Provider
-
-  static const double tolaToGram = 11.66;
-  static const double mashaToGram = 0.972;
-  static const double anaToGram = 0.72875;
-  static const double rattiToGram = 0.1215;
+  static const double tolaToGram = AppConstants.tolaToGram;
+  static const double mashaToGram = AppConstants.mashaToGram;
+  static const double anaToGram = AppConstants.anaToGram;
+  static const double rattiToGram = AppConstants.rattiToGram;
 
   final currencyFormat = NumberFormat.currency(
     locale: 'en_PK',
@@ -160,14 +158,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     double rate = _getDouble(goldRateController);
     if (rate > 0) {
       final goldRateUnit = ref.read(rateUnitProvider);
-      double gramRate = rate;
-      if ((goldRateUnit == UnitEnum.tola)) {
-        gramRate = (rate / tolaToGram);
-      } else if ((goldRateUnit == UnitEnum.tenGram)) {
-        gramRate = (rate / 10);
-      } else {
-        gramRate = rate;
-      }
+      final double gramRate = WeightConverter.ratePerGram(rate, goldRateUnit);
       double price = totalGrams * gramRate;
 
       final priceFormatted = currencyFormat.format(price);

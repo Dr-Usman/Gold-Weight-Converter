@@ -413,5 +413,169 @@
   "unknownLabel": "Unknown",
   "@unknownLabel": {
     "description": "Fallback text for unknown values"
+  },
+  "zakatMenuLabel": "Gold Zakat",
+  "@zakatMenuLabel": {
+    "description": "Drawer menu label for gold zakat screen"
+  },
+  "zakatScreenTitle": "Gold Zakat",
+  "@zakatScreenTitle": {
+    "description": "App bar title for gold zakat screen"
+  },
+  "zakatDisclaimer": "Helper for gold items only — not a full zakat assessment or religious ruling. Other assets and nisab are your responsibility; consult a local scholar.",
+  "@zakatDisclaimer": {
+    "description": "Disclaimer shown on the zakat screen"
+  },
+  "zakatRateInfo": "Market rate for 24K / pure gold per unit",
+  "@zakatRateInfo": {
+    "description": "Info text under zakat gold rate field"
+  },
+  "zakatItemsTitle": "Your gold items",
+  "@zakatItemsTitle": {
+    "description": "Section title for gold items list"
+  },
+  "zakatAddItem": "Add item",
+  "@zakatAddItem": {
+    "description": "Button to add a gold item"
+  },
+  "zakatEditItem": "Edit item",
+  "@zakatEditItem": {
+    "description": "Title when editing a gold item"
+  },
+  "zakatEmptyItems": "No gold items yet. Add jewelry or bars to calculate zakat.",
+  "@zakatEmptyItems": {
+    "description": "Empty state when no zakat items exist"
+  },
+  "zakatItemNameLabel": "Name (optional)",
+  "@zakatItemNameLabel": {
+    "description": "Label for optional item name"
+  },
+  "zakatItemNameHint": "e.g. Wedding ring",
+  "@zakatItemNameHint": {
+    "description": "Hint for optional item name"
+  },
+  "zakatWeightLabel": "Weight",
+  "@zakatWeightLabel": {
+    "description": "Label for item weight"
+  },
+  "zakatWeightHint": "e.g. 10",
+  "@zakatWeightHint": {
+    "description": "Hint for item weight"
+  },
+  "zakatWeightUnitLabel": "Unit",
+  "@zakatWeightUnitLabel": {
+    "description": "Label for weight unit dropdown"
+  },
+  "zakatPurityLabel": "Purity",
+  "@zakatPurityLabel": {
+    "description": "Label for purity dropdown"
+  },
+  "zakatCustomKaratLabel": "Custom karat (1–24)",
+  "@zakatCustomKaratLabel": {
+    "description": "Label for custom karat input"
+  },
+  "zakatCustomKaratHint": "e.g. 20",
+  "@zakatCustomKaratHint": {
+    "description": "Hint for custom karat"
+  },
+  "zakatPurity24k": "24K (pure)",
+  "@zakatPurity24k": {
+    "description": "24 karat purity option"
+  },
+  "zakatPurity22k": "22K",
+  "@zakatPurity22k": {
+    "description": "22 karat purity option"
+  },
+  "zakatPurity21k": "21K",
+  "@zakatPurity21k": {
+    "description": "21 karat purity option"
+  },
+  "zakatPurity18k": "18K",
+  "@zakatPurity18k": {
+    "description": "18 karat purity option"
+  },
+  "zakatPurityCustom": "Custom",
+  "@zakatPurityCustom": {
+    "description": "Custom purity option"
+  },
+  "zakatSaveItem": "Save",
+  "@zakatSaveItem": {
+    "description": "Save item button"
+  },
+  "zakatDeleteItem": "Delete",
+  "@zakatDeleteItem": {
+    "description": "Delete item button"
+  },
+  "zakatCancel": "Cancel",
+  "@zakatCancel": {
+    "description": "Cancel button"
+  },
+  "zakatUntitledItem": "Gold item",
+  "@zakatUntitledItem": {
+    "description": "Fallback name when item has no name"
+  },
+  "zakatSummaryTitle": "Zakat summary",
+  "@zakatSummaryTitle": {
+    "description": "Title for zakat results card"
+  },
+  "zakatTotalPureGold": "Total pure gold",
+  "@zakatTotalPureGold": {
+    "description": "Label for total pure gold"
+  },
+  "zakatPureGoldValue": "{grams} g ({tola} tola)",
+  "@zakatPureGoldValue": {
+    "description": "Formatted pure gold weight",
+    "placeholders": {
+      "grams": {
+        "type": "String",
+        "example": "22.0000"
+      },
+      "tola": {
+        "type": "String",
+        "example": "1.8868"
+      }
+    }
+  },
+  "zakatTotalValue": "Estimated value",
+  "@zakatTotalValue": {
+    "description": "Label for estimated total value"
+  },
+  "zakatDueLabel": "Zakat on these items (2.5%)",
+  "@zakatDueLabel": {
+    "description": "Label for zakat amount"
+  },
+  "zakatEnterRatePrompt": "Enter gold rate to estimate value and zakat",
+  "@zakatEnterRatePrompt": {
+    "description": "Prompt when rate is missing"
+  },
+  "zakatCalculateButton": "Calculate zakat",
+  "@zakatCalculateButton": {
+    "description": "Button to calculate and track zakat"
+  },
+  "zakatItemDetail": "{weight} {unit} · {purity}",
+  "@zakatItemDetail": {
+    "description": "Secondary line for an item row",
+    "placeholders": {
+      "weight": {
+        "type": "String",
+        "example": "10"
+      },
+      "unit": {
+        "type": "String",
+        "example": "Gram"
+      },
+      "purity": {
+        "type": "String",
+        "example": "22K"
+      }
+    }
+  },
+  "zakatValidationWeight": "Enter a weight greater than zero",
+  "@zakatValidationWeight": {
+    "description": "Validation when weight is missing or zero"
+  },
+  "zakatValidationKarat": "Enter a karat between 1 and 24",
+  "@zakatValidationKarat": {
+    "description": "Validation for custom karat"
   }
 }

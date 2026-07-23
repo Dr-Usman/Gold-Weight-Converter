@@ -254,6 +254,118 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get unknownLabel => 'نامعلوم';
+
+  @override
+  String get zakatMenuLabel => 'سونے کی زکوٰۃ';
+
+  @override
+  String get zakatScreenTitle => 'سونے کی زکوٰۃ';
+
+  @override
+  String get zakatDisclaimer =>
+      'صرف سونے کی اشیاء کے لیے مددگار — مکمل زکوٰۃ کا حساب یا فتویٰ نہیں۔ دیگر اثاثے اور نصاب آپ کی ذمہ داری ہیں؛ مقامی عالم سے رجوع کریں۔';
+
+  @override
+  String get zakatRateInfo => '24K / خالص سونے کی مارکیٹ شرح فی یونٹ';
+
+  @override
+  String get zakatItemsTitle => 'آپ کی سونے کی اشیاء';
+
+  @override
+  String get zakatAddItem => 'آئٹم شامل کریں';
+
+  @override
+  String get zakatEditItem => 'آئٹم میں ترمیم';
+
+  @override
+  String get zakatEmptyItems =>
+      'ابھی کوئی سونے کی شے نہیں۔ زکوٰۃ کے لیے زیورات یا بار شامل کریں۔';
+
+  @override
+  String get zakatItemNameLabel => 'نام (اختیاری)';
+
+  @override
+  String get zakatItemNameHint => 'مثلاً شادی کی انگوٹھی';
+
+  @override
+  String get zakatWeightLabel => 'وزن';
+
+  @override
+  String get zakatWeightHint => 'مثلاً 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'یونٹ';
+
+  @override
+  String get zakatPurityLabel => 'خالصیت';
+
+  @override
+  String get zakatCustomKaratLabel => 'حسبِ ضرورت قیراط (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'مثلاً 20';
+
+  @override
+  String get zakatPurity24k => '24K (خالص)';
+
+  @override
+  String get zakatPurity22k => '22K';
+
+  @override
+  String get zakatPurity21k => '21K';
+
+  @override
+  String get zakatPurity18k => '18K';
+
+  @override
+  String get zakatPurityCustom => 'حسبِ ضرورت';
+
+  @override
+  String get zakatSaveItem => 'محفوظ کریں';
+
+  @override
+  String get zakatDeleteItem => 'حذف کریں';
+
+  @override
+  String get zakatCancel => 'منسوخ';
+
+  @override
+  String get zakatUntitledItem => 'سونے کی شے';
+
+  @override
+  String get zakatSummaryTitle => 'زکوٰۃ کا خلاصہ';
+
+  @override
+  String get zakatTotalPureGold => 'کل خالص سونا';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams گرام ($tola تولہ)';
+  }
+
+  @override
+  String get zakatTotalValue => 'تخمینی قیمت';
+
+  @override
+  String get zakatDueLabel => 'ان اشیاء پر زکوٰۃ (2.5%)';
+
+  @override
+  String get zakatEnterRatePrompt =>
+      'قیمت اور زکوٰۃ کے لیے سونے کی شرح درج کریں';
+
+  @override
+  String get zakatCalculateButton => 'زکوٰۃ حساب کریں';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'صفر سے زیادہ وزن درج کریں';
+
+  @override
+  String get zakatValidationKarat => '1 سے 24 کے درمیان قیراط درج کریں';
 }
 
 /// The translations for Urdu, as used in Romania (`ur_RO`).
@@ -510,4 +622,116 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
 
   @override
   String get unknownLabel => 'Na-maloom';
+
+  @override
+  String get zakatMenuLabel => 'Sone ki Zakat';
+
+  @override
+  String get zakatScreenTitle => 'Sone ki Zakat';
+
+  @override
+  String get zakatDisclaimer =>
+      'Sirf sone ki ashyā ke liye madadgār — mukammal zakat ka hisāb ya fatwa nahi. Digar asāsē aur nisab āp ki zimmedāri hain; maqāmi ālim se mashwara karein.';
+
+  @override
+  String get zakatRateInfo => '24K / khālis sone ki market rate fi unit';
+
+  @override
+  String get zakatItemsTitle => 'Āp ki sone ki ashyā';
+
+  @override
+  String get zakatAddItem => 'Item shāmil karein';
+
+  @override
+  String get zakatEditItem => 'Item edit karein';
+
+  @override
+  String get zakatEmptyItems =>
+      'Abhi koi sone ki shai nahi. Zakat ke liye zewarāt ya bar shāmil karein.';
+
+  @override
+  String get zakatItemNameLabel => 'Naam (ikhtiyāri)';
+
+  @override
+  String get zakatItemNameHint => 'maslan shādi ki angūthi';
+
+  @override
+  String get zakatWeightLabel => 'Wazan';
+
+  @override
+  String get zakatWeightHint => 'maslan 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'Unit';
+
+  @override
+  String get zakatPurityLabel => 'Khālisiyat';
+
+  @override
+  String get zakatCustomKaratLabel => 'Custom qirāt (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'maslan 20';
+
+  @override
+  String get zakatPurity24k => '24K (khālis)';
+
+  @override
+  String get zakatPurity22k => '22K';
+
+  @override
+  String get zakatPurity21k => '21K';
+
+  @override
+  String get zakatPurity18k => '18K';
+
+  @override
+  String get zakatPurityCustom => 'Custom';
+
+  @override
+  String get zakatSaveItem => 'Mehfooz karein';
+
+  @override
+  String get zakatDeleteItem => 'Delete';
+
+  @override
+  String get zakatCancel => 'Cancel';
+
+  @override
+  String get zakatUntitledItem => 'Sone ki shai';
+
+  @override
+  String get zakatSummaryTitle => 'Zakat ka khulāsa';
+
+  @override
+  String get zakatTotalPureGold => 'Kul khālis sona';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams gram ($tola tola)';
+  }
+
+  @override
+  String get zakatTotalValue => 'Takhmini qeemat';
+
+  @override
+  String get zakatDueLabel => 'In ashyā par zakat (2.5%)';
+
+  @override
+  String get zakatEnterRatePrompt =>
+      'Qeemat aur zakat ke liye sone ki rate darj karein';
+
+  @override
+  String get zakatCalculateButton => 'Zakat hisāb karein';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'Sifr se zyāda wazan darj karein';
+
+  @override
+  String get zakatValidationKarat => '1 se 24 ke darmiyān qirāt darj karein';
 }

@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../constants/unit_enum.dart';
+import '../models/gold_item_model.dart';
 
 final preferencesServiceProvider = Provider<PreferencesService>((ref) {
   throw UnimplementedError('preferencesServiceProvider must be overridden');
@@ -9,6 +14,9 @@ final preferencesServiceProvider = Provider<PreferencesService>((ref) {
 class PreferencesService {
   static const String _themeModeKey = 'theme_mode';
   static const String _languageKey = 'language_code';
+  static const String _zakatItemsKey = 'zakat_gold_items';
+  static const String _zakatRateKey = 'zakat_gold_rate';
+  static const String _zakatRateUnitKey = 'zakat_rate_unit';
 
   late SharedPreferences _prefs;
 
@@ -67,6 +75,52 @@ class PreferencesService {
       return Locale('en'); // Fallback
     }
   }
+  // ============ Zakat Methods ============
+
+  /// Saved gold items for zakat, or empty list when unset/corrupt.
+  List<GoldItemModel> getZakatItems() {
+    final String? raw = _prefs.getString(_zakatItemsKey);
+    if (raw == null || raw.isEmpty) return const [];
+
+    try {
+      final dynamic decoded = jsonDecode(raw);
+      if (decoded is! List) return const [];
+      return decoded
+          .whereType<Map>()
+          .map(
+            (item) => GoldItemModel.fromJson(Map<String, dynamic>.from(item)),
+          )
+          .where((item) => item.id.isNotEmpty)
+          .toList();
+    } catch (_) {
+      return const [];
+    }
+  }
+
+  Future<void> saveZakatItems(List<GoldItemModel> items) async {
+    final List<Map<String, dynamic>> encoded = items
+        .map((item) => item.toJson())
+        .toList();
+    await _prefs.setString(_zakatItemsKey, jsonEncode(encoded));
+  }
+
+  /// Last entered zakat gold rate text, or empty when unset.
+  String getZakatRateText() {
+    return _prefs.getString(_zakatRateKey) ?? '';
+  }
+
+  Future<void> saveZakatRateText(String rateText) async {
+    await _prefs.setString(_zakatRateKey, rateText);
+  }
+
+  UnitEnum getZakatRateUnit() {
+    return UnitEnum.fromString(_prefs.getString(_zakatRateUnitKey));
+  }
+
+  Future<void> saveZakatRateUnit(UnitEnum unit) async {
+    await _prefs.setString(_zakatRateUnitKey, unit.name);
+  }
+
   // ============ Helper Methods ============
 
   ThemeMode _themeModeFromString(String? value) {

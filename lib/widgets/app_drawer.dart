@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/theme_provider.dart';
 import '../providers/version_provider.dart';
+import '../screens/zakat_screen.dart';
 import 'language_bottom_sheet.dart';
 
 class AppDrawer extends ConsumerWidget {
@@ -67,6 +68,34 @@ class AppDrawer extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 14),
+
+                    // Gold Zakat
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Card(
+                        color: scheme.surfaceContainerHighest,
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.volunteer_activism_outlined,
+                            color: scheme.primary,
+                          ),
+                          title: Text(l10n.zakatMenuLabel),
+                          trailing: const Icon(
+                            Icons.arrow_forward_ios,
+                            size: 16,
+                          ),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => const ZakatScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
 
                     // Theme Section
                     Padding(

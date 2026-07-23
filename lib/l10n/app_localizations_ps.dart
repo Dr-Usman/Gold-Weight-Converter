@@ -254,4 +254,116 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get unknownLabel => 'نامعلوم';
+
+  @override
+  String get zakatMenuLabel => 'د سرو زرو زکات';
+
+  @override
+  String get zakatScreenTitle => 'د سرو زرو زکات';
+
+  @override
+  String get zakatDisclaimer =>
+      'یوازې د سرو زرو توکو لپاره مرستندویه — بشپړ زکات ارزونه یا فتوا نه ده. نورې شتمنۍ او نصاب ستاسو مسؤلیت دی؛ له محلي عالم سره مشوره وکړئ.';
+
+  @override
+  String get zakatRateInfo => 'د ۲۴ عیار / خالص سرو زرو د بازار نرخ په هر واحد';
+
+  @override
+  String get zakatItemsTitle => 'ستاسو د سرو زرو توکي';
+
+  @override
+  String get zakatAddItem => 'توکی اضافه کړئ';
+
+  @override
+  String get zakatEditItem => 'توکی سمول';
+
+  @override
+  String get zakatEmptyItems =>
+      'تر اوسه د سرو زرو توکي نشته. د زکات لپاره زیور یا بار اضافه کړئ.';
+
+  @override
+  String get zakatItemNameLabel => 'نوم (اختیاري)';
+
+  @override
+  String get zakatItemNameHint => 'لکه د واده کړۍ';
+
+  @override
+  String get zakatWeightLabel => 'وزن';
+
+  @override
+  String get zakatWeightHint => 'لکه 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'واحد';
+
+  @override
+  String get zakatPurityLabel => 'خالصوالی';
+
+  @override
+  String get zakatCustomKaratLabel => 'دودیز عیار (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'لکه 20';
+
+  @override
+  String get zakatPurity24k => '۲۴K (خالص)';
+
+  @override
+  String get zakatPurity22k => '۲۲K';
+
+  @override
+  String get zakatPurity21k => '۲۱K';
+
+  @override
+  String get zakatPurity18k => '۱۸K';
+
+  @override
+  String get zakatPurityCustom => 'دودیز';
+
+  @override
+  String get zakatSaveItem => 'خوندي کړئ';
+
+  @override
+  String get zakatDeleteItem => 'ړنګول';
+
+  @override
+  String get zakatCancel => 'لغوه';
+
+  @override
+  String get zakatUntitledItem => 'د سرو زرو توکی';
+
+  @override
+  String get zakatSummaryTitle => 'د زکات لنډیز';
+
+  @override
+  String get zakatTotalPureGold => 'ټول خالص سره زر';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams ګرامه ($tola تولہ)';
+  }
+
+  @override
+  String get zakatTotalValue => 'اټکل شوی ارزښت';
+
+  @override
+  String get zakatDueLabel => 'په دې توکو زکات (۲.۵%)';
+
+  @override
+  String get zakatEnterRatePrompt =>
+      'د ارزښت او زکات لپاره د سرو زرو نرخ ولیکئ';
+
+  @override
+  String get zakatCalculateButton => 'زکات محاسبه کړئ';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'له صفر څخه زیات وزن ولیکئ';
+
+  @override
+  String get zakatValidationKarat => 'د ۱ او ۲۴ ترمنځ عیار ولیکئ';
 }

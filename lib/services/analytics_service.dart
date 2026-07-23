@@ -54,6 +54,21 @@ class AnalyticsService {
     );
   }
 
+  static void trackZakatCalculated({
+    required int itemCount,
+    required String rateUnit,
+    required bool hasGoldRate,
+  }) {
+    _mixpanel?.track(
+      'zakat_calculated',
+      properties: {
+        'item_count': itemCount,
+        'rate_unit': rateUnit,
+        'is_gold_rate_set': hasGoldRate,
+      },
+    );
+  }
+
   static void trackLanguageChanged({
     required Locale language,
     Locale? previousLanguage,

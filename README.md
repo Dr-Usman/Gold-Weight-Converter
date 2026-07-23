@@ -8,6 +8,7 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 
 - Convert weights between Tola, Masha, Ana, Ratti, and Gram
 - Calculate gold price by rate per Tola, per 10 Gram, or per 1 Gram
+- Gold zakat helper: add items by weight and purity (24K–18K / custom), shared market rate, 2.5% zakat on listed items (no nisab gate)
 - Show conversion and pricing breakdown with readable formulas
 - Persisted theme support: light, dark, and system mode
 - Multilingual UI with in-app language switching (12 supported locales)
