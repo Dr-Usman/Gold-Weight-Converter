@@ -37,9 +37,7 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
     final GoldItemModel? existing = widget.existing;
     _nameController = TextEditingController(text: existing?.name ?? '');
     _weightController = TextEditingController(
-      text: existing == null
-          ? ''
-          : NumberHelper.formatNumber(existing.weight),
+      text: existing == null ? '' : NumberHelper.formatNumber(existing.weight),
     );
     _karatController = TextEditingController(
       text: existing?.customKarat?.toString() ?? '',
@@ -195,6 +193,7 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
               TextField(
                 controller: _nameController,
                 textInputAction: TextInputAction.next,
+                textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(
                   labelText: l10n.zakatItemNameLabel,
                   hintText: l10n.zakatItemNameHint,
@@ -205,7 +204,7 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: TextField(
                       controller: _weightController,
                       keyboardType: const TextInputType.numberWithOptions(
@@ -221,6 +220,7 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
                   ),
                   const SizedBox(width: 12),
                   Expanded(
+                    flex: 2,
                     child: DropdownButtonFormField<WeightUnitEnum>(
                       key: ValueKey(_unit),
                       initialValue: _unit,
