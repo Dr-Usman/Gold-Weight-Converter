@@ -548,6 +548,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown'**
   String get unknownLabel;
+
+  /// Drawer menu label for gold zakat screen
+  ///
+  /// In en, this message translates to:
+  /// **'Gold Zakat'**
+  String get zakatMenuLabel;
+
+  /// App bar title for gold zakat screen
+  ///
+  /// In en, this message translates to:
+  /// **'Gold Zakat'**
+  String get zakatScreenTitle;
+
+  /// Disclaimer shown on the zakat screen
+  ///
+  /// In en, this message translates to:
+  /// **'Helper for gold items only — not a full zakat assessment or religious ruling. Other assets and nisab are your responsibility; consult a local scholar.'**
+  String get zakatDisclaimer;
+
+  /// Info text under zakat gold rate field
+  ///
+  /// In en, this message translates to:
+  /// **'Market rate for 24K / pure gold per unit'**
+  String get zakatRateInfo;
+
+  /// Section title for gold items list
+  ///
+  /// In en, this message translates to:
+  /// **'Your gold items'**
+  String get zakatItemsTitle;
+
+  /// Button to add a gold item
+  ///
+  /// In en, this message translates to:
+  /// **'Add item'**
+  String get zakatAddItem;
+
+  /// Title when editing a gold item
+  ///
+  /// In en, this message translates to:
+  /// **'Edit item'**
+  String get zakatEditItem;
+
+  /// Empty state when no zakat items exist
+  ///
+  /// In en, this message translates to:
+  /// **'No gold items yet. Add jewelry or bars to calculate zakat.'**
+  String get zakatEmptyItems;
+
+  /// Label for optional item name
+  ///
+  /// In en, this message translates to:
+  /// **'Name (optional)'**
+  String get zakatItemNameLabel;
+
+  /// Hint for optional item name
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Wedding ring'**
+  String get zakatItemNameHint;
+
+  /// Label for item weight
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get zakatWeightLabel;
+
+  /// Hint for item weight
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 10'**
+  String get zakatWeightHint;
+
+  /// Label for weight unit dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Unit'**
+  String get zakatWeightUnitLabel;
+
+  /// Label for purity dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Purity'**
+  String get zakatPurityLabel;
+
+  /// Label for custom karat input
+  ///
+  /// In en, this message translates to:
+  /// **'Custom karat (1–24)'**
+  String get zakatCustomKaratLabel;
+
+  /// Hint for custom karat
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 20'**
+  String get zakatCustomKaratHint;
+
+  /// 24 karat purity option
+  ///
+  /// In en, this message translates to:
+  /// **'24K (pure)'**
+  String get zakatPurity24k;
+
+  /// 22 karat purity option
+  ///
+  /// In en, this message translates to:
+  /// **'22K'**
+  String get zakatPurity22k;
+
+  /// 21 karat purity option
+  ///
+  /// In en, this message translates to:
+  /// **'21K'**
+  String get zakatPurity21k;
+
+  /// 18 karat purity option
+  ///
+  /// In en, this message translates to:
+  /// **'18K'**
+  String get zakatPurity18k;
+
+  /// Custom purity option
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get zakatPurityCustom;
+
+  /// Save item button
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get zakatSaveItem;
+
+  /// Delete item button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get zakatDeleteItem;
+
+  /// Title for delete confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete gold item?'**
+  String get zakatDeleteConfirmTitle;
+
+  /// Message for delete confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'This will remove \"{name}\" from your zakat list.'**
+  String zakatDeleteConfirmMessage(String name);
+
+  /// Cancel button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get zakatCancel;
+
+  /// Fallback name when item has no name
+  ///
+  /// In en, this message translates to:
+  /// **'Gold item'**
+  String get zakatUntitledItem;
+
+  /// Title for zakat results card
+  ///
+  /// In en, this message translates to:
+  /// **'Zakat summary'**
+  String get zakatSummaryTitle;
+
+  /// Label for total pure gold
+  ///
+  /// In en, this message translates to:
+  /// **'Total pure gold'**
+  String get zakatTotalPureGold;
+
+  /// Formatted pure gold weight
+  ///
+  /// In en, this message translates to:
+  /// **'{grams} g ({tola} tola)'**
+  String zakatPureGoldValue(String grams, String tola);
+
+  /// Label for estimated total value
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated value'**
+  String get zakatTotalValue;
+
+  /// Label for zakat amount
+  ///
+  /// In en, this message translates to:
+  /// **'Zakat on these items (2.5%)'**
+  String get zakatDueLabel;
+
+  /// Prompt when rate is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Enter gold rate to estimate value and zakat'**
+  String get zakatEnterRatePrompt;
+
+  /// Button to calculate and track zakat
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate zakat'**
+  String get zakatCalculateButton;
+
+  /// Secondary line for an item row
+  ///
+  /// In en, this message translates to:
+  /// **'{weight} {unit} · {purity}'**
+  String zakatItemDetail(String weight, String unit, String purity);
+
+  /// Validation when weight is missing or zero
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a weight greater than zero'**
+  String get zakatValidationWeight;
+
+  /// Validation for custom karat
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a karat between 1 and 24'**
+  String get zakatValidationKarat;
 }
 
 class _AppLocalizationsDelegate

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gold_weight_converter/constants/unit_enum.dart';
 import 'package:gold_weight_converter/main.dart';
+import 'package:gold_weight_converter/models/gold_item_model.dart';
 import 'package:gold_weight_converter/services/preferences_service.dart';
 
 class _TestPreferencesService extends PreferencesService {
@@ -23,6 +25,24 @@ class _TestPreferencesService extends PreferencesService {
 
   @override
   Future<void> clearAll() async {}
+
+  @override
+  List<GoldItemModel> getZakatItems() => const [];
+
+  @override
+  Future<void> saveZakatItems(List<GoldItemModel> items) async {}
+
+  @override
+  String getZakatRateText() => '';
+
+  @override
+  Future<void> saveZakatRateText(String rateText) async {}
+
+  @override
+  UnitEnum getZakatRateUnit() => UnitEnum.tola;
+
+  @override
+  Future<void> saveZakatRateUnit(UnitEnum unit) async {}
 }
 
 Future<void> pumpConverterApp(WidgetTester tester) async {
@@ -219,5 +239,22 @@ void main() {
 
     expect(find.text('Conversion Details'), findsNothing);
     expect(find.textContaining('Gold Price:'), findsNothing);
+  });
+
+  testWidgets('opens gold zakat screen from the drawer', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await tester.tap(find.byTooltip('Open navigation menu'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Gold Zakat'), findsOneWidget);
+    await tester.tap(find.text('Gold Zakat'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Your gold items'), findsOneWidget);
+    expect(find.textContaining('Helper for gold items only'), findsOneWidget);
+    expect(find.text('Add item'), findsOneWidget);
   });
 }

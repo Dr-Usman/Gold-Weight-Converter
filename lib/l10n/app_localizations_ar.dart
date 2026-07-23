@@ -254,4 +254,123 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unknownLabel => 'غير معروف';
+
+  @override
+  String get zakatMenuLabel => 'زكاة الذهب';
+
+  @override
+  String get zakatScreenTitle => 'زكاة الذهب';
+
+  @override
+  String get zakatDisclaimer =>
+      'مساعد لعناصر الذهب فقط — ليس تقييم زكاة كاملًا ولا فتوى. الأصول الأخرى والنصاب مسؤوليتك؛ راجع عالمًا محليًا.';
+
+  @override
+  String get zakatRateInfo => 'سعر السوق للذهب عيار 24 / الخالص لكل وحدة';
+
+  @override
+  String get zakatItemsTitle => 'قطع الذهب لديك';
+
+  @override
+  String get zakatAddItem => 'إضافة قطعة';
+
+  @override
+  String get zakatEditItem => 'تعديل القطعة';
+
+  @override
+  String get zakatEmptyItems =>
+      'لا توجد قطع ذهب بعد. أضف مجوهرات أو سبائك لحساب الزكاة.';
+
+  @override
+  String get zakatItemNameLabel => 'الاسم (اختياري)';
+
+  @override
+  String get zakatItemNameHint => 'مثل خاتم الزواج';
+
+  @override
+  String get zakatWeightLabel => 'الوزن';
+
+  @override
+  String get zakatWeightHint => 'مثل 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'الوحدة';
+
+  @override
+  String get zakatPurityLabel => 'النقاء';
+
+  @override
+  String get zakatCustomKaratLabel => 'عيار مخصص (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'مثل 20';
+
+  @override
+  String get zakatPurity24k => '24 قيراط (خالص)';
+
+  @override
+  String get zakatPurity22k => '22 قيراط';
+
+  @override
+  String get zakatPurity21k => '21 قيراط';
+
+  @override
+  String get zakatPurity18k => '18 قيراط';
+
+  @override
+  String get zakatPurityCustom => 'مخصص';
+
+  @override
+  String get zakatSaveItem => 'حفظ';
+
+  @override
+  String get zakatDeleteItem => 'حذف';
+
+  @override
+  String get zakatDeleteConfirmTitle => 'حذف قطعة الذهب؟';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'سيؤدي هذا إلى إزالة \"$name\" من قائمة الزكاة.';
+  }
+
+  @override
+  String get zakatCancel => 'إلغاء';
+
+  @override
+  String get zakatUntitledItem => 'قطعة ذهب';
+
+  @override
+  String get zakatSummaryTitle => 'ملخص الزكاة';
+
+  @override
+  String get zakatTotalPureGold => 'إجمالي الذهب الخالص';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams غ ($tola تولة)';
+  }
+
+  @override
+  String get zakatTotalValue => 'القيمة التقديرية';
+
+  @override
+  String get zakatDueLabel => 'الزكاة على هذه القطع (2.5%)';
+
+  @override
+  String get zakatEnterRatePrompt => 'أدخل سعر الذهب لتقدير القيمة والزكاة';
+
+  @override
+  String get zakatCalculateButton => 'احسب الزكاة';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'أدخل وزنًا أكبر من صفر';
+
+  @override
+  String get zakatValidationKarat => 'أدخل عيارًا بين 1 و 24';
 }

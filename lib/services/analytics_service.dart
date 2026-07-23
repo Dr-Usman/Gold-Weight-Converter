@@ -54,16 +54,34 @@ class AnalyticsService {
     );
   }
 
+  static void trackZakatCalculated({
+    required int itemCount,
+    required String rateUnit,
+    required bool hasGoldRate,
+  }) {
+    _mixpanel?.track(
+      'zakat_calculated',
+      properties: {
+        'item_count': itemCount,
+        'rate_unit': rateUnit,
+        'is_gold_rate_set': hasGoldRate,
+      },
+    );
+  }
+
   static void trackLanguageChanged({
     required Locale language,
     Locale? previousLanguage,
   }) {
     final String languageCode = localeToAnalyticsCode(language);
-    _mixpanel?.track('language_changed', properties: {
-      'language': languageCode,
-      if (previousLanguage != null)
-        'previous_language': localeToAnalyticsCode(previousLanguage),
-    });
+    _mixpanel?.track(
+      'language_changed',
+      properties: {
+        'language': languageCode,
+        if (previousLanguage != null)
+          'previous_language': localeToAnalyticsCode(previousLanguage),
+      },
+    );
     _mixpanel?.getPeople().set('preferred_language', languageCode);
   }
 
@@ -72,11 +90,14 @@ class AnalyticsService {
     ThemeMode? previousThemeMode,
   }) {
     final String themeValue = themeModeToAnalyticsValue(themeMode);
-    _mixpanel?.track('theme_changed', properties: {
-      'theme_mode': themeValue,
-      if (previousThemeMode != null)
-        'previous_theme_mode': themeModeToAnalyticsValue(previousThemeMode),
-    });
+    _mixpanel?.track(
+      'theme_changed',
+      properties: {
+        'theme_mode': themeValue,
+        if (previousThemeMode != null)
+          'previous_theme_mode': themeModeToAnalyticsValue(previousThemeMode),
+      },
+    );
     _mixpanel?.getPeople().set('theme_mode', themeValue);
   }
 

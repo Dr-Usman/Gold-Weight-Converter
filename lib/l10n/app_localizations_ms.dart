@@ -254,4 +254,124 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get unknownLabel => 'Tidak diketahui';
+
+  @override
+  String get zakatMenuLabel => 'Zakat Emas';
+
+  @override
+  String get zakatScreenTitle => 'Zakat Emas';
+
+  @override
+  String get zakatDisclaimer =>
+      'Pembantu untuk barang emas sahaja — bukan penilaian zakat penuh atau fatwa. Aset lain dan nisab adalah tanggungjawab anda; rujuk ulama tempatan.';
+
+  @override
+  String get zakatRateInfo => 'Harga pasaran emas 24K / tulen bagi setiap unit';
+
+  @override
+  String get zakatItemsTitle => 'Barangan emas anda';
+
+  @override
+  String get zakatAddItem => 'Tambah barang';
+
+  @override
+  String get zakatEditItem => 'Edit barang';
+
+  @override
+  String get zakatEmptyItems =>
+      'Tiada barang emas lagi. Tambah barang kemas atau jongkong untuk kira zakat.';
+
+  @override
+  String get zakatItemNameLabel => 'Nama (pilihan)';
+
+  @override
+  String get zakatItemNameHint => 'cth. cincin kahwin';
+
+  @override
+  String get zakatWeightLabel => 'Berat';
+
+  @override
+  String get zakatWeightHint => 'cth. 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'Unit';
+
+  @override
+  String get zakatPurityLabel => 'Ketulenan';
+
+  @override
+  String get zakatCustomKaratLabel => 'Karat tersuai (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'cth. 20';
+
+  @override
+  String get zakatPurity24k => '24K (tulen)';
+
+  @override
+  String get zakatPurity22k => '22K';
+
+  @override
+  String get zakatPurity21k => '21K';
+
+  @override
+  String get zakatPurity18k => '18K';
+
+  @override
+  String get zakatPurityCustom => 'Tersuai';
+
+  @override
+  String get zakatSaveItem => 'Simpan';
+
+  @override
+  String get zakatDeleteItem => 'Padam';
+
+  @override
+  String get zakatDeleteConfirmTitle => 'Padam barang emas?';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'Ini akan mengeluarkan \"$name\" daripada senarai zakat anda.';
+  }
+
+  @override
+  String get zakatCancel => 'Batal';
+
+  @override
+  String get zakatUntitledItem => 'Barang emas';
+
+  @override
+  String get zakatSummaryTitle => 'Ringkasan zakat';
+
+  @override
+  String get zakatTotalPureGold => 'Jumlah emas tulen';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams g ($tola tola)';
+  }
+
+  @override
+  String get zakatTotalValue => 'Anggaran nilai';
+
+  @override
+  String get zakatDueLabel => 'Zakat ke atas barang ini (2.5%)';
+
+  @override
+  String get zakatEnterRatePrompt =>
+      'Masukkan kadar emas untuk anggaran nilai dan zakat';
+
+  @override
+  String get zakatCalculateButton => 'Kira zakat';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'Masukkan berat lebih daripada sifar';
+
+  @override
+  String get zakatValidationKarat => 'Masukkan karat antara 1 dan 24';
 }

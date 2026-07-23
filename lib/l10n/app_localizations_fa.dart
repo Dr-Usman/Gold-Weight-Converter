@@ -254,4 +254,124 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get unknownLabel => 'نامعلوم';
+
+  @override
+  String get zakatMenuLabel => 'زکات طلا';
+
+  @override
+  String get zakatScreenTitle => 'زکات طلا';
+
+  @override
+  String get zakatDisclaimer =>
+      'فقط برای اقلام طلا — ارزیابی کامل زکات یا فتوا نیست. دارایی‌های دیگر و نصاب بر عهده شماست؛ با عالم محلی مشورت کنید.';
+
+  @override
+  String get zakatRateInfo => 'نرخ بازار طلای ۲۴ عیار / خالص برای هر واحد';
+
+  @override
+  String get zakatItemsTitle => 'اقلام طلای شما';
+
+  @override
+  String get zakatAddItem => 'افزودن قلم';
+
+  @override
+  String get zakatEditItem => 'ویرایش قلم';
+
+  @override
+  String get zakatEmptyItems =>
+      'هنوز قلم طلایی نیست. برای محاسبه زکات جواهر یا شمش اضافه کنید.';
+
+  @override
+  String get zakatItemNameLabel => 'نام (اختیاری)';
+
+  @override
+  String get zakatItemNameHint => 'مثلاً حلقه ازدواج';
+
+  @override
+  String get zakatWeightLabel => 'وزن';
+
+  @override
+  String get zakatWeightHint => 'مثلاً 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'واحد';
+
+  @override
+  String get zakatPurityLabel => 'عیار';
+
+  @override
+  String get zakatCustomKaratLabel => 'عیار سفارشی (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'مثلاً 20';
+
+  @override
+  String get zakatPurity24k => '۲۴ عیار (خالص)';
+
+  @override
+  String get zakatPurity22k => '۲۲ عیار';
+
+  @override
+  String get zakatPurity21k => '۲۱ عیار';
+
+  @override
+  String get zakatPurity18k => '۱۸ عیار';
+
+  @override
+  String get zakatPurityCustom => 'سفارشی';
+
+  @override
+  String get zakatSaveItem => 'ذخیره';
+
+  @override
+  String get zakatDeleteItem => 'حذف';
+
+  @override
+  String get zakatDeleteConfirmTitle => 'قلم طلا حذف شود؟';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'این کار \"$name\" را از فهرست زکات حذف می‌کند.';
+  }
+
+  @override
+  String get zakatCancel => 'لغو';
+
+  @override
+  String get zakatUntitledItem => 'قلم طلا';
+
+  @override
+  String get zakatSummaryTitle => 'خلاصه زکات';
+
+  @override
+  String get zakatTotalPureGold => 'مجموع طلای خالص';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams گرم ($tola تولہ)';
+  }
+
+  @override
+  String get zakatTotalValue => 'ارزش تقریبی';
+
+  @override
+  String get zakatDueLabel => 'زکات این اقلام (۲.۵٪)';
+
+  @override
+  String get zakatEnterRatePrompt =>
+      'برای برآورد ارزش و زکات نرخ طلا را وارد کنید';
+
+  @override
+  String get zakatCalculateButton => 'محاسبه زکات';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'وزنی بیشتر از صفر وارد کنید';
+
+  @override
+  String get zakatValidationKarat => 'عیاری بین ۱ و ۲۴ وارد کنید';
 }

@@ -254,4 +254,123 @@ class AppLocalizationsSd extends AppLocalizations {
 
   @override
   String get unknownLabel => 'نامعلوم';
+
+  @override
+  String get zakatMenuLabel => 'سوني جي زڪوات';
+
+  @override
+  String get zakatScreenTitle => 'سوني جي زڪوات';
+
+  @override
+  String get zakatDisclaimer =>
+      'صرف سوني جي شين لاءِ مددگار — مڪمل زڪوات جو حساب يا فتويٰ نه آهي. ٻيون ملڪيتون ۽ نصاب توهان جي ذميواري آهي؛ مقامي عالم سان صلاح ڪريو.';
+
+  @override
+  String get zakatRateInfo => '24K / خالص سوني جي مارڪيٽ شرح في يونٽ';
+
+  @override
+  String get zakatItemsTitle => 'توهان جون سوني جون شيون';
+
+  @override
+  String get zakatAddItem => 'شيءِ شامل ڪريو';
+
+  @override
+  String get zakatEditItem => 'شيءِ ۾ ترميم';
+
+  @override
+  String get zakatEmptyItems =>
+      'اڃا ڪا سوني جي شيءِ ناهي. زڪوات لاءِ زيور يا بار شامل ڪريو.';
+
+  @override
+  String get zakatItemNameLabel => 'نالو (اختياري)';
+
+  @override
+  String get zakatItemNameHint => 'مثال طور شادي جي آڱوٺي';
+
+  @override
+  String get zakatWeightLabel => 'وزن';
+
+  @override
+  String get zakatWeightHint => 'مثال طور 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'يونٽ';
+
+  @override
+  String get zakatPurityLabel => 'پاڪائي';
+
+  @override
+  String get zakatCustomKaratLabel => 'ڪسٽم قيراط (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'مثال طور 20';
+
+  @override
+  String get zakatPurity24k => '24K (خالص)';
+
+  @override
+  String get zakatPurity22k => '22K';
+
+  @override
+  String get zakatPurity21k => '21K';
+
+  @override
+  String get zakatPurity18k => '18K';
+
+  @override
+  String get zakatPurityCustom => 'ڪسٽم';
+
+  @override
+  String get zakatSaveItem => 'محفوظ ڪريو';
+
+  @override
+  String get zakatDeleteItem => 'ڊاهيو';
+
+  @override
+  String get zakatDeleteConfirmTitle => 'سوني جي شيءِ ختم ڪجي؟';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'هي توهان جي زڪوات جي فهرست مان \"$name\" هٽائي ڇڏيندو.';
+  }
+
+  @override
+  String get zakatCancel => 'منسوخ';
+
+  @override
+  String get zakatUntitledItem => 'سوني جي شيءِ';
+
+  @override
+  String get zakatSummaryTitle => 'زڪوات جو خلاصو';
+
+  @override
+  String get zakatTotalPureGold => 'ڪل خالص سونو';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams گرام ($tola تولو)';
+  }
+
+  @override
+  String get zakatTotalValue => 'اندازي مطابق قيمت';
+
+  @override
+  String get zakatDueLabel => 'هن شين تي زڪوات (2.5%)';
+
+  @override
+  String get zakatEnterRatePrompt => 'قيمت ۽ زڪوات لاءِ سوني جي شرح داخل ڪريو';
+
+  @override
+  String get zakatCalculateButton => 'زڪوات حساب ڪريو';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'صفر کان وڌيڪ وزن داخل ڪريو';
+
+  @override
+  String get zakatValidationKarat => '1 ۽ 24 جي وچ ۾ قيراط داخل ڪريو';
 }

@@ -254,4 +254,124 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unknownLabel => 'Unknown';
+
+  @override
+  String get zakatMenuLabel => 'Gold Zakat';
+
+  @override
+  String get zakatScreenTitle => 'Gold Zakat';
+
+  @override
+  String get zakatDisclaimer =>
+      'Helper for gold items only — not a full zakat assessment or religious ruling. Other assets and nisab are your responsibility; consult a local scholar.';
+
+  @override
+  String get zakatRateInfo => 'Market rate for 24K / pure gold per unit';
+
+  @override
+  String get zakatItemsTitle => 'Your gold items';
+
+  @override
+  String get zakatAddItem => 'Add item';
+
+  @override
+  String get zakatEditItem => 'Edit item';
+
+  @override
+  String get zakatEmptyItems =>
+      'No gold items yet. Add jewelry or bars to calculate zakat.';
+
+  @override
+  String get zakatItemNameLabel => 'Name (optional)';
+
+  @override
+  String get zakatItemNameHint => 'e.g. Wedding ring';
+
+  @override
+  String get zakatWeightLabel => 'Weight';
+
+  @override
+  String get zakatWeightHint => 'e.g. 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'Unit';
+
+  @override
+  String get zakatPurityLabel => 'Purity';
+
+  @override
+  String get zakatCustomKaratLabel => 'Custom karat (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'e.g. 20';
+
+  @override
+  String get zakatPurity24k => '24K (pure)';
+
+  @override
+  String get zakatPurity22k => '22K';
+
+  @override
+  String get zakatPurity21k => '21K';
+
+  @override
+  String get zakatPurity18k => '18K';
+
+  @override
+  String get zakatPurityCustom => 'Custom';
+
+  @override
+  String get zakatSaveItem => 'Save';
+
+  @override
+  String get zakatDeleteItem => 'Delete';
+
+  @override
+  String get zakatDeleteConfirmTitle => 'Delete gold item?';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'This will remove \"$name\" from your zakat list.';
+  }
+
+  @override
+  String get zakatCancel => 'Cancel';
+
+  @override
+  String get zakatUntitledItem => 'Gold item';
+
+  @override
+  String get zakatSummaryTitle => 'Zakat summary';
+
+  @override
+  String get zakatTotalPureGold => 'Total pure gold';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams g ($tola tola)';
+  }
+
+  @override
+  String get zakatTotalValue => 'Estimated value';
+
+  @override
+  String get zakatDueLabel => 'Zakat on these items (2.5%)';
+
+  @override
+  String get zakatEnterRatePrompt =>
+      'Enter gold rate to estimate value and zakat';
+
+  @override
+  String get zakatCalculateButton => 'Calculate zakat';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'Enter a weight greater than zero';
+
+  @override
+  String get zakatValidationKarat => 'Enter a karat between 1 and 24';
 }

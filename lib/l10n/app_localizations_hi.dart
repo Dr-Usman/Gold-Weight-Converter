@@ -254,4 +254,124 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get unknownLabel => 'अज्ञात';
+
+  @override
+  String get zakatMenuLabel => 'सोने की ज़कात';
+
+  @override
+  String get zakatScreenTitle => 'सोने की ज़कात';
+
+  @override
+  String get zakatDisclaimer =>
+      'केवल सोने की वस्तुओं के लिए सहायक — पूर्ण ज़कात आकलन या धार्मिक फ़तवा नहीं। अन्य संपत्ति और निसाब आपकी ज़िम्मेदारी है; स्थानीय विद्वान से सलाह लें।';
+
+  @override
+  String get zakatRateInfo => '24K / शुद्ध सोने की बाज़ार दर प्रति इकाई';
+
+  @override
+  String get zakatItemsTitle => 'आपकी सोने की वस्तुएँ';
+
+  @override
+  String get zakatAddItem => 'वस्तु जोड़ें';
+
+  @override
+  String get zakatEditItem => 'वस्तु संपादित करें';
+
+  @override
+  String get zakatEmptyItems =>
+      'अभी कोई सोने की वस्तु नहीं। ज़कात गणना के लिए आभूषण या बार जोड़ें।';
+
+  @override
+  String get zakatItemNameLabel => 'नाम (वैकल्पिक)';
+
+  @override
+  String get zakatItemNameHint => 'जैसे विवाह की अंगूठी';
+
+  @override
+  String get zakatWeightLabel => 'वज़न';
+
+  @override
+  String get zakatWeightHint => 'जैसे 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'इकाई';
+
+  @override
+  String get zakatPurityLabel => 'शुद्धता';
+
+  @override
+  String get zakatCustomKaratLabel => 'कस्टम कैरेट (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'जैसे 20';
+
+  @override
+  String get zakatPurity24k => '24K (शुद्ध)';
+
+  @override
+  String get zakatPurity22k => '22K';
+
+  @override
+  String get zakatPurity21k => '21K';
+
+  @override
+  String get zakatPurity18k => '18K';
+
+  @override
+  String get zakatPurityCustom => 'कस्टम';
+
+  @override
+  String get zakatSaveItem => 'सहेजें';
+
+  @override
+  String get zakatDeleteItem => 'हटाएँ';
+
+  @override
+  String get zakatDeleteConfirmTitle => 'सोने की वस्तु हटाएँ?';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'इससे आपकी ज़कात सूची से \"$name\" हट जाएगा।';
+  }
+
+  @override
+  String get zakatCancel => 'रद्द करें';
+
+  @override
+  String get zakatUntitledItem => 'सोने की वस्तु';
+
+  @override
+  String get zakatSummaryTitle => 'ज़कात सारांश';
+
+  @override
+  String get zakatTotalPureGold => 'कुल शुद्ध सोना';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams ग्राम ($tola तोला)';
+  }
+
+  @override
+  String get zakatTotalValue => 'अनुमानित मूल्य';
+
+  @override
+  String get zakatDueLabel => 'इन वस्तुओं पर ज़कात (2.5%)';
+
+  @override
+  String get zakatEnterRatePrompt =>
+      'मूल्य और ज़कात का अनुमान लगाने के लिए सोने की दर दर्ज करें';
+
+  @override
+  String get zakatCalculateButton => 'ज़कात गणना करें';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'शून्य से अधिक वज़न दर्ज करें';
+
+  @override
+  String get zakatValidationKarat => '1 से 24 के बीच कैरेट दर्ज करें';
 }

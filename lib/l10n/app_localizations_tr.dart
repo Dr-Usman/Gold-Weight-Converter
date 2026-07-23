@@ -254,4 +254,124 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get unknownLabel => 'Bilinmiyor';
+
+  @override
+  String get zakatMenuLabel => 'Altın Zekâtı';
+
+  @override
+  String get zakatScreenTitle => 'Altın Zekâtı';
+
+  @override
+  String get zakatDisclaimer =>
+      'Yalnızca altın eşyalar için yardımcı — tam zekât değerlendirmesi veya fetva değildir. Diğer varlıklar ve nisap sizin sorumluluğunuzdadır; yerel bir âlime danışın.';
+
+  @override
+  String get zakatRateInfo =>
+      '24 ayar / saf altın piyasa fiyatı (birim başına)';
+
+  @override
+  String get zakatItemsTitle => 'Altın eşyalarınız';
+
+  @override
+  String get zakatAddItem => 'Eşya ekle';
+
+  @override
+  String get zakatEditItem => 'Eşyayı düzenle';
+
+  @override
+  String get zakatEmptyItems =>
+      'Henüz altın eşya yok. Zekât için mücevher veya külçe ekleyin.';
+
+  @override
+  String get zakatItemNameLabel => 'Ad (isteğe bağlı)';
+
+  @override
+  String get zakatItemNameHint => 'örn. alyans';
+
+  @override
+  String get zakatWeightLabel => 'Ağırlık';
+
+  @override
+  String get zakatWeightHint => 'örn. 10';
+
+  @override
+  String get zakatWeightUnitLabel => 'Birim';
+
+  @override
+  String get zakatPurityLabel => 'Ayar';
+
+  @override
+  String get zakatCustomKaratLabel => 'Özel ayar (1–24)';
+
+  @override
+  String get zakatCustomKaratHint => 'örn. 20';
+
+  @override
+  String get zakatPurity24k => '24K (saf)';
+
+  @override
+  String get zakatPurity22k => '22K';
+
+  @override
+  String get zakatPurity21k => '21K';
+
+  @override
+  String get zakatPurity18k => '18K';
+
+  @override
+  String get zakatPurityCustom => 'Özel';
+
+  @override
+  String get zakatSaveItem => 'Kaydet';
+
+  @override
+  String get zakatDeleteItem => 'Sil';
+
+  @override
+  String get zakatDeleteConfirmTitle => 'Altın eşya silinsin mi?';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'Bu, \"$name\" öğesini zekât listenizden kaldırır.';
+  }
+
+  @override
+  String get zakatCancel => 'İptal';
+
+  @override
+  String get zakatUntitledItem => 'Altın eşya';
+
+  @override
+  String get zakatSummaryTitle => 'Zekât özeti';
+
+  @override
+  String get zakatTotalPureGold => 'Toplam saf altın';
+
+  @override
+  String zakatPureGoldValue(String grams, String tola) {
+    return '$grams g ($tola tola)';
+  }
+
+  @override
+  String get zakatTotalValue => 'Tahmini değer';
+
+  @override
+  String get zakatDueLabel => 'Bu eşyaların zekâtı (%2,5)';
+
+  @override
+  String get zakatEnterRatePrompt => 'Değer ve zekât için altın kurunu girin';
+
+  @override
+  String get zakatCalculateButton => 'Zekâtı hesapla';
+
+  @override
+  String zakatItemDetail(String weight, String unit, String purity) {
+    return '$weight $unit · $purity';
+  }
+
+  @override
+  String get zakatValidationWeight => 'Sıfırdan büyük bir ağırlık girin';
+
+  @override
+  String get zakatValidationKarat => '1 ile 24 arasında ayar girin';
 }

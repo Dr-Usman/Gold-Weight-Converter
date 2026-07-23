@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Gold zakat calculator (drawer → Gold Zakat)
+  - Dynamic gold items with weight, unit, and purity (24K / 22K / 21K / 18K / custom karat)
+  - Shared 24K market rate; always applies 2.5% on listed items (no nisab gate)
+  - Pure-gold grams, estimated value, and zakat due summary
+  - Items and rate persisted via SharedPreferences
+  - Mixpanel `zakat_calculated` event (`item_count`, `rate_unit`, `is_gold_rate_set`)
+- Shared `WeightConverter` / `ZakatCalculator` services with unit tests
+
 ### Changed
 - GitHub Releases now use CHANGELOG-driven notes (title `GWC vX.Y.Z`, Play Store section excluded) and versioned multi-platform assets (`gwc-android-*`, `gwc-web-*`, `gwc-macos-*`, `gwc-linux-*`, `gwc-windows-*`)
 
