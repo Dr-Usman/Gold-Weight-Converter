@@ -106,5 +106,7 @@
     "zakatCalculateButton": "زڪوات حساب ڪريو",
     "zakatItemDetail": "{weight} {unit} · {purity}",
     "zakatValidationWeight": "صفر کان وڌيڪ وزن داخل ڪريو",
-    "zakatValidationKarat": "1 ۽ 24 جي وچ ۾ قيراط داخل ڪريو"
+    "zakatValidationKarat": "1 ۽ 24 جي وچ ۾ قيراط داخل ڪريو",
+    "zakatDeleteConfirmTitle": "سوني جي شيءِ ختم ڪجي؟",
+    "zakatDeleteConfirmMessage": "هي توهان جي زڪوات جي فهرست مان \"{name}\" هٽائي ڇڏيندو."
 }

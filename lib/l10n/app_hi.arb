@@ -106,5 +106,7 @@
     "zakatCalculateButton": "ज़कात गणना करें",
     "zakatItemDetail": "{weight} {unit} · {purity}",
     "zakatValidationWeight": "शून्य से अधिक वज़न दर्ज करें",
-    "zakatValidationKarat": "1 से 24 के बीच कैरेट दर्ज करें"
+    "zakatValidationKarat": "1 से 24 के बीच कैरेट दर्ज करें",
+    "zakatDeleteConfirmTitle": "सोने की वस्तु हटाएँ?",
+    "zakatDeleteConfirmMessage": "इससे आपकी ज़कात सूची से \"{name}\" हट जाएगा।"
 }

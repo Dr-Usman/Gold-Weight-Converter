@@ -8,6 +8,7 @@ import 'package:gold_weight_converter/models/gold_item_model.dart';
 import 'package:gold_weight_converter/providers/zakat_provider.dart';
 import 'package:gold_weight_converter/utils/number_formatter.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
+import 'package:gold_weight_converter/widgets/zakat_delete_dialog.dart';
 
 /// Bottom sheet to add or edit a gold item for zakat.
 class GoldItemSheet extends ConsumerStatefulWidget {
@@ -118,9 +119,18 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
   }
 
   Future<void> _delete() async {
-    final String? id = widget.existing?.id;
-    if (id == null) return;
-    await ref.read(zakatNotifierProvider.notifier).removeItem(id);
+    final GoldItemModel? existing = widget.existing;
+    if (existing == null) return;
+
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final String name = existing.displayName ?? l10n.zakatUntitledItem;
+    final bool confirmed = await confirmZakatItemDeletion(
+      context,
+      itemName: name,
+    );
+    if (!confirmed || !mounted) return;
+
+    await ref.read(zakatNotifierProvider.notifier).removeItem(existing.id);
     if (mounted) Navigator.of(context).pop();
   }
 

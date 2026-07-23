@@ -106,5 +106,7 @@
     "zakatCalculateButton": "যাকাত হিসাব করুন",
     "zakatItemDetail": "{weight} {unit} · {purity}",
     "zakatValidationWeight": "শূন্যের বেশি ওজন লিখুন",
-    "zakatValidationKarat": "১ থেকে ২৪ এর মধ্যে ক্যারেট লিখুন"
+    "zakatValidationKarat": "১ থেকে ২৪ এর মধ্যে ক্যারেট লিখুন",
+    "zakatDeleteConfirmTitle": "স্বর্ণের জিনিস মুছবেন?",
+    "zakatDeleteConfirmMessage": "এতে আপনার যাকাত তালিকা থেকে \"{name}\" সরানো হবে।"
 }

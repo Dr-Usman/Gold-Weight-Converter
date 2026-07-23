@@ -12,6 +12,7 @@ import 'package:gold_weight_converter/services/zakat_calculator.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
 import 'package:gold_weight_converter/widgets/gold_item_sheet.dart';
 import 'package:gold_weight_converter/widgets/gold_text_field.dart';
+import 'package:gold_weight_converter/widgets/zakat_delete_dialog.dart';
 import 'package:intl/intl.dart';
 
 class ZakatScreen extends ConsumerStatefulWidget {
@@ -23,6 +24,8 @@ class ZakatScreen extends ConsumerStatefulWidget {
 
 class _ZakatScreenState extends ConsumerState<ZakatScreen> {
   late final TextEditingController _rateController;
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _summaryKey = GlobalKey();
   final NumberFormat _currencyFormat = NumberFormat.currency(
     locale: 'en_PK',
     symbol: 'Rs. ',
@@ -42,6 +45,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
   void dispose() {
     _rateController.removeListener(_onRateChanged);
     _rateController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -62,6 +66,28 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
     ref.read(zakatNotifierProvider.notifier).setRateText(_rateController.text);
   }
 
+  void _scrollToSummary() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final BuildContext? summaryContext = _summaryKey.currentContext;
+      if (summaryContext != null) {
+        Scrollable.ensureVisible(
+          summaryContext,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          alignment: 0.1,
+        );
+        return;
+      }
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
   void _calculateZakat() {
     FocusScope.of(context).unfocus();
     final ZakatState state = ref.read(zakatNotifierProvider);
@@ -76,6 +102,13 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
       },
       hasGoldRate: state.rateValue > 0,
     );
+    _scrollToSummary();
+  }
+
+  Future<bool> _confirmDelete(GoldItemModel item) async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final String name = item.displayName ?? l10n.zakatUntitledItem;
+    return confirmZakatItemDeletion(context, itemName: name);
   }
 
   String _purityLabel(AppLocalizations l10n, GoldItemModel item) {
@@ -96,6 +129,92 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
       WeightUnitEnum.ratti => l10n.rattiLabel,
       WeightUnitEnum.gram => l10n.gramLabel,
     };
+  }
+
+  Widget _buildRateCard({
+    required AppLocalizations l10n,
+    required ColorScheme scheme,
+    required bool isDark,
+    required ZakatState zakatState,
+  }) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(18, 20, 18, 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        color: isDark
+            ? scheme.surfaceContainer.withValues(alpha: 0.92)
+            : AppColors.surface.withValues(alpha: 0.96),
+        border: Border.all(
+          color: isDark
+              ? scheme.outlineVariant
+              : AppColors.cardBorder.withValues(alpha: 0.7),
+        ),
+      ),
+      child: GoldTextField(
+        label: l10n.goldRateLabel,
+        info: l10n.zakatRateInfo,
+        controller: _rateController,
+        semanticLabel: l10n.goldRateSemanticLabel,
+        hintText: l10n.goldRateHint,
+        hasDropdown: true,
+        dropdownValue: zakatState.rateUnit.name,
+        dropdownItems: UnitEnum.values.map((unit) => unit.name).toList(),
+        onDropdownChanged: (value) {
+          if (value == null) return;
+          ref
+              .read(zakatNotifierProvider.notifier)
+              .setRateUnit(UnitEnum.fromString(value));
+        },
+      ),
+    );
+  }
+
+  Widget _buildItemTile({
+    required AppLocalizations l10n,
+    required ColorScheme scheme,
+    required bool isDark,
+    required GoldItemModel item,
+  }) {
+    final String title = item.displayName ?? l10n.zakatUntitledItem;
+    final String weightText = NumberHelper.formatNumber(item.weight);
+
+    return Dismissible(
+      key: ValueKey(item.id),
+      direction: DismissDirection.endToStart,
+      confirmDismiss: (_) => _confirmDelete(item),
+      onDismissed: (_) {
+        ref.read(zakatNotifierProvider.notifier).removeItem(item.id);
+      },
+      background: Container(
+        alignment: Alignment.centerRight,
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          color: Colors.red.shade700,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: const Icon(Icons.delete_outline, color: Colors.white),
+      ),
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 10),
+        color: isDark ? scheme.surfaceContainerHighest : AppColors.surface,
+        child: ListTile(
+          title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+          subtitle: Text(
+            l10n.zakatItemDetail(
+              weightText,
+              _weightUnitLabel(l10n, item.unit),
+              _purityLabel(l10n, item),
+            ),
+          ),
+          trailing: IconButton(
+            icon: const Icon(Icons.edit_outlined),
+            onPressed: () => _openItemSheet(existing: item),
+          ),
+          onTap: () => _openItemSheet(existing: item),
+        ),
+      ),
+    );
   }
 
   @override
@@ -158,42 +277,10 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 760),
               child: ListView(
+                controller: _scrollController,
                 padding: const EdgeInsets.fromLTRB(16, 18, 16, 24),
                 children: [
                   _DisclaimerBanner(text: l10n.zakatDisclaimer),
-                  const SizedBox(height: 18),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(18, 20, 18, 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      color: isDark
-                          ? scheme.surfaceContainer.withValues(alpha: 0.92)
-                          : AppColors.surface.withValues(alpha: 0.96),
-                      border: Border.all(
-                        color: isDark
-                            ? scheme.outlineVariant
-                            : AppColors.cardBorder.withValues(alpha: 0.7),
-                      ),
-                    ),
-                    child: GoldTextField(
-                      label: l10n.goldRateLabel,
-                      info: l10n.zakatRateInfo,
-                      controller: _rateController,
-                      semanticLabel: l10n.goldRateSemanticLabel,
-                      hintText: l10n.goldRateHint,
-                      hasDropdown: true,
-                      dropdownValue: zakatState.rateUnit.name,
-                      dropdownItems: UnitEnum.values
-                          .map((unit) => unit.name)
-                          .toList(),
-                      onDropdownChanged: (value) {
-                        if (value == null) return;
-                        ref
-                            .read(zakatNotifierProvider.notifier)
-                            .setRateUnit(UnitEnum.fromString(value));
-                      },
-                    ),
-                  ),
                   const SizedBox(height: 18),
                   Row(
                     children: [
@@ -231,42 +318,20 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
                       ),
                     )
                   else
-                    ...zakatState.items.map((item) {
-                      final String title =
-                          item.displayName ?? l10n.zakatUntitledItem;
-                      final String weightText = NumberHelper.formatNumber(
-                        item.weight,
-                      );
-                      return Card(
-                        margin: const EdgeInsets.only(bottom: 10),
-                        color: isDark
-                            ? scheme.surfaceContainerHighest
-                            : AppColors.surface,
-                        child: ListTile(
-                          title: Text(
-                            title,
-                            style: const TextStyle(fontWeight: FontWeight.w600),
-                          ),
-                          subtitle: Text(
-                            l10n.zakatItemDetail(
-                              weightText,
-                              _weightUnitLabel(l10n, item.unit),
-                              _purityLabel(l10n, item),
-                            ),
-                          ),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.edit_outlined),
-                            onPressed: () => _openItemSheet(existing: item),
-                          ),
-                          onTap: () => _openItemSheet(existing: item),
-                        ),
-                      );
-                    }),
+                    ...zakatState.items.map(
+                      (item) => _buildItemTile(
+                        l10n: l10n,
+                        scheme: scheme,
+                        isDark: isDark,
+                        item: item,
+                      ),
+                    ),
                   const SizedBox(height: 18),
-                  _SummaryCard(
+                  _buildRateCard(
                     l10n: l10n,
-                    summary: summary,
-                    currencyFormat: _currencyFormat,
+                    scheme: scheme,
+                    isDark: isDark,
+                    zakatState: zakatState,
                   ),
                   if (zakatState.items.isNotEmpty) ...[
                     const SizedBox(height: 16),
@@ -279,6 +344,15 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
                       ),
                     ),
                   ],
+                  const SizedBox(height: 16),
+                  KeyedSubtree(
+                    key: _summaryKey,
+                    child: _SummaryCard(
+                      l10n: l10n,
+                      summary: summary,
+                      currencyFormat: _currencyFormat,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -339,7 +413,8 @@ class _SummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    final bool hasItems = summary.totalPureGrams > 0 || summary.totalGrossGrams > 0;
+    final bool hasItems =
+        summary.totalPureGrams > 0 || summary.totalGrossGrams > 0;
 
     return Container(
       width: double.infinity,

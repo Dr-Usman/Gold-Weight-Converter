@@ -106,5 +106,7 @@
     "zakatCalculateButton": "احسب الزكاة",
     "zakatItemDetail": "{weight} {unit} · {purity}",
     "zakatValidationWeight": "أدخل وزنًا أكبر من صفر",
-    "zakatValidationKarat": "أدخل عيارًا بين 1 و 24"
+    "zakatValidationKarat": "أدخل عيارًا بين 1 و 24",
+    "zakatDeleteConfirmTitle": "حذف قطعة الذهب؟",
+    "zakatDeleteConfirmMessage": "سيؤدي هذا إلى إزالة \"{name}\" من قائمة الزكاة."
 }

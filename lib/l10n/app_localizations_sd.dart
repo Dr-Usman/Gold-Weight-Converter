@@ -327,6 +327,14 @@ class AppLocalizationsSd extends AppLocalizations {
   String get zakatDeleteItem => 'ڊاهيو';
 
   @override
+  String get zakatDeleteConfirmTitle => 'سوني جي شيءِ ختم ڪجي؟';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'هي توهان جي زڪوات جي فهرست مان \"$name\" هٽائي ڇڏيندو.';
+  }
+
+  @override
   String get zakatCancel => 'منسوخ';
 
   @override

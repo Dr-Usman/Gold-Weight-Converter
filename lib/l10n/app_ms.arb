@@ -106,5 +106,7 @@
     "zakatCalculateButton": "Kira zakat",
     "zakatItemDetail": "{weight} {unit} · {purity}",
     "zakatValidationWeight": "Masukkan berat lebih daripada sifar",
-    "zakatValidationKarat": "Masukkan karat antara 1 dan 24"
+    "zakatValidationKarat": "Masukkan karat antara 1 dan 24",
+    "zakatDeleteConfirmTitle": "Padam barang emas?",
+    "zakatDeleteConfirmMessage": "Ini akan mengeluarkan \"{name}\" daripada senarai zakat anda."
 }

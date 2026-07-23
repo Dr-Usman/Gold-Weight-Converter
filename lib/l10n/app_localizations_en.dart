@@ -327,6 +327,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get zakatDeleteItem => 'Delete';
 
   @override
+  String get zakatDeleteConfirmTitle => 'Delete gold item?';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'This will remove \"$name\" from your zakat list.';
+  }
+
+  @override
   String get zakatCancel => 'Cancel';
 
   @override

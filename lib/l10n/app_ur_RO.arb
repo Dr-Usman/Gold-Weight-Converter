@@ -106,5 +106,7 @@
     "zakatCalculateButton": "Zakat hisāb karein",
     "zakatItemDetail": "{weight} {unit} · {purity}",
     "zakatValidationWeight": "Sifr se zyāda wazan darj karein",
-    "zakatValidationKarat": "1 se 24 ke darmiyān qirāt darj karein"
+    "zakatValidationKarat": "1 se 24 ke darmiyān qirāt darj karein",
+    "zakatDeleteConfirmTitle": "Sone ki shai delete karein?",
+    "zakatDeleteConfirmMessage": "Is se āp ki zakat list se \"{name}\" hat jāegi."
 }

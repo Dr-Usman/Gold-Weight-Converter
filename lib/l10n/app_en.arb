@@ -506,6 +506,20 @@
   "@zakatDeleteItem": {
     "description": "Delete item button"
   },
+  "zakatDeleteConfirmTitle": "Delete gold item?",
+  "@zakatDeleteConfirmTitle": {
+    "description": "Title for delete confirmation dialog"
+  },
+  "zakatDeleteConfirmMessage": "This will remove \"{name}\" from your zakat list.",
+  "@zakatDeleteConfirmMessage": {
+    "description": "Message for delete confirmation dialog",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Wedding ring"
+      }
+    }
+  },
   "zakatCancel": "Cancel",
   "@zakatCancel": {
     "description": "Cancel button"

@@ -327,6 +327,14 @@ class AppLocalizationsUr extends AppLocalizations {
   String get zakatDeleteItem => 'حذف کریں';
 
   @override
+  String get zakatDeleteConfirmTitle => 'سونے کی شے حذف کریں؟';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'اس سے آپ کی زکوٰۃ فہرست سے \"$name\" ہٹ جائے گی۔';
+  }
+
+  @override
   String get zakatCancel => 'منسوخ';
 
   @override
@@ -693,6 +701,14 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
 
   @override
   String get zakatDeleteItem => 'Delete';
+
+  @override
+  String get zakatDeleteConfirmTitle => 'Sone ki shai delete karein?';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'Is se āp ki zakat list se \"$name\" hat jāegi.';
+  }
 
   @override
   String get zakatCancel => 'Cancel';

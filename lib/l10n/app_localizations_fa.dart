@@ -327,6 +327,14 @@ class AppLocalizationsFa extends AppLocalizations {
   String get zakatDeleteItem => 'حذف';
 
   @override
+  String get zakatDeleteConfirmTitle => 'قلم طلا حذف شود؟';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'این کار \"$name\" را از فهرست زکات حذف می‌کند.';
+  }
+
+  @override
   String get zakatCancel => 'لغو';
 
   @override

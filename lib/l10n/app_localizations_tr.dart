@@ -328,6 +328,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get zakatDeleteItem => 'Sil';
 
   @override
+  String get zakatDeleteConfirmTitle => 'Altın eşya silinsin mi?';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'Bu, \"$name\" öğesini zekât listenizden kaldırır.';
+  }
+
+  @override
   String get zakatCancel => 'İptal';
 
   @override

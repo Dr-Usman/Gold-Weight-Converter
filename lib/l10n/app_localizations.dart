@@ -687,6 +687,18 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get zakatDeleteItem;
 
+  /// Title for delete confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete gold item?'**
+  String get zakatDeleteConfirmTitle;
+
+  /// Message for delete confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'This will remove \"{name}\" from your zakat list.'**
+  String zakatDeleteConfirmMessage(String name);
+
   /// Cancel button
   ///
   /// In en, this message translates to:

@@ -106,5 +106,7 @@
     "zakatCalculateButton": "محاسبه زکات",
     "zakatItemDetail": "{weight} {unit} · {purity}",
     "zakatValidationWeight": "وزنی بیشتر از صفر وارد کنید",
-    "zakatValidationKarat": "عیاری بین ۱ و ۲۴ وارد کنید"
+    "zakatValidationKarat": "عیاری بین ۱ و ۲۴ وارد کنید",
+    "zakatDeleteConfirmTitle": "قلم طلا حذف شود؟",
+    "zakatDeleteConfirmMessage": "این کار \"{name}\" را از فهرست زکات حذف می‌کند."
 }

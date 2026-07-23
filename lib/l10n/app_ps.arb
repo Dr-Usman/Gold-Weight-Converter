@@ -106,5 +106,7 @@
     "zakatCalculateButton": "زکات محاسبه کړئ",
     "zakatItemDetail": "{weight} {unit} · {purity}",
     "zakatValidationWeight": "له صفر څخه زیات وزن ولیکئ",
-    "zakatValidationKarat": "د ۱ او ۲۴ ترمنځ عیار ولیکئ"
+    "zakatValidationKarat": "د ۱ او ۲۴ ترمنځ عیار ولیکئ",
+    "zakatDeleteConfirmTitle": "د سرو زرو توکی ړنګ شي؟",
+    "zakatDeleteConfirmMessage": "دا به ستاسو د زکات لیست څخه \"{name}\" لرې کړي."
 }

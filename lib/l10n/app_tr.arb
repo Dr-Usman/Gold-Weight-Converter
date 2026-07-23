@@ -106,5 +106,7 @@
     "zakatCalculateButton": "Zekâtı hesapla",
     "zakatItemDetail": "{weight} {unit} · {purity}",
     "zakatValidationWeight": "Sıfırdan büyük bir ağırlık girin",
-    "zakatValidationKarat": "1 ile 24 arasında ayar girin"
+    "zakatValidationKarat": "1 ile 24 arasında ayar girin",
+    "zakatDeleteConfirmTitle": "Altın eşya silinsin mi?",
+    "zakatDeleteConfirmMessage": "Bu, \"{name}\" öğesini zekât listenizden kaldırır."
 }

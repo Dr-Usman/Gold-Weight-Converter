@@ -327,6 +327,14 @@ class AppLocalizationsPs extends AppLocalizations {
   String get zakatDeleteItem => 'ړنګول';
 
   @override
+  String get zakatDeleteConfirmTitle => 'د سرو زرو توکی ړنګ شي؟';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'دا به ستاسو د زکات لیست څخه \"$name\" لرې کړي.';
+  }
+
+  @override
   String get zakatCancel => 'لغوه';
 
   @override

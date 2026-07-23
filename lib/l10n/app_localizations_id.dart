@@ -327,6 +327,14 @@ class AppLocalizationsId extends AppLocalizations {
   String get zakatDeleteItem => 'Hapus';
 
   @override
+  String get zakatDeleteConfirmTitle => 'Hapus barang emas?';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'Ini akan menghapus \"$name\" dari daftar zakat Anda.';
+  }
+
+  @override
   String get zakatCancel => 'Batal';
 
   @override

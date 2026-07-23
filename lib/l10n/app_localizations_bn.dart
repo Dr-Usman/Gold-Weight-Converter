@@ -329,6 +329,14 @@ class AppLocalizationsBn extends AppLocalizations {
   String get zakatDeleteItem => 'মুছুন';
 
   @override
+  String get zakatDeleteConfirmTitle => 'স্বর্ণের জিনিস মুছবেন?';
+
+  @override
+  String zakatDeleteConfirmMessage(String name) {
+    return 'এতে আপনার যাকাত তালিকা থেকে \"$name\" সরানো হবে।';
+  }
+
+  @override
   String get zakatCancel => 'বাতিল';
 
   @override
