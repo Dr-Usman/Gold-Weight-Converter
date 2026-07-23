@@ -11,6 +11,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.0] - 2026-07-23
+
+### Added
+- Mixpanel product analytics (`mixpanel_flutter`)
+  - `app_opened` on startup
+  - `conversion_completed` when Calculate runs with weight input
+  - `language_changed` and `theme_changed` preference events
+  - People profile properties: `preferred_language`, `theme_mode`
+- `AGENTS.md` Mixpanel tracking guidance for future contributors
+- Mixpanel web SDK script for Flutter web builds
+
+---
+
 ## [1.3.0] - 2026-05-30
 
 ### Added

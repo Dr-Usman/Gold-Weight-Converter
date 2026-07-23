@@ -143,7 +143,7 @@ flutter build web --release --base-href "/Gold-Weight-Converter/"
 
 ## Releases
 
-- Version is maintained in pubspec.yaml (current: 1.3.0+3).
+- Version is maintained in pubspec.yaml (current: 1.4.0+4).
 - Change history is tracked in CHANGELOG.md.
 - GitHub release workflow is tag-driven and runs on tags matching v*.
 - The same v* tags also deploy the web build to GitHub Pages (`.github/workflows/deploy-pages.yml`), live at https://dr-usman.github.io/Gold-Weight-Converter/. The Pages deploy can also be run manually via workflow_dispatch.
