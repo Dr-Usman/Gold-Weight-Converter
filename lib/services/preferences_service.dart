@@ -14,6 +14,7 @@ final preferencesServiceProvider = Provider<PreferencesService>((ref) {
 class PreferencesService {
   static const String _themeModeKey = 'theme_mode';
   static const String _languageKey = 'language_code';
+  static const String _currencyKey = 'currency_code';
   static const String _zakatItemsKey = 'zakat_gold_items';
   static const String _zakatRateKey = 'zakat_gold_rate';
   static const String _zakatRateUnitKey = 'zakat_rate_unit';
@@ -56,6 +57,17 @@ class PreferencesService {
   Locale getLocale() {
     final code = _prefs.getString(_languageKey) ?? 'en';
     return _localeFromString(code);
+  }
+
+  // ============ Currency Methods ============
+
+  /// Saved ISO currency code, or `null` when the user has never chosen one.
+  String? getCurrencyCode() {
+    return _prefs.getString(_currencyKey);
+  }
+
+  Future<void> saveCurrencyCode(String code) async {
+    await _prefs.setString(_currencyKey, code);
   }
 
   /// Helper: Parse string to Locale

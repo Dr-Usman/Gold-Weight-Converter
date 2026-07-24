@@ -27,12 +27,14 @@ class AnalyticsService {
   static void syncUserPreferences({
     required Locale locale,
     required ThemeMode themeMode,
+    required String preferredCurrency,
   }) {
     final people = _mixpanel?.getPeople();
     if (people == null) return;
 
     people.set('preferred_language', localeToAnalyticsCode(locale));
     people.set('theme_mode', themeModeToAnalyticsValue(themeMode));
+    people.set('preferred_currency', preferredCurrency);
   }
 
   static void trackAppOpened() {
@@ -99,6 +101,20 @@ class AnalyticsService {
       },
     );
     _mixpanel?.getPeople().set('theme_mode', themeValue);
+  }
+
+  static void trackCurrencyChanged({
+    required String currency,
+    String? previousCurrency,
+  }) {
+    _mixpanel?.track(
+      'currency_changed',
+      properties: {
+        'currency': currency,
+        'previous_currency': ?previousCurrency,
+      },
+    );
+    _mixpanel?.getPeople().set('preferred_currency', currency);
   }
 
   /// Snake_case locale key, e.g. `en`, `ur`, `ur_ro`.

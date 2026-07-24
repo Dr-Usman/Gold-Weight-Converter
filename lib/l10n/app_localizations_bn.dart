@@ -223,6 +223,18 @@ class AppLocalizationsBn extends AppLocalizations {
   String get settingsLanguageLabel => 'ভাষা';
 
   @override
+  String get settingsCurrencyLabel => 'মুদ্রা';
+
+  @override
+  String get currencySelectionPrompt => 'আপনার মুদ্রা নির্বাচন করুন';
+
+  @override
+  String get currencySearchHint => 'কোড, নাম বা প্রতীক দিয়ে খুঁজুন';
+
+  @override
+  String get currencySearchEmpty => 'কোনো মুদ্রা মিলছে না';
+
+  @override
   String get languageSelectionPrompt => 'অনুগ্রহ করে আপনার ভাষা নির্বাচন করুন';
 
   @override

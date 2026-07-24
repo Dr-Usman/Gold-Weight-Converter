@@ -222,6 +222,18 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsLanguageLabel => 'Bahasa';
 
   @override
+  String get settingsCurrencyLabel => 'Mata uang';
+
+  @override
+  String get currencySelectionPrompt => 'Pilih mata uang Anda';
+
+  @override
+  String get currencySearchHint => 'Cari berdasarkan kode, nama, atau simbol';
+
+  @override
+  String get currencySearchEmpty => 'Tidak ada mata uang yang cocok';
+
+  @override
   String get languageSelectionPrompt => 'Silakan pilih bahasa Anda';
 
   @override

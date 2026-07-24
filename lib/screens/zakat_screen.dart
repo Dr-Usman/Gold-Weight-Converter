@@ -6,6 +6,7 @@ import 'package:gold_weight_converter/constants/unit_enum.dart';
 import 'package:gold_weight_converter/constants/weight_unit_enum.dart';
 import 'package:gold_weight_converter/l10n/app_localizations.dart';
 import 'package:gold_weight_converter/models/gold_item_model.dart';
+import 'package:gold_weight_converter/providers/currency_provider.dart';
 import 'package:gold_weight_converter/providers/zakat_provider.dart';
 import 'package:gold_weight_converter/services/analytics_service.dart';
 import 'package:gold_weight_converter/services/zakat_calculator.dart';
@@ -26,11 +27,6 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
   late final TextEditingController _rateController;
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _summaryKey = GlobalKey();
-  final NumberFormat _currencyFormat = NumberFormat.currency(
-    locale: 'en_PK',
-    symbol: 'Rs. ',
-    decimalDigits: 2,
-  );
 
   @override
   void initState() {
@@ -201,7 +197,10 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
         child: ListTile(
           title: Text(
             title,
-            style: const TextStyle(fontWeight: FontWeight.w600),
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: scheme.onSurface,
+            ),
           ),
           subtitle: Text(
             l10n.zakatItemDetail(
@@ -209,9 +208,10 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
               _weightUnitLabel(l10n, item.unit),
               _purityLabel(l10n, item),
             ),
+            style: TextStyle(color: scheme.onSurfaceVariant),
           ),
           trailing: IconButton(
-            icon: const Icon(Icons.edit_outlined),
+            icon: Icon(Icons.edit_outlined, color: scheme.onSurfaceVariant),
             onPressed: () => _openItemSheet(existing: item),
           ),
           onTap: () => _openItemSheet(existing: item),
@@ -227,6 +227,9 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final ZakatState zakatState = ref.watch(zakatNotifierProvider);
     final ZakatSummary summary = zakatState.summary;
+    final NumberFormat currencyFormat = ref
+        .watch(currencyProvider)
+        .numberFormat;
 
     return Scaffold(
       appBar: AppBar(
@@ -291,7 +294,10 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
                         child: Text(
                           l10n.zakatItemsTitle,
                           style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.w700),
+                              ?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: scheme.onSurface,
+                              ),
                         ),
                       ),
                       FilledButton.icon(
@@ -353,7 +359,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
                     child: _SummaryCard(
                       l10n: l10n,
                       summary: summary,
-                      currencyFormat: _currencyFormat,
+                      currencyFormat: currencyFormat,
                     ),
                   ),
                 ],
@@ -442,9 +448,10 @@ class _SummaryCard extends StatelessWidget {
         children: [
           Text(
             l10n.zakatSummaryTitle,
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: scheme.onSurface,
+            ),
           ),
           const SizedBox(height: 12),
           if (!hasItems)
@@ -457,7 +464,9 @@ class _SummaryCard extends StatelessWidget {
           else ...[
             Text(
               l10n.zakatTotalPureGold,
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(
+                context,
+              ).textTheme.labelLarge?.copyWith(color: scheme.onSurfaceVariant),
             ),
             const SizedBox(height: 4),
             Text(
@@ -465,22 +474,26 @@ class _SummaryCard extends StatelessWidget {
                 summary.totalPureGrams.toStringAsFixed(4),
                 summary.totalPureTola.toStringAsFixed(4),
               ),
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: scheme.onSurface,
+              ),
             ),
             const SizedBox(height: 14),
             Text(
               l10n.zakatTotalValue,
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(
+                context,
+              ).textTheme.labelLarge?.copyWith(color: scheme.onSurfaceVariant),
             ),
             const SizedBox(height: 4),
             if (summary.totalValue != null)
               Text(
                 currencyFormat.format(summary.totalValue),
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: scheme.onSurface,
+                ),
               )
             else
               Text(
@@ -492,7 +505,9 @@ class _SummaryCard extends StatelessWidget {
             const SizedBox(height: 14),
             Text(
               l10n.zakatDueLabel,
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(
+                context,
+              ).textTheme.labelLarge?.copyWith(color: scheme.onSurfaceVariant),
             ),
             const SizedBox(height: 4),
             if (summary.zakatDue != null)

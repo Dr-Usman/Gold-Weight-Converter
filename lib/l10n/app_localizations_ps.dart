@@ -222,6 +222,18 @@ class AppLocalizationsPs extends AppLocalizations {
   String get settingsLanguageLabel => 'ژبه';
 
   @override
+  String get settingsCurrencyLabel => 'اسعار';
+
+  @override
+  String get currencySelectionPrompt => 'خپل اسعار وټاکئ';
+
+  @override
+  String get currencySearchHint => 'د کوډ، نوم یا نښې له مخې لټون';
+
+  @override
+  String get currencySearchEmpty => 'هیڅ اسعار نه دي موندل شوي';
+
+  @override
   String get languageSelectionPrompt => 'براہ کرم خپل ژبه انتخاب کړئ';
 
   @override

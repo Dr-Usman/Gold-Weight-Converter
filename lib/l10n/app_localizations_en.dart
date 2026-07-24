@@ -222,6 +222,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageLabel => 'Language';
 
   @override
+  String get settingsCurrencyLabel => 'Currency';
+
+  @override
+  String get currencySelectionPrompt => 'Select your currency';
+
+  @override
+  String get currencySearchHint => 'Search by code, name, or symbol';
+
+  @override
+  String get currencySearchEmpty => 'No currencies match your search';
+
+  @override
   String get languageSelectionPrompt => 'Please select your language';
 
   @override

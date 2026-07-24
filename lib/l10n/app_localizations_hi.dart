@@ -222,6 +222,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsLanguageLabel => 'भाषा';
 
   @override
+  String get settingsCurrencyLabel => 'मुद्रा';
+
+  @override
+  String get currencySelectionPrompt => 'अपनी मुद्रा चुनें';
+
+  @override
+  String get currencySearchHint => 'कोड, नाम या चिह्न से खोजें';
+
+  @override
+  String get currencySearchEmpty => 'कोई मुद्रा मेल नहीं खाती';
+
+  @override
   String get languageSelectionPrompt => 'कृपया अपनी भाषा चुनें';
 
   @override

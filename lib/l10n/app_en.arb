@@ -370,6 +370,22 @@
   "@settingsLanguageLabel": {
     "description": "Label for language settings section"
   },
+  "settingsCurrencyLabel": "Currency",
+  "@settingsCurrencyLabel": {
+    "description": "Label for currency settings section in the drawer"
+  },
+  "currencySelectionPrompt": "Select your currency",
+  "@currencySelectionPrompt": {
+    "description": "Heading shown on currency selection bottom sheet"
+  },
+  "currencySearchHint": "Search by code, name, or symbol",
+  "@currencySearchHint": {
+    "description": "Hint text for currency search field"
+  },
+  "currencySearchEmpty": "No currencies match your search",
+  "@currencySearchEmpty": {
+    "description": "Empty state when currency search has no results"
+  },
   "languageSelectionPrompt": "Please select your language",
   "@languageSelectionPrompt": {
     "description": "Heading shown on language selection bottom sheet"
