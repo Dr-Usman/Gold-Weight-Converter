@@ -222,6 +222,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsLanguageLabel => 'اللغة';
 
   @override
+  String get settingsCurrencyLabel => 'العملة';
+
+  @override
+  String get currencySelectionPrompt => 'اختر عملتك';
+
+  @override
+  String get currencySearchHint => 'ابحث بالرمز أو الاسم أو العلامة';
+
+  @override
+  String get currencySearchEmpty => 'لا توجد عملات مطابقة';
+
+  @override
   String get languageSelectionPrompt => 'يرجى تحديد اللغة الخاصة بك';
 
   @override

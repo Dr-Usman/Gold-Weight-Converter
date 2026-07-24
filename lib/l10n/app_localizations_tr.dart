@@ -222,6 +222,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsLanguageLabel => 'Dil';
 
   @override
+  String get settingsCurrencyLabel => 'Para birimi';
+
+  @override
+  String get currencySelectionPrompt => 'Para biriminizi seçin';
+
+  @override
+  String get currencySearchHint => 'Kod, ad veya sembole göre ara';
+
+  @override
+  String get currencySearchEmpty => 'Eşleşen para birimi yok';
+
+  @override
   String get languageSelectionPrompt => 'Lütfen dilinizi seçin';
 
   @override

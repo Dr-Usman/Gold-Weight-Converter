@@ -222,6 +222,18 @@ class AppLocalizationsFa extends AppLocalizations {
   String get settingsLanguageLabel => 'زبان';
 
   @override
+  String get settingsCurrencyLabel => 'ارز';
+
+  @override
+  String get currencySelectionPrompt => 'ارز خود را انتخاب کنید';
+
+  @override
+  String get currencySearchHint => 'جستجو با کد، نام یا نماد';
+
+  @override
+  String get currencySearchEmpty => 'ارزی یافت نشد';
+
+  @override
   String get languageSelectionPrompt => 'لطفاً زبان خود را انتخاب کنید';
 
   @override

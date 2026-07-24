@@ -483,6 +483,30 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get settingsLanguageLabel;
 
+  /// Label for currency settings section in the drawer
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get settingsCurrencyLabel;
+
+  /// Heading shown on currency selection bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Select your currency'**
+  String get currencySelectionPrompt;
+
+  /// Hint text for currency search field
+  ///
+  /// In en, this message translates to:
+  /// **'Search by code, name, or symbol'**
+  String get currencySearchHint;
+
+  /// Empty state when currency search has no results
+  ///
+  /// In en, this message translates to:
+  /// **'No currencies match your search'**
+  String get currencySearchEmpty;
+
   /// Heading shown on language selection bottom sheet
   ///
   /// In en, this message translates to:

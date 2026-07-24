@@ -222,6 +222,18 @@ class AppLocalizationsSd extends AppLocalizations {
   String get settingsLanguageLabel => 'ٻولي';
 
   @override
+  String get settingsCurrencyLabel => 'ڪرنسي';
+
+  @override
+  String get currencySelectionPrompt => 'پنهنجي ڪرنسي چونڊيو';
+
+  @override
+  String get currencySearchHint => 'ڪوڊ، نالو يا علامت سان ڳوليو';
+
+  @override
+  String get currencySearchEmpty => 'ڪا ڪرنسي نه ملي';
+
+  @override
   String get languageSelectionPrompt => 'براہ ڪرم پنهنجي ٻولي چنڊيو';
 
   @override

@@ -24,6 +24,12 @@ class _TestPreferencesService extends PreferencesService {
   Future<void> saveLocale(Locale locale) async {}
 
   @override
+  String? getCurrencyCode() => 'INR';
+
+  @override
+  Future<void> saveCurrencyCode(String code) async {}
+
+  @override
   Future<void> clearAll() async {}
 
   @override
@@ -177,11 +183,8 @@ void main() {
     await selectRateUnit(tester, 'Tola');
     await tapCalculate(tester);
 
-    expect(find.textContaining('Gold Price: Rs. 1,166.00'), findsOneWidget);
-    expect(
-      find.textContaining('(Rate: Rs. 1,166.00 per Tola)'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('Gold Price: ₹1,166.00'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹1,166.00 per Tola)'), findsOneWidget);
   });
 
   testWidgets('calculates gold price using the 10 Gram rate unit', (
@@ -194,9 +197,9 @@ void main() {
     await selectRateUnit(tester, '10 Gram');
     await tapCalculate(tester);
 
-    expect(find.textContaining('Gold Price: Rs. 2,000.00'), findsOneWidget);
+    expect(find.textContaining('Gold Price: ₹2,000.00'), findsOneWidget);
     expect(
-      find.textContaining('(Rate: Rs. 2,000.00 per 10 Gram)'),
+      find.textContaining('(Rate: ₹2,000.00 per 10 Gram)'),
       findsOneWidget,
     );
   });
@@ -211,11 +214,8 @@ void main() {
     await selectRateUnit(tester, '1 Gram');
     await tapCalculate(tester);
 
-    expect(find.textContaining('Gold Price: Rs. 15,000.00'), findsOneWidget);
-    expect(
-      find.textContaining('(Rate: Rs. 3,000.00 per 1 Gram)'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('Gold Price: ₹15,000.00'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹3,000.00 per 1 Gram)'), findsOneWidget);
   });
 
   testWidgets('clear all removes entered values and hides results', (

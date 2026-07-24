@@ -84,10 +84,11 @@ These are the Mixpanel events currently tracked in this project. **All new Mixpa
 | Mixpanel Event | Trigger | Key Properties | File |
 |---|---|---|---|
 | `app_opened` | App finishes Mixpanel init at startup | (none custom — Mixpanel auto-sends `$os`, `mp_lib`, device, app version, geo, etc.) | `lib/services/analytics_service.dart` |
-| `conversion_completed` | User taps Calculate with at least one weight input | `input_units_used`, `rate_unit`, `is_gold_rate_set` | `lib/converter_screen.dart` → `calculateAll()` |
+| `conversion_completed` | User taps Calculate with at least one weight input | `input_units_used`, `rate_unit`, `is_gold_rate_set` | `lib/screens/converter_screen.dart` → `calculateAll()` |
 | `zakat_calculated` | User taps Calculate zakat with at least one gold item | `item_count`, `rate_unit`, `is_gold_rate_set` | `lib/screens/zakat_screen.dart` → `_calculateZakat()` |
 | `language_changed` | User picks a different language in settings | `language`, `previous_language` | `lib/providers/locale_provider.dart` |
 | `theme_changed` | User toggles dark/light theme | `theme_mode`, `previous_theme_mode` | `lib/providers/theme_provider.dart` |
+| `currency_changed` | User picks a different currency in the drawer | `currency`, `previous_currency` | `lib/providers/currency_provider.dart` |
 
 ### Mixpanel People properties
 
@@ -97,6 +98,7 @@ Set at app start via `AnalyticsService.syncUserPreferences`, and updated on chan
 |---|---|---|
 | `preferred_language` | `en`, `ur`, `ur_ro`, `sd`, … | Last selected app language |
 | `theme_mode` | `light`, `dark`, `system` | Last selected theme preference |
+| `preferred_currency` | `INR`, `PKR`, `USD`, … | Last selected display currency |
 
 Do **not** send a custom `platform` property. Mixpanel already provides `$os` (e.g. `Android`, `iOS`) and `mp_lib` (`flutter`).
 

@@ -222,6 +222,18 @@ class AppLocalizationsUr extends AppLocalizations {
   String get settingsLanguageLabel => 'زبان';
 
   @override
+  String get settingsCurrencyLabel => 'کرنسی';
+
+  @override
+  String get currencySelectionPrompt => 'اپنی کرنسی منتخب کریں';
+
+  @override
+  String get currencySearchHint => 'کوڈ، نام یا علامت سے تلاش کریں';
+
+  @override
+  String get currencySearchEmpty => 'کوئی کرنسی مماثل نہیں';
+
+  @override
   String get languageSelectionPrompt => 'براہ کرم اپنی زبان منتخب کریں';
 
   @override
@@ -595,6 +607,18 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
 
   @override
   String get settingsLanguageLabel => 'Zuban';
+
+  @override
+  String get settingsCurrencyLabel => 'Currency';
+
+  @override
+  String get currencySelectionPrompt => 'Apni currency muntakhib karen';
+
+  @override
+  String get currencySearchHint => 'Code, naam ya symbol se talash karen';
+
+  @override
+  String get currencySearchEmpty => 'Koi currency match nahi';
 
   @override
   String get languageSelectionPrompt =>

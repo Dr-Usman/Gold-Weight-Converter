@@ -4,15 +4,16 @@ import 'package:gold_weight_converter/constants/app_colors.dart';
 import 'package:gold_weight_converter/constants/app_constants.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
 import 'package:gold_weight_converter/l10n/app_localizations.dart';
+import 'package:gold_weight_converter/providers/currency_provider.dart';
+import 'package:gold_weight_converter/providers/locale_provider.dart';
 import 'package:gold_weight_converter/providers/unit_provider.dart';
 import 'package:gold_weight_converter/providers/weight_provider.dart';
 import 'package:gold_weight_converter/services/analytics_service.dart';
 import 'package:gold_weight_converter/services/weight_converter.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
-import 'package:intl/intl.dart';
 
-import 'widgets/app_drawer.dart';
-import 'widgets/gold_text_field.dart';
+import 'package:gold_weight_converter/widgets/app_drawer.dart';
+import 'package:gold_weight_converter/widgets/gold_text_field.dart';
 
 class GoldConverterScreen extends ConsumerStatefulWidget {
   const GoldConverterScreen({super.key});
@@ -36,11 +37,13 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   static const double anaToGram = AppConstants.anaToGram;
   static const double rattiToGram = AppConstants.rattiToGram;
 
-  final currencyFormat = NumberFormat.currency(
-    locale: 'en_PK',
-    symbol: 'Rs. ',
-    decimalDigits: 2,
-  );
+  String _localizedRateUnit(AppLocalizations l10n, UnitEnum unit) {
+    return switch (unit) {
+      UnitEnum.tola => l10n.unitTola,
+      UnitEnum.tenGram => l10n.unitTenGram,
+      UnitEnum.oneGram => l10n.unitOneGram,
+    };
+  }
 
   void _clearAll() {
     // Unfocus any currently focused text field
@@ -161,11 +164,15 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       final double gramRate = WeightConverter.ratePerGram(rate, goldRateUnit);
       double price = totalGrams * gramRate;
 
-      final priceFormatted = currencyFormat.format(price);
+      final l10n = AppLocalizations.of(context)!;
+      final currencyFormat = ref.read(currencyProvider).numberFormat;
+      final String priceFormatted = currencyFormat.format(price);
+      final String rateFormatted = currencyFormat.format(rate);
+      final String unitLabel = _localizedRateUnit(l10n, goldRateUnit);
 
       newPriceText =
-          'Gold Price: $priceFormatted '
-          '\n(Rate: ${currencyFormat.format(rate)} per ${goldRateUnit.name})';
+          '${l10n.goldPrice(priceFormatted)}\n'
+          '${l10n.rateInfo(rateFormatted, unitLabel)}';
     }
 
     final goldResultState = ref.read(goldResultNotifierProvider);
@@ -241,6 +248,21 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
+    ref.listen(currencyProvider, (_, _) {
+      if (mounted) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _calculate();
+        });
+      }
+    });
+    ref.listen(localeProvider, (_, _) {
+      if (mounted) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _calculate();
+        });
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
