@@ -48,7 +48,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
   Future<void> _openItemSheet({GoldItemModel? existing}) async {
     await showModalBottomSheet<void>(
       context: context,
-      useSafeArea: true,
+      useSafeArea: false,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => GoldItemSheet(existing: existing),

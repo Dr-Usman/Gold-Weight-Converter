@@ -166,12 +166,14 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
           color: isDark ? scheme.surface : AppColors.surface,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
         ),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
+        child: SafeArea(
+          top: false,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
               Center(
                 child: Container(
                   width: 40,
@@ -296,6 +298,7 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
               ),
             ],
           ),
+        ),
         ),
       ),
     );

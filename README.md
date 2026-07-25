@@ -23,11 +23,15 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 
 ## Screenshots
 
-|  |  |
+| Converter | Results & price |
 | --- | --- |
-| <img width="300" alt="Light input form" src="https://github.com/user-attachments/assets/96835e89-90b4-4930-8f46-e0a34a505849" /> | <img width="300" alt="Light input form and result" src="https://github.com/user-attachments/assets/b458f657-6551-48b8-928a-22d5d6606bf8" /> |
-| <img width="300" alt="Light and dark theme input form" src="https://github.com/user-attachments/assets/cac8e63c-bee3-444e-abd0-7ea27a1311b5" /> | <img width="300" alt="App drawer preview" src="https://github.com/user-attachments/assets/8dc678ed-2a1d-48cc-a91b-84c562519b2f" /> |
-| <img width="300" alt="Language bottom sheet" src="https://github.com/user-attachments/assets/94c962b8-651a-47ac-a2aa-1f480718ae53" /> | |
+| <img width="300" alt="Convert Tola, Masha, Ana, Ratti and Gram" src="docs/screenshots/01-converter-light.png" /> | <img width="300" alt="Conversion details and gold price summary" src="docs/screenshots/02-results-and-price.png" /> |
+| **Gold zakat** | **Currency** |
+| <img width="300" alt="Gold zakat calculator with item purity and 2.5% summary" src="docs/screenshots/03-gold-zakat.png" /> | <img width="300" alt="Searchable display currency picker" src="docs/screenshots/04-currency.png" /> |
+| **Languages** | **Dark mode** |
+| <img width="300" alt="Language selection with 12 supported locales" src="docs/screenshots/05-languages.png" /> | <img width="300" alt="Converter screen in dark mode" src="docs/screenshots/06-dark-mode.png" /> |
+| **Menu & settings** | |
+| <img width="300" alt="App drawer with zakat, theme, language and currency" src="docs/screenshots/07-menu-settings.png" /> | |
 
 ## Download
 

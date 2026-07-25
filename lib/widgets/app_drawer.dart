@@ -180,7 +180,7 @@ class _LanguageDrawerTile extends StatelessWidget {
           onTap: () {
             showModalBottomSheet(
               context: context,
-              useSafeArea: true,
+              useSafeArea: false,
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
               builder: (context) => const LanguageBottomSheet(),
@@ -216,7 +216,7 @@ class _CurrencyDrawerTile extends ConsumerWidget {
           onTap: () {
             showModalBottomSheet(
               context: context,
-              useSafeArea: true,
+              useSafeArea: false,
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
               builder: (context) => const CurrencyBottomSheet(),

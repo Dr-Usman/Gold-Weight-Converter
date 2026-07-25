@@ -36,13 +36,14 @@ class _CurrencyBottomSheetState extends ConsumerState<CurrencyBottomSheet> {
         .where((currency) => currency.matchesQuery(_query))
         .toList();
 
-    // Use Material (not a colored Container) so ListTile ink is not obscured.
-    return SafeArea(
-      top: false,
-      child: Material(
-        color: scheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-        clipBehavior: Clip.antiAlias,
+    // Color the sheet first, then SafeArea-pad content — otherwise the home
+    // indicator inset stays transparent over the modal scrim.
+    return Material(
+      color: scheme.surface,
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+      clipBehavior: Clip.antiAlias,
+      child: SafeArea(
+        top: false,
         child: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: maxHeight),
           child: Padding(

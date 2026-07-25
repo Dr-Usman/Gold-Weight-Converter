@@ -31,12 +31,14 @@ class LanguageBottomSheet extends ConsumerWidget {
       (locale: Locale('tr'), nativeLabel: 'Türkçe'),
     ];
 
-    return SafeArea(
-      top: false,
-      child: Material(
-        color: scheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-        clipBehavior: Clip.antiAlias,
+    // Color the sheet first, then SafeArea-pad content — otherwise the home
+    // indicator inset stays transparent over the modal scrim.
+    return Material(
+      color: scheme.surface,
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+      clipBehavior: Clip.antiAlias,
+      child: SafeArea(
+        top: false,
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(
