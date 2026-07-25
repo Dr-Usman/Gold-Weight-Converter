@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+---
+
+## [1.5.0] - 2026-07-24
+
 ### Added
 - Gold zakat calculator (drawer → Gold Zakat)
   - Dynamic gold items with weight, unit, and purity (24K / 22K / 21K / 18K / custom karat)
@@ -14,10 +18,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Pure-gold grams, estimated value, and zakat due summary
   - Items and rate persisted via SharedPreferences
   - Mixpanel `zakat_calculated` event (`item_count`, `rate_unit`, `is_gold_rate_set`)
+- Searchable display currency preference in the drawer
+  - Common currencies with locale-aware default and persistence
+  - Applied to converter and zakat value formatting (no FX conversion)
+  - Mixpanel `currency_changed` event and People property `preferred_currency`
 - Shared `WeightConverter` / `ZakatCalculator` services with unit tests
 
 ### Changed
 - GitHub Releases now use CHANGELOG-driven notes (title `GWC vX.Y.Z`, Play Store section excluded) and versioned multi-platform assets (`gwc-android-*`, `gwc-web-*`, `gwc-macos-*`, `gwc-linux-*`, `gwc-windows-*`)
+
+### Fixed
+- Android: disable Impeller to avoid native crashes on some Qualcomm Adreno/Vulkan drivers (`PipelineVK` / `vkCreateGraphicsPipelines`)
+
+### Play Store (en-US)
+```
+What's new in 1.5.0
+• Calculate gold zakat from your items with weight, purity, and a 2.5% summary
+• Choose your display currency from the drawer (searchable list)
+• Clearer value formatting on converter and zakat screens
+• Improved stability on some Android devices
+```
 
 ---
 

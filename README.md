@@ -1,6 +1,6 @@
 # Gold Weight Converter App
 
-A clean, open-source Flutter app to convert gold weight between traditional South Asian units (Tola, Masha, Ana, Ratti) and metric units (Gram), with integrated gold price estimation.
+A clean, open-source Flutter app to convert gold weight between traditional South Asian units (Tola, Masha, Ana, Ratti) and metric units (Gram), with gold price estimation, display-currency formatting, and a gold zakat calculator.
 
 **[Try the live demo](https://dr-usman.github.io/Gold-Weight-Converter/)**
 
@@ -8,7 +8,12 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 
 - Convert weights between Tola, Masha, Ana, Ratti, and Gram
 - Calculate gold price by rate per Tola, per 10 Gram, or per 1 Gram
-- Gold zakat helper: add items by weight and purity (24K–18K / custom), shared market rate, 2.5% zakat on listed items (no nisab gate)
+- Gold zakat calculator (drawer → Gold Zakat)
+  - Add items with weight, unit, and purity (24K / 22K / 21K / 18K / custom karat)
+  - Shared 24K market rate; applies 2.5% on listed items (no nisab gate)
+  - Pure-gold grams, estimated value, and zakat due summary
+  - Items and rate persisted across sessions
+- Searchable display currency preference in the drawer (locale-aware default; formatting only, no FX conversion)
 - Show conversion and pricing breakdown with readable formulas
 - Persisted theme support: light, dark, and system mode
 - Multilingual UI with in-app language switching (12 supported locales)
@@ -120,6 +125,7 @@ flutter test
 
 ```bash
 flutter test test/widget_test.dart
+flutter test test/zakat_calculator_test.dart
 flutter test test/widget_test.dart --plain-name 'calculates gold price using the tola rate unit'
 ```
 
@@ -135,16 +141,17 @@ flutter build web --release --base-href "/Gold-Weight-Converter/"
 
 ## Architecture At A Glance
 
-- App bootstrap in lib/main.dart initializes PreferencesService and injects it via Riverpod ProviderScope override.
-- Core calculator UI and calculation logic live in lib/converter_screen.dart.
-- State is managed by Riverpod providers in lib/providers for theme, locale, result text, selected rate unit, and app version.
-- Shared preference persistence is centralized in lib/services/preferences_service.dart.
-- Reusable UI components are in lib/widgets (input field, settings drawer, language selector).
-- Localization is generated from ARB files in lib/l10n.
+- App bootstrap in `lib/main.dart` initializes PreferencesService and injects it via Riverpod `ProviderScope` override; `lib/app.dart` hosts `MaterialApp`.
+- Screens live in `lib/screens/` (`converter_screen.dart`, `zakat_screen.dart`).
+- Shared conversion and zakat math live in `lib/services/` (`weight_converter.dart`, `zakat_calculator.dart`).
+- State is managed by Riverpod providers in `lib/providers/` for theme, locale, currency, converter results, zakat items, rate unit, and app version.
+- Shared preference persistence is centralized in `lib/services/preferences_service.dart`.
+- Reusable UI components are in `lib/widgets/` (input field, drawer, language/currency sheets, gold item sheet).
+- Localization is generated from ARB files in `lib/l10n/`.
 
 ## Releases
 
-- Version is maintained in pubspec.yaml (current: 1.4.0+4).
+- Version is maintained in pubspec.yaml (current: 1.5.0+5).
 - Change history is tracked in CHANGELOG.md.
 - For each release, add developer notes under `## [X.Y.Z]` plus a short **user-facing** `### Play Store (en-US)` section (paste into Google Play Console). Keep Play Store copy plain-language; no separate what’s-new file.
 - Tagging `v*` creates a GitHub Release titled **GWC vX.Y.Z**. Release body is generated from that CHANGELOG section (Play Store subsection excluded) with a Full Changelog link at the bottom.
@@ -160,7 +167,7 @@ flutter build web --release --base-href "/Gold-Weight-Converter/"
 Example release flow:
 
 ```bash
-# 1. Bump pubspec.yaml version (e.g. 1.4.0+4)
+# 1. Bump pubspec.yaml version (e.g. 1.5.0+5)
 # 2. Update CHANGELOG.md (developer notes + ### Play Store section)
 git add pubspec.yaml CHANGELOG.md README.md
 git commit -m "release: vX.Y.Z+N"
