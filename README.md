@@ -179,12 +179,12 @@ git tag vX.Y.Z
 git push origin main --tags
 ```
 
-Then paste the Play Store section from CHANGELOG.md into Google Play Console → Release → Release notes.
+Then paste the Play Store section from [CHANGELOG.md](CHANGELOG.md) into Google Play Console → Release → Release notes.
 
 ## Contributing
 
-Please read CONTRIBUTING.md for contribution workflow, checks, and pull request guidance.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for contribution workflow, checks, and pull request guidance.
 
 ## License
 
-This project is licensed under the MIT License. See LICENSE for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
