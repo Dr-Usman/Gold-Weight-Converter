@@ -12,6 +12,7 @@ import 'package:gold_weight_converter/services/analytics_service.dart';
 import 'package:gold_weight_converter/services/weight_converter.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
 
+import 'package:gold_weight_converter/widgets/app_banner_ad.dart';
 import 'package:gold_weight_converter/widgets/app_drawer.dart';
 import 'package:gold_weight_converter/widgets/gold_text_field.dart';
 
@@ -523,6 +524,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                             ],
                           ),
                         ),
+                        const AppBannerAd(),
                       ],
                     ),
                   ),

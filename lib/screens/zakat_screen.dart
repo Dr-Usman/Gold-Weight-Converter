@@ -11,6 +11,7 @@ import 'package:gold_weight_converter/providers/zakat_provider.dart';
 import 'package:gold_weight_converter/services/analytics_service.dart';
 import 'package:gold_weight_converter/services/zakat_calculator.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
+import 'package:gold_weight_converter/widgets/app_banner_ad.dart';
 import 'package:gold_weight_converter/widgets/gold_item_sheet.dart';
 import 'package:gold_weight_converter/widgets/gold_text_field.dart';
 import 'package:gold_weight_converter/widgets/zakat_delete_dialog.dart';
@@ -362,6 +363,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
                       currencyFormat: currencyFormat,
                     ),
                   ),
+                  const AppBannerAd(),
                 ],
               ),
             ),

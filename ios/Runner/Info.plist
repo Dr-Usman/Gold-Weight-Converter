@@ -4,6 +4,9 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<!-- AdMob App ID (production). Debug builds still use sample ad *unit* IDs via AdConfig. -->
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-2544985250210456~3307264116</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

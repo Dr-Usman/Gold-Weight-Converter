@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
 import 'models/app_currency.dart';
+import 'services/ads_service.dart';
 import 'services/analytics_service.dart';
 import 'services/preferences_service.dart';
 
@@ -25,6 +26,7 @@ void main() async {
     themeMode: preferencesService.getThemeMode(),
     preferredCurrency: preferredCurrency,
   );
+  await AdsService.init();
 
   runApp(
     ProviderScope(
