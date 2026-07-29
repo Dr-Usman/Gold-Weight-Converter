@@ -9,6 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.6.0] - 2026-07-29
+
+### Added
+- AdMob inline adaptive banner ads on converter and zakat screens
+  - Test ad units in debug/profile; production units in release
+  - Non-sticky banners inside scroll content via `AppBannerAd`
+- Hosted privacy policy page (`web/privacy-policy.html`) linked from README
+- Local app screenshots in README
+
+### Changed
+- Android toolchain: Gradle 9.1, AGP 9.0.1, Kotlin 2.3.20
+- iOS and macOS: migrate plugin dependencies from CocoaPods to Swift Package Manager
+
+### Fixed
+- Language/currency bottom sheets respect system safe area (home indicator)
+
+### Play Store (en-US)
+```
+What's new in 1.6.0
+• Light ads on the converter and zakat screens help keep the app free
+• Privacy policy is now available on the app website
+• Bottom sheets sit correctly above the home indicator
+• Under-the-hood updates for smoother builds and installs
+```
+
+---
+
 ## [1.5.0] - 2026-07-24
 
 ### Added
