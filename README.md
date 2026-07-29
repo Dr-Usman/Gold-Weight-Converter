@@ -185,6 +185,10 @@ Then paste the Play Store section from [CHANGELOG.md](CHANGELOG.md) into Google 
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for contribution workflow, checks, and pull request guidance.
 
+## Privacy Policy
+
+[Privacy Policy](https://dr-usman.github.io/Gold-Weight-Converter/privacy-policy.html)
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
