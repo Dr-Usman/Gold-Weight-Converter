@@ -73,3 +73,11 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // google_mobile_ads pulls work-runtime 2.7.0, whose consumer ProGuard rules are
+    // insufficient under AGP 9 R8 full mode (strips WorkDatabase_Impl no-arg ctor →
+    // crash in InitializationProvider). Force a version with fixed keep rules.
+    // See: https://github.com/googleads/googleads-mobile-flutter/issues/1444
+    implementation("androidx.work:work-runtime:2.11.2")
+}

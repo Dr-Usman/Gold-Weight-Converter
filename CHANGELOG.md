@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.6.1] - 2026-07-30
+
+### Fixed
+- Android release crash on startup under AGP 9 R8 full mode
+  - Force `androidx.work:work-runtime:2.11.2` (AdMob was pulling 2.7.0)
+  - Keep Room/WorkManager reflective constructors in ProGuard rules
+  - Resolves Play Console “16 KB page size” lab crash (`WorkDatabase` / `InitializationProvider`)
+
+### Play Store (en-US)
+```
+What's new in 1.6.1
+• Stability fix for Android startup crashes reported in Play review
+• Same features as 1.6.0 (ads, privacy policy, safer bottom sheets)
+```
+
+---
+
 ## [1.6.0] - 2026-07-29
 
 ### Added
