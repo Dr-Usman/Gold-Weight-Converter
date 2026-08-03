@@ -98,6 +98,9 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
         UnitEnum.oneGram => 'one_gram',
       },
       hasGoldRate: state.rateValue > 0,
+      totalGrams: double.parse(
+        state.summary.totalGrossGrams.toStringAsFixed(4),
+      ),
     );
     _scrollToSummary();
   }

@@ -45,6 +45,7 @@ class AnalyticsService {
     required List<String> inputUnitsUsed,
     required String rateUnit,
     required bool hasGoldRate,
+    required double totalGrams,
   }) {
     _mixpanel?.track(
       'conversion_completed',
@@ -52,6 +53,7 @@ class AnalyticsService {
         'input_units_used': inputUnitsUsed,
         'rate_unit': rateUnit,
         'is_gold_rate_set': hasGoldRate,
+        'total_grams': totalGrams,
       },
     );
   }
@@ -60,6 +62,7 @@ class AnalyticsService {
     required int itemCount,
     required String rateUnit,
     required bool hasGoldRate,
+    required double totalGrams,
   }) {
     _mixpanel?.track(
       'zakat_calculated',
@@ -67,6 +70,7 @@ class AnalyticsService {
         'item_count': itemCount,
         'rate_unit': rateUnit,
         'is_gold_rate_set': hasGoldRate,
+        'total_grams': totalGrams,
       },
     );
   }

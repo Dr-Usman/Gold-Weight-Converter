@@ -221,6 +221,13 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         if (gram > 0) 'gram',
       ];
       final UnitEnum rateUnit = ref.read(rateUnitProvider);
+      final double totalGrams = WeightConverter.totalGrams(
+        tola: tola,
+        masha: masha,
+        ana: ana,
+        ratti: ratti,
+        gram: gram,
+      );
 
       AnalyticsService.trackConversionCompleted(
         inputUnitsUsed: inputUnitsUsed,
@@ -230,6 +237,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           UnitEnum.oneGram => 'one_gram',
         },
         hasGoldRate: rate > 0,
+        totalGrams: double.parse(totalGrams.toStringAsFixed(4)),
       );
     }
 
