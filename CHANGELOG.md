@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.6.2] - 2026-08-06
+
+### Added
+- More display currencies for high-traffic Play Store regions: Ethiopian Birr (ETB), Thai Baht (THB), Sierra Leonean Leone (SLE), Philippine Peso (PHP), Ghanaian Cedi (GHS), Myanmar Kyat (MMK)
+- Drawer language tile shows the selected native language label (same pattern as currency)
+
+### Changed
+- Supported currencies live in `lib/constants/currencies.dart`; list ordered by Play Store audience volume
+- Supported languages live in `lib/constants/languages.dart` (shared by drawer and language sheet)
+- Language drawer icon uses translate glyph
+- Mixpanel `conversion_completed` and `zakat_calculated` include `total_grams`
+
+### Play Store (en-US)
+```
+What's new in 1.6.2
+• More currencies: Ethiopia, Thailand, Sierra Leone, Philippines, Ghana, and Myanmar
+• Currency list reordered for the regions using the app most
+• Drawer now shows your selected language at a glance
+```
+
+---
+
 ## [1.6.1] - 2026-07-30
 
 ### Fixed
