@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../constants/languages.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/currency_provider.dart';
+import '../providers/locale_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/version_provider.dart';
 import '../screens/zakat_screen.dart';
@@ -161,21 +163,23 @@ class _ThemeDrawerTile extends ConsumerWidget {
   }
 }
 
-class _LanguageDrawerTile extends StatelessWidget {
+class _LanguageDrawerTile extends ConsumerWidget {
   const _LanguageDrawerTile();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final ColorScheme scheme = Theme.of(context).colorScheme;
+    final Locale locale = ref.watch(localeProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Card(
         color: scheme.surfaceContainerHighest,
         child: ListTile(
-          leading: Icon(Icons.language, color: scheme.primary),
+          leading: Icon(Icons.translate, color: scheme.primary),
           title: Text(l10n.settingsLanguageLabel),
+          subtitle: Text(Languages.nativeLabelFor(locale)),
           trailing: const Icon(Icons.arrow_forward_ios, size: 16),
           onTap: () {
             showModalBottomSheet(

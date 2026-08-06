@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../constants/languages.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/locale_provider.dart';
 
@@ -14,22 +15,6 @@ class LanguageBottomSheet extends ConsumerWidget {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final double screenWidth = MediaQuery.sizeOf(context).width;
-
-    // Audience-first: India / South Asia, then MENA, then SE Asia / other.
-    final List<({Locale locale, String nativeLabel})> localeLanguages = [
-      (locale: Locale('en'), nativeLabel: 'English'),
-      (locale: Locale('hi'), nativeLabel: 'हिंदी'),
-      (locale: Locale('bn'), nativeLabel: 'বাংলা'),
-      (locale: Locale('ur'), nativeLabel: 'اردو'),
-      (locale: Locale('ur', 'RO'), nativeLabel: 'Roman Urdu'),
-      (locale: Locale('sd'), nativeLabel: 'سنڌي'),
-      (locale: Locale('ar'), nativeLabel: 'العربية'),
-      (locale: Locale('fa'), nativeLabel: 'فارسی'),
-      (locale: Locale('ps'), nativeLabel: 'پښتو'),
-      (locale: Locale('ms'), nativeLabel: 'Melayu'),
-      (locale: Locale('id'), nativeLabel: 'Indonesia'),
-      (locale: Locale('tr'), nativeLabel: 'Türkçe'),
-    ];
 
     // Color the sheet first, then SafeArea-pad content — otherwise the home
     // indicator inset stays transparent over the modal scrim.
@@ -68,11 +53,8 @@ class LanguageBottomSheet extends ConsumerWidget {
                 spacing: 6.0,
                 runSpacing: 0.0,
                 alignment: WrapAlignment.start,
-                children: localeLanguages.map((language) {
-                  final bool isSelected =
-                      currentLocale.languageCode ==
-                          language.locale.languageCode &&
-                      currentLocale.countryCode == language.locale.countryCode;
+                children: Languages.supported.map((language) {
+                  final bool isSelected = language.matches(currentLocale);
 
                   return ChoiceChip(
                     padding: const EdgeInsets.symmetric(

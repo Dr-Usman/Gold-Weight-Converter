@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../constants/currencies.dart';
+
 /// Display currency for gold price / zakat summaries (no FX conversion).
+///
+/// Supported currencies live in [Currencies.supportedCurrencies]
+/// (`lib/constants/currencies.dart`).
 class AppCurrency {
   const AppCurrency({
     required this.code,
@@ -28,181 +33,11 @@ class AppCurrency {
         symbol.toLowerCase().contains(q);
   }
 
-  static const AppCurrency inr = AppCurrency(
-    code: 'INR',
-    name: 'Indian Rupee',
-    symbol: '₹',
-    locale: 'en_IN',
-  );
+  /// Same catalog as [Currencies.supportedCurrencies] — edit that list to add currencies.
+  static const List<AppCurrency> all = Currencies.supportedCurrencies;
 
-  static const List<AppCurrency> all = [
-    inr,
-    AppCurrency(
-      code: 'PKR',
-      name: 'Pakistani Rupee',
-      symbol: 'Rs. ',
-      locale: 'en_PK',
-    ),
-    AppCurrency(
-      code: 'BDT',
-      name: 'Bangladeshi Taka',
-      symbol: '৳',
-      locale: 'en_BD',
-    ),
-    AppCurrency(
-      code: 'AED',
-      name: 'UAE Dirham',
-      symbol: 'AED ',
-      locale: 'en_AE',
-    ),
-    AppCurrency(
-      code: 'SAR',
-      name: 'Saudi Riyal',
-      symbol: 'SAR ',
-      locale: 'en_SA',
-    ),
-    AppCurrency(code: 'USD', name: 'US Dollar', symbol: '\$', locale: 'en_US'),
-    AppCurrency(code: 'EUR', name: 'Euro', symbol: '€', locale: 'en'),
-    AppCurrency(
-      code: 'GBP',
-      name: 'British Pound',
-      symbol: '£',
-      locale: 'en_GB',
-    ),
-    AppCurrency(
-      code: 'TRY',
-      name: 'Turkish Lira',
-      symbol: '₺',
-      locale: 'tr_TR',
-    ),
-    AppCurrency(
-      code: 'MYR',
-      name: 'Malaysian Ringgit',
-      symbol: 'RM ',
-      locale: 'en_MY',
-    ),
-    AppCurrency(
-      code: 'IDR',
-      name: 'Indonesian Rupiah',
-      symbol: 'Rp ',
-      locale: 'id_ID',
-    ),
-    AppCurrency(
-      code: 'IRR',
-      name: 'Iranian Rial',
-      symbol: '﷼',
-      locale: 'fa_IR',
-    ),
-    AppCurrency(
-      code: 'AFN',
-      name: 'Afghan Afghani',
-      symbol: '؋',
-      locale: 'en_AF',
-    ),
-    AppCurrency(
-      code: 'QAR',
-      name: 'Qatari Riyal',
-      symbol: 'QAR ',
-      locale: 'en_QA',
-    ),
-    AppCurrency(
-      code: 'KWD',
-      name: 'Kuwaiti Dinar',
-      symbol: 'KD ',
-      locale: 'en_KW',
-    ),
-    AppCurrency(
-      code: 'OMR',
-      name: 'Omani Rial',
-      symbol: 'OMR ',
-      locale: 'en_OM',
-    ),
-    AppCurrency(
-      code: 'BHD',
-      name: 'Bahraini Dinar',
-      symbol: 'BD ',
-      locale: 'en_BH',
-    ),
-    AppCurrency(
-      code: 'EGP',
-      name: 'Egyptian Pound',
-      symbol: 'E£',
-      locale: 'en_EG',
-    ),
-    AppCurrency(
-      code: 'LKR',
-      name: 'Sri Lankan Rupee',
-      symbol: 'Rs. ',
-      locale: 'en_LK',
-    ),
-    AppCurrency(
-      code: 'NPR',
-      name: 'Nepalese Rupee',
-      symbol: 'Rs. ',
-      locale: 'en_NP',
-    ),
-    AppCurrency(
-      code: 'CAD',
-      name: 'Canadian Dollar',
-      symbol: 'CA\$',
-      locale: 'en_CA',
-    ),
-    AppCurrency(
-      code: 'AUD',
-      name: 'Australian Dollar',
-      symbol: 'A\$',
-      locale: 'en_AU',
-    ),
-    AppCurrency(
-      code: 'SGD',
-      name: 'Singapore Dollar',
-      symbol: 'S\$',
-      locale: 'en_SG',
-    ),
-    AppCurrency(
-      code: 'HKD',
-      name: 'Hong Kong Dollar',
-      symbol: 'HK\$',
-      locale: 'en_HK',
-    ),
-    AppCurrency(
-      code: 'JPY',
-      name: 'Japanese Yen',
-      symbol: '¥',
-      locale: 'ja_JP',
-    ),
-    AppCurrency(
-      code: 'CNY',
-      name: 'Chinese Yuan',
-      symbol: '¥',
-      locale: 'zh_CN',
-    ),
-    AppCurrency(
-      code: 'CHF',
-      name: 'Swiss Franc',
-      symbol: 'CHF ',
-      locale: 'en_CH',
-    ),
-    AppCurrency(
-      code: 'ZAR',
-      name: 'South African Rand',
-      symbol: 'R ',
-      locale: 'en_ZA',
-    ),
-    AppCurrency(
-      code: 'NGN',
-      name: 'Nigerian Naira',
-      symbol: '₦',
-      locale: 'en_NG',
-    ),
-    AppCurrency(
-      code: 'KES',
-      name: 'Kenyan Shilling',
-      symbol: 'KSh ',
-      locale: 'en_KE',
-    ),
-  ];
-
+  /// Fast lookup: ISO currency code → [AppCurrency] (e.g. `'PKR'` → Pakistani Rupee).
+  /// Indexing with `[]` returns one [AppCurrency?], not the whole map.
   static final Map<String, AppCurrency> _byCode = {
     for (final AppCurrency currency in all) currency.code: currency,
   };
@@ -213,7 +48,7 @@ class AppCurrency {
   }
 
   static AppCurrency fromCode(String? code) {
-    return tryParse(code) ?? inr;
+    return tryParse(code) ?? Currencies.inr;
   }
 
   /// First-launch default from device locale; ultimate fallback is INR.
@@ -228,12 +63,14 @@ class AppCurrency {
     final AppCurrency? byLanguage = _fromLanguageCode(language);
     if (byLanguage != null) return byLanguage;
 
-    return inr;
+    return Currencies.inr;
   }
 
+  /// Maps a device *country* code (ISO 3166, e.g. `'PK'`) to a display currency.
+  /// Uses [_byCode] so country `'PK'` resolves to currency `'PKR'`, etc.
   static AppCurrency? _fromCountryCode(String country) {
     return switch (country) {
-      'IN' => inr,
+      'IN' => Currencies.inr,
       'PK' => _byCode['PKR'],
       'BD' => _byCode['BDT'],
       'AE' => _byCode['AED'],
@@ -262,6 +99,12 @@ class AppCurrency {
       'ZA' => _byCode['ZAR'],
       'NG' => _byCode['NGN'],
       'KE' => _byCode['KES'],
+      'ET' => _byCode['ETB'],
+      'TH' => _byCode['THB'],
+      'SL' => _byCode['SLE'],
+      'PH' => _byCode['PHP'],
+      'GH' => _byCode['GHS'],
+      'MM' => _byCode['MMK'],
       'DE' ||
       'FR' ||
       'IT' ||
@@ -287,7 +130,7 @@ class AppCurrency {
 
   static AppCurrency? _fromLanguageCode(String language) {
     return switch (language) {
-      'hi' => inr,
+      'hi' => Currencies.inr,
       'bn' => _byCode['BDT'],
       'ur' => _byCode['PKR'],
       'sd' => _byCode['PKR'],
@@ -297,6 +140,10 @@ class AppCurrency {
       'tr' => _byCode['TRY'],
       'ms' => _byCode['MYR'],
       'id' => _byCode['IDR'],
+      'th' => _byCode['THB'],
+      'am' => _byCode['ETB'],
+      'fil' || 'tl' => _byCode['PHP'],
+      'my' => _byCode['MMK'],
       _ => null,
     };
   }
