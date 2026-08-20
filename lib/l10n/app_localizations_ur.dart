@@ -24,7 +24,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get tolaInfo => '1 تولہ = 11.66 گرام = 12 ماشہ = 16 آنہ = 96 رتی';
 
   @override
-  String get tolaHint => 'مثال کے طور پر 2.5';
+  String get tolaHint => 'مثلاً 2.5';
 
   @override
   String get tolaSemanticLabel => 'تولہ وزن درج کنے والا فیلڈ';
@@ -36,7 +36,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get mashaInfo => '1 ماشہ = 0.972 گرام = 1.333 آنہ = 8 رتی';
 
   @override
-  String get mashaHint => 'مثال کے طور پر 12.5';
+  String get mashaHint => 'مثلاً 12.5';
 
   @override
   String get mashaSemanticLabel => 'ماشہ وزن درج کنے والا فیلڈ';
@@ -48,7 +48,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get anaInfo => '1 آنہ = 0.72875 گرام = 6 رتی';
 
   @override
-  String get anaHint => 'مثال کے طور پر 16.25';
+  String get anaHint => 'مثلاً 16.25';
 
   @override
   String get anaSemanticLabel => 'آنہ وزن درج کنے والا فیلڈ';
@@ -60,7 +60,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get rattiInfo => '1 رتی = 0.1215 گرام';
 
   @override
-  String get rattiHint => 'مثال کے طور پر 96.75';
+  String get rattiHint => 'مثلاً 96.75';
 
   @override
   String get rattiSemanticLabel => 'رتی وزن درج کنے والا فیلڈ';
@@ -72,7 +72,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get gramInfo => 'براہ راست گرام درج کریں';
 
   @override
-  String get gramHint => 'مثال کے طور پر 11.66';
+  String get gramHint => 'مثلاً 11.66';
 
   @override
   String get gramSemanticLabel => 'گرام وزن درج کنے والا فیلڈ';
@@ -84,7 +84,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get goldRateInfo => 'موجودہ مارکیٹ شرح فی یونٹ';
 
   @override
-  String get goldRateHint => 'مثال کے طور پر 150,000';
+  String get goldRateHint => 'مثلاً 150,000';
 
   @override
   String get goldRateSemanticLabel => 'سونے کی شرح درج کنے والا فیلڈ';
@@ -386,6 +386,32 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => '1 سے 24 کے درمیان قیراط درج کریں';
+
+  @override
+  String get copyResults => 'کاپی';
+
+  @override
+  String get shareResults => 'شیئر';
+
+  @override
+  String get resultsCopied => 'کلپ بورڈ پر کاپی ہو گیا';
+
+  @override
+  String get privacyPolicyLabel => 'رازداری کی پالیسی';
+
+  @override
+  String get rateAppLabel => 'ایپ کو ریٹ کریں';
+
+  @override
+  String get shareAppLabel => 'ایپ شیئر کریں';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'سونے کے وزن کا کنورٹر استعمال کریں: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'لنک نہیں کھل سکا';
 }
 
 /// The translations for Urdu, as used in Romania (`ur_RO`).
@@ -409,7 +435,7 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   String get tolaInfo => '1 Tola = 11.66 gram = 12 Masha = 16 Ana = 96 Ratti';
 
   @override
-  String get tolaHint => 'Misal k tor par 2.5';
+  String get tolaHint => 'maslan 2.5';
 
   @override
   String get tolaSemanticLabel => 'Tola wazan darj karne wala field';
@@ -421,7 +447,7 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   String get mashaInfo => '1 Masha = 0.972 gram = 1.333 Ana = 8 Ratti';
 
   @override
-  String get mashaHint => 'Misal k tor par 12.5';
+  String get mashaHint => 'maslan 12.5';
 
   @override
   String get mashaSemanticLabel => 'Masha wazan darj karne wala field';
@@ -433,7 +459,7 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   String get anaInfo => '1 Ana = 0.72875 gram = 6 Ratti';
 
   @override
-  String get anaHint => 'Misal k tor par 16.25';
+  String get anaHint => 'maslan 16.25';
 
   @override
   String get anaSemanticLabel => 'Ana wazan darj karne wala field';
@@ -445,7 +471,7 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   String get rattiInfo => '1 Ratti = 0.1215 gram';
 
   @override
-  String get rattiHint => 'Misal k tor par 96.75';
+  String get rattiHint => 'maslan 96.75';
 
   @override
   String get rattiSemanticLabel => 'Ratti wazan darj karne wala field';
@@ -457,7 +483,7 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   String get gramInfo => 'Barah-e-rast gram darj karen';
 
   @override
-  String get gramHint => 'Misal k tor par 11.66';
+  String get gramHint => 'maslan 11.66';
 
   @override
   String get gramSemanticLabel => 'Gram wazan darj karne wala field';
@@ -469,7 +495,7 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   String get goldRateInfo => 'Mojoda market sharah fi unit';
 
   @override
-  String get goldRateHint => 'Misal k tor par 150,000';
+  String get goldRateHint => 'maslan 150,000';
 
   @override
   String get goldRateSemanticLabel => 'Sone ki sharah darj karne wala field';
@@ -774,4 +800,30 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
 
   @override
   String get zakatValidationKarat => '1 se 24 ke darmiyān qirāt darj karein';
+
+  @override
+  String get copyResults => 'Copy';
+
+  @override
+  String get shareResults => 'Share';
+
+  @override
+  String get resultsCopied => 'Clipboard par copy ho gaya';
+
+  @override
+  String get privacyPolicyLabel => 'Privacy policy';
+
+  @override
+  String get rateAppLabel => 'App ko rate karein';
+
+  @override
+  String get shareAppLabel => 'App share karein';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'Sone ke wazan ka converter istemal karein: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'Link nahi khul saka';
 }

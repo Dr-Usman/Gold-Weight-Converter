@@ -49,6 +49,18 @@ class _TestPreferencesService extends PreferencesService {
 
   @override
   Future<void> saveZakatRateUnit(UnitEnum unit) async {}
+
+  @override
+  String getConverterRateText() => '';
+
+  @override
+  Future<void> saveConverterRateText(String rateText) async {}
+
+  @override
+  UnitEnum getConverterRateUnit() => UnitEnum.tola;
+
+  @override
+  Future<void> saveConverterRateUnit(UnitEnum unit) async {}
 }
 
 Future<void> pumpConverterApp(WidgetTester tester) async {
@@ -257,4 +269,90 @@ void main() {
     expect(find.textContaining('Helper for gold items only'), findsOneWidget);
     expect(find.text('Add item'), findsOneWidget);
   });
+
+  testWidgets('shows copy and share actions after converting', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await enterField(tester, 0, '1');
+    await tapCalculate(tester);
+
+    expect(find.byTooltip('Copy'), findsOneWidget);
+    expect(find.byTooltip('Share'), findsOneWidget);
+  });
+
+  testWidgets('drawer exposes theme modes and about links', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await tester.tap(find.byTooltip('Open navigation menu'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Light'), findsOneWidget);
+    expect(find.text('Dark'), findsOneWidget);
+    expect(find.text('System'), findsOneWidget);
+    expect(find.text('About'), findsOneWidget);
+    expect(find.text('Privacy policy'), findsOneWidget);
+    expect(find.text('Rate app'), findsOneWidget);
+    expect(find.text('Share app'), findsOneWidget);
+  });
+
+  testWidgets('persists converter gold rate across launches', (
+    WidgetTester tester,
+  ) async {
+    final _MemoryPreferencesService prefs = _MemoryPreferencesService();
+
+    Future<void> pumpWithPrefs() async {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+          child: const MyApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+    }
+
+    await pumpWithPrefs();
+    await enterField(tester, 5, '1166');
+    expect(prefs.converterRateText.replaceAll(',', ''), '1166');
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpAndSettle();
+    await pumpWithPrefs();
+
+    final TextFormField rateField = tester.widget<TextFormField>(fieldAt(5));
+    expect(rateField.controller?.text.replaceAll(',', ''), '1166');
+  });
+}
+
+class _MemoryPreferencesService extends _TestPreferencesService {
+  String converterRateText = '';
+  UnitEnum converterRateUnit = UnitEnum.tola;
+  ThemeMode storedThemeMode = ThemeMode.light;
+
+  @override
+  String getConverterRateText() => converterRateText;
+
+  @override
+  Future<void> saveConverterRateText(String rateText) async {
+    converterRateText = rateText;
+  }
+
+  @override
+  UnitEnum getConverterRateUnit() => converterRateUnit;
+
+  @override
+  Future<void> saveConverterRateUnit(UnitEnum unit) async {
+    converterRateUnit = unit;
+  }
+
+  @override
+  ThemeMode getThemeMode() => storedThemeMode;
+
+  @override
+  Future<void> saveThemeMode(ThemeMode mode) async {
+    storedThemeMode = mode;
+  }
 }

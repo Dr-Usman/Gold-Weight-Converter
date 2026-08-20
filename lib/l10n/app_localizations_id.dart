@@ -24,7 +24,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get tolaInfo => '1 Tola = 11.66 gram = 12 Masha = 16 Ana = 96 Ratti';
 
   @override
-  String get tolaHint => 'Misalnya 2.5';
+  String get tolaHint => 'mis. 2.5';
 
   @override
   String get tolaSemanticLabel => 'Kolom input berat Tola';
@@ -36,7 +36,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get mashaInfo => '1 Masha = 0.972 gram = 1.333 Ana = 8 Ratti';
 
   @override
-  String get mashaHint => 'Misalnya 12.5';
+  String get mashaHint => 'mis. 12.5';
 
   @override
   String get mashaSemanticLabel => 'Kolom input berat Masha';
@@ -48,7 +48,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get anaInfo => '1 Ana = 0.72875 gram = 6 Ratti';
 
   @override
-  String get anaHint => 'Misalnya 16.25';
+  String get anaHint => 'mis. 16.25';
 
   @override
   String get anaSemanticLabel => 'Kolom input berat Ana';
@@ -60,7 +60,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get rattiInfo => '1 Ratti = 0.1215 gram';
 
   @override
-  String get rattiHint => 'Misalnya 96.75';
+  String get rattiHint => 'mis. 96.75';
 
   @override
   String get rattiSemanticLabel => 'Kolom input berat Ratti';
@@ -72,7 +72,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get gramInfo => 'Masukkan gram secara langsung';
 
   @override
-  String get gramHint => 'Misalnya 11.66';
+  String get gramHint => 'mis. 11.66';
 
   @override
   String get gramSemanticLabel => 'Kolom input berat Gram';
@@ -84,7 +84,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get goldRateInfo => 'Harga pasar saat ini per unit';
 
   @override
-  String get goldRateHint => 'Misalnya 150,000';
+  String get goldRateHint => 'mis. 150,000';
 
   @override
   String get goldRateSemanticLabel => 'Kolom input harga emas';
@@ -386,4 +386,30 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => 'Masukkan karat antara 1 dan 24';
+
+  @override
+  String get copyResults => 'Salin';
+
+  @override
+  String get shareResults => 'Bagikan';
+
+  @override
+  String get resultsCopied => 'Disalin ke papan klip';
+
+  @override
+  String get privacyPolicyLabel => 'Kebijakan privasi';
+
+  @override
+  String get rateAppLabel => 'Nilai aplikasi';
+
+  @override
+  String get shareAppLabel => 'Bagikan aplikasi';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'Konversi berat emas dengan Gold Weight Converter: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'Tautan tidak dapat dibuka';
 }

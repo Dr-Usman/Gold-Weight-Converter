@@ -24,7 +24,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tolaInfo => '1 تولة = 11.66 جرام = 12 ماشة = 16 آنة = 96 راتي';
 
   @override
-  String get tolaHint => 'على سبيل المثال 2.5';
+  String get tolaHint => 'مثل 2.5';
 
   @override
   String get tolaSemanticLabel => 'حقل إدخال وزن التولة';
@@ -36,7 +36,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get mashaInfo => '1 ماشة = 0.972 جرام = 1.333 آنة = 8 راتي';
 
   @override
-  String get mashaHint => 'على سبيل المثال 12.5';
+  String get mashaHint => 'مثل 12.5';
 
   @override
   String get mashaSemanticLabel => 'حقل إدخال وزن الماشة';
@@ -48,7 +48,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get anaInfo => '1 آنة = 0.72875 جرام = 6 راتي';
 
   @override
-  String get anaHint => 'على سبيل المثال 16.25';
+  String get anaHint => 'مثل 16.25';
 
   @override
   String get anaSemanticLabel => 'حقل إدخال وزن الآنة';
@@ -60,7 +60,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rattiInfo => '1 راتي = 0.1215 جرام';
 
   @override
-  String get rattiHint => 'على سبيل المثال 96.75';
+  String get rattiHint => 'مثل 96.75';
 
   @override
   String get rattiSemanticLabel => 'حقل إدخال وزن الراتي';
@@ -72,7 +72,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get gramInfo => 'إدخال مباشر بالجرام';
 
   @override
-  String get gramHint => 'على سبيل المثال 11.66';
+  String get gramHint => 'مثل 11.66';
 
   @override
   String get gramSemanticLabel => 'حقل إدخال وزن الجرام';
@@ -84,7 +84,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get goldRateInfo => 'سعر السوق الحالي لكل وحدة';
 
   @override
-  String get goldRateHint => 'على سبيل المثال 150,000';
+  String get goldRateHint => 'مثل 150,000';
 
   @override
   String get goldRateSemanticLabel => 'حقل إدخال سعر الذهب';
@@ -385,4 +385,30 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => 'أدخل عيارًا بين 1 و 24';
+
+  @override
+  String get copyResults => 'نسخ';
+
+  @override
+  String get shareResults => 'مشاركة';
+
+  @override
+  String get resultsCopied => 'تم النسخ إلى الحافظة';
+
+  @override
+  String get privacyPolicyLabel => 'سياسة الخصوصية';
+
+  @override
+  String get rateAppLabel => 'قيّم التطبيق';
+
+  @override
+  String get shareAppLabel => 'شارك التطبيق';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'حوّل أوزان الذهب مع محول وزن الذهب: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'تعذر فتح الرابط';
 }

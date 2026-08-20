@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../constants/app_constants.dart';
 import '../constants/languages.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/currency_provider.dart';
@@ -8,6 +9,8 @@ import '../providers/locale_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/version_provider.dart';
 import '../screens/zakat_screen.dart';
+import '../services/analytics_service.dart';
+import '../services/external_links.dart';
 import 'currency_bottom_sheet.dart';
 import 'language_bottom_sheet.dart';
 
@@ -81,6 +84,8 @@ class AppDrawer extends StatelessWidget {
                     const _LanguageDrawerTile(),
                     const SizedBox(height: 10),
                     const _CurrencyDrawerTile(),
+                    const SizedBox(height: 10),
+                    const _AboutLinksDrawerCard(),
                     const SizedBox(height: 16),
                   ],
                 ),
@@ -134,29 +139,59 @@ class _ThemeDrawerTile extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final ThemeMode themeMode = ref.watch(themeModeProvider);
-    final bool darkModeEnabled =
-        themeMode == ThemeMode.dark ||
-        (themeMode == ThemeMode.system &&
-            Theme.of(context).brightness == Brightness.dark);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Card(
         color: scheme.surfaceContainerHighest,
-        child: SwitchListTile.adaptive(
-          secondary: Icon(
-            darkModeEnabled ? Icons.dark_mode : Icons.light_mode,
-            color: scheme.primary,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.brightness_6_outlined, color: scheme.primary),
+                  const SizedBox(width: 12),
+                  Text(
+                    l10n.settingsThemeLabel,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              SegmentedButton<ThemeMode>(
+                showSelectedIcon: false,
+                style: const ButtonStyle(
+                  visualDensity: VisualDensity.compact,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                segments: [
+                  ButtonSegment(
+                    value: ThemeMode.light,
+                    label: Text(l10n.themeLight),
+                    tooltip: l10n.themeLight,
+                  ),
+                  ButtonSegment(
+                    value: ThemeMode.dark,
+                    label: Text(l10n.themeDark),
+                    tooltip: l10n.themeDark,
+                  ),
+                  ButtonSegment(
+                    value: ThemeMode.system,
+                    label: Text(l10n.themeSystem),
+                    tooltip: l10n.themeSystem,
+                  ),
+                ],
+                selected: {themeMode},
+                onSelectionChanged: (Set<ThemeMode> selected) {
+                  ref
+                      .read(themeModeProvider.notifier)
+                      .setThemeMode(selected.first);
+                },
+              ),
+            ],
           ),
-          title: Text(l10n.darkModeLabel),
-          value: darkModeEnabled,
-          onChanged: (enabled) {
-            ref
-                .read(themeModeProvider.notifier)
-                .setThemeMode(enabled ? ThemeMode.dark : ThemeMode.light);
-          },
-          activeThumbColor: scheme.primary,
-          activeTrackColor: scheme.primaryContainer,
         ),
       ),
     );
@@ -229,6 +264,96 @@ class _CurrencyDrawerTile extends ConsumerWidget {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class _AboutLinksDrawerCard extends ConsumerWidget {
+  const _AboutLinksDrawerCard();
+
+  void _showAbout(BuildContext context, WidgetRef ref) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final String version =
+        ref.read(appVersionProvider).asData?.value ?? l10n.unknownLabel;
+
+    showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(l10n.settingsAboutLabel),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(l10n.aboutDescription),
+              const SizedBox(height: 12),
+              Text('${l10n.aboutVersion} $version'),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(MaterialLocalizations.of(context).okButtonLabel),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Card(
+        color: scheme.surfaceContainerHighest,
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(Icons.info_outline, color: scheme.primary),
+              title: Text(l10n.settingsAboutLabel),
+              onTap: () => _showAbout(context, ref),
+            ),
+            const Divider(height: 1),
+            ListTile(
+              leading: Icon(Icons.privacy_tip_outlined, color: scheme.primary),
+              title: Text(l10n.privacyPolicyLabel),
+              onTap: () {
+                ExternalLinks.openUrl(
+                  context,
+                  AppConstants.privacyPolicyUrl,
+                  onOpened: AnalyticsService.trackPrivacyPolicyOpened,
+                );
+              },
+            ),
+            const Divider(height: 1),
+            ListTile(
+              leading: Icon(Icons.star_outline, color: scheme.primary),
+              title: Text(l10n.rateAppLabel),
+              onTap: () {
+                ExternalLinks.openUrl(
+                  context,
+                  AppConstants.playStoreUrl,
+                  onOpened: AnalyticsService.trackRateAppOpened,
+                );
+              },
+            ),
+            const Divider(height: 1),
+            ListTile(
+              leading: Icon(Icons.share_outlined, color: scheme.primary),
+              title: Text(l10n.shareAppLabel),
+              onTap: () {
+                ExternalLinks.shareApp(
+                  l10n.shareAppMessage(AppConstants.playStoreUrl),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

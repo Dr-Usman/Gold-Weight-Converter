@@ -18,6 +18,8 @@ class PreferencesService {
   static const String _zakatItemsKey = 'zakat_gold_items';
   static const String _zakatRateKey = 'zakat_gold_rate';
   static const String _zakatRateUnitKey = 'zakat_rate_unit';
+  static const String _converterRateKey = 'converter_gold_rate';
+  static const String _converterRateUnitKey = 'converter_rate_unit';
 
   late SharedPreferences _prefs;
 
@@ -131,6 +133,24 @@ class PreferencesService {
 
   Future<void> saveZakatRateUnit(UnitEnum unit) async {
     await _prefs.setString(_zakatRateUnitKey, unit.name);
+  }
+
+  // ============ Converter Methods ============
+
+  String getConverterRateText() {
+    return _prefs.getString(_converterRateKey) ?? '';
+  }
+
+  Future<void> saveConverterRateText(String rateText) async {
+    await _prefs.setString(_converterRateKey, rateText);
+  }
+
+  UnitEnum getConverterRateUnit() {
+    return UnitEnum.fromString(_prefs.getString(_converterRateUnitKey));
+  }
+
+  Future<void> saveConverterRateUnit(UnitEnum unit) async {
+    await _prefs.setString(_converterRateUnitKey, unit.name);
   }
 
   // ============ Helper Methods ============

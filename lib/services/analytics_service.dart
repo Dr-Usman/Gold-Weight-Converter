@@ -107,6 +107,26 @@ class AnalyticsService {
     _mixpanel?.getPeople().set('theme_mode', themeValue);
   }
 
+  static void trackResultsCopied({required String screen}) {
+    _mixpanel?.track('results_copied', properties: {'screen': screen});
+  }
+
+  static void trackResultsShared({required String screen}) {
+    _mixpanel?.track('results_shared', properties: {'screen': screen});
+  }
+
+  static void trackAppShared() {
+    _mixpanel?.track('app_shared');
+  }
+
+  static void trackRateAppOpened() {
+    _mixpanel?.track('rate_app_opened');
+  }
+
+  static void trackPrivacyPolicyOpened() {
+    _mixpanel?.track('privacy_policy_opened');
+  }
+
   static void trackCurrencyChanged({
     required String currency,
     String? previousCurrency,

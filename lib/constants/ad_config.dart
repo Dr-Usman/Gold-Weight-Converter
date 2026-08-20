@@ -31,4 +31,3 @@ class AdConfig {
   /// True when using Google sample ads (debug / profile).
   static bool get isUsingTestAds => !kReleaseMode;
 }
-

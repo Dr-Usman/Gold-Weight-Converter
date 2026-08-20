@@ -24,7 +24,7 @@ class AppLocalizationsSd extends AppLocalizations {
   String get tolaInfo => '1 تولا = 11.66 ڳرام = 12 ماشو = 16 آنو = 96 رتي';
 
   @override
-  String get tolaHint => 'نمونو طور تي 2.5';
+  String get tolaHint => 'مثال طور 2.5';
 
   @override
   String get tolaSemanticLabel => 'تولا جو وزن درج ڪرڻ والو شعبو';
@@ -36,7 +36,7 @@ class AppLocalizationsSd extends AppLocalizations {
   String get mashaInfo => '1 ماشو = 0.972 ڳرام = 1.333 آنو = 8 رتي';
 
   @override
-  String get mashaHint => 'نمونو طور تي 12.5';
+  String get mashaHint => 'مثال طور 12.5';
 
   @override
   String get mashaSemanticLabel => 'ماشو جو وزن درج ڪرڻ والو شعبو';
@@ -48,7 +48,7 @@ class AppLocalizationsSd extends AppLocalizations {
   String get anaInfo => '1 آنو = 0.72875 ڳرام = 6 رتي';
 
   @override
-  String get anaHint => 'نمونو طور تي 16.25';
+  String get anaHint => 'مثال طور 16.25';
 
   @override
   String get anaSemanticLabel => 'آنو جو وزن درج ڪرڻ والو شعبو';
@@ -60,7 +60,7 @@ class AppLocalizationsSd extends AppLocalizations {
   String get rattiInfo => '1 رتي = 0.1215 ڳرام';
 
   @override
-  String get rattiHint => 'نمونو طور تي 96.75';
+  String get rattiHint => 'مثال طور 96.75';
 
   @override
   String get rattiSemanticLabel => 'رتي جو وزن درج ڪرڻ والو شعبو';
@@ -72,7 +72,7 @@ class AppLocalizationsSd extends AppLocalizations {
   String get gramInfo => 'سڌو ڳرام درج ڪريو';
 
   @override
-  String get gramHint => 'نمونو طور تي 11.66';
+  String get gramHint => 'مثال طور 11.66';
 
   @override
   String get gramSemanticLabel => 'ڳرام جو وزن درج ڪرڻ والو شعبو';
@@ -84,7 +84,7 @@ class AppLocalizationsSd extends AppLocalizations {
   String get goldRateInfo => 'موجوده بازار جو ڏيڻو في يونٹ';
 
   @override
-  String get goldRateHint => 'نمونو طور تي 150,000';
+  String get goldRateHint => 'مثال طور 150,000';
 
   @override
   String get goldRateSemanticLabel => 'سونءِ جو ڏيڻو درج ڪرڻ والو شعبو';
@@ -385,4 +385,30 @@ class AppLocalizationsSd extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => '1 ۽ 24 جي وچ ۾ قيراط داخل ڪريو';
+
+  @override
+  String get copyResults => 'ڪاپي';
+
+  @override
+  String get shareResults => 'شيئر';
+
+  @override
+  String get resultsCopied => 'ڪلپ بورڊ تي ڪاپي ٿي ويو';
+
+  @override
+  String get privacyPolicyLabel => 'رازداري پاليسي';
+
+  @override
+  String get rateAppLabel => 'ايپ کي ريٽ ڪريو';
+
+  @override
+  String get shareAppLabel => 'ايپ شيئر ڪريو';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'سوني جي وزن جو ڪنورٽر استعمال ڪريو: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'لنڪ نه کلي سگهيو';
 }

@@ -607,5 +607,43 @@
   "zakatValidationKarat": "Enter a karat between 1 and 24",
   "@zakatValidationKarat": {
     "description": "Validation for custom karat"
+  },
+  "copyResults": "Copy",
+  "@copyResults": {
+    "description": "Tooltip for copying results to the clipboard"
+  },
+  "shareResults": "Share",
+  "@shareResults": {
+    "description": "Tooltip for sharing results"
+  },
+  "resultsCopied": "Copied to clipboard",
+  "@resultsCopied": {
+    "description": "SnackBar shown after results are copied"
+  },
+  "privacyPolicyLabel": "Privacy policy",
+  "@privacyPolicyLabel": {
+    "description": "Drawer item that opens the privacy policy"
+  },
+  "rateAppLabel": "Rate app",
+  "@rateAppLabel": {
+    "description": "Drawer item that opens the Play Store listing"
+  },
+  "shareAppLabel": "Share app",
+  "@shareAppLabel": {
+    "description": "Drawer item that shares a link to the app"
+  },
+  "shareAppMessage": "Convert gold weights with Gold Weight Converter: {url}",
+  "@shareAppMessage": {
+    "description": "Text shared when the user shares the app",
+    "placeholders": {
+      "url": {
+        "type": "String",
+        "example": "https://play.google.com/store/apps/details?id=com.avenzor.gold_weight_converter"
+      }
+    }
+  },
+  "openLinkFailed": "Couldn't open the link",
+  "@openLinkFailed": {
+    "description": "SnackBar when a URL cannot be launched"
   }
 }

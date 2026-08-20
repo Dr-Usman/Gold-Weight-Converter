@@ -22,6 +22,13 @@ void main() {
       expect(total, closeTo(11.66 + 1.944 + 5, 0.0001));
     });
 
+    test('converts grams back to tola', () {
+      expect(
+        WeightConverter.fromGrams(11.66, WeightUnitEnum.tola),
+        closeTo(1, 0.0001),
+      );
+    });
+
     test('converts rate per tola to per gram', () {
       expect(
         WeightConverter.ratePerGram(1166, UnitEnum.tola),

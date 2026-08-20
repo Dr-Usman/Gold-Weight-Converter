@@ -25,7 +25,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get tolaInfo => '1 তোলা = 11.66 গ্রাম = 12 মাশা = 16 আনা = 96 রত্তি';
 
   @override
-  String get tolaHint => 'উদাহরণস্বরূপ 2.5';
+  String get tolaHint => 'যেমন 2.5';
 
   @override
   String get tolaSemanticLabel => 'তোলা ওজন ইনপুট ক্ষেত্র';
@@ -37,7 +37,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get mashaInfo => '1 মাশা = 0.972 গ্রাম = 1.333 আনা = 8 রত্তি';
 
   @override
-  String get mashaHint => 'উদাহরণস্বরূপ 12.5';
+  String get mashaHint => 'যেমন 12.5';
 
   @override
   String get mashaSemanticLabel => 'মাশা ওজন ইনপুট ক্ষেত্র';
@@ -49,7 +49,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get anaInfo => '1 আনা = 0.72875 গ্রাম = 6 রত্তি';
 
   @override
-  String get anaHint => 'উদাহরণস্বরূপ 16.25';
+  String get anaHint => 'যেমন 16.25';
 
   @override
   String get anaSemanticLabel => 'আনা ওজন ইনপুট ক্ষেত্র';
@@ -61,7 +61,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get rattiInfo => '1 রত্তি = 0.1215 গ্রাম';
 
   @override
-  String get rattiHint => 'উদাহরণস্বরূপ 96.75';
+  String get rattiHint => 'যেমন 96.75';
 
   @override
   String get rattiSemanticLabel => 'রত্তি ওজন ইনপুট ক্ষেত্র';
@@ -73,7 +73,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get gramInfo => 'সরাসরি গ্রাম প্রবেশ করুন';
 
   @override
-  String get gramHint => 'উদাহরণস্বরূপ 11.66';
+  String get gramHint => 'যেমন 11.66';
 
   @override
   String get gramSemanticLabel => 'গ্রাম ওজন ইনপুট ক্ষেত্র';
@@ -85,7 +85,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get goldRateInfo => 'বর্তমান বাজার হার প্রতি ইউনিট';
 
   @override
-  String get goldRateHint => 'উদাহরণস্বরূপ 150,000';
+  String get goldRateHint => 'যেমন 150,000';
 
   @override
   String get goldRateSemanticLabel => 'সোনার হার ইনপুট ক্ষেত্র';
@@ -388,4 +388,30 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => '১ থেকে ২৪ এর মধ্যে ক্যারেট লিখুন';
+
+  @override
+  String get copyResults => 'কপি';
+
+  @override
+  String get shareResults => 'শেয়ার';
+
+  @override
+  String get resultsCopied => 'ক্লিপবোর্ডে কপি হয়েছে';
+
+  @override
+  String get privacyPolicyLabel => 'গোপনীয়তা নীতি';
+
+  @override
+  String get rateAppLabel => 'অ্যাপ রেট করুন';
+
+  @override
+  String get shareAppLabel => 'অ্যাপ শেয়ার করুন';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'সোনার ওজন রূপান্তরকারী ব্যবহার করুন: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'লিঙ্ক খোলা যায়নি';
 }
