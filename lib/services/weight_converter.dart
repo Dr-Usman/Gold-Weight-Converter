@@ -27,10 +27,15 @@ class WeightConverter {
         gram;
   }
 
+  /// Converts total grams into [unit].
+  static double fromGrams(double grams, WeightUnitEnum unit) {
+    if (grams <= 0) return 0;
+    return grams / unit.gramsPerUnit;
+  }
+
   /// Converts total grams into tola.
   static double gramsToTola(double grams) {
-    if (grams <= 0) return 0;
-    return grams / AppConstants.tolaToGram;
+    return fromGrams(grams, WeightUnitEnum.tola);
   }
 
   /// Converts a market rate quoted per [rateUnit] into rate per gram.

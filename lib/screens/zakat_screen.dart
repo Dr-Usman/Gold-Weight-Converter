@@ -14,6 +14,7 @@ import 'package:gold_weight_converter/utils/number_helper.dart';
 import 'package:gold_weight_converter/widgets/app_banner_ad.dart';
 import 'package:gold_weight_converter/widgets/gold_item_sheet.dart';
 import 'package:gold_weight_converter/widgets/gold_text_field.dart';
+import 'package:gold_weight_converter/widgets/result_actions.dart';
 import 'package:gold_weight_converter/widgets/zakat_delete_dialog.dart';
 import 'package:intl/intl.dart';
 
@@ -423,6 +424,35 @@ class _SummaryCard extends StatelessWidget {
     required this.currencyFormat,
   });
 
+  String _zakatSummaryShareText({
+    required AppLocalizations l10n,
+    required ZakatSummary summary,
+    required NumberFormat currencyFormat,
+  }) {
+    final StringBuffer buffer = StringBuffer()
+      ..writeln(l10n.zakatSummaryTitle)
+      ..writeln(l10n.zakatTotalPureGold)
+      ..writeln(
+        l10n.zakatPureGoldValue(
+          summary.totalPureGrams.toStringAsFixed(4),
+          summary.totalPureTola.toStringAsFixed(4),
+        ),
+      );
+    if (summary.totalValue != null) {
+      buffer
+        ..writeln(l10n.zakatTotalValue)
+        ..writeln(currencyFormat.format(summary.totalValue));
+    } else {
+      buffer.writeln(l10n.zakatEnterRatePrompt);
+    }
+    if (summary.zakatDue != null) {
+      buffer
+        ..writeln(l10n.zakatDueLabel)
+        ..writeln(currencyFormat.format(summary.zakatDue));
+    }
+    return buffer.toString().trim();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
@@ -451,12 +481,27 @@ class _SummaryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            l10n.zakatSummaryTitle,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-              color: scheme.onSurface,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.zakatSummaryTitle,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: scheme.onSurface,
+                  ),
+                ),
+              ),
+              if (hasItems)
+                ResultActions(
+                  text: _zakatSummaryShareText(
+                    l10n: l10n,
+                    summary: summary,
+                    currencyFormat: currencyFormat,
+                  ),
+                  screen: 'zakat',
+                ),
+            ],
           ),
           const SizedBox(height: 12),
           if (!hasItems)

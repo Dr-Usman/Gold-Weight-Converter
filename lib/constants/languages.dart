@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 
 /// One selectable app language (native label shown in UI).
 class AppLanguageOption {
-  const AppLanguageOption({
-    required this.locale,
-    required this.nativeLabel,
-  });
+  const AppLanguageOption({required this.locale, required this.nativeLabel});
 
   final Locale locale;
   final String nativeLabel;

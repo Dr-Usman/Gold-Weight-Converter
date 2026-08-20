@@ -794,6 +794,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a karat between 1 and 24'**
   String get zakatValidationKarat;
+
+  /// Tooltip for copying results to the clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copyResults;
+
+  /// Tooltip for sharing results
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareResults;
+
+  /// SnackBar shown after results are copied
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get resultsCopied;
+
+  /// Drawer item that opens the privacy policy
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get privacyPolicyLabel;
+
+  /// Drawer item that opens the Play Store listing
+  ///
+  /// In en, this message translates to:
+  /// **'Rate app'**
+  String get rateAppLabel;
+
+  /// Drawer item that shares a link to the app
+  ///
+  /// In en, this message translates to:
+  /// **'Share app'**
+  String get shareAppLabel;
+
+  /// Text shared when the user shares the app
+  ///
+  /// In en, this message translates to:
+  /// **'Convert gold weights with Gold Weight Converter: {url}'**
+  String shareAppMessage(String url);
+
+  /// SnackBar when a URL cannot be launched
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the link'**
+  String get openLinkFailed;
 }
 
 class _AppLocalizationsDelegate

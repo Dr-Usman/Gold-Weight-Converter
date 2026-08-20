@@ -174,131 +174,133 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: scheme.outlineVariant,
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                _isEditing ? l10n.zakatEditItem : l10n.zakatAddItem,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 18),
-              TextField(
-                controller: _nameController,
-                textInputAction: TextInputAction.next,
-                textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(
-                  labelText: l10n.zakatItemNameLabel,
-                  hintText: l10n.zakatItemNameHint,
-                ),
-              ),
-              const SizedBox(height: 14),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: TextField(
-                      controller: _weightController,
-                      keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      inputFormatters: [ThousandsSeparatorInputFormatter()],
-                      decoration: InputDecoration(
-                        labelText: l10n.zakatWeightLabel,
-                        hintText: l10n.zakatWeightHint,
-                        errorText: _weightError,
-                      ),
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: scheme.outlineVariant,
+                      borderRadius: BorderRadius.circular(999),
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    flex: 2,
-                    child: DropdownButtonFormField<WeightUnitEnum>(
-                      key: ValueKey(_unit),
-                      initialValue: _unit,
-                      decoration: InputDecoration(
-                        labelText: l10n.zakatWeightUnitLabel,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _isEditing ? l10n.zakatEditItem : l10n.zakatAddItem,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(height: 18),
+                TextField(
+                  controller: _nameController,
+                  textInputAction: TextInputAction.next,
+                  textCapitalization: TextCapitalization.words,
+                  decoration: InputDecoration(
+                    labelText: l10n.zakatItemNameLabel,
+                    hintText: l10n.zakatItemNameHint,
+                  ),
+                ),
+                const SizedBox(height: 14),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: TextField(
+                        controller: _weightController,
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
+                        inputFormatters: [ThousandsSeparatorInputFormatter()],
+                        decoration: InputDecoration(
+                          labelText: l10n.zakatWeightLabel,
+                          hintText: l10n.zakatWeightHint,
+                          errorText: _weightError,
+                        ),
                       ),
-                      items: WeightUnitEnum.values
-                          .map(
-                            (unit) => DropdownMenuItem(
-                              value: unit,
-                              child: Text(_unitLabel(l10n, unit)),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        if (value == null) return;
-                        setState(() => _unit = value);
-                      },
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      flex: 2,
+                      child: DropdownButtonFormField<WeightUnitEnum>(
+                        key: ValueKey(_unit),
+                        initialValue: _unit,
+                        decoration: InputDecoration(
+                          labelText: l10n.zakatWeightUnitLabel,
+                        ),
+                        items: WeightUnitEnum.values
+                            .map(
+                              (unit) => DropdownMenuItem(
+                                value: unit,
+                                child: Text(_unitLabel(l10n, unit)),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          if (value == null) return;
+                          setState(() => _unit = value);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                DropdownButtonFormField<PurityEnum>(
+                  key: ValueKey(_purity),
+                  initialValue: _purity,
+                  decoration: InputDecoration(labelText: l10n.zakatPurityLabel),
+                  items: PurityEnum.values
+                      .map(
+                        (purity) => DropdownMenuItem(
+                          value: purity,
+                          child: Text(_purityLabel(l10n, purity)),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value == null) return;
+                    setState(() => _purity = value);
+                  },
+                ),
+                if (_purity == PurityEnum.custom) ...[
+                  const SizedBox(height: 14),
+                  TextField(
+                    controller: _karatController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: l10n.zakatCustomKaratLabel,
+                      hintText: l10n.zakatCustomKaratHint,
+                      errorText: _karatError,
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(height: 14),
-              DropdownButtonFormField<PurityEnum>(
-                key: ValueKey(_purity),
-                initialValue: _purity,
-                decoration: InputDecoration(labelText: l10n.zakatPurityLabel),
-                items: PurityEnum.values
-                    .map(
-                      (purity) => DropdownMenuItem(
-                        value: purity,
-                        child: Text(_purityLabel(l10n, purity)),
+                const SizedBox(height: 22),
+                Row(
+                  children: [
+                    if (_isEditing)
+                      TextButton(
+                        onPressed: _delete,
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.red,
+                        ),
+                        child: Text(l10n.zakatDeleteItem),
                       ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  if (value == null) return;
-                  setState(() => _purity = value);
-                },
-              ),
-              if (_purity == PurityEnum.custom) ...[
-                const SizedBox(height: 14),
-                TextField(
-                  controller: _karatController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: l10n.zakatCustomKaratLabel,
-                    hintText: l10n.zakatCustomKaratHint,
-                    errorText: _karatError,
-                  ),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(l10n.zakatCancel),
+                    ),
+                    const SizedBox(width: 8),
+                    FilledButton(
+                      onPressed: _save,
+                      child: Text(l10n.zakatSaveItem),
+                    ),
+                  ],
                 ),
               ],
-              const SizedBox(height: 22),
-              Row(
-                children: [
-                  if (_isEditing)
-                    TextButton(
-                      onPressed: _delete,
-                      style: TextButton.styleFrom(foregroundColor: Colors.red),
-                      child: Text(l10n.zakatDeleteItem),
-                    ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text(l10n.zakatCancel),
-                  ),
-                  const SizedBox(width: 8),
-                  FilledButton(
-                    onPressed: _save,
-                    child: Text(l10n.zakatSaveItem),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
         ),
       ),
     );

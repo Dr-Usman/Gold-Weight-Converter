@@ -87,8 +87,13 @@ These are the Mixpanel events currently tracked in this project. **All new Mixpa
 | `conversion_completed` | User taps Calculate with at least one weight input | `input_units_used`, `rate_unit`, `is_gold_rate_set`, `total_grams` | `lib/screens/converter_screen.dart` → `calculateAll()` |
 | `zakat_calculated` | User taps Calculate zakat with at least one gold item | `item_count`, `rate_unit`, `is_gold_rate_set`, `total_grams` | `lib/screens/zakat_screen.dart` → `_calculateZakat()` |
 | `language_changed` | User picks a different language in settings | `language`, `previous_language` | `lib/providers/locale_provider.dart` |
-| `theme_changed` | User toggles dark/light theme | `theme_mode`, `previous_theme_mode` | `lib/providers/theme_provider.dart` |
+| `theme_changed` | User changes theme (light / dark / system) | `theme_mode`, `previous_theme_mode` | `lib/providers/theme_provider.dart` |
 | `currency_changed` | User picks a different currency in the drawer | `currency`, `previous_currency` | `lib/providers/currency_provider.dart` |
+| `results_copied` | User copies converter or zakat results | `screen` (`converter` or `zakat`) | `lib/widgets/result_actions.dart` |
+| `results_shared` | User shares converter or zakat results (share sheet not dismissed) | `screen` (`converter` or `zakat`) | `lib/services/external_links.dart` |
+| `app_shared` | User shares the app from the drawer (share sheet not dismissed) | (none) | `lib/widgets/app_drawer.dart` |
+| `rate_app_opened` | User opens the Play Store listing from the drawer | (none) | `lib/widgets/app_drawer.dart` |
+| `privacy_policy_opened` | User opens the privacy policy from the drawer | (none) | `lib/widgets/app_drawer.dart` |
 
 ### Mixpanel People properties
 

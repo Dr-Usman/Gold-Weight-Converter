@@ -1,42 +1,20 @@
-import 'package:flutter_riverpod/legacy.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
+import 'package:gold_weight_converter/services/preferences_service.dart';
 
-// ## Simple Single State Provider
-// final rateUnitProvider = StateProvider<String>((ref) => 'Tola'); // OR
-final rateUnitProvider = StateProvider<UnitEnum>((ref) {
-  return UnitEnum.tola;
-});
+final rateUnitProvider = NotifierProvider<RateUnitNotifier, UnitEnum>(
+  RateUnitNotifier.new,
+);
 
-/*
-// ## New NotifierProvider approach
-final rateUnitNotifierProvider = NotifierProvider<RateUnitNotifier, String>(() {
-  return RateUnitNotifier();
-});
-
-class RateUnitNotifier extends Notifier<String> {
-  // Initial Value
+class RateUnitNotifier extends Notifier<UnitEnum> {
   @override
-  String build() {
-    return 'Tola';
+  UnitEnum build() {
+    return ref.read(preferencesServiceProvider).getConverterRateUnit();
   }
 
-  void setRateUnit(String unit) {
+  Future<void> setRateUnit(UnitEnum unit) async {
+    if (state == unit) return;
     state = unit;
+    await ref.read(preferencesServiceProvider).saveConverterRateUnit(unit);
   }
 }
-// ## ------------------------------
-
-// ## Legacy approach with StateNotifierProvider
-final rateUnitStateNotifierProvider =
-    StateNotifierProvider<RateUnitStateNotifier, String>((ref) {
-      return RateUnitStateNotifier();
-    });
-
-class RateUnitStateNotifier extends StateNotifier<String> {
-  RateUnitStateNotifier() : super('Tola');
-
-  void setRateUnit(String unit) {
-    state = unit;
-  }
-}
- */

@@ -24,7 +24,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get tolaInfo => '1 تولہ = 11.66 ګرام = 12 ماشہ = 16 آنہ = 96 رتی';
 
   @override
-  String get tolaHint => 'د بیلګې د لپاره 2.5';
+  String get tolaHint => 'لکه 2.5';
 
   @override
   String get tolaSemanticLabel => 'تولہ وزن دخل کوونکی ځای';
@@ -36,7 +36,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get mashaInfo => '1 ماشہ = 0.972 ګرام = 1.333 آنہ = 8 رتی';
 
   @override
-  String get mashaHint => 'د بیلګې د لپاره 12.5';
+  String get mashaHint => 'لکه 12.5';
 
   @override
   String get mashaSemanticLabel => 'ماشہ وزن دخل کوونکی ځای';
@@ -48,7 +48,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get anaInfo => '1 آنہ = 0.72875 ګرام = 6 رتی';
 
   @override
-  String get anaHint => 'د بیلګې د لپاره 16.25';
+  String get anaHint => 'لکه 16.25';
 
   @override
   String get anaSemanticLabel => 'آنہ وزن دخل کوونکی ځای';
@@ -60,7 +60,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get rattiInfo => '1 رتی = 0.1215 ګرام';
 
   @override
-  String get rattiHint => 'د بیلګې د لپاره 96.75';
+  String get rattiHint => 'لکه 96.75';
 
   @override
   String get rattiSemanticLabel => 'رتی وزن دخل کوونکی ځای';
@@ -72,7 +72,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get gramInfo => 'مستقیم ګرام دخل کړئ';
 
   @override
-  String get gramHint => 'د بیلګې د لپاره 11.66';
+  String get gramHint => 'لکه 11.66';
 
   @override
   String get gramSemanticLabel => 'ګرام وزن دخل کوونکی ځای';
@@ -84,7 +84,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get goldRateInfo => 'اوسنی بازار نرخ فی واحد';
 
   @override
-  String get goldRateHint => 'د بیلګې د لپاره 150,000';
+  String get goldRateHint => 'لکه 150,000';
 
   @override
   String get goldRateSemanticLabel => 'د سونې نرخ دخل کوونکی ځای';
@@ -386,4 +386,30 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => 'د ۱ او ۲۴ ترمنځ عیار ولیکئ';
+
+  @override
+  String get copyResults => 'کاپي';
+
+  @override
+  String get shareResults => 'شریکول';
+
+  @override
+  String get resultsCopied => 'کلیپ بورډ ته کاپي شو';
+
+  @override
+  String get privacyPolicyLabel => 'د محرمیت تګلاره';
+
+  @override
+  String get rateAppLabel => 'اپلیکیشن ته درجه ورکړئ';
+
+  @override
+  String get shareAppLabel => 'اپلیکیشن شریک کړئ';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'د سرو زرو وزن د Gold Weight Converter سره واړوئ: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'لینک پرانیستل نشو';
 }

@@ -3,18 +3,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gold_weight_converter/constants/app_colors.dart';
 import 'package:gold_weight_converter/constants/app_constants.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
+import 'package:gold_weight_converter/constants/weight_unit_enum.dart';
 import 'package:gold_weight_converter/l10n/app_localizations.dart';
 import 'package:gold_weight_converter/providers/currency_provider.dart';
 import 'package:gold_weight_converter/providers/locale_provider.dart';
 import 'package:gold_weight_converter/providers/unit_provider.dart';
 import 'package:gold_weight_converter/providers/weight_provider.dart';
 import 'package:gold_weight_converter/services/analytics_service.dart';
+import 'package:gold_weight_converter/services/preferences_service.dart';
 import 'package:gold_weight_converter/services/weight_converter.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
 
 import 'package:gold_weight_converter/widgets/app_banner_ad.dart';
 import 'package:gold_weight_converter/widgets/app_drawer.dart';
 import 'package:gold_weight_converter/widgets/gold_text_field.dart';
+import 'package:gold_weight_converter/widgets/result_actions.dart';
 
 class GoldConverterScreen extends ConsumerStatefulWidget {
   const GoldConverterScreen({super.key});
@@ -33,10 +36,33 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   final TextEditingController goldRateController = TextEditingController();
   final ScrollController scrollController = ScrollController();
 
-  static const double tolaToGram = AppConstants.tolaToGram;
-  static const double mashaToGram = AppConstants.mashaToGram;
-  static const double anaToGram = AppConstants.anaToGram;
-  static const double rattiToGram = AppConstants.rattiToGram;
+  @override
+  void initState() {
+    super.initState();
+    goldRateController.text = ref
+        .read(preferencesServiceProvider)
+        .getConverterRateText();
+    goldRateController.addListener(_persistGoldRate);
+  }
+
+  @override
+  void dispose() {
+    goldRateController.removeListener(_persistGoldRate);
+    tolaController.dispose();
+    mashaController.dispose();
+    anaController.dispose();
+    rattiController.dispose();
+    gramController.dispose();
+    goldRateController.dispose();
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void _persistGoldRate() {
+    ref
+        .read(preferencesServiceProvider)
+        .saveConverterRateText(goldRateController.text);
+  }
 
   String _localizedRateUnit(AppLocalizations l10n, UnitEnum unit) {
     return switch (unit) {
@@ -93,6 +119,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
 
   // Private method for calculations without Unfocus (used by onChanged)
   void _calculate() {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     final double tola = _getDouble(tolaController);
     final double masha = _getDouble(mashaController);
     final double ana = _getDouble(anaController);
@@ -101,60 +128,100 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
 
     if (tola == 0 && masha == 0 && ana == 0 && ratti == 0 && gram == 0) {
       ref.read(goldResultNotifierProvider.notifier).clearResults();
-
-      // setState(() {
-      //   resultText = '';
-      //   priceText = '';
-      // });
       return;
     }
 
-    double totalGrams = 0;
-    StringBuffer resultBuffer = StringBuffer();
+    final double totalGrams = WeightConverter.totalGrams(
+      tola: tola,
+      masha: masha,
+      ana: ana,
+      ratti: ratti,
+      gram: gram,
+    );
+    final StringBuffer resultBuffer = StringBuffer();
 
     if (tola > 0) {
-      totalGrams += tola * tolaToGram;
       resultBuffer.writeln(
-        'Tola: $tola × $tolaToGram = ${(tola * tolaToGram).toStringAsFixed(4)} grams',
+        l10n.tolaConversion(
+          '$tola',
+          '${AppConstants.tolaToGram}',
+          WeightConverter.toGrams(tola, WeightUnitEnum.tola).toStringAsFixed(4),
+        ),
       );
     }
     if (masha > 0) {
-      totalGrams += masha * mashaToGram;
       resultBuffer.writeln(
-        'Masha: $masha × $mashaToGram = ${(masha * mashaToGram).toStringAsFixed(4)} grams',
+        l10n.mashaConversion(
+          '$masha',
+          '${AppConstants.mashaToGram}',
+          WeightConverter.toGrams(
+            masha,
+            WeightUnitEnum.masha,
+          ).toStringAsFixed(4),
+        ),
       );
     }
     if (ana > 0) {
-      totalGrams += ana * anaToGram;
       resultBuffer.writeln(
-        'Ana: $ana × $anaToGram = ${(ana * anaToGram).toStringAsFixed(4)} grams',
+        l10n.anaConversion(
+          '$ana',
+          '${AppConstants.anaToGram}',
+          WeightConverter.toGrams(ana, WeightUnitEnum.ana).toStringAsFixed(4),
+        ),
       );
     }
     if (ratti > 0) {
-      totalGrams += ratti * rattiToGram;
       resultBuffer.writeln(
-        'Ratti: $ratti × $rattiToGram = ${(ratti * rattiToGram).toStringAsFixed(4)} grams',
+        l10n.rattiConversion(
+          '$ratti',
+          '${AppConstants.rattiToGram}',
+          WeightConverter.toGrams(
+            ratti,
+            WeightUnitEnum.ratti,
+          ).toStringAsFixed(4),
+        ),
       );
     }
     if (gram > 0) {
-      totalGrams += gram;
-      resultBuffer.writeln('Gram: $gram grams');
+      resultBuffer.writeln(l10n.gramConversion('$gram'));
     }
 
     resultBuffer.writeln(
-      '\nTotal Weight: ${totalGrams.toStringAsFixed(4)} grams',
+      '\n${l10n.totalWeight(totalGrams.toStringAsFixed(4))}',
     );
-
-    double tolaResult = totalGrams / tolaToGram;
-    double mashaResult = totalGrams / mashaToGram;
-    double anaResult = totalGrams / anaToGram;
-    double rattiResult = totalGrams / rattiToGram;
-
-    resultBuffer.writeln('\nConverted to:');
-    resultBuffer.writeln('Tola: ${tolaResult.toStringAsFixed(4)}');
-    resultBuffer.writeln('Masha: ${mashaResult.toStringAsFixed(4)}');
-    resultBuffer.writeln('Ana: ${anaResult.toStringAsFixed(4)}');
-    resultBuffer.writeln('Ratti: ${rattiResult.toStringAsFixed(4)}');
+    resultBuffer.writeln('\n${l10n.convertedTo}');
+    resultBuffer.writeln(
+      l10n.tolaResult(
+        WeightConverter.fromGrams(
+          totalGrams,
+          WeightUnitEnum.tola,
+        ).toStringAsFixed(4),
+      ),
+    );
+    resultBuffer.writeln(
+      l10n.mashaResult(
+        WeightConverter.fromGrams(
+          totalGrams,
+          WeightUnitEnum.masha,
+        ).toStringAsFixed(4),
+      ),
+    );
+    resultBuffer.writeln(
+      l10n.anaResult(
+        WeightConverter.fromGrams(
+          totalGrams,
+          WeightUnitEnum.ana,
+        ).toStringAsFixed(4),
+      ),
+    );
+    resultBuffer.writeln(
+      l10n.rattiResult(
+        WeightConverter.fromGrams(
+          totalGrams,
+          WeightUnitEnum.ratti,
+        ).toStringAsFixed(4),
+      ),
+    );
 
     String newResultText = resultBuffer.toString();
     String? newPriceText;
@@ -165,7 +232,6 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       final double gramRate = WeightConverter.ratePerGram(rate, goldRateUnit);
       double price = totalGrams * gramRate;
 
-      final l10n = AppLocalizations.of(context)!;
       final currencyFormat = ref.read(currencyProvider).numberFormat;
       final String priceFormatted = currencyFormat.format(price);
       final String rateFormatted = currencyFormat.format(rate);
@@ -488,9 +554,8 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                                       final UnitEnum newUnit =
                                           UnitEnum.fromString(value);
                                       ref
-                                              .read(rateUnitProvider.notifier)
-                                              .state =
-                                          newUnit;
+                                          .read(rateUnitProvider.notifier)
+                                          .setRateUnit(newUnit);
                                       _calculate();
                                     },
                                   );
@@ -551,7 +616,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         Expanded(
           child: Semantics(
             button: true,
-            label: 'Calculate gold weight conversion',
+            label: AppLocalizations.of(context)!.calculateSemanticLabel,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
@@ -601,7 +666,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         Expanded(
           child: Semantics(
             button: true,
-            label: 'Clear all input fields',
+            label: AppLocalizations.of(context)!.clearAllSemanticLabel,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
@@ -648,6 +713,12 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     );
   }
 
+  String _shareableConverterText(String weightsText) {
+    final String? priceText = ref.read(goldResultNotifierProvider).priceText;
+    if (priceText == null || priceText.isEmpty) return weightsText.trim();
+    return '${weightsText.trim()}\n\n${priceText.trim()}';
+  }
+
   Widget _buildWeightsResultSection(String resultText) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
@@ -691,13 +762,19 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                 size: 24,
               ),
               const SizedBox(width: 8),
-              Text(
-                AppLocalizations.of(context)!.conversionDetails,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: scheme.onSurface,
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context)!.conversionDetails,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: scheme.onSurface,
+                  ),
                 ),
+              ),
+              ResultActions(
+                text: _shareableConverterText(resultText),
+                screen: 'converter',
               ),
             ],
           ),

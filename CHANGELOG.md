@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Copy and share actions on converter and zakat result cards
+- In-app About dialog, privacy policy, Rate app, and Share app links in the drawer
+- Mixpanel events: `results_copied`, `results_shared`, `app_shared`, `rate_app_opened`, `privacy_policy_opened`
+
+### Changed
+- Converter result breakdown uses existing localization strings (no longer hardcoded English)
+- Converter gold rate and rate unit persist across sessions
+- Theme control is Light / Dark / System (system preference is preserved)
+- Converter math uses shared `WeightConverter` helpers
+- Calculate and Clear All semantic labels use localized strings
+- Shortened converter field hints across all locales (e.g. `مثلاً` / `maslan` / `مثل` instead of long “for example” phrases)
+
 ---
 
 ## [1.6.2] - 2026-08-06

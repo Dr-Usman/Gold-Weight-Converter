@@ -24,7 +24,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tolaInfo => '1 Tola = 11.66 gram = 12 Masha = 16 Ana = 96 Ratti';
 
   @override
-  String get tolaHint => 'Örneğin 2.5';
+  String get tolaHint => 'örn. 2.5';
 
   @override
   String get tolaSemanticLabel => 'Tola ağırlık giriş alanı';
@@ -36,7 +36,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get mashaInfo => '1 Masha = 0.972 gram = 1.333 Ana = 8 Ratti';
 
   @override
-  String get mashaHint => 'Örneğin 12.5';
+  String get mashaHint => 'örn. 12.5';
 
   @override
   String get mashaSemanticLabel => 'Masha ağırlık giriş alanı';
@@ -48,7 +48,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get anaInfo => '1 Ana = 0.72875 gram = 6 Ratti';
 
   @override
-  String get anaHint => 'Örneğin 16.25';
+  String get anaHint => 'örn. 16.25';
 
   @override
   String get anaSemanticLabel => 'Ana ağırlık giriş alanı';
@@ -60,7 +60,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get rattiInfo => '1 Ratti = 0.1215 gram';
 
   @override
-  String get rattiHint => 'Örneğin 96.75';
+  String get rattiHint => 'örn. 96.75';
 
   @override
   String get rattiSemanticLabel => 'Ratti ağırlık giriş alanı';
@@ -72,7 +72,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get gramInfo => 'Doğrudan gram girin';
 
   @override
-  String get gramHint => 'Örneğin 11.66';
+  String get gramHint => 'örn. 11.66';
 
   @override
   String get gramSemanticLabel => 'Gram ağırlık giriş alanı';
@@ -84,7 +84,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get goldRateInfo => 'Güncel pazar fiyatı birim başına';
 
   @override
-  String get goldRateHint => 'Örneğin 150,000';
+  String get goldRateHint => 'örn. 150,000';
 
   @override
   String get goldRateSemanticLabel => 'Altın fiyatı giriş alanı';
@@ -386,4 +386,30 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => '1 ile 24 arasında ayar girin';
+
+  @override
+  String get copyResults => 'Kopyala';
+
+  @override
+  String get shareResults => 'Paylaş';
+
+  @override
+  String get resultsCopied => 'Panoya kopyalandı';
+
+  @override
+  String get privacyPolicyLabel => 'Gizlilik politikası';
+
+  @override
+  String get rateAppLabel => 'Uygulamayı puanla';
+
+  @override
+  String get shareAppLabel => 'Uygulamayı paylaş';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'Altın ağırlıklarını Gold Weight Converter ile dönüştürün: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'Bağlantı açılamadı';
 }

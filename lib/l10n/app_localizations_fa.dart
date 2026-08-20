@@ -24,7 +24,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get tolaInfo => '1 تولہ = 11.66 گرم = 12 ماشہ = 16 آنہ = 96 رتی';
 
   @override
-  String get tolaHint => 'برای مثال 2.5';
+  String get tolaHint => 'مثلاً 2.5';
 
   @override
   String get tolaSemanticLabel => 'فیلد ورودی وزن تولہ';
@@ -36,7 +36,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get mashaInfo => '1 ماشہ = 0.972 گرم = 1.333 آنہ = 8 رتی';
 
   @override
-  String get mashaHint => 'برای مثال 12.5';
+  String get mashaHint => 'مثلاً 12.5';
 
   @override
   String get mashaSemanticLabel => 'فیلد ورودی وزن ماشہ';
@@ -48,7 +48,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get anaInfo => '1 آنہ = 0.72875 گرم = 6 رتی';
 
   @override
-  String get anaHint => 'برای مثال 16.25';
+  String get anaHint => 'مثلاً 16.25';
 
   @override
   String get anaSemanticLabel => 'فیلد ورودی وزن آنہ';
@@ -60,7 +60,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get rattiInfo => '1 رتی = 0.1215 گرم';
 
   @override
-  String get rattiHint => 'برای مثال 96.75';
+  String get rattiHint => 'مثلاً 96.75';
 
   @override
   String get rattiSemanticLabel => 'فیلد ورودی وزن رتی';
@@ -72,7 +72,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get gramInfo => 'گرم مستقیم وارد کنید';
 
   @override
-  String get gramHint => 'برای مثال 11.66';
+  String get gramHint => 'مثلاً 11.66';
 
   @override
   String get gramSemanticLabel => 'فیلد ورودی وزن گرم';
@@ -84,7 +84,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get goldRateInfo => 'نرخ بازار فعلی در هر واحد';
 
   @override
-  String get goldRateHint => 'برای مثال 150,000';
+  String get goldRateHint => 'مثلاً 150,000';
 
   @override
   String get goldRateSemanticLabel => 'فیلد ورودی نرخ طلا';
@@ -386,4 +386,30 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => 'عیاری بین ۱ و ۲۴ وارد کنید';
+
+  @override
+  String get copyResults => 'کپی';
+
+  @override
+  String get shareResults => 'اشتراک‌گذاری';
+
+  @override
+  String get resultsCopied => 'در کلیپ‌بورد کپی شد';
+
+  @override
+  String get privacyPolicyLabel => 'سیاست حفظ حریم خصوصی';
+
+  @override
+  String get rateAppLabel => 'امتیاز به برنامه';
+
+  @override
+  String get shareAppLabel => 'اشتراک برنامه';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'وزن طلا را با مبدل وزن طلا تبدیل کنید: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'پیوند باز نشد';
 }

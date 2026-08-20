@@ -386,4 +386,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => 'Enter a karat between 1 and 24';
+
+  @override
+  String get copyResults => 'Copy';
+
+  @override
+  String get shareResults => 'Share';
+
+  @override
+  String get resultsCopied => 'Copied to clipboard';
+
+  @override
+  String get privacyPolicyLabel => 'Privacy policy';
+
+  @override
+  String get rateAppLabel => 'Rate app';
+
+  @override
+  String get shareAppLabel => 'Share app';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'Convert gold weights with Gold Weight Converter: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'Couldn\'t open the link';
 }

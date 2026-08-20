@@ -24,7 +24,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get tolaInfo => '1 तोला = 11.66 ग्राम = 12 माशा = 16 आना = 96 रत्ती';
 
   @override
-  String get tolaHint => 'उदाहरण के लिए 2.5';
+  String get tolaHint => 'जैसे 2.5';
 
   @override
   String get tolaSemanticLabel => 'तोला वजन इनपुट फील्ड';
@@ -36,7 +36,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get mashaInfo => '1 माशा = 0.972 ग्राम = 1.333 आना = 8 रत्ती';
 
   @override
-  String get mashaHint => 'उदाहरण के लिए 12.5';
+  String get mashaHint => 'जैसे 12.5';
 
   @override
   String get mashaSemanticLabel => 'माशा वजन इनपुट फील्ड';
@@ -48,7 +48,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get anaInfo => '1 आना = 0.72875 ग्राम = 6 रत्ती';
 
   @override
-  String get anaHint => 'उदाहरण के लिए 16.25';
+  String get anaHint => 'जैसे 16.25';
 
   @override
   String get anaSemanticLabel => 'आना वजन इनपुट फील्ड';
@@ -60,7 +60,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get rattiInfo => '1 रत्ती = 0.1215 ग्राम';
 
   @override
-  String get rattiHint => 'उदाहरण के लिए 96.75';
+  String get rattiHint => 'जैसे 96.75';
 
   @override
   String get rattiSemanticLabel => 'रत्ती वजन इनपुट फील्ड';
@@ -72,7 +72,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get gramInfo => 'सीधे ग्राम दर्ज करें';
 
   @override
-  String get gramHint => 'उदाहरण के लिए 11.66';
+  String get gramHint => 'जैसे 11.66';
 
   @override
   String get gramSemanticLabel => 'ग्राम वजन इनपुट फील्ड';
@@ -84,7 +84,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get goldRateInfo => 'वर्तमान बाजार दर प्रति इकाई';
 
   @override
-  String get goldRateHint => 'उदाहरण के लिए 150,000';
+  String get goldRateHint => 'जैसे 150,000';
 
   @override
   String get goldRateSemanticLabel => 'सोने की दर इनपुट फील्ड';
@@ -386,4 +386,30 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get zakatValidationKarat => '1 से 24 के बीच कैरेट दर्ज करें';
+
+  @override
+  String get copyResults => 'कॉपी';
+
+  @override
+  String get shareResults => 'शेयर';
+
+  @override
+  String get resultsCopied => 'क्लिपबोर्ड पर कॉपी हो गया';
+
+  @override
+  String get privacyPolicyLabel => 'गोपनीयता नीति';
+
+  @override
+  String get rateAppLabel => 'ऐप को रेट करें';
+
+  @override
+  String get shareAppLabel => 'ऐप शेयर करें';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'सोने के वजन का कनवर्टर आज़माएँ: $url';
+  }
+
+  @override
+  String get openLinkFailed => 'लिंक नहीं खुल सका';
 }
