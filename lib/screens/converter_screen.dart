@@ -28,6 +28,16 @@ class GoldConverterScreen extends ConsumerStatefulWidget {
 }
 
 class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
+  /// Prefills sample weights/rate and runs Calculate (README screenshots).
+  ///
+  /// ```bash
+  /// flutter run --dart-define=HIDE_ADS=true --dart-define=SCREENSHOT_DEMO=true
+  /// ```
+  static const bool _screenshotDemo = bool.fromEnvironment(
+    'SCREENSHOT_DEMO',
+    defaultValue: false,
+  );
+
   final TextEditingController tolaController = TextEditingController();
   final TextEditingController mashaController = TextEditingController();
   final TextEditingController anaController = TextEditingController();
@@ -39,10 +49,24 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   @override
   void initState() {
     super.initState();
-    goldRateController.text = ref
-        .read(preferencesServiceProvider)
-        .getConverterRateText();
+    if (_screenshotDemo) {
+      tolaController.text = '1.5';
+      mashaController.text = '4';
+      anaController.text = '7';
+      rattiController.text = '18';
+      goldRateController.text = '150,000';
+    } else {
+      goldRateController.text = ref
+          .read(preferencesServiceProvider)
+          .getConverterRateText();
+    }
     goldRateController.addListener(_persistGoldRate);
+    if (_screenshotDemo) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        calculateAll();
+      });
+    }
   }
 
   @override

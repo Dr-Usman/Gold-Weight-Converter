@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+---
+
+## [1.7.0] - 2026-08-21
+
 ### Added
 - Copy and share actions on converter and zakat result cards
 - In-app About dialog, privacy policy, Rate app, and Share app links in the drawer
 - Mixpanel events: `results_copied`, `results_shared`, `app_shared`, `rate_app_opened`, `privacy_policy_opened`
+- Optional `--dart-define=HIDE_ADS=true` to disable banner ads (screenshots / quiet debug)
+- Optional `--dart-define=SCREENSHOT_DEMO=true` to prefill converter demo values for screenshots
 
 ### Changed
 - Converter result breakdown uses existing localization strings (no longer hardcoded English)
@@ -19,6 +25,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Converter math uses shared `WeightConverter` helpers
 - Calculate and Clear All semantic labels use localized strings
 - Shortened converter field hints across all locales (e.g. `مثلاً` / `maslan` / `مثل` instead of long “for example” phrases)
+- README screenshots updated for copy/share, theme modes, about links, and ad-free captures
+
+### Play Store (en-US)
+```
+What's new in 1.7.0
+• Copy or share your converter and zakat results
+• Gold rate and unit remembered for next time
+• Choose Light, Dark, or match your system theme
+• About, privacy policy, Rate app, and Share app in the menu
+• Clearer localized conversion details and shorter field hints
+```
 
 ---
 

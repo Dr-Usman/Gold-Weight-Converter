@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:gold_weight_converter/constants/ad_config.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Initializes Google Mobile Ads on supported platforms only.
@@ -6,6 +7,7 @@ class AdsService {
   AdsService._();
 
   static bool get isSupported {
+    if (!AdConfig.adsEnabled) return false;
     if (kIsWeb) return false;
     return defaultTargetPlatform == TargetPlatform.android ||
         defaultTargetPlatform == TargetPlatform.iOS;

@@ -24,7 +24,9 @@ class _AppBannerAdState extends State<AppBannerAd> {
   }
 
   Future<void> _loadAd() async {
-    if (!AdsService.isSupported || _loadStarted) return;
+    if (!AdConfig.adsEnabled || !AdsService.isSupported || _loadStarted) {
+      return;
+    }
     _loadStarted = true;
 
     final int width = MediaQuery.sizeOf(context).width.truncate();
@@ -82,6 +84,10 @@ class _AppBannerAdState extends State<AppBannerAd> {
 
   @override
   Widget build(BuildContext context) {
+    if (!AdConfig.adsEnabled) {
+      return const SizedBox.shrink();
+    }
+
     final BannerAd? banner = _bannerAd;
     if (!_isLoaded || banner == null) {
       return const SizedBox.shrink();

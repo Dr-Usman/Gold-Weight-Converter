@@ -8,10 +8,13 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 
 - Convert weights between Tola, Masha, Ana, Ratti, and Gram
 - Calculate gold price by rate per Tola, per 10 Gram, or per 1 Gram
+- Localized conversion breakdown with copy and share actions
+- Converter gold rate and rate unit remembered across sessions
 - Gold zakat calculator (drawer → Gold Zakat)
   - Add items with weight, unit, and purity (24K / 22K / 21K / 18K / custom karat)
   - Shared 24K market rate; applies 2.5% on listed items (no nisab gate)
   - Pure-gold grams, estimated value, and zakat due summary
+  - Copy and share zakat summary
   - Items and rate persisted across sessions
 - Searchable display currency preference in the drawer (locale-aware default; formatting only, no FX conversion)
 - Show conversion and pricing breakdown with readable formulas
@@ -20,18 +23,7 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 - Smart numeric input formatting with thousands separators
 - Clear-all reset for all fields and computed results
 - Accessibility labels for key input fields
-
-## Screenshots
-
-| Converter | Results & price |
-| --- | --- |
-| <img width="300" alt="Convert Tola, Masha, Ana, Ratti and Gram" src="docs/screenshots/01-converter-light.png" /> | <img width="300" alt="Conversion details and gold price summary" src="docs/screenshots/02-results-and-price.png" /> |
-| **Gold zakat** | **Currency** |
-| <img width="300" alt="Gold zakat calculator with item purity and 2.5% summary" src="docs/screenshots/03-gold-zakat.png" /> | <img width="300" alt="Searchable display currency picker" src="docs/screenshots/04-currency.png" /> |
-| **Languages** | **Dark mode** |
-| <img width="300" alt="Language selection with 12 supported locales" src="docs/screenshots/05-languages.png" /> | <img width="300" alt="Converter screen in dark mode" src="docs/screenshots/06-dark-mode.png" /> |
-| **Menu & settings** | |
-| <img width="300" alt="App drawer with zakat, theme, language and currency" src="docs/screenshots/07-menu-settings.png" /> | |
+- In-drawer About, Privacy policy, Rate app, and Share app links
 
 ## Download
 
@@ -43,6 +35,18 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 <a href="https://play.google.com/store/apps/details?id=com.avenzor.gold_weight_converter">
   <img src="https://github.com/user-attachments/assets/2038fc47-dd6c-488c-b423-598723600d6e" width="250" alt="Download from Google Play" />
 </a>
+
+## Screenshots
+
+| Converter | Results & price |
+| --- | --- |
+| <img width="300" alt="Convert Tola, Masha, Ana, Ratti and Gram" src="docs/screenshots/01-converter-light.png" /> | <img width="300" alt="Conversion details with copy/share and gold price summary" src="docs/screenshots/02-results-and-price.png" /> |
+| **Gold zakat** | **Currency** |
+| <img width="300" alt="Gold zakat calculator with item purity, 2.5% summary, and copy/share" src="docs/screenshots/03-gold-zakat.png" /> | <img width="300" alt="Searchable display currency picker" src="docs/screenshots/04-currency.png" /> |
+| **Languages** | **Dark mode** |
+| <img width="300" alt="Language selection with 12 supported locales" src="docs/screenshots/05-languages.png" /> | <img width="300" alt="Converter screen in dark mode" src="docs/screenshots/06-dark-mode.png" /> |
+| **Menu & settings** | |
+| <img width="300" alt="App drawer with zakat, Light/Dark/System theme, language, currency, and about links" src="docs/screenshots/07-menu-settings.png" /> | |
 
 ## Conversion Table
 
@@ -143,6 +147,19 @@ flutter build appbundle
 flutter build web --release --base-href "/Gold-Weight-Converter/"
 ```
 
+Hide banner ads (README / store screenshots, or a quieter debug run):
+
+```bash
+flutter run --dart-define=HIDE_ADS=true
+flutter build apk --debug --dart-define=HIDE_ADS=true
+```
+
+Prefill converter demo values and auto-calculate (pair with `HIDE_ADS` for README shots):
+
+```bash
+flutter run --dart-define=HIDE_ADS=true --dart-define=SCREENSHOT_DEMO=true
+```
+
 ## Architecture At A Glance
 
 - App bootstrap in `lib/main.dart` initializes PreferencesService and injects it via Riverpod `ProviderScope` override; `lib/app.dart` hosts `MaterialApp`.
@@ -171,7 +188,7 @@ flutter build web --release --base-href "/Gold-Weight-Converter/"
 Example release flow:
 
 ```bash
-# 1. Bump pubspec.yaml version (e.g. 1.6.1+7)
+# 1. Bump pubspec.yaml version (e.g. 1.7.0+9)
 # 2. Update CHANGELOG.md (developer notes + ### Play Store section)
 git add pubspec.yaml CHANGELOG.md
 git commit -m "release: vX.Y.Z+N"
