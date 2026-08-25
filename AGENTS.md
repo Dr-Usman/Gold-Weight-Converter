@@ -94,6 +94,8 @@ These are the Mixpanel events currently tracked in this project. **All new Mixpa
 | `app_shared` | User shares the app from the drawer (share sheet not dismissed) | (none) | `lib/widgets/app_drawer.dart` |
 | `rate_app_opened` | User opens the Play Store listing from the drawer | (none) | `lib/widgets/app_drawer.dart` |
 | `privacy_policy_opened` | User opens the privacy policy from the drawer | (none) | `lib/widgets/app_drawer.dart` |
+| `app_update_prompted` | Play flexible in-app update download starts (Android + Play installs) | (none) | `lib/services/app_update_service.dart` |
+| `app_update_completed` | User taps Restart to apply a downloaded Play flexible update | (none) | `lib/services/app_update_service.dart` |
 
 ### Mixpanel People properties
 

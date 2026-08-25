@@ -120,5 +120,7 @@
     "rateAppLabel": "Nilai aplikasi",
     "shareAppLabel": "Kongsi aplikasi",
     "shareAppMessage": "Tukar berat emas dengan Gold Weight Converter: {url}",
-    "openLinkFailed": "Pautan tidak dapat dibuka"
+    "openLinkFailed": "Pautan tidak dapat dibuka",
+    "appUpdateReady": "Kemas kini dimuat turun. Mulakan semula untuk pasang.",
+    "appUpdateRestart": "Mulakan semula"
 }

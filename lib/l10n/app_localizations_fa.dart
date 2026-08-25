@@ -412,4 +412,11 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'پیوند باز نشد';
+
+  @override
+  String get appUpdateReady =>
+      'به‌روزرسانی دانلود شد. برای نصب، برنامه را دوباره راه‌اندازی کنید.';
+
+  @override
+  String get appUpdateRestart => 'راه‌اندازی مجدد';
 }

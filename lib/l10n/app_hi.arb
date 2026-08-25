@@ -120,5 +120,7 @@
     "rateAppLabel": "ऐप को रेट करें",
     "shareAppLabel": "ऐप शेयर करें",
     "shareAppMessage": "सोने के वजन का कनवर्टर आज़माएँ: {url}",
-    "openLinkFailed": "लिंक नहीं खुल सका"
+    "openLinkFailed": "लिंक नहीं खुल सका",
+    "appUpdateReady": "अपडेट डाउनलोड हो गया। इंस्टॉल करने के लिए रीस्टार्ट करें।",
+    "appUpdateRestart": "रीस्टार्ट"
 }

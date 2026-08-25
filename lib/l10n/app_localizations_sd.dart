@@ -411,4 +411,11 @@ class AppLocalizationsSd extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'لنڪ نه کلي سگهيو';
+
+  @override
+  String get appUpdateReady =>
+      'اپڊيٽ ڊائون لوڊ ٿي وئي. انسٽال لاءِ ٻيهر شروع ڪريو.';
+
+  @override
+  String get appUpdateRestart => 'ٻيهر شروع ڪريو';
 }

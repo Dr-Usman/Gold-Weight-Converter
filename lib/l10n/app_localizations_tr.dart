@@ -412,4 +412,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'Bağlantı açılamadı';
+
+  @override
+  String get appUpdateReady =>
+      'Güncelleme indirildi. Yüklemek için yeniden başlatın.';
+
+  @override
+  String get appUpdateRestart => 'Yeniden başlat';
 }

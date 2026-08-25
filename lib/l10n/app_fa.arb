@@ -120,5 +120,7 @@
     "rateAppLabel": "امتیاز به برنامه",
     "shareAppLabel": "اشتراک برنامه",
     "shareAppMessage": "وزن طلا را با مبدل وزن طلا تبدیل کنید: {url}",
-    "openLinkFailed": "پیوند باز نشد"
+    "openLinkFailed": "پیوند باز نشد",
+    "appUpdateReady": "به‌روزرسانی دانلود شد. برای نصب، برنامه را دوباره راه‌اندازی کنید.",
+    "appUpdateRestart": "راه‌اندازی مجدد"
 }

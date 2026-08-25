@@ -842,6 +842,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t open the link'**
   String get openLinkFailed;
+
+  /// SnackBar when a Play flexible update has finished downloading
+  ///
+  /// In en, this message translates to:
+  /// **'Update downloaded. Restart to install.'**
+  String get appUpdateReady;
+
+  /// SnackBar action that applies a downloaded Play update
+  ///
+  /// In en, this message translates to:
+  /// **'Restart'**
+  String get appUpdateRestart;
 }
 
 class _AppLocalizationsDelegate

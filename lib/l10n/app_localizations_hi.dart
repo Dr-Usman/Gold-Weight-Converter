@@ -412,4 +412,11 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'लिंक नहीं खुल सका';
+
+  @override
+  String get appUpdateReady =>
+      'अपडेट डाउनलोड हो गया। इंस्टॉल करने के लिए रीस्टार्ट करें।';
+
+  @override
+  String get appUpdateRestart => 'रीस्टार्ट';
 }

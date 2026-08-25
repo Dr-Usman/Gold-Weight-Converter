@@ -127,6 +127,14 @@ class AnalyticsService {
     _mixpanel?.track('privacy_policy_opened');
   }
 
+  static void trackAppUpdatePrompted() {
+    _mixpanel?.track('app_update_prompted');
+  }
+
+  static void trackAppUpdateCompleted() {
+    _mixpanel?.track('app_update_completed');
+  }
+
   static void trackCurrencyChanged({
     required String currency,
     String? previousCurrency,

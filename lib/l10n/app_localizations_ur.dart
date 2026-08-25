@@ -412,6 +412,13 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'لنک نہیں کھل سکا';
+
+  @override
+  String get appUpdateReady =>
+      'اپڈیٹ ڈاؤن لوڈ ہو گئی۔ انسٹال کے لیے دوبارہ شروع کریں۔';
+
+  @override
+  String get appUpdateRestart => 'دوبارہ شروع کریں';
 }
 
 /// The translations for Urdu, as used in Romania (`ur_RO`).
@@ -826,4 +833,11 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
 
   @override
   String get openLinkFailed => 'Link nahi khul saka';
+
+  @override
+  String get appUpdateReady =>
+      'Update download ho gaya. Install ke liye restart karein.';
+
+  @override
+  String get appUpdateRestart => 'Restart';
 }

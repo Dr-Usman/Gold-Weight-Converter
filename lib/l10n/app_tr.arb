@@ -120,5 +120,7 @@
     "rateAppLabel": "Uygulamayı puanla",
     "shareAppLabel": "Uygulamayı paylaş",
     "shareAppMessage": "Altın ağırlıklarını Gold Weight Converter ile dönüştürün: {url}",
-    "openLinkFailed": "Bağlantı açılamadı"
+    "openLinkFailed": "Bağlantı açılamadı",
+    "appUpdateReady": "Güncelleme indirildi. Yüklemek için yeniden başlatın.",
+    "appUpdateRestart": "Yeniden başlat"
 }

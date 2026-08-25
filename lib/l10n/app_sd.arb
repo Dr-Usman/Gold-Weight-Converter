@@ -120,5 +120,7 @@
     "rateAppLabel": "ايپ کي ريٽ ڪريو",
     "shareAppLabel": "ايپ شيئر ڪريو",
     "shareAppMessage": "سوني جي وزن جو ڪنورٽر استعمال ڪريو: {url}",
-    "openLinkFailed": "لنڪ نه کلي سگهيو"
+    "openLinkFailed": "لنڪ نه کلي سگهيو",
+    "appUpdateReady": "اپڊيٽ ڊائون لوڊ ٿي وئي. انسٽال لاءِ ٻيهر شروع ڪريو.",
+    "appUpdateRestart": "ٻيهر شروع ڪريو"
 }

@@ -412,4 +412,11 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'Pautan tidak dapat dibuka';
+
+  @override
+  String get appUpdateReady =>
+      'Kemas kini dimuat turun. Mulakan semula untuk pasang.';
+
+  @override
+  String get appUpdateRestart => 'Mulakan semula';
 }

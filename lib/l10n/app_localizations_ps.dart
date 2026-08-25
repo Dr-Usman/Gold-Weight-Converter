@@ -412,4 +412,10 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'لینک پرانیستل نشو';
+
+  @override
+  String get appUpdateReady => 'تازه کول ډاونلوډ شول. د نصب لپاره بیا پیل کړئ.';
+
+  @override
+  String get appUpdateRestart => 'بیا پیل';
 }

@@ -414,4 +414,11 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'লিঙ্ক খোলা যায়নি';
+
+  @override
+  String get appUpdateReady =>
+      'আপডেট ডাউনলোড হয়েছে। ইনস্টল করতে রিস্টার্ট করুন।';
+
+  @override
+  String get appUpdateRestart => 'রিস্টার্ট';
 }

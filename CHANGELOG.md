@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.7.2] - 2026-08-25
+
+### Added
+- Google Play flexible in-app updates on Android (Play Store installs only)
+- Restart snackbar when a flexible update finishes downloading (localized)
+- Mixpanel events: `app_update_prompted`, `app_update_completed`
+
+### Play Store (en-US)
+```
+What's new in 1.7.2
+• App can download updates from Play in the background
+• Tap Restart when prompted to install the update
+• No need to open the Play Store listing for routine updates
+```
+
+---
+
 ## [1.7.0] - 2026-08-21
 
 ### Added

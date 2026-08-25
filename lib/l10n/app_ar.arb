@@ -120,5 +120,7 @@
     "rateAppLabel": "قيّم التطبيق",
     "shareAppLabel": "شارك التطبيق",
     "shareAppMessage": "حوّل أوزان الذهب مع محول وزن الذهب: {url}",
-    "openLinkFailed": "تعذر فتح الرابط"
+    "openLinkFailed": "تعذر فتح الرابط",
+    "appUpdateReady": "تم تنزيل التحديث. أعد التشغيل للتثبيت.",
+    "appUpdateRestart": "إعادة التشغيل"
 }

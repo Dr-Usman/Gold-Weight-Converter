@@ -120,5 +120,7 @@
     "rateAppLabel": "ایپ کو ریٹ کریں",
     "shareAppLabel": "ایپ شیئر کریں",
     "shareAppMessage": "سونے کے وزن کا کنورٹر استعمال کریں: {url}",
-    "openLinkFailed": "لنک نہیں کھل سکا"
+    "openLinkFailed": "لنک نہیں کھل سکا",
+    "appUpdateReady": "اپڈیٹ ڈاؤن لوڈ ہو گئی۔ انسٹال کے لیے دوبارہ شروع کریں۔",
+    "appUpdateRestart": "دوبارہ شروع کریں"
 }

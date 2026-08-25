@@ -120,5 +120,7 @@
     "rateAppLabel": "অ্যাপ রেট করুন",
     "shareAppLabel": "অ্যাপ শেয়ার করুন",
     "shareAppMessage": "সোনার ওজন রূপান্তরকারী ব্যবহার করুন: {url}",
-    "openLinkFailed": "লিঙ্ক খোলা যায়নি"
+    "openLinkFailed": "লিঙ্ক খোলা যায়নি",
+    "appUpdateReady": "আপডেট ডাউনলোড হয়েছে। ইনস্টল করতে রিস্টার্ট করুন।",
+    "appUpdateRestart": "রিস্টার্ট"
 }

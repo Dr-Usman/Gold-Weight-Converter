@@ -7,6 +7,7 @@ import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
 import 'screens/converter_screen.dart';
 import 'theme/app_theme.dart';
+import 'widgets/app_update_listener.dart';
 
 /// Root [MaterialApp] — themes, locale, and home screen.
 class GoldWeightConverterApp extends ConsumerWidget {
@@ -47,7 +48,9 @@ class GoldWeightConverterApp extends ConsumerWidget {
 
         return Directionality(
           textDirection: direction,
-          child: child ?? const SizedBox.shrink(),
+          child: AppUpdateListener(
+            child: child ?? const SizedBox.shrink(),
+          ),
         );
       },
       home: const GoldConverterScreen(),

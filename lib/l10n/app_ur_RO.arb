@@ -120,5 +120,7 @@
     "rateAppLabel": "App ko rate karein",
     "shareAppLabel": "App share karein",
     "shareAppMessage": "Sone ke wazan ka converter istemal karein: {url}",
-    "openLinkFailed": "Link nahi khul saka"
+    "openLinkFailed": "Link nahi khul saka",
+    "appUpdateReady": "Update download ho gaya. Install ke liye restart karein.",
+    "appUpdateRestart": "Restart"
 }

@@ -645,5 +645,13 @@
   "openLinkFailed": "Couldn't open the link",
   "@openLinkFailed": {
     "description": "SnackBar when a URL cannot be launched"
+  },
+  "appUpdateReady": "Update downloaded. Restart to install.",
+  "@appUpdateReady": {
+    "description": "SnackBar when a Play flexible update has finished downloading"
+  },
+  "appUpdateRestart": "Restart",
+  "@appUpdateRestart": {
+    "description": "SnackBar action that applies a downloaded Play update"
   }
 }

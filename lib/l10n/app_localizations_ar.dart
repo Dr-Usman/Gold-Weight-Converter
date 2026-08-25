@@ -411,4 +411,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'تعذر فتح الرابط';
+
+  @override
+  String get appUpdateReady => 'تم تنزيل التحديث. أعد التشغيل للتثبيت.';
+
+  @override
+  String get appUpdateRestart => 'إعادة التشغيل';
 }

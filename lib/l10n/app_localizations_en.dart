@@ -412,4 +412,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'Couldn\'t open the link';
+
+  @override
+  String get appUpdateReady => 'Update downloaded. Restart to install.';
+
+  @override
+  String get appUpdateRestart => 'Restart';
 }

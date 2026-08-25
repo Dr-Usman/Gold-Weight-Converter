@@ -120,5 +120,7 @@
     "rateAppLabel": "اپلیکیشن ته درجه ورکړئ",
     "shareAppLabel": "اپلیکیشن شریک کړئ",
     "shareAppMessage": "د سرو زرو وزن د Gold Weight Converter سره واړوئ: {url}",
-    "openLinkFailed": "لینک پرانیستل نشو"
+    "openLinkFailed": "لینک پرانیستل نشو",
+    "appUpdateReady": "تازه کول ډاونلوډ شول. د نصب لپاره بیا پیل کړئ.",
+    "appUpdateRestart": "بیا پیل"
 }

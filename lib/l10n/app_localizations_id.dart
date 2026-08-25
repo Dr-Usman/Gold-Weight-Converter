@@ -412,4 +412,10 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get openLinkFailed => 'Tautan tidak dapat dibuka';
+
+  @override
+  String get appUpdateReady => 'Pembaruan diunduh. Mulai ulang untuk memasang.';
+
+  @override
+  String get appUpdateRestart => 'Mulai ulang';
 }
