@@ -13,6 +13,22 @@ void main() {
       expect(WeightConverter.toGrams(1, WeightUnitEnum.tola), 11.66);
     });
 
+    test('converts lal to grams', () {
+      expect(
+        WeightConverter.toGrams(100, WeightUnitEnum.lal),
+        closeTo(11.66, 0.0001),
+      );
+    });
+
+    test('sums mixed units with lal', () {
+      final double total = WeightConverter.totalGrams(
+        tola: 1,
+        lal: 50,
+        gram: 5,
+      );
+      expect(total, closeTo(11.66 + (50 * 0.1166) + 5, 0.0001));
+    });
+
     test('sums mixed units', () {
       final double total = WeightConverter.totalGrams(
         tola: 1,
@@ -26,6 +42,13 @@ void main() {
       expect(
         WeightConverter.fromGrams(11.66, WeightUnitEnum.tola),
         closeTo(1, 0.0001),
+      );
+    });
+
+    test('converts grams back to lal', () {
+      expect(
+        WeightConverter.fromGrams(11.66, WeightUnitEnum.lal),
+        closeTo(100, 0.0001),
       );
     });
 

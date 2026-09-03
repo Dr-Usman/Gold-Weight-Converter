@@ -145,6 +145,7 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
   String _unitLabel(AppLocalizations l10n, WeightUnitEnum unit) {
     return switch (unit) {
       WeightUnitEnum.tola => l10n.tolaLabel,
+      WeightUnitEnum.lal => l10n.lalLabel,
       WeightUnitEnum.masha => l10n.mashaLabel,
       WeightUnitEnum.ana => l10n.anaLabel,
       WeightUnitEnum.ratti => l10n.rattiLabel,

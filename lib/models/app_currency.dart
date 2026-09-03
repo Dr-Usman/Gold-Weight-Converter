@@ -131,6 +131,7 @@ class AppCurrency {
   static AppCurrency? _fromLanguageCode(String language) {
     return switch (language) {
       'hi' => Currencies.inr,
+      'ne' => _byCode['NPR'],
       'bn' => _byCode['BDT'],
       'ur' => _byCode['PKR'],
       'sd' => _byCode['PKR'],
@@ -143,6 +144,8 @@ class AppCurrency {
       'th' => _byCode['THB'],
       'am' => _byCode['ETB'],
       'fil' || 'tl' => _byCode['PHP'],
+      'si' => _byCode['LKR'],
+      'ta' => Currencies.inr,
       'my' => _byCode['MMK'],
       _ => null,
     };

@@ -5,6 +5,7 @@ import 'package:gold_weight_converter/constants/app_constants.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
 import 'package:gold_weight_converter/constants/weight_unit_enum.dart';
 import 'package:gold_weight_converter/l10n/app_localizations.dart';
+import 'package:gold_weight_converter/models/app_currency.dart';
 import 'package:gold_weight_converter/providers/currency_provider.dart';
 import 'package:gold_weight_converter/providers/locale_provider.dart';
 import 'package:gold_weight_converter/providers/unit_provider.dart';
@@ -39,6 +40,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   );
 
   final TextEditingController tolaController = TextEditingController();
+  final TextEditingController lalController = TextEditingController();
   final TextEditingController mashaController = TextEditingController();
   final TextEditingController anaController = TextEditingController();
   final TextEditingController rattiController = TextEditingController();
@@ -73,6 +75,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   void dispose() {
     goldRateController.removeListener(_persistGoldRate);
     tolaController.dispose();
+    lalController.dispose();
     mashaController.dispose();
     anaController.dispose();
     rattiController.dispose();
@@ -101,6 +104,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     FocusScope.of(context).unfocus();
 
     tolaController.clear();
+    lalController.clear();
     mashaController.clear();
     anaController.clear();
     rattiController.clear();
@@ -144,22 +148,33 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   // Private method for calculations without Unfocus (used by onChanged)
   void _calculate() {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final Locale currentLocale = ref.read(localeProvider);
+    final AppCurrency currentCurrency = ref.read(currencyProvider);
+    final bool isNepaliSystem =
+        currentLocale.languageCode == 'ne' || currentCurrency.code == 'NPR';
+
     final double tola = _getDouble(tolaController);
+    final double lal = _getDouble(lalController);
     final double masha = _getDouble(mashaController);
     final double ana = _getDouble(anaController);
     final double ratti = _getDouble(rattiController);
     final double gram = _getDouble(gramController);
 
-    if (tola == 0 && masha == 0 && ana == 0 && ratti == 0 && gram == 0) {
+    final bool hasAnyInput = isNepaliSystem
+        ? (tola > 0 || ana > 0 || lal > 0 || gram > 0)
+        : (tola > 0 || masha > 0 || ana > 0 || ratti > 0 || gram > 0);
+
+    if (!hasAnyInput) {
       ref.read(goldResultNotifierProvider.notifier).clearResults();
       return;
     }
 
     final double totalGrams = WeightConverter.totalGrams(
       tola: tola,
-      masha: masha,
+      lal: isNepaliSystem ? lal : 0,
+      masha: isNepaliSystem ? 0 : masha,
       ana: ana,
-      ratti: ratti,
+      ratti: isNepaliSystem ? 0 : ratti,
       gram: gram,
     );
     final StringBuffer resultBuffer = StringBuffer();
@@ -173,38 +188,59 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         ),
       );
     }
-    if (masha > 0) {
-      resultBuffer.writeln(
-        l10n.mashaConversion(
-          '$masha',
-          '${AppConstants.mashaToGram}',
-          WeightConverter.toGrams(
-            masha,
-            WeightUnitEnum.masha,
-          ).toStringAsFixed(4),
-        ),
-      );
-    }
-    if (ana > 0) {
-      resultBuffer.writeln(
-        l10n.anaConversion(
-          '$ana',
-          '${AppConstants.anaToGram}',
-          WeightConverter.toGrams(ana, WeightUnitEnum.ana).toStringAsFixed(4),
-        ),
-      );
-    }
-    if (ratti > 0) {
-      resultBuffer.writeln(
-        l10n.rattiConversion(
-          '$ratti',
-          '${AppConstants.rattiToGram}',
-          WeightConverter.toGrams(
-            ratti,
-            WeightUnitEnum.ratti,
-          ).toStringAsFixed(4),
-        ),
-      );
+    if (isNepaliSystem) {
+      if (ana > 0) {
+        resultBuffer.writeln(
+          l10n.anaConversion(
+            '$ana',
+            '${AppConstants.anaToGram}',
+            WeightConverter.toGrams(ana, WeightUnitEnum.ana).toStringAsFixed(4),
+          ),
+        );
+      }
+      if (lal > 0) {
+        resultBuffer.writeln(
+          l10n.lalConversion(
+            '$lal',
+            '${AppConstants.lalToGram}',
+            WeightConverter.toGrams(lal, WeightUnitEnum.lal).toStringAsFixed(4),
+          ),
+        );
+      }
+    } else {
+      if (masha > 0) {
+        resultBuffer.writeln(
+          l10n.mashaConversion(
+            '$masha',
+            '${AppConstants.mashaToGram}',
+            WeightConverter.toGrams(
+              masha,
+              WeightUnitEnum.masha,
+            ).toStringAsFixed(4),
+          ),
+        );
+      }
+      if (ana > 0) {
+        resultBuffer.writeln(
+          l10n.anaConversion(
+            '$ana',
+            '${AppConstants.anaToGram}',
+            WeightConverter.toGrams(ana, WeightUnitEnum.ana).toStringAsFixed(4),
+          ),
+        );
+      }
+      if (ratti > 0) {
+        resultBuffer.writeln(
+          l10n.rattiConversion(
+            '$ratti',
+            '${AppConstants.rattiToGram}',
+            WeightConverter.toGrams(
+              ratti,
+              WeightUnitEnum.ratti,
+            ).toStringAsFixed(4),
+          ),
+        );
+      }
     }
     if (gram > 0) {
       resultBuffer.writeln(l10n.gramConversion('$gram'));
@@ -222,30 +258,49 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         ).toStringAsFixed(4),
       ),
     );
-    resultBuffer.writeln(
-      l10n.mashaResult(
-        WeightConverter.fromGrams(
-          totalGrams,
-          WeightUnitEnum.masha,
-        ).toStringAsFixed(4),
-      ),
-    );
-    resultBuffer.writeln(
-      l10n.anaResult(
-        WeightConverter.fromGrams(
-          totalGrams,
-          WeightUnitEnum.ana,
-        ).toStringAsFixed(4),
-      ),
-    );
-    resultBuffer.writeln(
-      l10n.rattiResult(
-        WeightConverter.fromGrams(
-          totalGrams,
-          WeightUnitEnum.ratti,
-        ).toStringAsFixed(4),
-      ),
-    );
+    if (isNepaliSystem) {
+      resultBuffer.writeln(
+        l10n.anaResult(
+          WeightConverter.fromGrams(
+            totalGrams,
+            WeightUnitEnum.ana,
+          ).toStringAsFixed(4),
+        ),
+      );
+      resultBuffer.writeln(
+        l10n.lalResult(
+          WeightConverter.fromGrams(
+            totalGrams,
+            WeightUnitEnum.lal,
+          ).toStringAsFixed(4),
+        ),
+      );
+    } else {
+      resultBuffer.writeln(
+        l10n.mashaResult(
+          WeightConverter.fromGrams(
+            totalGrams,
+            WeightUnitEnum.masha,
+          ).toStringAsFixed(4),
+        ),
+      );
+      resultBuffer.writeln(
+        l10n.anaResult(
+          WeightConverter.fromGrams(
+            totalGrams,
+            WeightUnitEnum.ana,
+          ).toStringAsFixed(4),
+        ),
+      );
+      resultBuffer.writeln(
+        l10n.rattiResult(
+          WeightConverter.fromGrams(
+            totalGrams,
+            WeightUnitEnum.ratti,
+          ).toStringAsFixed(4),
+        ),
+      );
+    }
 
     String newResultText = resultBuffer.toString();
     String? newPriceText;
@@ -278,44 +333,46 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     if (priceText != newPriceText) {
       goldResultNotifier.setGoldPrice(newPriceText);
     }
-
-    // if (resultText != newResultText || priceText != newPriceText) {
-    //   setState(() {
-    //     resultText = newResultText;
-    //     priceText = newPriceText;
-    //   });
-    // }
   }
 
   // Public method for button presses (includes unfocus)
   void calculateAll() {
     FocusScope.of(context).unfocus();
 
+    final Locale currentLocale = ref.read(localeProvider);
+    final AppCurrency currentCurrency = ref.read(currencyProvider);
+    final bool isNepaliSystem =
+        currentLocale.languageCode == 'ne' || currentCurrency.code == 'NPR';
+
     final double tola = _getDouble(tolaController);
+    final double lal = _getDouble(lalController);
     final double masha = _getDouble(mashaController);
     final double ana = _getDouble(anaController);
     final double ratti = _getDouble(rattiController);
     final double gram = _getDouble(gramController);
     final double rate = _getDouble(goldRateController);
-    final bool hasInput =
-        tola > 0 || masha > 0 || ana > 0 || ratti > 0 || gram > 0;
+    final bool hasInput = isNepaliSystem
+        ? (tola > 0 || ana > 0 || lal > 0 || gram > 0)
+        : (tola > 0 || masha > 0 || ana > 0 || ratti > 0 || gram > 0);
 
     _calculate();
 
     if (hasInput) {
       final List<String> inputUnitsUsed = <String>[
         if (tola > 0) 'tola',
-        if (masha > 0) 'masha',
         if (ana > 0) 'ana',
-        if (ratti > 0) 'ratti',
+        if (isNepaliSystem && lal > 0) 'lal',
+        if (!isNepaliSystem && masha > 0) 'masha',
+        if (!isNepaliSystem && ratti > 0) 'ratti',
         if (gram > 0) 'gram',
       ];
       final UnitEnum rateUnit = ref.read(rateUnitProvider);
       final double totalGrams = WeightConverter.totalGrams(
         tola: tola,
-        masha: masha,
+        lal: isNepaliSystem ? lal : 0,
+        masha: isNepaliSystem ? 0 : masha,
         ana: ana,
-        ratti: ratti,
+        ratti: isNepaliSystem ? 0 : ratti,
         gram: gram,
       );
 
@@ -347,6 +404,11 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final Locale currentLocale = ref.watch(localeProvider);
+    final AppCurrency currentCurrency = ref.watch(currencyProvider);
+    final bool isNepaliSystem =
+        currentLocale.languageCode == 'ne' || currentCurrency.code == 'NPR';
 
     ref.listen(currencyProvider, (_, _) {
       if (mounted) {
@@ -364,22 +426,24 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     });
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 60,
         title: Text(
-          AppLocalizations.of(context)!.appTitle,
+          l10n.appTitle,
           style: const TextStyle(
             fontWeight: FontWeight.w700,
-            fontSize: 18,
-            letterSpacing: 0.2,
+            fontSize: 22,
+            letterSpacing: 0,
+            fontFamily: 'Cinzel',
           ),
         ),
         centerTitle: true,
         foregroundColor: Colors.white,
         elevation: 0,
+        backgroundColor: Colors.transparent,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
               colors: [
                 AppColors.primaryDark,
                 AppColors.primary,
@@ -392,11 +456,6 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         ),
       ),
       drawer: const AppDrawer(),
-      onDrawerChanged: (isOpened) {
-        if (isOpened) {
-          FocusManager.instance.primaryFocus?.unfocus();
-        }
-      },
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -418,20 +477,8 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         child: Stack(
           children: [
             Positioned(
-              top: -120,
-              left: -80,
-              child: Container(
-                width: 260,
-                height: 260,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.secondary.withValues(alpha: 0.18),
-                ),
-              ),
-            ),
-            Positioned(
-              right: -90,
-              top: 180,
+              top: -60,
+              right: -60,
               child: Container(
                 width: 220,
                 height: 220,
@@ -483,67 +530,76 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               GoldTextField(
-                                label: AppLocalizations.of(context)!.tolaLabel,
-                                info: AppLocalizations.of(context)!.tolaInfo,
+                                label: l10n.tolaLabel,
+                                info:
+                                    isNepaliSystem &&
+                                        currentLocale.languageCode == 'en'
+                                    ? '1 Tola = 11.66 grams = 16 Aana = 100 Lal'
+                                    : l10n.tolaInfo,
                                 controller: tolaController,
-                                semanticLabel: AppLocalizations.of(
-                                  context,
-                                )!.tolaSemanticLabel,
+                                semanticLabel: l10n.tolaSemanticLabel,
                                 validator: _validateInput,
                                 onChanged: _calculate,
-                                hintText: AppLocalizations.of(
-                                  context,
-                                )!.tolaHint,
+                                hintText: l10n.tolaHint,
                               ),
+                              if (isNepaliSystem) ...[
+                                GoldTextField(
+                                  label: l10n.anaLabel,
+                                  info: currentLocale.languageCode == 'en'
+                                      ? '1 Aana = 0.729 grams = 6.25 Lal'
+                                      : l10n.anaInfo,
+                                  controller: anaController,
+                                  semanticLabel: l10n.anaSemanticLabel,
+                                  validator: _validateInput,
+                                  onChanged: _calculate,
+                                  hintText: l10n.anaHint,
+                                ),
+                                GoldTextField(
+                                  label: l10n.lalLabel,
+                                  info: l10n.lalInfo,
+                                  controller: lalController,
+                                  semanticLabel: l10n.lalSemanticLabel,
+                                  validator: _validateInput,
+                                  onChanged: _calculate,
+                                  hintText: l10n.lalHint,
+                                ),
+                              ] else ...[
+                                GoldTextField(
+                                  label: l10n.mashaLabel,
+                                  info: l10n.mashaInfo,
+                                  controller: mashaController,
+                                  semanticLabel: l10n.mashaSemanticLabel,
+                                  validator: _validateInput,
+                                  onChanged: _calculate,
+                                  hintText: l10n.mashaHint,
+                                ),
+                                GoldTextField(
+                                  label: l10n.anaLabel,
+                                  info: l10n.anaInfo,
+                                  controller: anaController,
+                                  semanticLabel: l10n.anaSemanticLabel,
+                                  validator: _validateInput,
+                                  onChanged: _calculate,
+                                  hintText: l10n.anaHint,
+                                ),
+                                GoldTextField(
+                                  label: l10n.rattiLabel,
+                                  info: l10n.rattiInfo,
+                                  controller: rattiController,
+                                  semanticLabel: l10n.rattiSemanticLabel,
+                                  validator: _validateInput,
+                                  onChanged: _calculate,
+                                  hintText: l10n.rattiHint,
+                                ),
+                              ],
                               GoldTextField(
-                                label: AppLocalizations.of(context)!.mashaLabel,
-                                info: AppLocalizations.of(context)!.mashaInfo,
-                                controller: mashaController,
-                                semanticLabel: AppLocalizations.of(
-                                  context,
-                                )!.mashaSemanticLabel,
-                                validator: _validateInput,
-                                onChanged: _calculate,
-                                hintText: AppLocalizations.of(
-                                  context,
-                                )!.mashaHint,
-                              ),
-                              GoldTextField(
-                                label: AppLocalizations.of(context)!.anaLabel,
-                                info: AppLocalizations.of(context)!.anaInfo,
-                                controller: anaController,
-                                semanticLabel: AppLocalizations.of(
-                                  context,
-                                )!.anaSemanticLabel,
-                                validator: _validateInput,
-                                onChanged: _calculate,
-                                hintText: AppLocalizations.of(context)!.anaHint,
-                              ),
-                              GoldTextField(
-                                label: AppLocalizations.of(context)!.rattiLabel,
-                                info: AppLocalizations.of(context)!.rattiInfo,
-                                controller: rattiController,
-                                semanticLabel: AppLocalizations.of(
-                                  context,
-                                )!.rattiSemanticLabel,
-                                validator: _validateInput,
-                                onChanged: _calculate,
-                                hintText: AppLocalizations.of(
-                                  context,
-                                )!.rattiHint,
-                              ),
-                              GoldTextField(
-                                label: AppLocalizations.of(context)!.gramLabel,
-                                info: AppLocalizations.of(context)!.gramInfo,
+                                label: l10n.gramLabel,
+                                info: l10n.gramInfo,
                                 controller: gramController,
-                                semanticLabel: AppLocalizations.of(
-                                  context,
-                                )!.gramSemanticLabel,
+                                semanticLabel: l10n.gramSemanticLabel,
                                 validator: _validateInput,
                                 onChanged: _calculate,
-                                hintText: AppLocalizations.of(
-                                  context,
-                                )!.gramHint,
+                                hintText: l10n.gramHint,
                               ),
                               Consumer(
                                 builder: (context, ref, child) {

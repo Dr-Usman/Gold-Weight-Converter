@@ -48,9 +48,7 @@ class GoldWeightConverterApp extends ConsumerWidget {
 
         return Directionality(
           textDirection: direction,
-          child: AppUpdateListener(
-            child: child ?? const SizedBox.shrink(),
-          ),
+          child: AppUpdateListener(child: child ?? const SizedBox.shrink()),
         );
       },
       home: const GoldConverterScreen(),

@@ -92,7 +92,8 @@ These are the Mixpanel events currently tracked in this project. **All new Mixpa
 | `results_copied` | User copies converter or zakat results | `screen` (`converter` or `zakat`) | `lib/widgets/result_actions.dart` |
 | `results_shared` | User shares converter or zakat results (share sheet not dismissed) | `screen` (`converter` or `zakat`) | `lib/services/external_links.dart` |
 | `app_shared` | User shares the app from the drawer (share sheet not dismissed) | (none) | `lib/widgets/app_drawer.dart` |
-| `rate_app_opened` | User opens the Play Store listing from the drawer | (none) | `lib/widgets/app_drawer.dart` |
+| `rate_app_store_opened` | Play Store listing opened from the drawer | (none) | `lib/widgets/app_drawer.dart` |
+| `more_apps_opened` | User opens the developer's other apps from the drawer | (none) | `lib/widgets/app_drawer.dart` |
 | `privacy_policy_opened` | User opens the privacy policy from the drawer | (none) | `lib/widgets/app_drawer.dart` |
 | `app_update_prompted` | Play flexible in-app update download starts (Android + Play installs) | (none) | `lib/services/app_update_service.dart` |
 | `app_update_completed` | User taps Restart to apply a downloaded Play flexible update | (none) | `lib/services/app_update_service.dart` |

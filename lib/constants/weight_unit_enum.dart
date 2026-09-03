@@ -3,6 +3,7 @@ import 'package:gold_weight_converter/constants/app_constants.dart';
 /// Weight units used when entering gold item mass.
 enum WeightUnitEnum {
   tola('tola'),
+  lal('lal'),
   masha('masha'),
   ana('ana'),
   ratti('ratti'),
@@ -14,6 +15,7 @@ enum WeightUnitEnum {
 
   double get gramsPerUnit => switch (this) {
     WeightUnitEnum.tola => AppConstants.tolaToGram,
+    WeightUnitEnum.lal => AppConstants.lalToGram,
     WeightUnitEnum.masha => AppConstants.mashaToGram,
     WeightUnitEnum.ana => AppConstants.anaToGram,
     WeightUnitEnum.ratti => AppConstants.rattiToGram,

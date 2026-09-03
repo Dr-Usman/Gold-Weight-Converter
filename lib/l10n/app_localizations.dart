@@ -5,15 +5,23 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_am.dart';
 import 'app_localizations_ar.dart';
 import 'app_localizations_bn.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
 import 'app_localizations_fa.dart';
+import 'app_localizations_fil.dart';
+import 'app_localizations_fr.dart';
 import 'app_localizations_hi.dart';
 import 'app_localizations_id.dart';
 import 'app_localizations_ms.dart';
+import 'app_localizations_my.dart';
+import 'app_localizations_ne.dart';
 import 'app_localizations_ps.dart';
 import 'app_localizations_sd.dart';
+import 'app_localizations_si.dart';
+import 'app_localizations_ta.dart';
 import 'app_localizations_tr.dart';
 import 'app_localizations_ur.dart';
 
@@ -103,15 +111,23 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('am'),
     Locale('ar'),
     Locale('bn'),
     Locale('en'),
+    Locale('es'),
     Locale('fa'),
+    Locale('fil'),
+    Locale('fr'),
     Locale('hi'),
     Locale('id'),
     Locale('ms'),
+    Locale('my'),
+    Locale('ne'),
     Locale('ps'),
     Locale('sd'),
+    Locale('si'),
+    Locale('ta'),
     Locale('tr'),
     Locale('ur'),
     Locale('ur', 'RO'),
@@ -231,6 +247,30 @@ abstract class AppLocalizations {
   /// **'Ratti weight input field'**
   String get rattiSemanticLabel;
 
+  /// Label for Lal weight unit (Nepal)
+  ///
+  /// In en, this message translates to:
+  /// **'Lal'**
+  String get lalLabel;
+
+  /// Information about Lal conversion
+  ///
+  /// In en, this message translates to:
+  /// **'1 Lal = 0.1166 grams = 0.01 Tola (100 Lal = 1 Tola)'**
+  String get lalInfo;
+
+  /// Hint text for Lal input field
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 25'**
+  String get lalHint;
+
+  /// Semantic label for Lal input field
+  ///
+  /// In en, this message translates to:
+  /// **'Lal weight input field'**
+  String get lalSemanticLabel;
+
   /// Label for Gram weight unit
   ///
   /// In en, this message translates to:
@@ -333,6 +373,12 @@ abstract class AppLocalizations {
   /// **'Ratti: {value} × {factor} = {result} grams'**
   String rattiConversion(String value, String factor, String result);
 
+  /// Lal conversion result text
+  ///
+  /// In en, this message translates to:
+  /// **'Lal: {value} × {factor} = {result} grams'**
+  String lalConversion(String value, String factor, String result);
+
   /// Gram conversion result text
   ///
   /// In en, this message translates to:
@@ -356,6 +402,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tola: {value}'**
   String tolaResult(String value);
+
+  /// Lal result after conversion
+  ///
+  /// In en, this message translates to:
+  /// **'Lal: {value}'**
+  String lalResult(String value);
 
   /// Masha result after conversion
   ///
@@ -392,6 +444,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tola'**
   String get unitTola;
+
+  /// Unit name for Lal
+  ///
+  /// In en, this message translates to:
+  /// **'Lal'**
+  String get unitLal;
 
   /// Unit name for 10 Gram
   ///
@@ -825,6 +883,12 @@ abstract class AppLocalizations {
   /// **'Rate app'**
   String get rateAppLabel;
 
+  /// Drawer item that opens the developer's other apps on the store
+  ///
+  /// In en, this message translates to:
+  /// **'More apps'**
+  String get moreAppsLabel;
+
   /// Drawer item that shares a link to the app
   ///
   /// In en, this message translates to:
@@ -867,15 +931,23 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) => <String>[
+    'am',
     'ar',
     'bn',
     'en',
+    'es',
     'fa',
+    'fil',
+    'fr',
     'hi',
     'id',
     'ms',
+    'my',
+    'ne',
     'ps',
     'sd',
+    'si',
+    'ta',
     'tr',
     'ur',
   ].contains(locale.languageCode);
@@ -899,24 +971,40 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'am':
+      return AppLocalizationsAm();
     case 'ar':
       return AppLocalizationsAr();
     case 'bn':
       return AppLocalizationsBn();
     case 'en':
       return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
     case 'fa':
       return AppLocalizationsFa();
+    case 'fil':
+      return AppLocalizationsFil();
+    case 'fr':
+      return AppLocalizationsFr();
     case 'hi':
       return AppLocalizationsHi();
     case 'id':
       return AppLocalizationsId();
     case 'ms':
       return AppLocalizationsMs();
+    case 'my':
+      return AppLocalizationsMy();
+    case 'ne':
+      return AppLocalizationsNe();
     case 'ps':
       return AppLocalizationsPs();
     case 'sd':
       return AppLocalizationsSd();
+    case 'si':
+      return AppLocalizationsSi();
+    case 'ta':
+      return AppLocalizationsTa();
     case 'tr':
       return AppLocalizationsTr();
     case 'ur':

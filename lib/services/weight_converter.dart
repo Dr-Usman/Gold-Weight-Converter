@@ -15,12 +15,14 @@ class WeightConverter {
   /// Sums mixed traditional + metric weight inputs into total grams.
   static double totalGrams({
     double tola = 0,
+    double lal = 0,
     double masha = 0,
     double ana = 0,
     double ratti = 0,
     double gram = 0,
   }) {
     return (tola * AppConstants.tolaToGram) +
+        (lal * AppConstants.lalToGram) +
         (masha * AppConstants.mashaToGram) +
         (ana * AppConstants.anaToGram) +
         (ratti * AppConstants.rattiToGram) +

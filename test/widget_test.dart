@@ -296,7 +296,34 @@ void main() {
     expect(find.text('About'), findsOneWidget);
     expect(find.text('Privacy policy'), findsOneWidget);
     expect(find.text('Rate app'), findsOneWidget);
+    expect(find.text('More apps'), findsOneWidget);
     expect(find.text('Share app'), findsOneWidget);
+  });
+
+  testWidgets('opens language bottom sheet and selects language', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await tester.tap(find.byTooltip('Open navigation menu'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Language'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Please select your language'), findsOneWidget);
+    final nepaliOption = find.byWidgetPredicate(
+      (w) => w is RichText && w.text.toPlainText().contains('नेपाली'),
+    );
+    expect(nepaliOption, findsOneWidget);
+
+    // Tap Nepali
+    await tester.tap(nepaliOption);
+    await tester.pumpAndSettle();
+
+    // Verify converter rendered in Nepali
+    expect(find.text('सुनको तौल रूपान्तरक'), findsWidgets);
+    expect(find.text('गणना गर्नुहोस्'), findsOneWidget);
   });
 
   testWidgets('persists converter gold rate across launches', (
@@ -325,6 +352,213 @@ void main() {
     final TextFormField rateField = tester.widget<TextFormField>(fieldAt(5));
     expect(rateField.controller?.text.replaceAll(',', ''), '1166');
   });
+
+  testWidgets('renders converter in Nepali when locale is ne', (tester) async {
+    final prefs = _NepaliPreferencesService();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('सुनको तौल रूपान्तरक'), findsOneWidget);
+    expect(find.text('गणना गर्नुहोस्'), findsOneWidget);
+    expect(find.text('सबै खाली गर्नुहोस्'), findsOneWidget);
+  });
+
+  testWidgets('renders converter in Amharic when locale is am', (tester) async {
+    final prefs = _LocalePreferencesService(const Locale('am'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('የወርቅ ክብደት መለወጫ'), findsOneWidget);
+    expect(find.text('አስላ'), findsOneWidget);
+    expect(find.text('ሁሉንም አጽዳ'), findsOneWidget);
+  });
+
+  testWidgets('renders converter in Burmese when locale is my', (tester) async {
+    final prefs = _LocalePreferencesService(const Locale('my'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('ရွှေအလေးချိန် တွက်ချက်စက်'), findsOneWidget);
+    expect(find.text('တွက်ချက်မည်'), findsOneWidget);
+    expect(find.text('အားလုံးရှင်းမည်'), findsOneWidget);
+  });
+
+  testWidgets('renders converter in Filipino when locale is fil', (
+    tester,
+  ) async {
+    final prefs = _LocalePreferencesService(const Locale('fil'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Kalkulahin'), findsOneWidget);
+    expect(find.text('I-clear Lahat'), findsOneWidget);
+  });
+
+  testWidgets('renders converter in Sinhala when locale is si', (tester) async {
+    final prefs = _LocalePreferencesService(const Locale('si'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('රන් බර පරිවර්තකය'), findsOneWidget);
+    expect(find.text('ගණනය කරන්න'), findsOneWidget);
+  });
+
+  testWidgets('renders converter in Tamil when locale is ta', (tester) async {
+    final prefs = _LocalePreferencesService(const Locale('ta'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('தங்க எடை மாற்றி'), findsOneWidget);
+    expect(find.text('கணக்கிடு'), findsOneWidget);
+  });
+
+  testWidgets('renders converter in French when locale is fr', (tester) async {
+    final prefs = _LocalePreferencesService(const Locale('fr'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text("Convertisseur de Poids d'Or"), findsOneWidget);
+    expect(find.text('Calculer'), findsOneWidget);
+  });
+
+  testWidgets('renders converter in Spanish when locale is es', (tester) async {
+    final prefs = _LocalePreferencesService(const Locale('es'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Conversor de Peso de Oro'), findsOneWidget);
+    expect(find.text('Calcular'), findsOneWidget);
+  });
+
+  testWidgets('renders Lal field and converts correctly in Nepali mode', (
+    tester,
+  ) async {
+    final prefs = _NepaliPreferencesService();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // In Nepali mode, fields are Tola, Ana, Lal, Gram
+    expect(find.text('तोला'), findsWidgets);
+    expect(find.text('आना'), findsWidgets);
+    expect(find.text('लाल'), findsWidgets);
+    expect(find.text('ग्राम'), findsWidgets);
+    expect(find.text('मासा'), findsNothing);
+    expect(find.text('रत्ती'), findsNothing);
+
+    // Enter 1 Tola, 10 Lal
+    await enterField(tester, 0, '1'); // Tola
+    await enterField(tester, 2, '10'); // Lal
+
+    final Finder calcButton = find.text('गणना गर्नुहोस्');
+    await tester.ensureVisible(calcButton);
+    await tester.tap(calcButton);
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('12.8260'), findsOneWidget);
+    expect(
+      find.textContaining('तोला: 1.0 × 11.66 = 11.6600 ग्राम'),
+      findsOneWidget,
+    );
+    expect(
+      find.textContaining('लाल: 10.0 × 0.1166 = 1.1660 ग्राम'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('renders Lal field when currency is NPR in English mode', (
+    tester,
+  ) async {
+    final prefs = _NprPreferencesService();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // With NPR currency, Nepali bullion units (Tola, Ana, Lal, Gram) are shown
+    expect(find.text('Tola'), findsWidgets);
+    expect(find.text('Ana'), findsWidgets);
+    expect(find.text('Lal'), findsWidgets);
+    expect(find.text('Gram'), findsWidgets);
+    expect(find.text('Masha'), findsNothing);
+    expect(find.text('Ratti'), findsNothing);
+
+    // Enter 2 Lal
+    await enterField(tester, 2, '2');
+    await tapCalculate(tester);
+
+    expect(
+      find.textContaining('Lal: 2.0 × 0.1166 = 0.2332 grams'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('Total Weight: 0.2332 grams'), findsOneWidget);
+    expect(find.textContaining('Lal: 2.0000'), findsOneWidget);
+  });
+}
+
+class _NepaliPreferencesService extends _TestPreferencesService {
+  @override
+  Locale getLocale() => const Locale('ne');
+}
+
+class _NprPreferencesService extends _TestPreferencesService {
+  @override
+  String? getCurrencyCode() => 'NPR';
+}
+
+class _LocalePreferencesService extends _TestPreferencesService {
+  final Locale _locale;
+  _LocalePreferencesService(this._locale);
+
+  @override
+  Locale getLocale() => _locale;
 }
 
 class _MemoryPreferencesService extends _TestPreferencesService {

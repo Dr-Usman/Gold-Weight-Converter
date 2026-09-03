@@ -119,8 +119,12 @@ class AnalyticsService {
     _mixpanel?.track('app_shared');
   }
 
-  static void trackRateAppOpened() {
-    _mixpanel?.track('rate_app_opened');
+  static void trackRateAppStoreOpened() {
+    _mixpanel?.track('rate_app_store_opened');
+  }
+
+  static void trackMoreAppsOpened() {
+    _mixpanel?.track('more_apps_opened');
   }
 
   static void trackPrivacyPolicyOpened() {

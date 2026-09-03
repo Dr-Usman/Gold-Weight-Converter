@@ -339,7 +339,7 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
                 ExternalLinks.openUrl(
                   context,
                   AppConstants.playStoreUrl,
-                  onOpened: AnalyticsService.trackRateAppOpened,
+                  onOpened: AnalyticsService.trackRateAppStoreOpened,
                 );
               },
             ),
@@ -350,6 +350,18 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
               onTap: () {
                 ExternalLinks.shareApp(
                   l10n.shareAppMessage(AppConstants.playStoreUrl),
+                );
+              },
+            ),
+            const Divider(height: 1),
+            ListTile(
+              leading: Icon(Icons.apps_outlined, color: scheme.primary),
+              title: Text(l10n.moreAppsLabel),
+              onTap: () {
+                ExternalLinks.openUrl(
+                  context,
+                  AppConstants.developerPlayStoreUrl,
+                  onOpened: AnalyticsService.trackMoreAppsOpened,
                 );
               },
             ),

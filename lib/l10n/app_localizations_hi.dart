@@ -66,6 +66,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get rattiSemanticLabel => 'रत्ती वजन इनपुट फील्ड';
 
   @override
+  String get lalLabel => 'Lal';
+
+  @override
+  String get lalInfo => '1 Lal = 0.1166 grams = 0.01 Tola (100 Lal = 1 Tola)';
+
+  @override
+  String get lalHint => 'e.g. 25';
+
+  @override
+  String get lalSemanticLabel => 'Lal weight input field';
+
+  @override
   String get gramLabel => 'ग्राम';
 
   @override
@@ -125,6 +137,11 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
+  String lalConversion(String value, String factor, String result) {
+    return 'Lal: $value × $factor = $result grams';
+  }
+
+  @override
   String gramConversion(String value) {
     return 'ग्राम: $value ग्राम';
   }
@@ -140,6 +157,11 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String tolaResult(String value) {
     return 'तोला: $value';
+  }
+
+  @override
+  String lalResult(String value) {
+    return 'Lal: $value';
   }
 
   @override
@@ -169,6 +191,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get unitTola => 'तोला';
+
+  @override
+  String get unitLal => 'Lal';
 
   @override
   String get unitTenGram => '10 ग्राम';
@@ -401,6 +426,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get rateAppLabel => 'ऐप को रेट करें';
+
+  @override
+  String get moreAppsLabel => 'और ऐप्स';
 
   @override
   String get shareAppLabel => 'ऐप शेयर करें';

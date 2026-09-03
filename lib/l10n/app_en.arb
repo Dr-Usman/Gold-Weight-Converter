@@ -76,6 +76,22 @@
   "@rattiSemanticLabel": {
     "description": "Semantic label for Ratti input field"
   },
+  "lalLabel": "Lal",
+  "@lalLabel": {
+    "description": "Label for Lal weight unit (Nepal)"
+  },
+  "lalInfo": "1 Lal = 0.1166 grams = 0.01 Tola (100 Lal = 1 Tola)",
+  "@lalInfo": {
+    "description": "Information about Lal conversion"
+  },
+  "lalHint": "e.g. 25",
+  "@lalHint": {
+    "description": "Hint text for Lal input field"
+  },
+  "lalSemanticLabel": "Lal weight input field",
+  "@lalSemanticLabel": {
+    "description": "Semantic label for Lal input field"
+  },
   "gramLabel": "Gram",
   "@gramLabel": {
     "description": "Label for Gram weight unit"
@@ -200,6 +216,24 @@
       }
     }
   },
+  "lalConversion": "Lal: {value} × {factor} = {result} grams",
+  "@lalConversion": {
+    "description": "Lal conversion result text",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "25"
+      },
+      "factor": {
+        "type": "String",
+        "example": "0.1166"
+      },
+      "result": {
+        "type": "String",
+        "example": "2.915"
+      }
+    }
+  },
   "gramConversion": "Gram: {value} grams",
   "@gramConversion": {
     "description": "Gram conversion result text",
@@ -231,6 +265,16 @@
       "value": {
         "type": "String",
         "example": "2.5"
+      }
+    }
+  },
+  "lalResult": "Lal: {value}",
+  "@lalResult": {
+    "description": "Lal result after conversion",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "250"
       }
     }
   },
@@ -291,6 +335,10 @@
   "unitTola": "Tola",
   "@unitTola": {
     "description": "Unit name for Tola"
+  },
+  "unitLal": "Lal",
+  "@unitLal": {
+    "description": "Unit name for Lal"
   },
   "unitTenGram": "10 Gram",
   "@unitTenGram": {
@@ -627,6 +675,10 @@
   "rateAppLabel": "Rate app",
   "@rateAppLabel": {
     "description": "Drawer item that opens the Play Store listing"
+  },
+  "moreAppsLabel": "More apps",
+  "@moreAppsLabel": {
+    "description": "Drawer item that opens the developer's other apps on the store"
   },
   "shareAppLabel": "Share app",
   "@shareAppLabel": {

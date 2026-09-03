@@ -44,7 +44,7 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 | **Gold zakat** | **Currency** |
 | <img width="300" alt="Gold zakat calculator with item purity, 2.5% summary, and copy/share" src="docs/screenshots/03-gold-zakat.png" /> | <img width="300" alt="Searchable display currency picker" src="docs/screenshots/04-currency.png" /> |
 | **Languages** | **Dark mode** |
-| <img width="300" alt="Language selection with 12 supported locales" src="docs/screenshots/05-languages.png" /> | <img width="300" alt="Converter screen in dark mode" src="docs/screenshots/06-dark-mode.png" /> |
+| <img width="300" alt="Language selection with 20 supported locales" src="docs/screenshots/05-languages.png" /> | <img width="300" alt="Converter screen in dark mode" src="docs/screenshots/06-dark-mode.png" /> |
 | **Menu & settings** | |
 | <img width="300" alt="App drawer with zakat, Light/Dark/System theme, language, currency, and about links" src="docs/screenshots/07-menu-settings.png" /> | |
 

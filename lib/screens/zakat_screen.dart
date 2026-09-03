@@ -125,6 +125,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
   String _weightUnitLabel(AppLocalizations l10n, WeightUnitEnum unit) {
     return switch (unit) {
       WeightUnitEnum.tola => l10n.tolaLabel,
+      WeightUnitEnum.lal => l10n.lalLabel,
       WeightUnitEnum.masha => l10n.mashaLabel,
       WeightUnitEnum.ana => l10n.anaLabel,
       WeightUnitEnum.ratti => l10n.rattiLabel,

@@ -15,86 +15,145 @@ class LanguageBottomSheet extends ConsumerWidget {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final double screenWidth = MediaQuery.sizeOf(context).width;
+    final double maxHeight = MediaQuery.sizeOf(context).height * 0.80;
 
-    // Color the sheet first, then SafeArea-pad content — otherwise the home
-    // indicator inset stays transparent over the modal scrim.
     return Material(
       color: scheme.surface,
       borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       clipBehavior: Clip.antiAlias,
       child: SafeArea(
         top: false,
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Center(
-                child: Container(
-                  width: screenWidth * 0.15,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: scheme.outlineVariant,
-                    borderRadius: BorderRadius.circular(99),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: maxHeight),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Center(
+                  child: Container(
+                    width: screenWidth * 0.15,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: scheme.outlineVariant,
+                      borderRadius: BorderRadius.circular(99),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                l10n.languageSelectionPrompt,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: isDark ? Colors.white : scheme.onSurface,
-                  fontWeight: FontWeight.w700,
+                const SizedBox(height: 12),
+                Text(
+                  l10n.languageSelectionPrompt,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: isDark ? Colors.white : scheme.onSurface,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 6.0,
-                runSpacing: 0.0,
-                alignment: WrapAlignment.start,
-                children: Languages.supported.map((language) {
-                  final bool isSelected = language.matches(currentLocale);
-
-                  return ChoiceChip(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 8,
-                    ),
-                    labelPadding: const EdgeInsets.symmetric(horizontal: 2),
-                    label: SizedBox(
-                      width: screenWidth * 0.25,
-                      child: Center(
-                        child: FittedBox(child: Text(language.nativeLabel)),
-                      ),
-                    ),
-                    selected: isSelected,
-                    selectedColor: scheme.primary,
-                    backgroundColor: isDark
-                        ? scheme.surfaceContainerHighest
-                        : scheme.surface,
-                    showCheckmark: false,
-                    side: BorderSide(color: scheme.outlineVariant),
-                    labelStyle: Theme.of(context).textTheme.titleSmall
-                        ?.copyWith(
-                          color: isSelected
-                              ? scheme.onPrimary
-                              : (isDark ? Colors.white : scheme.onSurface),
-                          fontWeight: FontWeight.w700,
+                const SizedBox(height: 12),
+                Flexible(
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: Languages.supported.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: 3.0,
                         ),
-                    onSelected: (_) async {
-                      await ref
-                          .read(localeProvider.notifier)
-                          .setLocale(language.locale);
-                      await Future.delayed(const Duration(milliseconds: 200));
-                      if (context.mounted) {
-                        Navigator.of(context).pop();
-                      }
+                    itemBuilder: (context, index) {
+                      final AppLanguage language = Languages.supported[index];
+                      final bool isSelected = language.matches(currentLocale);
+
+                      return InkWell(
+                        borderRadius: BorderRadius.circular(12),
+                        onTap: () async {
+                          await ref
+                              .read(localeProvider.notifier)
+                              .setLocale(language.locale);
+                          await Future.delayed(
+                            const Duration(milliseconds: 150),
+                          );
+                          if (context.mounted) {
+                            Navigator.of(context).pop();
+                          }
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? scheme.primary.withValues(alpha: 0.12)
+                                : (isDark
+                                      ? scheme.surfaceContainerHighest
+                                            .withValues(alpha: 0.4)
+                                      : scheme.surface),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: isSelected
+                                  ? scheme.primary
+                                  : scheme.outlineVariant.withValues(
+                                      alpha: 0.6,
+                                    ),
+                              width: isSelected ? 1.5 : 1.0,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text.rich(
+                                  TextSpan(
+                                    text: language.nativeLabel,
+                                    style: TextStyle(
+                                      fontWeight: isSelected
+                                          ? FontWeight.w700
+                                          : FontWeight.w600,
+                                      fontSize: 13.5,
+                                      color: isDark
+                                          ? Colors.white
+                                          : scheme.onSurface,
+                                    ),
+                                    children:
+                                        language.englishName !=
+                                            language.nativeLabel
+                                        ? [
+                                            TextSpan(
+                                              text:
+                                                  '  (${language.englishName})',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 12,
+                                                color: isDark
+                                                    ? Colors.white70
+                                                    : scheme.onSurfaceVariant,
+                                              ),
+                                            ),
+                                          ]
+                                        : null,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              if (isSelected) ...[
+                                const SizedBox(width: 4),
+                                Icon(
+                                  Icons.check_circle,
+                                  size: 18,
+                                  color: scheme.primary,
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                      );
                     },
-                  );
-                }).toList(),
-              ),
-            ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
