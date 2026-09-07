@@ -1,12 +1,14 @@
 # Gold Weight Converter App
 
-A clean, open-source Flutter app to convert gold weight between traditional South Asian units (Tola, Masha, Ana, Ratti) and metric units (Gram), with gold price estimation, display-currency formatting, and a gold zakat calculator.
+A clean, open-source Flutter app to convert gold weight between traditional South Asian units (Tola, Masha, Ana, Ratti, Lal) and metric units (Gram), with gold price estimation, display-currency formatting, and a gold zakat calculator.
 
 **[Try the live demo](https://dr-usman.github.io/Gold-Weight-Converter/)**
 
+![Gold Weight Converter Banner](docs/feature-graphics/feature-graphic-en.png)
+
 ## Features
 
-- Convert weights between Tola, Masha, Ana, Ratti, and Gram
+- Convert weights between Tola, Masha, Ana, Ratti, Lal and Gram
 - Calculate gold price by rate per Tola, per 10 Gram, or per 1 Gram
 - Localized conversion breakdown with copy and share actions
 - Converter gold rate and rate unit remembered across sessions
@@ -19,11 +21,11 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 - Searchable display currency preference in the drawer (locale-aware default; formatting only, no FX conversion)
 - Show conversion and pricing breakdown with readable formulas
 - Persisted theme support: light, dark, and system mode
-- Multilingual UI with in-app language switching (12 supported locales)
+- Multilingual UI with in-app language switching (20 supported locales)
 - Smart numeric input formatting with thousands separators
 - Clear-all reset for all fields and computed results
 - Accessibility labels for key input fields
-- In-drawer About, Privacy policy, Rate app, and Share app links
+- In-drawer About, Privacy policy, Rate app, More apps, and Share app links
 
 ## Download
 
@@ -52,31 +54,59 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 
 | Unit    | Gram Equivalent | Notes                            |
 | ------- | --------------- | -------------------------------- |
-| 1 Tola  | 11.66 g         | = 12 Masha = 16 Ana = 96 Ratti  |
+| 1 Tola  | 11.66 g         | = 12 Masha = 16 Ana = 96 Ratti = 100 Lal |
 | 1 Masha | 0.972 g         | = 1.333 Ana = 8 Ratti           |
-| 1 Ana   | 0.72875 g       | = 6 Ratti                       |
+| 1 Ana   | 0.72875 g       | = 6 Ratti = 6.25 Lal            |
 | 1 Ratti | 0.1215 g        |                                  |
+| 1 Lal   | 0.1166 g        | = 1/100 Tola (traditional unit in Nepal) |
 
 These are standard traditional conversion factors used in the app calculations.
 
 ## Supported Languages
 
-The app supports 12 locales:
+The app supports 20 locales:
 
-- English (en)
-- Urdu (ur)
-- Roman Urdu (ur-RO)
-- Arabic (ar)
-- Bengali (bn)
-- Farsi/Persian (fa)
-- Hindi (hi)
-- Indonesian (id)
-- Malay (ms)
-- Pashto (ps)
-- Sindhi (sd)
-- Turkish (tr)
+| Language | Code | Language | Code |
+|---|---|---|---|
+| English | `en` | हिंदी (Hindi) | `hi` |
+| اردو (Urdu) | `ur` | Roman Urdu | `ur-RO` |
+| বাংলা (Bengali) | `bn` | नेपाली (Nepali) | `ne` |
+| العربية (Arabic) | `ar` | Español (Spanish) | `es` |
+| Français (French) | `fr` | Filipino | `fil` |
+| தமிழ் (Tamil) | `ta` | မြန်မာစာ (Burmese) | `my` |
+| සිංහල (Sinhala) | `si` | አማርኛ (Amharic) | `am` |
+| فارسی (Persian) | `fa` | پښتو (Pashto) | `ps` |
+| سنڌي (Sindhi) | `sd` | Indonesia (Indonesian) | `id` |
+| Melayu (Malay) | `ms` | Türkçe (Turkish) | `tr` |
 
 Language can be changed from the settings drawer and is persisted across sessions.
+
+## Supported Currencies
+
+The app supports 36 display currencies with locale-aware number and symbol formatting:
+
+| Currency | Code | Symbol | Currency | Code | Symbol |
+|---|---|---|---|---|---|
+| Indian Rupee | `INR` | ₹ | Pakistani Rupee | `PKR` | Rs. |
+| Bangladeshi Taka | `BDT` | ৳ | US Dollar | `USD` | $ |
+| Nepalese Rupee | `NPR` | Rs. | Saudi Riyal | `SAR` | SAR |
+| UAE Dirham | `AED` | AED | British Pound | `GBP` | £ |
+| Euro | `EUR` | € | Sri Lankan Rupee | `LKR` | Rs. |
+| Malaysian Ringgit | `MYR` | RM | Philippine Peso | `PHP` | ₱ |
+| Indonesian Rupiah | `IDR` | Rp | Qatari Riyal | `QAR` | QAR |
+| Kuwaiti Dinar | `KWD` | KD | Omani Rial | `OMR` | OMR |
+| Bahraini Dinar | `BHD` | BD | Canadian Dollar | `CAD` | CA$ |
+| Australian Dollar | `AUD` | A$ | Japanese Yen | `JPY` | ¥ |
+| Turkish Lira | `TRY` | ₺ | Egyptian Pound | `EGP` | E£ |
+| Afghan Afghani | `AFN` | ؋ | Iranian Rial | `IRR` | ﷼ |
+| Ethiopian Birr | `ETB` | Br | Ghanaian Cedi | `GHS` | GH₵ |
+| Myanmar Kyat | `MMK` | K | South African Rand | `ZAR` | R |
+| Nigerian Naira | `NGN` | ₦ | Kenyan Shilling | `KES` | KSh |
+| Sierra Leonean Leone | `SLE` | Le | Thai Baht | `THB` | ฿ |
+| Hong Kong Dollar | `HKD` | HK$ | Singapore Dollar | `SGD` | S$ |
+| Chinese Yuan | `CNY` | ¥ | Swiss Franc | `CHF` | CHF |
+
+*Currency selection formats gold price and zakat calculations for your region; there is no live currency exchange (FX) conversion.*
 
 ## Supported Platforms
 

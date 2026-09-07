@@ -1,0 +1,34 @@
+Title:
+Gold Weight Converter & Zakat
+
+Short Description:
+Convert Tola, Masha, Ratti & Gram with gold prices and 2.5% Zakat calculator.
+
+Full Description:
+Gold Weight Converter is the most accurate, versatile, and easy-to-use weight converter and valuation calculator designed for jewelers, bullion traders, buyers, and gold investors worldwide.
+
+Seamlessly convert between traditional Asian bullion units (Tola, Masha, Ana, Ratti, Lal) and international metric units (Grams, Milligrams, Kilograms, Troy Ounces) with zero rounding errors.
+
+Key Features:
+★ Comprehensive Unit Support:
+  - Tola, Masha, Ana, Ratti (South Asian bullion system)
+  - Lal (Nepali bullion system: 100 Lal = 1 Tola)
+  - Gram (g), Milligram (mg), Kilogram (kg), Troy Ounce (oz t)
+
+★ Live Gold Rate & Price Valuation:
+  - Enter the latest gold rate per tola or per gram
+  - Instant price valuation in your chosen currency (supports 36 currencies including USD, INR, PKR, NPR, AED, SAR, GBP, EUR)
+
+★ 2.5% Gold Zakat Calculator:
+  - Enter multiple gold items across various purities (24K, 22K, 21K, 18K)
+  - Calculates pure gold weight equivalent and payable 2.5% Zakat amount instantly
+
+★ Modern & Intuitive User Experience:
+  - Beautiful Light and Dark modes designed for comfortable daytime and nighttime use
+  - Instant copy and share features for sending calculation summaries to clients or family
+  - 100% offline functionality — no internet connection required for weight conversions
+
+★ Localized in 20+ Languages:
+  - English, Hindi, Urdu, Nepali, Arabic, Bengali, Spanish, French, Tamil, and more
+
+Whether you are shopping for gold jewelry, calculating bullion value, or determining annual Zakat obligations, Gold Weight Converter makes your calculations transparent, fast, and effortless.
