@@ -9,14 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.8.0] - 2026-09-03
+## [1.8.0] - 2026-09-07
 
 ### Added
 - 8 new supported languages: Amharic, Spanish, Filipino, French, Burmese, Nepali, Sinhala, and Tamil (20 languages total)
 - Lal weight unit support for Nepali locale and NPR currency mode (100 Lal = 1 Tola, 1 Lal = 0.1166 g)
 - "More apps" link in the drawer opening the developer's Google Play catalog
 - Mixpanel event: `more_apps_opened`
-- Updated language selection screenshot and store listing assets
+- High-resolution localized Google Play Store mockups and feature graphics for English, Hindi (India), and Nepali (Nepal)
+- Ready-to-use localized store listing copy files (`docs/store-listings/`)
 
 ### Play Store (en-US)
 ```
