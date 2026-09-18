@@ -327,8 +327,18 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
 
     final goldResultNotifier = ref.read(goldResultNotifierProvider.notifier);
 
-    if (resultText != newResultText) {
-      goldResultNotifier.setGoldWeights(newResultText);
+    final double totalTola = WeightConverter.gramsToTola(totalGrams);
+    final double roundedGrams = double.parse(totalGrams.toStringAsFixed(4));
+    final double roundedTola = double.parse(totalTola.toStringAsFixed(4));
+
+    if (resultText != newResultText ||
+        goldResultState.totalGrams != roundedGrams ||
+        goldResultState.totalTola != roundedTola) {
+      goldResultNotifier.setGoldWeights(
+        newResultText,
+        totalGrams: roundedGrams,
+        totalTola: roundedTola,
+      );
     }
     if (priceText != newPriceText) {
       goldResultNotifier.setGoldPrice(newPriceText);
@@ -376,6 +386,8 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         gram: gram,
       );
 
+      final double totalTola = WeightConverter.gramsToTola(totalGrams);
+
       AnalyticsService.trackConversionCompleted(
         inputUnitsUsed: inputUnitsUsed,
         rateUnit: switch (rateUnit) {
@@ -385,6 +397,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         },
         hasGoldRate: rate > 0,
         totalGrams: double.parse(totalGrams.toStringAsFixed(4)),
+        totalTola: double.parse(totalTola.toStringAsFixed(4)),
       );
     }
 
@@ -802,6 +815,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   Widget _buildWeightsResultSection(String resultText) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final goldResult = ref.read(goldResultNotifierProvider);
 
     return Container(
       margin: const EdgeInsets.only(top: 20),
@@ -855,6 +869,8 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
               ResultActions(
                 text: _shareableConverterText(resultText),
                 screen: 'converter',
+                totalGrams: goldResult.totalGrams,
+                totalTola: goldResult.totalTola,
               ),
             ],
           ),

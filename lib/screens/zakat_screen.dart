@@ -9,6 +9,7 @@ import 'package:gold_weight_converter/models/gold_item_model.dart';
 import 'package:gold_weight_converter/providers/currency_provider.dart';
 import 'package:gold_weight_converter/providers/zakat_provider.dart';
 import 'package:gold_weight_converter/services/analytics_service.dart';
+import 'package:gold_weight_converter/services/weight_converter.dart';
 import 'package:gold_weight_converter/services/zakat_calculator.dart';
 import 'package:gold_weight_converter/utils/number_helper.dart';
 import 'package:gold_weight_converter/widgets/app_banner_ad.dart';
@@ -91,6 +92,26 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
     final ZakatState state = ref.read(zakatNotifierProvider);
     if (state.items.isEmpty) return;
 
+    final List<String> puritiesUsed = state.items
+        .map((item) => switch (item.purity) {
+              PurityEnum.karat24 => '24k',
+              PurityEnum.karat22 => '22k',
+              PurityEnum.karat21 => '21k',
+              PurityEnum.karat18 => '18k',
+              PurityEnum.custom => 'custom',
+            })
+        .toSet()
+        .toList();
+
+    final List<String> weightUnitsUsed = state.items
+        .map((item) => item.unit.name)
+        .toSet()
+        .toList();
+
+    final bool hasCustomKarat = state.items.any(
+      (item) => item.purity == PurityEnum.custom,
+    );
+
     AnalyticsService.trackZakatCalculated(
       itemCount: state.items.length,
       rateUnit: switch (state.rateUnit) {
@@ -102,6 +123,12 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
       totalGrams: double.parse(
         state.summary.totalGrossGrams.toStringAsFixed(4),
       ),
+      totalPureGrams: double.parse(
+        state.summary.totalPureGrams.toStringAsFixed(4),
+      ),
+      puritiesUsed: puritiesUsed,
+      weightUnitsUsed: weightUnitsUsed,
+      hasCustomKarat: hasCustomKarat,
     );
     _scrollToSummary();
   }
@@ -501,6 +528,14 @@ class _SummaryCard extends StatelessWidget {
                     currencyFormat: currencyFormat,
                   ),
                   screen: 'zakat',
+                  totalGrams: double.parse(
+                    summary.totalGrossGrams.toStringAsFixed(4),
+                  ),
+                  totalTola: double.parse(
+                    WeightConverter.gramsToTola(
+                      summary.totalGrossGrams,
+                    ).toStringAsFixed(4),
+                  ),
                 ),
             ],
           ),

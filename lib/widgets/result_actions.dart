@@ -8,12 +8,24 @@ import 'package:gold_weight_converter/services/external_links.dart';
 class ResultActions extends StatelessWidget {
   final String text;
   final String screen;
+  final double? totalGrams;
+  final double? totalTola;
 
-  const ResultActions({super.key, required this.text, required this.screen});
+  const ResultActions({
+    super.key,
+    required this.text,
+    required this.screen,
+    this.totalGrams,
+    this.totalTola,
+  });
 
   Future<void> _copy(BuildContext context) async {
     await Clipboard.setData(ClipboardData(text: text));
-    AnalyticsService.trackResultsCopied(screen: screen);
+    AnalyticsService.trackResultsCopied(
+      screen: screen,
+      totalGrams: totalGrams,
+      totalTola: totalTola,
+    );
     if (!context.mounted) return;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(
@@ -44,7 +56,12 @@ class ResultActions extends StatelessWidget {
           visualDensity: VisualDensity.compact,
           onPressed: text.trim().isEmpty
               ? null
-              : () => ExternalLinks.shareText(text, screen: screen),
+              : () => ExternalLinks.shareText(
+                    text,
+                    screen: screen,
+                    totalGrams: totalGrams,
+                    totalTola: totalTola,
+                  ),
           icon: Icon(
             Icons.share_outlined,
             size: 20,

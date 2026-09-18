@@ -28,12 +28,21 @@ class ExternalLinks {
     ).showSnackBar(SnackBar(content: Text(l10n.openLinkFailed)));
   }
 
-  static Future<void> shareText(String text, {required String screen}) async {
+  static Future<void> shareText(
+    String text, {
+    required String screen,
+    double? totalGrams,
+    double? totalTola,
+  }) async {
     final ShareResult result = await SharePlus.instance.share(
       ShareParams(text: text),
     );
     if (result.status == ShareResultStatus.dismissed) return;
-    AnalyticsService.trackResultsShared(screen: screen);
+    AnalyticsService.trackResultsShared(
+      screen: screen,
+      totalGrams: totalGrams,
+      totalTola: totalTola,
+    );
   }
 
   static Future<void> shareApp(String message) async {

@@ -46,6 +46,7 @@ class AnalyticsService {
     required String rateUnit,
     required bool hasGoldRate,
     required double totalGrams,
+    required double totalTola,
   }) {
     _mixpanel?.track(
       'conversion_completed',
@@ -54,6 +55,7 @@ class AnalyticsService {
         'rate_unit': rateUnit,
         'is_gold_rate_set': hasGoldRate,
         'total_grams': totalGrams,
+        'total_tola': totalTola,
       },
     );
   }
@@ -63,6 +65,10 @@ class AnalyticsService {
     required String rateUnit,
     required bool hasGoldRate,
     required double totalGrams,
+    required double totalPureGrams,
+    required List<String> puritiesUsed,
+    required List<String> weightUnitsUsed,
+    required bool hasCustomKarat,
   }) {
     _mixpanel?.track(
       'zakat_calculated',
@@ -71,6 +77,10 @@ class AnalyticsService {
         'rate_unit': rateUnit,
         'is_gold_rate_set': hasGoldRate,
         'total_grams': totalGrams,
+        'total_pure_grams': totalPureGrams,
+        'purities_used': puritiesUsed,
+        'weight_units_used': weightUnitsUsed,
+        'has_custom_karat': hasCustomKarat,
       },
     );
   }
@@ -107,12 +117,34 @@ class AnalyticsService {
     _mixpanel?.getPeople().set('theme_mode', themeValue);
   }
 
-  static void trackResultsCopied({required String screen}) {
-    _mixpanel?.track('results_copied', properties: {'screen': screen});
+  static void trackResultsCopied({
+    required String screen,
+    double? totalGrams,
+    double? totalTola,
+  }) {
+    _mixpanel?.track(
+      'results_copied',
+      properties: {
+        'screen': screen,
+        'total_grams': ?totalGrams,
+        'total_tola': ?totalTola,
+      },
+    );
   }
 
-  static void trackResultsShared({required String screen}) {
-    _mixpanel?.track('results_shared', properties: {'screen': screen});
+  static void trackResultsShared({
+    required String screen,
+    double? totalGrams,
+    double? totalTola,
+  }) {
+    _mixpanel?.track(
+      'results_shared',
+      properties: {
+        'screen': screen,
+        'total_grams': ?totalGrams,
+        'total_tola': ?totalTola,
+      },
+    );
   }
 
   static void trackAppShared() {

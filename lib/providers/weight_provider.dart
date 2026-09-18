@@ -12,8 +12,16 @@ class GoldResultNotifier extends Notifier<GoldResultModel> {
     return GoldResultModel(); // Initial state with null values
   }
 
-  void setGoldWeights(String? weights) {
-    state = state.copyWith(weightsText: weights);
+  void setGoldWeights(
+    String? weights, {
+    double? totalGrams,
+    double? totalTola,
+  }) {
+    state = state.copyWith(
+      weightsText: weights,
+      totalGrams: totalGrams,
+      totalTola: totalTola,
+    );
   }
 
   void setGoldPrice(String? price) {
