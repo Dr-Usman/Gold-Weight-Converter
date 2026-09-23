@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.9.0] - 2026-09-23
+
+### Added
+- Localized Google Play Store listings, phone mockups, and promotional feature graphics for Pakistan (Urdu) and Bangladesh (Bengali)
+- Comprehensive Lal weight unit localization strings across all 20 supported languages
+- Enriched Mixpanel analytics tracking for conversion, zakat, copy, and share actions with weight metrics (`total_grams`, `total_tola`, `total_pure_grams`)
+- Refreshed high-resolution platform app launcher icons (Android adaptive, iOS, macOS, and Web)
+
+### Play Store (en-US)
+```
+What's new in 1.9.0
+• Localized store listings and graphics for Pakistan and Bangladesh
+• Improved Lal weight unit translations across all languages
+• Updated modern app icon
+• Performance improvements and bug fixes
+```
+
+---
+
 ## [1.8.0] - 2026-09-07
 
 ### Added
