@@ -68,7 +68,43 @@ def get_font(size, bold=False, lang='ne'):
                         continue
         return ImageFont.load_default()
 
-    # Devanagari font search
+    if lang == 'ur':
+        candidate_paths = [
+            ('/System/Library/Fonts/GeezaPro.ttc', 1 if bold else 0),
+            ('/System/Library/Fonts/SFArabic.ttf', 0),
+            ('/Library/Fonts/NotoNastaliqUrdu-Bold.ttf' if bold else '/Library/Fonts/NotoNastaliqUrdu-Regular.ttf', 0),
+            ('/usr/share/fonts/truetype/noto/NotoNastaliqUrdu-Bold.ttf' if bold else '/usr/share/fonts/truetype/noto/NotoNastaliqUrdu-Regular.ttf', 0),
+        ]
+        for path, idx in candidate_paths:
+            if os.path.exists(path):
+                try:
+                    return ImageFont.truetype(path, size, index=idx)
+                except Exception:
+                    try:
+                        return ImageFont.truetype(path, size)
+                    except Exception:
+                        continue
+        return ImageFont.load_default()
+
+    if lang == 'bn':
+        candidate_paths = [
+            ('/System/Library/Fonts/KohinoorBangla.ttc', 3 if bold else 0),
+            ('/System/Library/Fonts/Supplemental/Bangla Sangam MN.ttc', 1 if bold else 0),
+            ('/System/Library/Fonts/Supplemental/Bangla MN.ttc', 1 if bold else 0),
+            ('/usr/share/fonts/truetype/noto/NotoSansBengali-Bold.ttf' if bold else '/usr/share/fonts/truetype/noto/NotoSansBengali-Regular.ttf', 0),
+        ]
+        for path, idx in candidate_paths:
+            if os.path.exists(path):
+                try:
+                    return ImageFont.truetype(path, size, index=idx)
+                except Exception:
+                    try:
+                        return ImageFont.truetype(path, size)
+                    except Exception:
+                        continue
+        return ImageFont.load_default()
+
+    # Devanagari font search (ne, hi)
     candidate_paths = [
         '/System/Library/Fonts/Supplemental/Devanagari Sangam MN.ttc',
         '/System/Library/Fonts/Supplemental/ITFDevanagari.ttc',
@@ -192,12 +228,22 @@ def generate_mockup(base_bg, shadow_layer, screenshot_path, badge, title, subtit
 
     # 3. Render Typography
     draw = ImageDraw.Draw(canvas)
-    badge_font = get_font(32 if lang == 'en' else 34, bold=True, lang=lang)
-    title_font = get_font(78 if lang == 'en' else 82, bold=True, lang=lang)
-    subtitle_font = get_font(42 if lang == 'en' else 44, bold=False, lang=lang)
+    text_kwargs = {'direction': 'rtl'} if lang == 'ur' else {}
+    if lang == 'en':
+        b_size, t_size, s_size = 32, 78, 42
+    elif lang == 'ur':
+        b_size, t_size, s_size = 34, 76, 40
+    elif lang == 'bn':
+        b_size, t_size, s_size = 34, 78, 42
+    else:  # ne, hi
+        b_size, t_size, s_size = 34, 82, 44
+
+    badge_font = get_font(b_size, bold=True, lang=lang)
+    title_font = get_font(t_size, bold=True, lang=lang)
+    subtitle_font = get_font(s_size, bold=False, lang=lang)
 
     # Badge Pill
-    bbox_b = draw.textbbox((0, 0), badge, font=badge_font)
+    bbox_b = draw.textbbox((0, 0), badge, font=badge_font, **text_kwargs)
     bw = bbox_b[2] - bbox_b[0] + 54
     bh = 62
     bx = (CANVAS_WIDTH - bw) // 2
@@ -214,18 +260,19 @@ def generate_mockup(base_bg, shadow_layer, screenshot_path, badge, title, subtit
         ((CANVAS_WIDTH - (bbox_b[2] - bbox_b[0])) // 2, by + (13 if lang == 'en' else 11)),
         badge,
         font=badge_font,
-        fill=COLOR_BADGE_TEXT
+        fill=COLOR_BADGE_TEXT,
+        **text_kwargs
     )
 
     # Primary Title & Subtitle
-    bbox_title = draw.textbbox((0, 0), title, font=title_font)
-    bbox_sub = draw.textbbox((0, 0), subtitle, font=subtitle_font)
+    bbox_title = draw.textbbox((0, 0), title, font=title_font, **text_kwargs)
+    bbox_sub = draw.textbbox((0, 0), subtitle, font=subtitle_font, **text_kwargs)
 
     tx = (CANVAS_WIDTH - (bbox_title[2] - bbox_title[0])) // 2
     sx = (CANVAS_WIDTH - (bbox_sub[2] - bbox_sub[0])) // 2
 
-    draw.text((tx, 205), title, font=title_font, fill=COLOR_TEXT_PRIMARY)
-    draw.text((sx, 325), subtitle, font=subtitle_font, fill=COLOR_TEXT_SECONDARY)
+    draw.text((tx, 205), title, font=title_font, fill=COLOR_TEXT_PRIMARY, **text_kwargs)
+    draw.text((sx, 325), subtitle, font=subtitle_font, fill=COLOR_TEXT_SECONDARY, **text_kwargs)
 
     # 4. Save Final High-Quality Asset
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -279,12 +326,22 @@ def generate_dual_mockup(base_bg, light_screenshot_path, dark_screenshot_path, b
 
     # Render Typography
     draw = ImageDraw.Draw(canvas)
-    badge_font = get_font(32 if lang == 'en' else 34, bold=True, lang=lang)
-    title_font = get_font(78 if lang == 'en' else 80, bold=True, lang=lang)
-    subtitle_font = get_font(42 if lang == 'en' else 42, bold=False, lang=lang)
+    text_kwargs = {'direction': 'rtl'} if lang == 'ur' else {}
+    if lang == 'en':
+        b_size, t_size, s_size = 32, 78, 42
+    elif lang == 'ur':
+        b_size, t_size, s_size = 34, 76, 40
+    elif lang == 'bn':
+        b_size, t_size, s_size = 34, 78, 42
+    else:  # ne, hi
+        b_size, t_size, s_size = 34, 80, 42
+
+    badge_font = get_font(b_size, bold=True, lang=lang)
+    title_font = get_font(t_size, bold=True, lang=lang)
+    subtitle_font = get_font(s_size, bold=False, lang=lang)
 
     # Badge Pill
-    bbox_b = draw.textbbox((0, 0), badge, font=badge_font)
+    bbox_b = draw.textbbox((0, 0), badge, font=badge_font, **text_kwargs)
     bw = bbox_b[2] - bbox_b[0] + 54
     bh = 62
     bx = (CANVAS_WIDTH - bw) // 2
@@ -301,18 +358,19 @@ def generate_dual_mockup(base_bg, light_screenshot_path, dark_screenshot_path, b
         ((CANVAS_WIDTH - (bbox_b[2] - bbox_b[0])) // 2, by + (13 if lang == 'en' else 11)),
         badge,
         font=badge_font,
-        fill=COLOR_BADGE_TEXT
+        fill=COLOR_BADGE_TEXT,
+        **text_kwargs
     )
 
     # Primary Title & Subtitle
-    bbox_title = draw.textbbox((0, 0), title, font=title_font)
-    bbox_sub = draw.textbbox((0, 0), subtitle, font=subtitle_font)
+    bbox_title = draw.textbbox((0, 0), title, font=title_font, **text_kwargs)
+    bbox_sub = draw.textbbox((0, 0), subtitle, font=subtitle_font, **text_kwargs)
 
     tx = (CANVAS_WIDTH - (bbox_title[2] - bbox_title[0])) // 2
     sx = (CANVAS_WIDTH - (bbox_sub[2] - bbox_sub[0])) // 2
 
-    draw.text((tx, 205), title, font=title_font, fill=COLOR_TEXT_PRIMARY)
-    draw.text((sx, 325), subtitle, font=subtitle_font, fill=COLOR_TEXT_SECONDARY)
+    draw.text((tx, 205), title, font=title_font, fill=COLOR_TEXT_PRIMARY, **text_kwargs)
+    draw.text((sx, 325), subtitle, font=subtitle_font, fill=COLOR_TEXT_SECONDARY, **text_kwargs)
 
     # Save Final High-Quality Asset
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -522,46 +580,153 @@ def main():
         }
     ]
 
-    print("\n-> Generating Nepal Store Mockups (1 to 6)...")
-    for m in nepal_mockups:
-        if m.get('type') == 'dual':
-            if not os.path.exists(m['shot_light']) or not os.path.exists(m['shot_dark']):
-                print(f"  [WARN] Missing screenshot for dual mockup: {m['out']}")
-                continue
-            generate_dual_mockup(base_bg, m['shot_light'], m['shot_dark'], m['badge'], m['title'], m['subtitle'], m['out'], lang=m['lang'])
-        else:
-            if not os.path.exists(m['shot']):
-                print(f"  [WARN] Screenshot missing: {m['shot']}")
-                continue
-            generate_mockup(base_bg, shadow_layer, m['shot'], m['badge'], m['title'], m['subtitle'], m['out'], lang=m['lang'])
+    # Mockup Definitions for Pakistan (Urdu) Store Listing
+    pakistan_mockups = [
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/01-converter-inputs.png'),
+            'badge': 'پاکستان کے لیے خاص',
+            'title': 'تولہ، ماشہ، آنہ اور گرام',
+            'subtitle': 'پاکستانی صرافہ مارکیٹ کے روایتی اوزان کا درست حساب',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/01-converter-inputs-mockup.png'),
+            'lang': 'ur'
+        },
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/02-results-and-price.png'),
+            'badge': 'مکمل حساب تفصیل',
+            'title': 'فوری نتائج اور سونے کی قیمت',
+            'subtitle': 'پاکستانی روپے اور ریٹ کے مطابق درست حساب',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/02-results-and-price-mockup.png'),
+            'lang': 'ur'
+        },
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/03-gold-zakat.png'),
+            'badge': 'زکوٰۃ کیلکولیٹر',
+            'title': 'سونے کی ۲.۵٪ زکوٰۃ کا حساب',
+            'subtitle': '۲۴ اور ۲۲ قیراط زیورات اور خالص سونا',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/03-gold-zakat-mockup.png'),
+            'lang': 'ur'
+        },
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/04-drawer-menu.png'),
+            'badge': 'کرنسی اور ڈارک موڈ',
+            'title': 'پاکستانی روپیہ اور جدید تھیم',
+            'subtitle': '۳۶ کرنسیاں اور آنکھوں کے لیے پرسکون ڈارک موڈ',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/04-drawer-menu-mockup.png'),
+            'lang': 'ur'
+        },
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/05-languages.png'),
+            'badge': 'کثیر لسانی سپورٹ',
+            'title': 'اردو اور ۲۰ سے زائد زبانیں',
+            'subtitle': 'سناروں، تاجروں اور خریداروں کے لیے انتہائی آسان',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/05-languages-mockup.png'),
+            'lang': 'ur'
+        },
+        {
+            'type': 'dual',
+            'shot_light': os.path.join(project_root, 'docs/screenshots/pakistan/01-converter-inputs.png'),
+            'shot_dark': os.path.join(project_root, 'docs/screenshots/pakistan/01-converter-inputs-dark.png'),
+            'badge': 'خوبصورت تھیمز',
+            'title': 'لائٹ اور ڈارک موڈ سپورٹ',
+            'subtitle': 'دن ہو یا رات، سونے کا حساب ہر وقت آسان',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/06-light-dark-mode-mockup.png'),
+            'lang': 'ur'
+        }
+    ]
 
-    print("\n-> Generating English Store Mockups (1 to 6)...")
-    for m in english_mockups:
-        if m.get('type') == 'dual':
-            if not os.path.exists(m['shot_light']) or not os.path.exists(m['shot_dark']):
-                print(f"  [WARN] Missing screenshot for dual mockup: {m['out']}")
-                continue
-            generate_dual_mockup(base_bg, m['shot_light'], m['shot_dark'], m['badge'], m['title'], m['subtitle'], m['out'], lang=m['lang'])
-        else:
-            if not os.path.exists(m['shot']):
-                print(f"  [WARN] Screenshot missing: {m['shot']}")
-                continue
-            generate_mockup(base_bg, shadow_layer, m['shot'], m['badge'], m['title'], m['subtitle'], m['out'], lang=m['lang'])
+    # Mockup Definitions for Bangladesh (Bengali) Store Listing
+    bangladesh_mockups = [
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/01-converter-inputs.png'),
+            'badge': 'বাংলাদেশ স্পেশাল',
+            'title': 'তোলা, মাশা, আনা ও গ্রাম',
+            'subtitle': 'বাংলাদেশি স্বর্ণ বাজারের সঠিক ও নিখুঁত রূপান্তর',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/01-converter-inputs-mockup.png'),
+            'lang': 'bn'
+        },
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/02-results-and-price.png'),
+            'badge': 'হিসাবের পূর্ণ বিবরণ',
+            'title': 'বিস্তারিত রূপান্তর ও স্বর্ণের মূল্য',
+            'subtitle': 'বাংলাদেশি টাকা (৳) তে তাৎক্ষণিক সঠিক দর ও হিসাব',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/02-results-and-price-mockup.png'),
+            'lang': 'bn'
+        },
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/03-gold-zakat.png'),
+            'badge': 'যাকাত ক্যালকুলেটর',
+            'title': 'স্বর্ণের ২.৫% যাকাতের হিসাব',
+            'subtitle': '২৪ ক্যারেট ও ২২ ক্যারেট গহনার নিখুঁত বিশুদ্ধতা ও মান',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/03-gold-zakat-mockup.png'),
+            'lang': 'bn'
+        },
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/04-drawer-menu.png'),
+            'badge': 'মুদ্রা ও ডার্ক থিম',
+            'title': 'বাংলাদেশি টাকা (৳) ও নাইট মোড',
+            'subtitle': '৩৬টি মুদ্রা এবং চোখের জন্য আরামদায়ক ডার্ক থিম',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/04-drawer-menu-mockup.png'),
+            'lang': 'bn'
+        },
+        {
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/05-languages.png'),
+            'badge': 'বহুভাষিক সুবিধা',
+            'title': 'বাংলা সহ ২০+ আন্তর্জাতিক ভাষা',
+            'subtitle': 'স্বর্ণ ব্যবসায়ী ও গ্রাহকদের জন্য সহজ ব্যবহার',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/05-languages-mockup.png'),
+            'lang': 'bn'
+        },
+        {
+            'type': 'dual',
+            'shot_light': os.path.join(project_root, 'docs/screenshots/bangladesh/01-converter-inputs.png'),
+            'shot_dark': os.path.join(project_root, 'docs/screenshots/bangladesh/01-converter-inputs-dark.png'),
+            'badge': 'আকর্ষণীয় থিমসমূহ',
+            'title': 'লাইট ও ডার্ক মোড সাপোর্ট',
+            'subtitle': 'দিন বা রাত, যেকোনো সময় হিসাব করুন স্বাচ্ছন্দ্যে',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/06-light-dark-mode-mockup.png'),
+            'lang': 'bn'
+        }
+    ]
 
-    print("\n-> Generating India (Hindi) Store Mockups (1 to 6)...")
-    for m in india_mockups:
-        if m.get('type') == 'dual':
-            if not os.path.exists(m['shot_light']) or not os.path.exists(m['shot_dark']):
-                print(f"  [WARN] Missing screenshot for dual mockup: {m['out']}")
-                continue
-            generate_dual_mockup(base_bg, m['shot_light'], m['shot_dark'], m['badge'], m['title'], m['subtitle'], m['out'], lang=m['lang'])
-        else:
-            if not os.path.exists(m['shot']):
-                print(f"  [WARN] Screenshot missing: {m['shot']}")
-                continue
-            generate_mockup(base_bg, shadow_layer, m['shot'], m['badge'], m['title'], m['subtitle'], m['out'], lang=m['lang'])
+    all_sets = {
+        'pakistan': ('Pakistan (Urdu)', pakistan_mockups),
+        'bangladesh': ('Bangladesh (Bengali)', bangladesh_mockups),
+        'nepal': ('Nepal', nepal_mockups),
+        'english': ('English', english_mockups),
+        'india': ('India (Hindi)', india_mockups),
+    }
 
-    print("\nAll mockups generated successfully at 1242 x 2688 px!")
+    # Filter by arguments if supplied, e.g. python3 generate_mockups.py pakistan bangladesh
+    selected_targets = [arg.lower() for arg in sys.argv[1:] if arg.lower() in all_sets]
+    if not selected_targets:
+        selected_targets = list(all_sets.keys())
+
+    for target_key in selected_targets:
+        label, mockups = all_sets[target_key]
+        print(f"\n-> Generating {label} Store Mockups (1 to {len(mockups)})...")
+        for m in mockups:
+            if m.get('type') == 'dual':
+                if not os.path.exists(m['shot_light']) or not os.path.exists(m['shot_dark']):
+                    print(f"  [WARN] Missing screenshot for dual mockup: {m['out']}")
+                    continue
+                generate_dual_mockup(base_bg, m['shot_light'], m['shot_dark'], m['badge'], m['title'], m['subtitle'], m['out'], lang=m['lang'])
+            else:
+                if not os.path.exists(m['shot']):
+                    print(f"  [WARN] Screenshot missing: {m['shot']}")
+                    continue
+                generate_mockup(base_bg, shadow_layer, m['shot'], m['badge'], m['title'], m['subtitle'], m['out'], lang=m['lang'])
+
+    print("\nAll requested mockups generated successfully at 1242 x 2688 px!")
 
 if __name__ == '__main__':
     main()

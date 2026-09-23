@@ -6,11 +6,14 @@ This document is the single source of truth for all Google Play Store listings f
 
 ## Quick Reference Summary
 
-| Listing Type | Target Audience / Country | Default Language | Currency Mode | Key Regional Units | Text File (Title / Short / Full) | Feature Graphic | Mockups Directory |
+| Listing Type | Target Audience / Country | Default Language | Currency Mode | Key Regional Units | Metadata Document | Feature Graphic | Mockups Directory |
 |---|---|---|---|---|---|---|---|
-| **Main Store Listing** | Global (All Countries) | English (`en-US`) | Multi / USD (`$`) | Tola, Masha, Ratti, Gram | [`store-listing-en.txt`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-en.txt) | `docs/feature-graphics/feature-graphic-en.png` | `docs/mockups/english/` |
-| **Custom Store Listing** | India 🇮🇳 | Hindi (`hi-IN`) | INR (`₹`) | Tola, Masha, Ana, Ratti, Gram | [`store-listing-hi.txt`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-hi.txt) | `docs/feature-graphics/feature-graphic-hi.png` | `docs/mockups/india/` |
-| **Custom Store Listing** | Nepal 🇳🇵 | Nepali (`ne-NP`) | NPR (`रु`) | Tola, Lal, Ana, Gram | [`store-listing-ne.txt`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-ne.txt) | `docs/feature-graphics/feature-graphic-ne.png` | `docs/mockups/nepal/` |
+| **Main Store Listing** | Global (All Countries) | English (`en-US`) | Multi / USD (`$`) | Tola, Masha, Ratti, Gram | [`store-listing-en.md`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-en.md) | `docs/feature-graphics/feature-graphic-en.png` | `docs/mockups/english/` |
+| **Custom Store Listing** | Pakistan 🇵🇰 | Urdu (`ur`) | PKR (`Rs` / `₨`) | Tola, Masha, Ana, Ratti, Gram | [`store-listing-ur.md`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-ur.md) | `docs/feature-graphics/feature-graphic-ur.png` | `docs/mockups/pakistan/` |
+| **Custom Store Listing** | Bangladesh 🇧🇩 | Bengali (`bn` / `bn-BD`) | BDT (`৳`) | Vori/Tola, Ana, Ratti, Point/Lal, Gram | [`store-listing-bn.md`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-bn.md) | `docs/feature-graphics/feature-graphic-bn.png` | `docs/mockups/bangladesh/` |
+| **Custom Store Listing** | India 🇮🇳 | Hindi (`hi-IN`) | INR (`₹`) | Tola, Masha, Ana, Ratti, Gram | [`store-listing-hi.md`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-hi.md) | `docs/feature-graphics/feature-graphic-hi.png` | `docs/mockups/india/` |
+| **Custom Store Listing** | Nepal 🇳🇵 | Nepali (`ne-NP`) | NPR (`रु`) | Tola, Lal, Ana, Gram | [`store-listing-ne.md`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-ne.md) | `docs/feature-graphics/feature-graphic-ne.png` | `docs/mockups/nepal/` |
+
 
 ---
 
@@ -149,7 +152,87 @@ This document is the single source of truth for all Google Play Store listings f
 
 ---
 
-## 3. Global / Main Store Listing (English) 🌍
+## 3. Pakistan (Custom Store Listing) 🇵🇰
+
+### Target Audience & Configuration
+- **Play Console Location**: Store presence > Custom store listings > Create listing
+- **Target Criteria**: **Country / Region** → Select **Pakistan**
+- **Default Language**: **Urdu (`ur`)**
+- **Target Age (App Content)**: **18 and over** (Utility / Finance tool)
+- **Currency Mode**: **PKR (`Rs` / `₨`)**
+- **Key Regional Units**: Tola, Masha, Ana, Ratti, Gram (1 Tola = 12 Masha = 16 Ana = 96 Ratti = 11.664 g)
+
+### Store Listing Copy
+
+#### **App Title** *(27 / 30 characters)*:
+```text
+گولڈ ویٹ کنورٹر: تولہ، ماشہ انا
+```
+
+#### **Short Description** *(72 / 80 characters)*:
+```text
+تولہ، ماشہ، رتی اور گرام میں سونے کا وزن، قیمت اور 2.5% زکوٰۃ کیلکولیٹر۔
+```
+
+#### **Full Description** *(Google Play Store)*:
+*(See complete copy-paste markdown in [`store-listing-ur.md`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-ur.md))*
+
+### Visual Assets & Mockups
+
+- **Feature Graphic** (`1024 × 500 px`):
+  `docs/feature-graphics/feature-graphic-ur.png`
+- **Play Store Phone Mockups** (`1242 × 2688 px`):
+  1. `docs/mockups/pakistan/01-converter-inputs-mockup.png` — *پاکستان کے لیے خاص: تولہ، ماشہ، آنہ اور گرام*
+  2. `docs/mockups/pakistan/02-results-and-price-mockup.png` — *مکمل حساب تفصیل: فوری نتائج اور سونے کی قیمت (Rs)*
+  3. `docs/mockups/pakistan/03-gold-zakat-mockup.png` — *زکوٰۃ کیلکولیٹر: سونے کی ۲.۵٪ زکوٰۃ کا حساب*
+  4. `docs/mockups/pakistan/04-drawer-menu-mockup.png` — *کرنسی اور ڈارک موڈ: پاکستانی روپیہ اور جدید تھیم*
+  5. `docs/mockups/pakistan/05-languages-mockup.png` — *کثیر لسانی سپورٹ: اردو اور ۲۰ سے زائد زبانیں*
+  6. `docs/mockups/pakistan/06-light-dark-mode-mockup.png` — *خوبصورت تھیمز: لائٹ اور ڈارک موڈ سپورٹ (Dual 3D Phones)*
+- **Source Screenshots**: `docs/screenshots/pakistan/`
+
+---
+
+## 4. Bangladesh (Custom Store Listing) 🇧🇩
+
+### Target Audience & Configuration
+- **Play Console Location**: Store presence > Custom store listings > Create listing
+- **Target Criteria**: **Country / Region** → Select **Bangladesh**
+- **Default Language**: **Bengali (`bn` / `bn-BD`)**
+- **Target Age (App Content)**: **18 and over** (Utility / Finance tool)
+- **Currency Mode**: **BDT (`৳`)**
+- **Key Regional Units**: Vori/Tola, Ana, Ratti, Point/Lal, Gram (1 Vori/Tola = 16 Ana = 96 Ratti = 11.664 g; 1 Ana = 6 Ratti)
+
+### Store Listing Copy
+
+#### **App Title** *(25 / 30 characters)*:
+```text
+সোনার ওজন ও দাম: ভরি, আনা
+```
+
+#### **Short Description** *(73 / 80 characters)*:
+```text
+ভরি, আনা, রতি ও গ্রাম কনভার্টার, স্বর্ণের দাম এবং ২.৫% যাকাত ক্যালকুলেটর।
+```
+
+#### **Full Description** *(Google Play Store)*:
+*(See complete copy-paste markdown in [`store-listing-bn.md`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-bn.md))*
+
+### Visual Assets & Mockups
+
+- **Feature Graphic** (`1024 × 500 px`):
+  `docs/feature-graphics/feature-graphic-bn.png`
+- **Play Store Phone Mockups** (`1242 × 2688 px`):
+  1. `docs/mockups/bangladesh/01-converter-inputs-mockup.png` — *বাংলাদেশ স্পেশাল: তোলা, মাশা, আনা ও গ্রাম*
+  2. `docs/mockups/bangladesh/02-results-and-price-mockup.png` — *হিসাবের পূর্ণ বিবরণ: বিস্তারিত রূপান্তর ও স্বর্ণের মূল্য (৳)*
+  3. `docs/mockups/bangladesh/03-gold-zakat-mockup.png` — *যাকাত ক্যালকুলেটর: স্বর্ণের ২.৫% যাকাতের হিসাব*
+  4. `docs/mockups/bangladesh/04-drawer-menu-mockup.png` — *মুদ্রা ও ডার্ক থিম: বাংলাদেশি টাকা (৳) ও নাইট মোড*
+  5. `docs/mockups/bangladesh/05-languages-mockup.png` — *বহুভাষিক সুবিধা: বাংলা সহ ২০+ আন্তর্জাতিক ভাষা*
+  6. `docs/mockups/bangladesh/06-light-dark-mode-mockup.png` — *আকর্ষণীয় থিমসমূহ: লাইট ও ডার্ক মোড সাপোর্ট (Dual 3D Phones)*
+- **Source Screenshots**: `docs/screenshots/bangladesh/`
+
+---
+
+## 5. Global / Main Store Listing (English) 🌍
 
 ### Target Audience & Configuration
 - **Play Console Location**: Store presence > Main store listing
@@ -214,16 +297,39 @@ Whether you are shopping for gold jewelry, calculating bullion value, or determi
 
 ---
 
-## 4. Regeneration & Asset Automation
+## 6. Regeneration & Asset Automation
 
-All 18 Play Store mockups can be programmatically re-rendered at any time using the unified Python script:
+### 6.1 Play Store Phone Mockups (1242 × 2688 px)
+All 30 Play Store phone mockups (6 screens across English, Pakistan, Bangladesh, India, and Nepal) can be programmatically re-rendered at any time:
 
 ```bash
+# Render all 30 mockups across all 5 target regions
 python3 docs/mockups/generate_mockups.py
+
+# Or target specific regions
+python3 docs/mockups/generate_mockups.py pakistan bangladesh
 ```
 
 - **Output Dimensions**: `1242 × 2688 px` (High DPI, 9:19.5 aspect ratio)
-- **Framing**: Titanium bezel with realistic speaker notch and unclipped 3D drop shadows
+- **Framing**: Titanium bezel with realistic speaker notch, rounded glass corners, and unclipped 3D drop shadows
 - **Device Mockup Types**:
   - Mockups 1–5: Single centered device
   - Mockup 6: Dual angled 3D floating perspective (Light Mode foreground + Dark Mode background)
+
+### 6.2 Feature Graphics (1024 × 500 px)
+Google Play Store promotional feature graphics are located under `docs/feature-graphics/`:
+- `feature-graphic-en.png`: Global English
+- `feature-graphic-ur.png`: Pakistan (Urdu / اردو)
+- `feature-graphic-bn.png`: Bangladesh (Bengali / বাংলা)
+- `feature-graphic-hi.png`: India (Hindi / हिन्दी)
+- `feature-graphic-ne.png`: Nepal (Nepali / नेपाली)
+
+Programmatic generation script:
+```bash
+python3 docs/feature-graphics/generate_feature_graphics.py
+```
+
+- **Output Dimensions**: `1024 × 500 px` (Standard Google Play format, RGB PNG, maximum 15 MB)
+- **Visual Features**: Embossed 3D gold typography, royal purple to golden amber radial glow, perspective-rendered smartphone showing regional converter inputs, Dynamic Island front-camera pill, 3D golden balance scale, Flutter badge, and regional flag badges.
+
+
