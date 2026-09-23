@@ -3,11 +3,11 @@ description: Install Flutter SDK, cache pub dependencies, and run pub get
 
 inputs:
   flutter-version:
-    description: Flutter SDK version
+    description: 'Flutter SDK version (leave empty for latest on channel)'
     required: false
-    default: '3.44.5'
+    default: ''
   channel:
-    description: Flutter channel
+    description: 'Flutter channel'
     required: false
     default: stable
 

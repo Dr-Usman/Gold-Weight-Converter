@@ -58,6 +58,59 @@ void main() {
         closeTo(100, 0.0001),
       );
     });
+
+    test('converts ana to grams with exact 5-decimal precision', () {
+      expect(
+        WeightConverter.toGrams(1, WeightUnitEnum.ana),
+        0.72875,
+      );
+      expect(
+        WeightConverter.fromGrams(0.72875, WeightUnitEnum.ana),
+        closeTo(1.0, 0.000001),
+      );
+    });
+
+    test('converts ratti to grams with exact precision', () {
+      expect(
+        WeightConverter.toGrams(1, WeightUnitEnum.ratti),
+        0.1215,
+      );
+      expect(
+        WeightConverter.fromGrams(0.1215, WeightUnitEnum.ratti),
+        closeTo(1.0, 0.000001),
+      );
+    });
+
+    test('converts masha to grams with exact precision', () {
+      expect(
+        WeightConverter.toGrams(1, WeightUnitEnum.masha),
+        0.972,
+      );
+      expect(
+        WeightConverter.fromGrams(0.972, WeightUnitEnum.masha),
+        closeTo(1.0, 0.000001),
+      );
+    });
+
+    test('maintains accuracy with 5-decimal fractional inputs', () {
+      // 0.72875 Ana + 0.12150 Ratti + 0.00005 Gram
+      final double total = WeightConverter.totalGrams(
+        ana: 0.72875,
+        ratti: 0.1215,
+        gram: 0.00005,
+      );
+      final double expected = (0.72875 * 0.72875) + (0.1215 * 0.1215) + 0.00005;
+      expect(total, closeTo(expected, 1e-9));
+    });
+
+    test('maintains accuracy on large scale numbers (millions)', () {
+      final double total = WeightConverter.totalGrams(
+        tola: 1000000,
+        gram: 500000,
+      );
+      // 1,000,000 tola = 11,660,000 grams + 500,000 = 12,160,000 grams
+      expect(total, 12160000.0);
+    });
   });
 
   group('ZakatCalculator', () {
