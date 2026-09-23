@@ -123,5 +123,12 @@
   "shareAppMessage": "حوّل أوزان الذهب مع محول وزن الذهب: {url}",
   "openLinkFailed": "تعذر فتح الرابط",
   "appUpdateReady": "تم تنزيل التحديث. أعد التشغيل للتثبيت.",
-  "appUpdateRestart": "إعادة التشغيل"
+  "appUpdateRestart": "إعادة التشغيل",
+  "lalLabel": "لال",
+  "lalInfo": "1 لال = 0.1166 جرام = 0.01 تولة (100 لال = 1 تولة)",
+  "lalHint": "مثل 25",
+  "lalSemanticLabel": "حقل إدخال وزن اللال",
+  "lalConversion": "اللال: {value} × {factor} = {result} جرام",
+  "lalResult": "اللال: {value}",
+  "unitLal": "لال"
 }

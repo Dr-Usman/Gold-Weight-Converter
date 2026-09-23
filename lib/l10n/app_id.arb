@@ -123,5 +123,12 @@
   "shareAppMessage": "Konversi berat emas dengan Gold Weight Converter: {url}",
   "openLinkFailed": "Tautan tidak dapat dibuka",
   "appUpdateReady": "Pembaruan diunduh. Mulai ulang untuk memasang.",
-  "appUpdateRestart": "Mulai ulang"
+  "appUpdateRestart": "Mulai ulang",
+  "lalLabel": "Lal",
+  "lalInfo": "1 Lal = 0.1166 gram = 0.01 Tola (100 Lal = 1 Tola)",
+  "lalHint": "cth. 25",
+  "lalSemanticLabel": "Kolom input berat Lal",
+  "lalConversion": "Lal: {value} × {factor} = {result} gram",
+  "lalResult": "Lal: {value}",
+  "unitLal": "Lal"
 }

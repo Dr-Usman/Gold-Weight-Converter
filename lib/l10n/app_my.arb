@@ -123,5 +123,12 @@
   "shareAppMessage": "ရွှေအလေးချိန် တွက်ချက်စက်ကို အသုံးပြုကြည့်ပါ: {url}",
   "openLinkFailed": "လင့်ခ်ကို ဖွင့်၍မရပါ",
   "appUpdateReady": "အပ်ဒိတ် ဒေါင်းလုဒ်ပြီးပါပြီ။ ထည့်သွင်းရန် အက်ပ်ကို ပြန်လည်စတင်ပါ။",
-  "appUpdateRestart": "ပြန်လည်စတင်မည်"
+  "appUpdateRestart": "ပြန်လည်စတင်မည်",
+  "lalLabel": "လာလ်",
+  "lalInfo": "၁ လာလ် = ၀.၁၁၆၆ ဂရမ် = ၀.၀၁ တိုလာ (၁၀၀ လာလ် = ၁ တိုလာ)",
+  "lalHint": "ဥပမာ ၂၅",
+  "lalSemanticLabel": "လာလ် အလေးချိန် ထည့်သွင်းရန် အကွက်",
+  "lalConversion": "လာလ်: {value} × {factor} = {result} ဂရမ်",
+  "lalResult": "လာလ်: {value}",
+  "unitLal": "လာလ်"
 }

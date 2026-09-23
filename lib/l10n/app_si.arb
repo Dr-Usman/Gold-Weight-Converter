@@ -123,5 +123,12 @@
   "shareAppMessage": "රන් බර පරිවර්තකය භාවිතා කර බලන්න: {url}",
   "openLinkFailed": "සබැඳිය විවෘත කිරීමට නොහැකි විය",
   "appUpdateReady": "යාවත්කාලීන කිරීම බාගන්නා ලදි. ස්ථාපනය කිරීමට නැවත ආරම්භ කරන්න.",
-  "appUpdateRestart": "නැවත ආරම්භ කරන්න"
+  "appUpdateRestart": "නැවත ආරම්භ කරන්න",
+  "lalLabel": "ලාල්",
+  "lalInfo": "1 ලාල් = 0.1166 ග්‍රෑම් = 0.01 තෝලා (100 ලාල් = 1 තෝලා)",
+  "lalHint": "උදා. 25",
+  "lalSemanticLabel": "ලාල් බර ආදාන ක්ෂේත්‍රය",
+  "lalConversion": "ලාල්: {value} × {factor} = {result} ග්‍රෑම්",
+  "lalResult": "ලාල්: {value}",
+  "unitLal": "ලාල්"
 }

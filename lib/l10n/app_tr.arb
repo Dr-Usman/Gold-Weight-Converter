@@ -123,5 +123,12 @@
   "shareAppMessage": "Altın ağırlıklarını Gold Weight Converter ile dönüştürün: {url}",
   "openLinkFailed": "Bağlantı açılamadı",
   "appUpdateReady": "Güncelleme indirildi. Yüklemek için yeniden başlatın.",
-  "appUpdateRestart": "Yeniden başlat"
+  "appUpdateRestart": "Yeniden başlat",
+  "lalLabel": "Lal",
+  "lalInfo": "1 Lal = 0.1166 gram = 0.01 Tola (100 Lal = 1 Tola)",
+  "lalHint": "örn. 25",
+  "lalSemanticLabel": "Lal ağırlık giriş alanı",
+  "lalConversion": "Lal: {value} × {factor} = {result} gram",
+  "lalResult": "Lal: {value}",
+  "unitLal": "Lal"
 }

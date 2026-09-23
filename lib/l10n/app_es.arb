@@ -123,5 +123,12 @@
   "shareAppMessage": "Pruebe el conversor de peso de oro: {url}",
   "openLinkFailed": "No se pudo abrir el enlace",
   "appUpdateReady": "Actualización descargada. Reinicie para instalar.",
-  "appUpdateRestart": "Reiniciar"
+  "appUpdateRestart": "Reiniciar",
+  "lalLabel": "Lal",
+  "lalInfo": "1 Lal = 0,1166 gramos = 0,01 Tola (100 Lal = 1 Tola)",
+  "lalHint": "ej. 25",
+  "lalSemanticLabel": "Campo de entrada de peso en Lal",
+  "lalConversion": "Lal: {value} × {factor} = {result} gramos",
+  "lalResult": "Lal: {value}",
+  "unitLal": "Lal"
 }

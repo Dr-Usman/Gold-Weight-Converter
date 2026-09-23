@@ -123,5 +123,12 @@
   "shareAppMessage": "সোনার ওজন রূপান্তরকারী ব্যবহার করুন: {url}",
   "openLinkFailed": "লিঙ্ক খোলা যায়নি",
   "appUpdateReady": "আপডেট ডাউনলোড হয়েছে। ইনস্টল করতে রিস্টার্ট করুন।",
-  "appUpdateRestart": "রিস্টার্ট"
+  "appUpdateRestart": "রিস্টার্ট",
+  "lalLabel": "লাল",
+  "lalInfo": "১ লাল = ০.১১৬৬ গ্রাম = ০.০১ তোলা (১০০ লাল = ১ তোলা)",
+  "lalHint": "যেমন ২৫",
+  "lalSemanticLabel": "লাল ওজন ইনপুট ক্ষেত্র",
+  "lalConversion": "লাল: {value} × {factor} = {result} গ্রাম",
+  "lalResult": "লাল: {value}",
+  "unitLal": "লাল"
 }

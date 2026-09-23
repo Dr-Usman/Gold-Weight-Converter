@@ -66,16 +66,16 @@ class AppLocalizationsUr extends AppLocalizations {
   String get rattiSemanticLabel => 'رتی وزن درج کنے والا فیلڈ';
 
   @override
-  String get lalLabel => 'Lal';
+  String get lalLabel => 'لال';
 
   @override
-  String get lalInfo => '1 Lal = 0.1166 grams = 0.01 Tola (100 Lal = 1 Tola)';
+  String get lalInfo => '1 لال = 0.1166 گرام = 0.01 تولہ (100 لال = 1 تولہ)';
 
   @override
-  String get lalHint => 'e.g. 25';
+  String get lalHint => 'مثلاً 25';
 
   @override
-  String get lalSemanticLabel => 'Lal weight input field';
+  String get lalSemanticLabel => 'لال وزن درج کرنے والا فیلڈ';
 
   @override
   String get gramLabel => 'گرام';
@@ -138,7 +138,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String lalConversion(String value, String factor, String result) {
-    return 'Lal: $value × $factor = $result grams';
+    return 'لال: $value × $factor = $result گرام';
   }
 
   @override
@@ -161,7 +161,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String lalResult(String value) {
-    return 'Lal: $value';
+    return 'لال: $value';
   }
 
   @override
@@ -193,7 +193,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get unitTola => 'تولہ';
 
   @override
-  String get unitLal => 'Lal';
+  String get unitLal => 'لال';
 
   @override
   String get unitTenGram => '10 گرام';
@@ -512,6 +512,18 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   String get rattiSemanticLabel => 'Ratti wazan darj karne wala field';
 
   @override
+  String get lalLabel => 'Lal';
+
+  @override
+  String get lalInfo => '1 Lal = 0.1166 gram = 0.01 Tola (100 Lal = 1 Tola)';
+
+  @override
+  String get lalHint => 'maslan 25';
+
+  @override
+  String get lalSemanticLabel => 'Lal wazan darj karne wala field';
+
+  @override
   String get gramLabel => 'Gram';
 
   @override
@@ -572,6 +584,11 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   }
 
   @override
+  String lalConversion(String value, String factor, String result) {
+    return 'Lal: $value × $factor = $result gram';
+  }
+
+  @override
   String gramConversion(String value) {
     return 'Gram: $value gram';
   }
@@ -587,6 +604,11 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   @override
   String tolaResult(String value) {
     return 'Tola: $value';
+  }
+
+  @override
+  String lalResult(String value) {
+    return 'Lal: $value';
   }
 
   @override
@@ -616,6 +638,9 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
 
   @override
   String get unitTola => 'Tola';
+
+  @override
+  String get unitLal => 'Lal';
 
   @override
   String get unitTenGram => '10 Gram';

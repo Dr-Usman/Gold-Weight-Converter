@@ -123,5 +123,12 @@
   "shareAppMessage": "የወርቅ ክብደት መለወጫን ይሞክሩ: {url}",
   "openLinkFailed": "ሊንኩን መክፈት አልተቻለም",
   "appUpdateReady": "ዝመናው ወርዷል። ለመጫን መተግበሪያውን እንደገና ያስጀምሩ።",
-  "appUpdateRestart": "እንደገና አስጀምር"
+  "appUpdateRestart": "እንደገና አስጀምር",
+  "lalLabel": "ላል",
+  "lalInfo": "1 ላል = 0.1166 ግራም = 0.01 ቶላ (100 ላል = 1 ቶላ)",
+  "lalHint": "ምሳሌ 25",
+  "lalSemanticLabel": "የላል ክብደት ማስገቢያ ሳጥን",
+  "lalConversion": "ላል: {value} × {factor} = {result} ግራም",
+  "lalResult": "ላል: {value}",
+  "unitLal": "ላል"
 }

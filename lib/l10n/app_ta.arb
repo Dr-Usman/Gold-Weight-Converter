@@ -123,5 +123,12 @@
   "shareAppMessage": "தங்க எடை மாற்றியைப் பயன்படுத்தவும்: {url}",
   "openLinkFailed": "இணைப்பைத் திறக்க முடியவில்லை",
   "appUpdateReady": "புதுப்பிப்பு பதிவிறக்கம் செய்யப்பட்டது. நிறுவ மீண்டும் தொடங்கவும்.",
-  "appUpdateRestart": "மீண்டும் தொடங்கு"
+  "appUpdateRestart": "மீண்டும் தொடங்கு",
+  "lalLabel": "லால்",
+  "lalInfo": "1 லால் = 0.1166 கிராம் = 0.01 தோலா (100 லால் = 1 தோலா)",
+  "lalHint": "எ.கா. 25",
+  "lalSemanticLabel": "லால் எடை உள்ளீட்டு புலம்",
+  "lalConversion": "லால்: {value} × {factor} = {result} கிராம்",
+  "lalResult": "லால்: {value}",
+  "unitLal": "லால்"
 }

@@ -66,16 +66,16 @@ class AppLocalizationsFa extends AppLocalizations {
   String get rattiSemanticLabel => 'فیلد ورودی وزن رتی';
 
   @override
-  String get lalLabel => 'Lal';
+  String get lalLabel => 'لال';
 
   @override
-  String get lalInfo => '1 Lal = 0.1166 grams = 0.01 Tola (100 Lal = 1 Tola)';
+  String get lalInfo => '۱ لال = ۰.۱۱۶۶ گرم = ۰.۰۱ توله (۱۰۰ لال = ۱ توله)';
 
   @override
-  String get lalHint => 'e.g. 25';
+  String get lalHint => 'مثلاً ۲۵';
 
   @override
-  String get lalSemanticLabel => 'Lal weight input field';
+  String get lalSemanticLabel => 'فیلد ورودی وزن لال';
 
   @override
   String get gramLabel => 'گرم';
@@ -138,7 +138,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String lalConversion(String value, String factor, String result) {
-    return 'Lal: $value × $factor = $result grams';
+    return 'لال: $value × $factor = $result گرم';
   }
 
   @override
@@ -161,7 +161,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String lalResult(String value) {
-    return 'Lal: $value';
+    return 'لال: $value';
   }
 
   @override
@@ -193,7 +193,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get unitTola => 'تولہ';
 
   @override
-  String get unitLal => 'Lal';
+  String get unitLal => 'لال';
 
   @override
   String get unitTenGram => '10 گرم';

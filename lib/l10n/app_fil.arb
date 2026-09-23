@@ -123,5 +123,12 @@
   "shareAppMessage": "Subukan ang Gold Weight Converter: {url}",
   "openLinkFailed": "Hindi mabuksan ang link",
   "appUpdateReady": "Na-download na ang update. I-restart upang mai-install.",
-  "appUpdateRestart": "I-restart"
+  "appUpdateRestart": "I-restart",
+  "lalLabel": "Lal",
+  "lalInfo": "1 Lal = 0.1166 gramo = 0.01 Tola (100 Lal = 1 Tola)",
+  "lalHint": "hal. 25",
+  "lalSemanticLabel": "Input field para sa bigat ng Lal",
+  "lalConversion": "Lal: {value} × {factor} = {result} gramo",
+  "lalResult": "Lal: {value}",
+  "unitLal": "Lal"
 }

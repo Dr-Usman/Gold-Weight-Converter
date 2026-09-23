@@ -123,5 +123,12 @@
   "shareAppMessage": "د سرو زرو وزن د Gold Weight Converter سره واړوئ: {url}",
   "openLinkFailed": "لینک پرانیستل نشو",
   "appUpdateReady": "تازه کول ډاونلوډ شول. د نصب لپاره بیا پیل کړئ.",
-  "appUpdateRestart": "بیا پیل"
+  "appUpdateRestart": "بیا پیل",
+  "lalLabel": "لال",
+  "lalInfo": "1 لال = 0.1166 ګرام = 0.01 توله (100 لال = 1 توله)",
+  "lalHint": "مثلاً 25",
+  "lalSemanticLabel": "د لال وزن درج کولو ځای",
+  "lalConversion": "لال: {value} × {factor} = {result} ګرام",
+  "lalResult": "لال: {value}",
+  "unitLal": "لال"
 }

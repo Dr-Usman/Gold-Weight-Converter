@@ -123,5 +123,12 @@
   "shareAppMessage": "Sone ke wazan ka converter istemal karein: {url}",
   "openLinkFailed": "Link nahi khul saka",
   "appUpdateReady": "Update download ho gaya. Install ke liye restart karein.",
-  "appUpdateRestart": "Restart"
+  "appUpdateRestart": "Restart",
+  "lalLabel": "Lal",
+  "lalInfo": "1 Lal = 0.1166 gram = 0.01 Tola (100 Lal = 1 Tola)",
+  "lalHint": "maslan 25",
+  "lalSemanticLabel": "Lal wazan darj karne wala field",
+  "lalConversion": "Lal: {value} × {factor} = {result} gram",
+  "lalResult": "Lal: {value}",
+  "unitLal": "Lal"
 }

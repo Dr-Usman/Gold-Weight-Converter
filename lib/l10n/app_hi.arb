@@ -123,5 +123,12 @@
   "shareAppMessage": "सोने के वजन का कनवर्टर आज़माएँ: {url}",
   "openLinkFailed": "लिंक नहीं खुल सका",
   "appUpdateReady": "अपडेट डाउनलोड हो गया। इंस्टॉल करने के लिए रीस्टार्ट करें।",
-  "appUpdateRestart": "रीस्टार्ट"
+  "appUpdateRestart": "रीस्टार्ट",
+  "lalLabel": "लाल",
+  "lalInfo": "1 लाल = 0.1166 ग्राम = 0.01 तोला (100 लाल = 1 तोला)",
+  "lalHint": "जैसे 25",
+  "lalSemanticLabel": "लाल वजन इनपुट फ़ील्ड",
+  "lalConversion": "लाल: {value} × {factor} = {result} ग्राम",
+  "lalResult": "लाल: {value}",
+  "unitLal": "लाल"
 }

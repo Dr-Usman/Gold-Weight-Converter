@@ -70,13 +70,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get lalLabel => 'Lal';
 
   @override
-  String get lalInfo => '1 Lal = 0.1166 grams = 0.01 Tola (100 Lal = 1 Tola)';
+  String get lalInfo => '1 Lal = 0,1166 gramme = 0,01 Tola (100 Lal = 1 Tola)';
 
   @override
-  String get lalHint => 'e.g. 25';
+  String get lalHint => 'ex. 25';
 
   @override
-  String get lalSemanticLabel => 'Lal weight input field';
+  String get lalSemanticLabel => 'Champ de saisie du poids en Lal';
 
   @override
   String get gramLabel => 'Gramme';
@@ -139,7 +139,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String lalConversion(String value, String factor, String result) {
-    return 'Lal: $value × $factor = $result grams';
+    return 'Lal: $value × $factor = $result grammes';
   }
 
   @override

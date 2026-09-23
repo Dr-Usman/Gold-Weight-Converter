@@ -123,5 +123,12 @@
   "shareAppMessage": "وزن طلا را با مبدل وزن طلا تبدیل کنید: {url}",
   "openLinkFailed": "پیوند باز نشد",
   "appUpdateReady": "به‌روزرسانی دانلود شد. برای نصب، برنامه را دوباره راه‌اندازی کنید.",
-  "appUpdateRestart": "راه‌اندازی مجدد"
+  "appUpdateRestart": "راه‌اندازی مجدد",
+  "lalLabel": "لال",
+  "lalInfo": "۱ لال = ۰.۱۱۶۶ گرم = ۰.۰۱ توله (۱۰۰ لال = ۱ توله)",
+  "lalHint": "مثلاً ۲۵",
+  "lalSemanticLabel": "فیلد ورودی وزن لال",
+  "lalConversion": "لال: {value} × {factor} = {result} گرم",
+  "lalResult": "لال: {value}",
+  "unitLal": "لال"
 }
