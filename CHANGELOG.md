@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.9.1] - 2026-09-23
+
+### Fixed
+- Fixed decimal trailing zero bug in number input formatter, allowing seamless typing of decimal fractions like `0.0`, `2.00`, and `3.5005`
+- Fixed caret trapping when backspacing across thousands separator commas
+- Prevented invalid multiple decimal points, leading redundant zeros, and negative signs in weight fields
+
+### Added
+- Comprehensive test suite covering 55 number formatter edge cases and high-precision unit conversions
+
+### Play Store (en-US)
+```
+What's new in 1.9.1
+• Improved number input when entering decimals and zeros
+• Smoother typing and editing across all gold weight fields
+• Performance improvements and bug fixes
+```
+
+---
+
 ## [1.9.0] - 2026-09-23
 
 ### Added
