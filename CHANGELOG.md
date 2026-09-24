@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.9.2] - 2026-09-24
+
+### Added
+- Registered Mixpanel Super Properties (`preferred_language`, `theme_mode`, `preferred_currency`) so user preferences automatically attach client-side to every tracked event
+- Independent fallback and graceful preference initialization for first-time installs before `app_opened` fires
+- Dynamic Super Property updates whenever users change their language, theme mode, or display currency
+- Unit test suite for analytics helpers and preference value resolvers
+
+### Play Store (en-US)
+```
+What's new in 1.9.2
+• Improved app reliability and user settings persistence
+• Performance improvements and bug fixes
+```
+
+---
+
 ## [1.9.1] - 2026-09-23
 
 ### Fixed
