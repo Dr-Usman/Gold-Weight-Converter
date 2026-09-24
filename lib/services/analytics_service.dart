@@ -15,26 +15,67 @@ class AnalyticsService {
 
   static Mixpanel? get instance => _mixpanel;
 
-  static Future<void> init() async {
+  static Future<void> init({
+    Locale? initialLocale,
+    ThemeMode? initialThemeMode,
+    String? initialPreferredCurrency,
+  }) async {
     if (_mixpanel != null) return;
 
-    _mixpanel = await Mixpanel.init(projectToken, trackAutomaticEvents: true);
+    final initialSuperProperties = <String, dynamic>{
+      if (initialLocale != null)
+        'preferred_language': localeToAnalyticsCode(initialLocale),
+      if (initialThemeMode != null)
+        'theme_mode': themeModeToAnalyticsValue(initialThemeMode),
+      if (initialPreferredCurrency != null &&
+          initialPreferredCurrency.isNotEmpty)
+        'preferred_currency': initialPreferredCurrency,
+    };
+
+    _mixpanel = await Mixpanel.init(
+      projectToken,
+      trackAutomaticEvents: true,
+      superProperties: initialSuperProperties.isNotEmpty
+          ? initialSuperProperties
+          : null,
+    );
+
+    if (initialSuperProperties.isNotEmpty) {
+      final people = _mixpanel?.getPeople();
+      if (people != null) {
+        for (final entry in initialSuperProperties.entries) {
+          people.set(entry.key, entry.value);
+        }
+      }
+    }
 
     trackAppOpened();
   }
 
-  /// Sync saved preferences onto the Mixpanel People profile (no event).
+  /// Sync saved preferences as Super Properties (attached to every event)
+  /// and onto the Mixpanel People profile.
   static void syncUserPreferences({
-    required Locale locale,
-    required ThemeMode themeMode,
-    required String preferredCurrency,
+    Locale? locale,
+    ThemeMode? themeMode,
+    String? preferredCurrency,
   }) {
+    final properties = <String, dynamic>{
+      if (locale != null) 'preferred_language': localeToAnalyticsCode(locale),
+      if (themeMode != null) 'theme_mode': themeModeToAnalyticsValue(themeMode),
+      if (preferredCurrency != null && preferredCurrency.isNotEmpty)
+        'preferred_currency': preferredCurrency,
+    };
+
+    if (properties.isEmpty) return;
+
+    _mixpanel?.registerSuperProperties(properties);
+
     final people = _mixpanel?.getPeople();
     if (people == null) return;
 
-    people.set('preferred_language', localeToAnalyticsCode(locale));
-    people.set('theme_mode', themeModeToAnalyticsValue(themeMode));
-    people.set('preferred_currency', preferredCurrency);
+    for (final entry in properties.entries) {
+      people.set(entry.key, entry.value);
+    }
   }
 
   static void trackAppOpened() {
@@ -90,6 +131,7 @@ class AnalyticsService {
     Locale? previousLanguage,
   }) {
     final String languageCode = localeToAnalyticsCode(language);
+    _mixpanel?.registerSuperProperties({'preferred_language': languageCode});
     _mixpanel?.track(
       'language_changed',
       properties: {
@@ -106,6 +148,7 @@ class AnalyticsService {
     ThemeMode? previousThemeMode,
   }) {
     final String themeValue = themeModeToAnalyticsValue(themeMode);
+    _mixpanel?.registerSuperProperties({'theme_mode': themeValue});
     _mixpanel?.track(
       'theme_changed',
       properties: {
@@ -175,6 +218,7 @@ class AnalyticsService {
     required String currency,
     String? previousCurrency,
   }) {
+    _mixpanel?.registerSuperProperties({'preferred_currency': currency});
     _mixpanel?.track(
       'currency_changed',
       properties: {

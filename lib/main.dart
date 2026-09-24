@@ -20,11 +20,10 @@ void main() async {
       preferencesService.getCurrencyCode() ??
       AppCurrency.resolveDefault(PlatformDispatcher.instance.locale).code;
 
-  await AnalyticsService.init();
-  AnalyticsService.syncUserPreferences(
-    locale: preferencesService.getLocale(),
-    themeMode: preferencesService.getThemeMode(),
-    preferredCurrency: preferredCurrency,
+  await AnalyticsService.init(
+    initialLocale: preferencesService.getLocale(),
+    initialThemeMode: preferencesService.getThemeMode(),
+    initialPreferredCurrency: preferredCurrency,
   );
   await AdsService.init();
 

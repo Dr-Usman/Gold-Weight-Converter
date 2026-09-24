@@ -98,9 +98,9 @@ These are the Mixpanel events currently tracked in this project. **All new Mixpa
 | `app_update_prompted` | Play flexible in-app update download starts (Android + Play installs) | (none) | `lib/services/app_update_service.dart` |
 | `app_update_completed` | User taps Restart to apply a downloaded Play flexible update | (none) | `lib/services/app_update_service.dart` |
 
-### Mixpanel People properties
+### Mixpanel Super Properties & People Properties
 
-Set at app start via `AnalyticsService.syncUserPreferences`, and updated on change:
+The following properties are registered as **Mixpanel Super Properties** (automatically attached to **every** tracked event client-side) and synced to the **Mixpanel People profile** at app initialization and whenever a user updates them:
 
 | Property | Values | Meaning |
 |---|---|---|
