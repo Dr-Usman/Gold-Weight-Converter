@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.9.3] - 2026-09-30
+
+### Fixed
+- Fixed default currency detection on first app launch for users in Pakistan and South Asia whose device display language is set to English (United Kingdom) or English (United States)
+- Added timezone offset disambiguation so ambiguous locales like `en_GB` and `en_US` correctly default to regional currencies (e.g. `PKR` for PKT +05:00, `INR` for IST +05:30, `NPR` for NPT +05:45, `BDT` for BST +06:00, `AED` for GST +04:00, and `SAR` for AST +03:00)
+
+### Added
+- Unit test suite validating timezone-aware initial currency resolution across standard, ambiguous, and fallback locales
+
+### Play Store (en-US)
+```
+What's new in 1.9.3
+• Improved automatic currency detection on first launch for Pakistan and South Asia
+• Accurate local currency setup based on device timezone
+• Performance improvements and bug fixes
+```
+
+---
+
 ## [1.9.2] - 2026-09-24
 
 ### Added
