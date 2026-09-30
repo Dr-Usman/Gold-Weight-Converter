@@ -8,7 +8,7 @@ import '../providers/currency_provider.dart';
 import '../providers/locale_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/version_provider.dart';
-import '../screens/zakat_screen.dart';
+import '../screens/zakat/zakat_screen.dart';
 import '../services/analytics_service.dart';
 import '../services/external_links.dart';
 import 'currency_bottom_sheet.dart';

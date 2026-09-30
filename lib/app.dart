@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'l10n/app_localizations.dart';
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
-import 'screens/converter_screen.dart';
+import 'screens/converter/converter_screen.dart';
 import 'theme/app_theme.dart';
 import 'widgets/app_update_listener.dart';
 

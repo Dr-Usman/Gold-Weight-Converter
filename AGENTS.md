@@ -84,8 +84,8 @@ These are the Mixpanel events currently tracked in this project. **All new Mixpa
 | Mixpanel Event | Trigger | Key Properties | File |
 |---|---|---|---|
 | `app_opened` | App finishes Mixpanel init at startup | (none custom — Mixpanel auto-sends `$os`, `mp_lib`, device, app version, geo, etc.) | `lib/services/analytics_service.dart` |
-| `conversion_completed` | User taps Calculate with at least one weight input | `input_units_used`, `rate_unit`, `is_gold_rate_set`, `total_grams`, `total_tola` | `lib/screens/converter_screen.dart` → `calculateAll()` |
-| `zakat_calculated` | User taps Calculate zakat with at least one gold item | `item_count`, `rate_unit`, `is_gold_rate_set`, `total_grams`, `total_pure_grams`, `purities_used`, `weight_units_used`, `has_custom_karat` | `lib/screens/zakat_screen.dart` → `_calculateZakat()` |
+| `conversion_completed` | User taps Calculate with at least one weight input | `input_units_used`, `rate_unit`, `is_gold_rate_set`, `total_grams`, `total_tola` | `lib/screens/converter/converter_screen.dart` → `calculateAll()` |
+| `zakat_calculated` | User taps Calculate zakat with at least one gold item | `item_count`, `rate_unit`, `is_gold_rate_set`, `total_grams`, `total_pure_grams`, `purities_used`, `weight_units_used`, `has_custom_karat` | `lib/screens/zakat/zakat_screen.dart` → `_calculateZakat()` |
 | `language_changed` | User picks a different language in settings | `language`, `previous_language` | `lib/providers/locale_provider.dart` |
 | `theme_changed` | User changes theme (light / dark / system) | `theme_mode`, `previous_theme_mode` | `lib/providers/theme_provider.dart` |
 | `currency_changed` | User picks a different currency in the drawer | `currency`, `previous_currency` | `lib/providers/currency_provider.dart` |

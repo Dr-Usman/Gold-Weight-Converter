@@ -193,7 +193,7 @@ flutter run --dart-define=HIDE_ADS=true --dart-define=SCREENSHOT_DEMO=true
 ## Architecture At A Glance
 
 - App bootstrap in `lib/main.dart` initializes PreferencesService and injects it via Riverpod `ProviderScope` override; `lib/app.dart` hosts `MaterialApp`.
-- Screens live in `lib/screens/` (`converter_screen.dart`, `zakat_screen.dart`).
+- Screens live in `lib/screens/` (`converter/converter_screen.dart`, `zakat/zakat_screen.dart`).
 - Shared conversion and zakat math live in `lib/services/` (`weight_converter.dart`, `zakat_calculator.dart`).
 - State is managed by Riverpod providers in `lib/providers/` for theme, locale, currency, converter results, zakat items, rate unit, and app version.
 - Shared preference persistence is centralized in `lib/services/preferences_service.dart`.

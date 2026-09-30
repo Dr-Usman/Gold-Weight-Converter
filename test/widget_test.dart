@@ -292,6 +292,58 @@ void main() {
     expect(find.textContaining('(Rate: ₹98,600 per Tola)'), findsOneWidget);
   });
 
+  testWidgets('rounds price for 10 Gram rate unit when rate is whole number', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await enterField(tester, 4, '5'); // 5 Grams
+    await enterField(tester, 5, '80000'); // 80,000 per 10 Gram
+    await selectRateUnit(tester, '10 Gram');
+    await tapCalculate(tester);
+
+    // 5 * (80,000 / 10) = 40,000
+    expect(find.textContaining('Gold Price: ₹40,000'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹80,000 per 10 Gram)'), findsOneWidget);
+  });
+
+  testWidgets(
+    'preserves decimals for 10 Gram rate unit when rate is fractional',
+    (WidgetTester tester) async {
+      await pumpConverterApp(tester);
+
+      await enterField(tester, 4, '5'); // 5 Grams
+      await enterField(tester, 5, '80000.75'); // 80,000.75 per 10 Gram
+      await selectRateUnit(tester, '10 Gram');
+      await tapCalculate(tester);
+
+      // 5 * (80,000.75 / 10) = 40,000.375 -> rounds to 40,000.38
+      expect(find.textContaining('Gold Price: ₹40,000.38'), findsOneWidget);
+      expect(
+        find.textContaining('(Rate: ₹80,000.75 per 10 Gram)'),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets('rounds price with mixed traditional units and whole rate', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await enterField(tester, 0, '1'); // 1 Tola
+    await enterField(tester, 1, '2'); // 2 Masha
+    await enterField(tester, 3, '4'); // 4 Ratti
+    await enterField(tester, 5, '120000'); // 120,000 per Tola
+    await selectRateUnit(tester, 'Tola');
+    await tapCalculate(tester);
+
+    // Total grams = 11.66 + 1.944 + 0.486 = 14.09g
+    // 14.09 / 11.66 * 120,000 = 145,008.576... -> rounds to 145,009
+    expect(find.textContaining('Gold Price: ₹1,45,009'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹1,20,000 per Tola)'), findsOneWidget);
+  });
+
   testWidgets('clear all removes entered values and hides results', (
     WidgetTester tester,
   ) async {
@@ -411,6 +463,202 @@ void main() {
       // Zakat due: 85,763.722... * 0.025 = 2,144.093... -> ₹2,144.09
       expect(find.text('₹85,763.72'), findsOneWidget);
       expect(find.text('₹2,144.09'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'handles exact whole zakat without extra ceil increment when rate is whole number',
+    (WidgetTester tester) async {
+      final prefs = _ZakatTestPreferencesService(
+        items: const [
+          GoldItemModel(
+            id: '1',
+            weight: 10,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat24,
+          ),
+        ],
+        rateText: '1000',
+        rateUnit: UnitEnum.oneGram,
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+          child: const MyApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Gold Zakat'));
+      await tester.pumpAndSettle();
+
+      final Finder calculateBtn = find.text('Calculate zakat');
+      await tester.ensureVisible(calculateBtn);
+      await tester.tap(calculateBtn);
+      await tester.pumpAndSettle();
+
+      // 10g * 1,000 = 10,000 total value
+      // Zakat due: 10,000 * 0.025 = 250 -> ceil(250) is 250
+      expect(find.text('₹10,000'), findsOneWidget);
+      expect(find.text('₹250'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'treats zakat rate with .00 as whole number and applies ceiling rounding',
+    (WidgetTester tester) async {
+      final prefs = _ZakatTestPreferencesService(
+        items: const [
+          GoldItemModel(
+            id: '1',
+            weight: 10,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat24,
+          ),
+        ],
+        rateText: '100000.00',
+        rateUnit: UnitEnum.tola,
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+          child: const MyApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Gold Zakat'));
+      await tester.pumpAndSettle();
+
+      final Finder calculateBtn = find.text('Calculate zakat');
+      await tester.ensureVisible(calculateBtn);
+      await tester.tap(calculateBtn);
+      await tester.pumpAndSettle();
+
+      // 100000.00 is treated as whole number -> total value 85,763 and zakat due 2,145
+      expect(find.text('₹85,763'), findsOneWidget);
+      expect(find.text('₹2,145'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'calculates zakat for multiple mixed purity items (24k, 22k, 18k) with 10 Gram rate unit and ceiling rounds zakat',
+    (WidgetTester tester) async {
+      final prefs = _ZakatTestPreferencesService(
+        items: const [
+          GoldItemModel(
+            id: '1',
+            name: 'Pure bar',
+            weight: 10,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat24,
+          ),
+          GoldItemModel(
+            id: '2',
+            name: 'Bangle',
+            weight: 12,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat22,
+          ),
+          GoldItemModel(
+            id: '3',
+            name: 'Ring',
+            weight: 8,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat18,
+          ),
+        ],
+        rateText: '75000',
+        rateUnit: UnitEnum.tenGram,
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+          child: const MyApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Gold Zakat'));
+      await tester.pumpAndSettle();
+
+      await tester.drag(find.byType(ListView), const Offset(0, -400));
+      await tester.pumpAndSettle();
+
+      final Finder calculateBtn = find.text('Calculate zakat');
+      await tester.tap(calculateBtn);
+      await tester.pumpAndSettle();
+
+      // Pure grams: 10 + (12 * 22/24 = 11) + (8 * 18/24 = 6) = 27.0g pure
+      // Total value: 27.0g * (75,000 / 10) = 202,500 -> ₹2,02,500
+      // Zakat due: 202,500 * 0.025 = 5,062.50 -> ceil is 5,063 -> ₹5,063
+      expect(find.text('₹2,02,500'), findsOneWidget);
+      expect(find.text('₹5,063'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'calculates zakat for multiple mixed purity items with fractional 10 Gram rate unit preserving decimals',
+    (WidgetTester tester) async {
+      final prefs = _ZakatTestPreferencesService(
+        items: const [
+          GoldItemModel(
+            id: '1',
+            weight: 10,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat24,
+          ),
+          GoldItemModel(
+            id: '2',
+            weight: 12,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat22,
+          ),
+          GoldItemModel(
+            id: '3',
+            weight: 8,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat18,
+          ),
+        ],
+        rateText: '75000.50',
+        rateUnit: UnitEnum.tenGram,
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+          child: const MyApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Gold Zakat'));
+      await tester.pumpAndSettle();
+
+      await tester.drag(find.byType(ListView), const Offset(0, -400));
+      await tester.pumpAndSettle();
+
+      final Finder calculateBtn = find.text('Calculate zakat');
+      await tester.tap(calculateBtn);
+      await tester.pumpAndSettle();
+
+      // Pure grams: 27.0g
+      // Total value: 27.0g * (75,000.50 / 10) = 202,501.35 -> ₹2,02,501.35
+      // Zakat due: 202,501.35 * 0.025 = 5,062.53375 -> ₹5,062.53
+      expect(find.text('₹2,02,501.35'), findsOneWidget);
+      expect(find.text('₹5,062.53'), findsOneWidget);
     },
   );
 
