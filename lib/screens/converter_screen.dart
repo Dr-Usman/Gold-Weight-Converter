@@ -101,7 +101,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
 
   void _clearAll() {
     // Unfocus any currently focused text field
-    FocusScope.of(context).unfocus();
+    FocusManager.instance.primaryFocus?.unfocus();
 
     tolaController.clear();
     lalController.clear();
@@ -311,8 +311,14 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       final double gramRate = WeightConverter.ratePerGram(rate, goldRateUnit);
       double price = totalGrams * gramRate;
 
-      final currencyFormat = ref.read(currencyProvider).numberFormat;
-      final String priceFormatted = currencyFormat.format(price);
+      final currency = ref.read(currencyProvider);
+      final bool hasRateFraction =
+          (rate - rate.truncateToDouble()).abs() > 0.000001;
+      final int decimalDigits = hasRateFraction ? 2 : 0;
+      final currencyFormat = currency.numberFormatWithDigits(decimalDigits);
+
+      final double finalPrice = hasRateFraction ? price : price.roundToDouble();
+      final String priceFormatted = currencyFormat.format(finalPrice);
       final String rateFormatted = currencyFormat.format(rate);
       final String unitLabel = _localizedRateUnit(l10n, goldRateUnit);
 
@@ -347,7 +353,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
 
   // Public method for button presses (includes unfocus)
   void calculateAll() {
-    FocusScope.of(context).unfocus();
+    FocusManager.instance.primaryFocus?.unfocus();
 
     final Locale currentLocale = ref.read(localeProvider);
     final AppCurrency currentCurrency = ref.read(currencyProvider);
@@ -892,6 +898,14 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
+    final int newlineIndex = priceText.indexOf('\n');
+    final String goldPriceLine = newlineIndex != -1
+        ? priceText.substring(0, newlineIndex).trim()
+        : priceText.trim();
+    final String? rateInfoLine = newlineIndex != -1
+        ? priceText.substring(newlineIndex + 1).trim()
+        : null;
+
     return Container(
       margin: const EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(20),
@@ -923,24 +937,29 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           ),
         ],
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.monetization_on,
-            color: AppColors.goldDeep,
-            size: 28,
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              priceText,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: scheme.onSurface,
-              ),
+          SelectableText(
+            goldPriceLine,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: scheme.onSurface,
             ),
           ),
+          if (rateInfoLine != null && rateInfoLine.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            SelectableText(
+              rateInfoLine,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: scheme.onSurface.withValues(alpha: 0.75),
+              ),
+            ),
+          ],
         ],
       ),
     );

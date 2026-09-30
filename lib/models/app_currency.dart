@@ -25,6 +25,13 @@ class AppCurrency {
   NumberFormat get numberFormat =>
       NumberFormat.currency(locale: locale, symbol: symbol, decimalDigits: 2);
 
+  NumberFormat numberFormatWithDigits(int decimalDigits) =>
+      NumberFormat.currency(
+        locale: locale,
+        symbol: symbol,
+        decimalDigits: decimalDigits,
+      );
+
   bool matchesQuery(String query) {
     final String q = query.trim().toLowerCase();
     if (q.isEmpty) return true;
@@ -90,7 +97,8 @@ class AppCurrency {
   /// ambiguous (e.g. 'GB', 'US', or absent).
   static AppCurrency? _fromTimezoneOffset(Duration offset) {
     return switch (offset.inMinutes) {
-      180 => _byCode['SAR'], // UTC+3:00 (Saudi Arabia / Qatar / Kuwait / Bahrain)
+      180 =>
+        _byCode['SAR'], // UTC+3:00 (Saudi Arabia / Qatar / Kuwait / Bahrain)
       240 => _byCode['AED'], // UTC+4:00 (UAE / Oman)
       300 => _byCode['PKR'], // UTC+5:00 (Pakistan Standard Time - PKT)
       330 => Currencies.inr, // UTC+5:30 (India Standard Time - IST / Sri Lanka)

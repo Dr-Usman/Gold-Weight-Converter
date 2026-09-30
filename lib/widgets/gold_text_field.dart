@@ -95,7 +95,7 @@ class GoldTextField extends StatelessWidget {
           controller: controller,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           validator: validator,
-          onTapOutside: (_) => FocusScope.of(context).unfocus(),
+          onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
           inputFormatters: [ThousandsSeparatorInputFormatter()],
           onChanged: (value) {
             if (value.isNotEmpty && onChanged != null) {
@@ -142,7 +142,8 @@ class GoldTextField extends StatelessWidget {
                   decimal: true,
                 ),
                 validator: validator,
-                onTapOutside: (_) => FocusScope.of(context).unfocus(),
+                onTapOutside: (_) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
                 inputFormatters: [ThousandsSeparatorInputFormatter()],
                 onChanged: (value) {
                   if (value.isNotEmpty && onChanged != null) {

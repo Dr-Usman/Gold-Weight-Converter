@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gold_weight_converter/constants/purity_enum.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
+import 'package:gold_weight_converter/constants/weight_unit_enum.dart';
 import 'package:gold_weight_converter/main.dart';
 import 'package:gold_weight_converter/models/gold_item_model.dart';
 import 'package:gold_weight_converter/services/preferences_service.dart';
@@ -195,8 +197,8 @@ void main() {
     await selectRateUnit(tester, 'Tola');
     await tapCalculate(tester);
 
-    expect(find.textContaining('Gold Price: ₹1,166.00'), findsOneWidget);
-    expect(find.textContaining('(Rate: ₹1,166.00 per Tola)'), findsOneWidget);
+    expect(find.textContaining('Gold Price: ₹1,166'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹1,166 per Tola)'), findsOneWidget);
   });
 
   testWidgets('calculates gold price using the 10 Gram rate unit', (
@@ -209,11 +211,8 @@ void main() {
     await selectRateUnit(tester, '10 Gram');
     await tapCalculate(tester);
 
-    expect(find.textContaining('Gold Price: ₹2,000.00'), findsOneWidget);
-    expect(
-      find.textContaining('(Rate: ₹2,000.00 per 10 Gram)'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('Gold Price: ₹2,000'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹2,000 per 10 Gram)'), findsOneWidget);
   });
 
   testWidgets('calculates gold price using the 1 Gram rate unit', (
@@ -226,8 +225,71 @@ void main() {
     await selectRateUnit(tester, '1 Gram');
     await tapCalculate(tester);
 
-    expect(find.textContaining('Gold Price: ₹15,000.00'), findsOneWidget);
-    expect(find.textContaining('(Rate: ₹3,000.00 per 1 Gram)'), findsOneWidget);
+    expect(find.textContaining('Gold Price: ₹15,000'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹3,000 per 1 Gram)'), findsOneWidget);
+  });
+
+  testWidgets('formats decimals when rate contains fraction', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await enterField(tester, 4, '5');
+    await enterField(tester, 5, '3000.50');
+    await selectRateUnit(tester, '1 Gram');
+    await tapCalculate(tester);
+
+    expect(find.textContaining('Gold Price: ₹15,002.50'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹3,000.50 per 1 Gram)'), findsOneWidget);
+  });
+
+  testWidgets(
+    'rounds off gold price when gold rate is whole number even if conversion produces fraction',
+    (WidgetTester tester) async {
+      await pumpConverterApp(tester);
+
+      await enterField(tester, 4, '1'); // 1 Gram
+      await enterField(tester, 5, '100000'); // 100,000 per Tola
+      await selectRateUnit(tester, 'Tola');
+      await tapCalculate(tester);
+
+      // 1 gram / 11.66 * 100000 = 8576.329... -> rounds to 8,576
+      expect(find.textContaining('Gold Price: ₹8,576'), findsOneWidget);
+      expect(find.textContaining('(Rate: ₹1,00,000 per Tola)'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'preserves decimals when gold rate has fractions with fractional weight',
+    (WidgetTester tester) async {
+      await pumpConverterApp(tester);
+
+      await enterField(tester, 0, '0.5'); // 0.5 Tola
+      await enterField(tester, 5, '98600.50'); // 98,600.50 per Tola
+      await selectRateUnit(tester, 'Tola');
+      await tapCalculate(tester);
+
+      // 0.5 * 98,600.50 = 49,300.25
+      expect(find.textContaining('Gold Price: ₹49,300.25'), findsOneWidget);
+      expect(
+        find.textContaining('(Rate: ₹98,600.50 per Tola)'),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets('treats rate with .00 as whole number and rounds price', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await enterField(tester, 0, '1');
+    await enterField(tester, 5, '98600.00');
+    await selectRateUnit(tester, 'Tola');
+    await tapCalculate(tester);
+
+    expect(find.textContaining('Gold Price: ₹98,600'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹98,600 per Tola)'), findsOneWidget);
   });
 
   testWidgets('clear all removes entered values and hides results', (
@@ -269,6 +331,88 @@ void main() {
     expect(find.textContaining('Helper for gold items only'), findsOneWidget);
     expect(find.text('Add item'), findsOneWidget);
   });
+
+  testWidgets(
+    'rounds up zakat due to next whole digit and rounds total value when rate is whole number',
+    (WidgetTester tester) async {
+      final prefs = _ZakatTestPreferencesService(
+        items: const [
+          GoldItemModel(
+            id: '1',
+            weight: 10,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat24,
+          ),
+        ],
+        rateText: '100000',
+        rateUnit: UnitEnum.tola,
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+          child: const MyApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Gold Zakat'));
+      await tester.pumpAndSettle();
+
+      final Finder calculateBtn = find.text('Calculate zakat');
+      await tester.ensureVisible(calculateBtn);
+      await tester.tap(calculateBtn);
+      await tester.pumpAndSettle();
+
+      // 10g pure / 11.66 * 100,000 = 85,763.293... -> total value rounded to 85,763
+      // Zakat due: 85,763.293... * 0.025 = 2,144.0823... -> ceils to 2,145
+      expect(find.text('₹85,763'), findsOneWidget);
+      expect(find.text('₹2,145'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'preserves decimals for zakat due and total value when rate has fractions',
+    (WidgetTester tester) async {
+      final prefs = _ZakatTestPreferencesService(
+        items: const [
+          GoldItemModel(
+            id: '1',
+            weight: 10,
+            unit: WeightUnitEnum.gram,
+            purity: PurityEnum.karat24,
+          ),
+        ],
+        rateText: '100000.50',
+        rateUnit: UnitEnum.tola,
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [preferencesServiceProvider.overrideWithValue(prefs)],
+          child: const MyApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Gold Zakat'));
+      await tester.pumpAndSettle();
+
+      final Finder calculateBtn = find.text('Calculate zakat');
+      await tester.ensureVisible(calculateBtn);
+      await tester.tap(calculateBtn);
+      await tester.pumpAndSettle();
+
+      // 10g pure / 11.66 * 100,000.50 = 85,763.722... -> ₹85,763.72
+      // Zakat due: 85,763.722... * 0.025 = 2,144.093... -> ₹2,144.09
+      expect(find.text('₹85,763.72'), findsOneWidget);
+      expect(find.text('₹2,144.09'), findsOneWidget);
+    },
+  );
 
   testWidgets('shows copy and share actions after converting', (
     WidgetTester tester,
@@ -589,4 +733,25 @@ class _MemoryPreferencesService extends _TestPreferencesService {
   Future<void> saveThemeMode(ThemeMode mode) async {
     storedThemeMode = mode;
   }
+}
+
+class _ZakatTestPreferencesService extends _TestPreferencesService {
+  final List<GoldItemModel> items;
+  final String rateText;
+  final UnitEnum rateUnit;
+
+  _ZakatTestPreferencesService({
+    required this.items,
+    this.rateText = '',
+    this.rateUnit = UnitEnum.tola,
+  });
+
+  @override
+  List<GoldItemModel> getZakatItems() => items;
+
+  @override
+  String getZakatRateText() => rateText;
+
+  @override
+  UnitEnum getZakatRateUnit() => rateUnit;
 }

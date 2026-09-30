@@ -93,13 +93,15 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
     if (state.items.isEmpty) return;
 
     final List<String> puritiesUsed = state.items
-        .map((item) => switch (item.purity) {
-              PurityEnum.karat24 => '24k',
-              PurityEnum.karat22 => '22k',
-              PurityEnum.karat21 => '21k',
-              PurityEnum.karat18 => '18k',
-              PurityEnum.custom => 'custom',
-            })
+        .map(
+          (item) => switch (item.purity) {
+            PurityEnum.karat24 => '24k',
+            PurityEnum.karat22 => '22k',
+            PurityEnum.karat21 => '21k',
+            PurityEnum.karat18 => '18k',
+            PurityEnum.custom => 'custom',
+          },
+        )
         .toSet()
         .toList();
 
@@ -260,9 +262,14 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final ZakatState zakatState = ref.watch(zakatNotifierProvider);
     final ZakatSummary summary = zakatState.summary;
-    final NumberFormat currencyFormat = ref
-        .watch(currencyProvider)
-        .numberFormat;
+    final currency = ref.watch(currencyProvider);
+    final bool hasRateFraction =
+        (zakatState.rateValue - zakatState.rateValue.truncateToDouble()).abs() >
+        0.000001;
+    final int decimalDigits = hasRateFraction ? 2 : 0;
+    final NumberFormat currencyFormat = currency.numberFormatWithDigits(
+      decimalDigits,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -393,6 +400,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
                       l10n: l10n,
                       summary: summary,
                       currencyFormat: currencyFormat,
+                      hasRateFraction: hasRateFraction,
                     ),
                   ),
                   const AppBannerAd(),
@@ -445,17 +453,21 @@ class _SummaryCard extends StatelessWidget {
   final AppLocalizations l10n;
   final ZakatSummary summary;
   final NumberFormat currencyFormat;
+  final bool hasRateFraction;
 
   const _SummaryCard({
     required this.l10n,
     required this.summary,
     required this.currencyFormat,
+    this.hasRateFraction = false,
   });
 
   String _zakatSummaryShareText({
     required AppLocalizations l10n,
     required ZakatSummary summary,
     required NumberFormat currencyFormat,
+    required double? displayTotalValue,
+    required double? displayZakatDue,
   }) {
     final StringBuffer buffer = StringBuffer()
       ..writeln(l10n.zakatSummaryTitle)
@@ -466,17 +478,17 @@ class _SummaryCard extends StatelessWidget {
           summary.totalPureTola.toStringAsFixed(4),
         ),
       );
-    if (summary.totalValue != null) {
+    if (displayTotalValue != null) {
       buffer
         ..writeln(l10n.zakatTotalValue)
-        ..writeln(currencyFormat.format(summary.totalValue));
+        ..writeln(currencyFormat.format(displayTotalValue));
     } else {
       buffer.writeln(l10n.zakatEnterRatePrompt);
     }
-    if (summary.zakatDue != null) {
+    if (displayZakatDue != null) {
       buffer
         ..writeln(l10n.zakatDueLabel)
-        ..writeln(currencyFormat.format(summary.zakatDue));
+        ..writeln(currencyFormat.format(displayZakatDue));
     }
     return buffer.toString().trim();
   }
@@ -487,6 +499,18 @@ class _SummaryCard extends StatelessWidget {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final bool hasItems =
         summary.totalPureGrams > 0 || summary.totalGrossGrams > 0;
+
+    final double? displayTotalValue = summary.totalValue == null
+        ? null
+        : (hasRateFraction
+              ? summary.totalValue
+              : summary.totalValue!.roundToDouble());
+
+    final double? displayZakatDue = summary.zakatDue == null
+        ? null
+        : (hasRateFraction
+              ? summary.zakatDue
+              : summary.zakatDue!.ceilToDouble());
 
     return Container(
       width: double.infinity,
@@ -526,6 +550,8 @@ class _SummaryCard extends StatelessWidget {
                     l10n: l10n,
                     summary: summary,
                     currencyFormat: currencyFormat,
+                    displayTotalValue: displayTotalValue,
+                    displayZakatDue: displayZakatDue,
                   ),
                   screen: 'zakat',
                   totalGrams: double.parse(
@@ -573,9 +599,9 @@ class _SummaryCard extends StatelessWidget {
               ).textTheme.labelLarge?.copyWith(color: scheme.onSurfaceVariant),
             ),
             const SizedBox(height: 4),
-            if (summary.totalValue != null)
+            if (displayTotalValue != null)
               Text(
-                currencyFormat.format(summary.totalValue),
+                currencyFormat.format(displayTotalValue),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: scheme.onSurface,
@@ -596,9 +622,9 @@ class _SummaryCard extends StatelessWidget {
               ).textTheme.labelLarge?.copyWith(color: scheme.onSurfaceVariant),
             ),
             const SizedBox(height: 4),
-            if (summary.zakatDue != null)
+            if (displayZakatDue != null)
               Text(
-                currencyFormat.format(summary.zakatDue),
+                currencyFormat.format(displayZakatDue),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w800,
                   color: isDark ? scheme.primary : AppColors.primaryDark,
