@@ -51,9 +51,29 @@ class AppCurrency {
     return tryParse(code) ?? Currencies.inr;
   }
 
-  /// First-launch default from device locale; ultimate fallback is INR.
-  static AppCurrency resolveDefault(Locale deviceLocale) {
+  /// First-launch default from device locale and timezone; ultimate fallback is INR.
+  static AppCurrency resolveDefault(
+    Locale deviceLocale, {
+    Duration? timeZoneOffset,
+  }) {
+    final Duration offset = timeZoneOffset ?? DateTime.now().timeZoneOffset;
     final String? country = deviceLocale.countryCode?.toUpperCase();
+
+    // If country is explicitly set and not a generic English locale (GB / US)
+    // where users frequently select it outside those countries:
+    if (country != null &&
+        country.isNotEmpty &&
+        country != 'GB' &&
+        country != 'US') {
+      final AppCurrency? byCountry = _fromCountryCode(country);
+      if (byCountry != null) return byCountry;
+    }
+
+    // Disambiguate generic locales (GB, US, or unset country) using the device timezone.
+    final AppCurrency? byTimezone = _fromTimezoneOffset(offset);
+    if (byTimezone != null) return byTimezone;
+
+    // Fall back to GB or US country code if timezone did not match a specific region
     if (country != null && country.isNotEmpty) {
       final AppCurrency? byCountry = _fromCountryCode(country);
       if (byCountry != null) return byCountry;
@@ -64,6 +84,20 @@ class AppCurrency {
     if (byLanguage != null) return byLanguage;
 
     return Currencies.inr;
+  }
+
+  /// Maps a timezone offset to an [AppCurrency] when the country code is
+  /// ambiguous (e.g. 'GB', 'US', or absent).
+  static AppCurrency? _fromTimezoneOffset(Duration offset) {
+    return switch (offset.inMinutes) {
+      180 => _byCode['SAR'], // UTC+3:00 (Saudi Arabia / Qatar / Kuwait / Bahrain)
+      240 => _byCode['AED'], // UTC+4:00 (UAE / Oman)
+      300 => _byCode['PKR'], // UTC+5:00 (Pakistan Standard Time - PKT)
+      330 => Currencies.inr, // UTC+5:30 (India Standard Time - IST / Sri Lanka)
+      345 => _byCode['NPR'], // UTC+5:45 (Nepal Time - NPT)
+      360 => _byCode['BDT'], // UTC+6:00 (Bangladesh Standard Time - BST)
+      _ => null,
+    };
   }
 
   /// Maps a device *country* code (ISO 3166, e.g. `'PK'`) to a display currency.
