@@ -13,7 +13,7 @@ jobs:
   release-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install Linux build dependencies
         run: |
@@ -47,7 +47,7 @@ jobs:
           tar -czf "../../../../gwc-linux-${VERSION}-x64.tar.gz" .
 
       - name: Upload Linux bundle to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}
           name: ${{ steps.release_notes.outputs.release_name }}

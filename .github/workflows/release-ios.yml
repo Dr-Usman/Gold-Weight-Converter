@@ -14,7 +14,7 @@ jobs:
   release-ios:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: ./.github/actions/setup-flutter
 
@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/actions/release-notes
 
       - name: Import code signing certificates
-        uses: apple-actions/import-codesign-certs@v3
+        uses: apple-actions/import-codesign-certs@v7
         with:
           p12-file-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
           p12-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
@@ -62,7 +62,7 @@ jobs:
           cp "${IPA_FILES[0]}" "build/ios/ipa/gwc-ios-${VERSION}.ipa"
 
       - name: Upload IPA to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}
           name: ${{ steps.release_notes.outputs.release_name }}
