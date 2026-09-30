@@ -23,19 +23,22 @@ void main() {
       );
     });
 
-    test('themeModeToAnalyticsValue returns expected string representations', () {
-      expect(
-        AnalyticsService.themeModeToAnalyticsValue(ThemeMode.light),
-        equals('light'),
-      );
-      expect(
-        AnalyticsService.themeModeToAnalyticsValue(ThemeMode.dark),
-        equals('dark'),
-      );
-      expect(
-        AnalyticsService.themeModeToAnalyticsValue(ThemeMode.system),
-        equals('system'),
-      );
-    });
+    test(
+      'themeModeToAnalyticsValue returns expected string representations',
+      () {
+        expect(
+          AnalyticsService.themeModeToAnalyticsValue(ThemeMode.light),
+          equals('light'),
+        );
+        expect(
+          AnalyticsService.themeModeToAnalyticsValue(ThemeMode.dark),
+          equals('dark'),
+        );
+        expect(
+          AnalyticsService.themeModeToAnalyticsValue(ThemeMode.system),
+          equals('system'),
+        );
+      },
+    );
   });
 }

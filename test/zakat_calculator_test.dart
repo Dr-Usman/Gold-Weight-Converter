@@ -60,10 +60,7 @@ void main() {
     });
 
     test('converts ana to grams with exact 5-decimal precision', () {
-      expect(
-        WeightConverter.toGrams(1, WeightUnitEnum.ana),
-        0.72875,
-      );
+      expect(WeightConverter.toGrams(1, WeightUnitEnum.ana), 0.72875);
       expect(
         WeightConverter.fromGrams(0.72875, WeightUnitEnum.ana),
         closeTo(1.0, 0.000001),
@@ -71,10 +68,7 @@ void main() {
     });
 
     test('converts ratti to grams with exact precision', () {
-      expect(
-        WeightConverter.toGrams(1, WeightUnitEnum.ratti),
-        0.1215,
-      );
+      expect(WeightConverter.toGrams(1, WeightUnitEnum.ratti), 0.1215);
       expect(
         WeightConverter.fromGrams(0.1215, WeightUnitEnum.ratti),
         closeTo(1.0, 0.000001),
@@ -82,10 +76,7 @@ void main() {
     });
 
     test('converts masha to grams with exact precision', () {
-      expect(
-        WeightConverter.toGrams(1, WeightUnitEnum.masha),
-        0.972,
-      );
+      expect(WeightConverter.toGrams(1, WeightUnitEnum.masha), 0.972);
       expect(
         WeightConverter.fromGrams(0.972, WeightUnitEnum.masha),
         closeTo(1.0, 0.000001),

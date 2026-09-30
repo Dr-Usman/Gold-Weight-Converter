@@ -47,7 +47,8 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
       final int commaIndex = newValue.selection.baseOffset;
       if (commaIndex > 0) {
         // Delete the digit before the comma
-        rawText = rawText.substring(0, commaIndex - 1) +
+        rawText =
+            rawText.substring(0, commaIndex - 1) +
             rawText.substring(commaIndex);
         rawCursor = commaIndex - 1;
       }
@@ -103,8 +104,12 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
 
     // 5. Separate integer and fractional parts.
     final int dotIndex = cleanText.indexOf('.');
-    String intPart = dotIndex != -1 ? cleanText.substring(0, dotIndex) : cleanText;
-    String? fracPart = dotIndex != -1 ? cleanText.substring(dotIndex + 1) : null;
+    String intPart = dotIndex != -1
+        ? cleanText.substring(0, dotIndex)
+        : cleanText;
+    String? fracPart = dotIndex != -1
+        ? cleanText.substring(dotIndex + 1)
+        : null;
 
     // 6. Normalize leading zeros in integer part.
     // - "00" or "000" -> "0"
@@ -147,8 +152,9 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
     final String formattedInt = _formatThousands(intPart);
 
     // 9. Reassemble the formatted number without modifying fractional precision.
-    final String formattedText =
-        fracPart != null ? '$formattedInt.$fracPart' : formattedInt;
+    final String formattedText = fracPart != null
+        ? '$formattedInt.$fracPart'
+        : formattedInt;
 
     // 10. Calculate caret position.
     // If user was at the very end of input, place caret at the end of formatted output.

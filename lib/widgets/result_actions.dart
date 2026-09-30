@@ -57,11 +57,11 @@ class ResultActions extends StatelessWidget {
           onPressed: text.trim().isEmpty
               ? null
               : () => ExternalLinks.shareText(
-                    text,
-                    screen: screen,
-                    totalGrams: totalGrams,
-                    totalTola: totalTola,
-                  ),
+                  text,
+                  screen: screen,
+                  totalGrams: totalGrams,
+                  totalTola: totalTola,
+                ),
           icon: Icon(
             Icons.share_outlined,
             size: 20,
