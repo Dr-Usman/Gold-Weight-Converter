@@ -9,6 +9,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.9.4] - 2026-09-30
+
+### Added
+- Rate-driven decimal formatting: whole number gold rates format price results as whole integers without redundant decimals, while fractional rates preserve 2-decimal precision
+- Upper digit ceiling rounding (`ceilToDouble`) for Gold Zakat calculations when gold rate is a whole number, ensuring religious obligations are never underpaid
+- Comprehensive widget test scenarios covering whole and fractional rates, 10 Gram rate units, traditional units, and multi-item mixed-purity zakat calculations (123 total tests)
+
+### Changed
+- Redesigned the Converter price result card with bold 16sp selectable price text and 14sp secondary rate information, removing the fixed dollar icon for maximum horizontal room
+- Refactored monolithic screen files into clean, modular feature folders (`lib/screens/converter/` and `lib/screens/zakat/`) with dedicated subcomponents
+
+### Fixed
+- Fixed keyboard unexpectedly restoring over the navigation drawer when opened after calculating or tapping outside an input field
+
+### Play Store (en-US)
+```
+What's new in 1.9.4
+• Smarter price rounding based on entered gold rate
+• Zakat calculation rounds up to ensure complete fulfillment
+• Redesigned, cleaner price result display
+• Fixed keyboard showing when opening the drawer
+• Performance improvements and bug fixes
+```
+
+---
+
 ## [1.9.3] - 2026-09-30
 
 ### Fixed
