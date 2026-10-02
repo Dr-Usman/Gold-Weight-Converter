@@ -7,7 +7,8 @@ enum WeightUnitEnum {
   masha('masha'),
   ana('ana'),
   ratti('ratti'),
-  gram('gram');
+  gram('gram'),
+  ounce('ounce');
 
   final String storageKey;
 
@@ -20,6 +21,7 @@ enum WeightUnitEnum {
     WeightUnitEnum.ana => AppConstants.anaToGram,
     WeightUnitEnum.ratti => AppConstants.rattiToGram,
     WeightUnitEnum.gram => 1.0,
+    WeightUnitEnum.ounce => AppConstants.ounceToGram,
   };
 
   static WeightUnitEnum fromStorageKey(String? value) {

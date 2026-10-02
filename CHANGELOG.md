@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Troy Ounce (`Ounce`) rate and weight conversion support across gold converter and zakat calculations
+- Dynamic Ounce input field automatically displayed when the market rate unit is set to Ounce
+- Automatic Ounce equivalent weight displayed in conversion details (`Ounce: X.XXXX oz`)
+- Support for Tanzanian Shilling (`TZS`) display currency with automatic country code detection (`TZ`)
+- Automatic USD default mapping for international markets including Zimbabwe (`ZW`), Guyana (`GY`), Iraq (`IQ`), Lebanon (`LB`), Liberia (`LR`), Somalia (`SO`), Malawi (`MW`), Papua New Guinea (`PG`), Sudan (`SD`), Yemen (`YE`), Uzbekistan (`UZ`), and Cambodia (`KH`)
+
+### Changed
+- Expanded the rate unit dropdown width and improved horizontal padding to provide clean, truncation-free unit labels
+
+### Play Store (en-US)
+```
+What's new in 1.9.6
+• Added Troy Ounce (Ounce) rate and weight conversion support
+• Dynamic Ounce input field appears when Ounce rate is selected
+• Always view Ounce equivalent weight in conversion results
+• Added Tanzanian Shilling (TZS) currency support
+• Expanded dropdown layout for clearer unit selection
+```
+
 ---
 
 ## [1.9.5] - 2026-10-02

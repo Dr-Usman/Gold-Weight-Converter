@@ -295,6 +295,30 @@ abstract class AppLocalizations {
   /// **'Gram weight input field'**
   String get gramSemanticLabel;
 
+  /// Label for Troy Ounce weight unit
+  ///
+  /// In en, this message translates to:
+  /// **'Ounce'**
+  String get ounceLabel;
+
+  /// Information about Ounce conversion
+  ///
+  /// In en, this message translates to:
+  /// **'1 Troy Ounce = 31.1035 grams'**
+  String get ounceInfo;
+
+  /// Hint text for Ounce input field
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 1.5'**
+  String get ounceHint;
+
+  /// Semantic label for Ounce input field
+  ///
+  /// In en, this message translates to:
+  /// **'Ounce weight input field'**
+  String get ounceSemanticLabel;
+
   /// Label for Gold Rate input field
   ///
   /// In en, this message translates to:
@@ -385,6 +409,12 @@ abstract class AppLocalizations {
   /// **'Gram: {value} grams'**
   String gramConversion(String value);
 
+  /// Ounce conversion result text
+  ///
+  /// In en, this message translates to:
+  /// **'Ounce: {value} × {factor} = {result} grams'**
+  String ounceConversion(String value, String factor, String result);
+
   /// Total weight calculation result
   ///
   /// In en, this message translates to:
@@ -427,6 +457,12 @@ abstract class AppLocalizations {
   /// **'Ratti: {value}'**
   String rattiResult(String value);
 
+  /// Ounce result after conversion
+  ///
+  /// In en, this message translates to:
+  /// **'Ounce: {value} oz'**
+  String ounceResult(String value);
+
   /// Gold price calculation result
   ///
   /// In en, this message translates to:
@@ -462,6 +498,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 Gram'**
   String get unitOneGram;
+
+  /// Unit name for Ounce
+  ///
+  /// In en, this message translates to:
+  /// **'Ounce'**
+  String get unitOunce;
 
   /// Hint text for entering a value
   ///

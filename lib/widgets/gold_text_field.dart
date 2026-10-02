@@ -120,7 +120,7 @@ class GoldTextField extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 2,
+          flex: 5,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -160,10 +160,11 @@ class GoldTextField extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 10),
         Expanded(
+          flex: 3,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               border: Border.all(

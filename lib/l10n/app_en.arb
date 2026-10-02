@@ -108,6 +108,22 @@
   "@gramSemanticLabel": {
     "description": "Semantic label for Gram input field"
   },
+  "ounceLabel": "Ounce",
+  "@ounceLabel": {
+    "description": "Label for Troy Ounce weight unit"
+  },
+  "ounceInfo": "1 Troy Ounce = 31.1035 grams",
+  "@ounceInfo": {
+    "description": "Information about Ounce conversion"
+  },
+  "ounceHint": "e.g. 1.5",
+  "@ounceHint": {
+    "description": "Hint text for Ounce input field"
+  },
+  "ounceSemanticLabel": "Ounce weight input field",
+  "@ounceSemanticLabel": {
+    "description": "Semantic label for Ounce input field"
+  },
   "goldRateLabel": "Gold Rate",
   "@goldRateLabel": {
     "description": "Label for Gold Rate input field"
@@ -244,6 +260,24 @@
       }
     }
   },
+  "ounceConversion": "Ounce: {value} × {factor} = {result} grams",
+  "@ounceConversion": {
+    "description": "Ounce conversion result text",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "1.5"
+      },
+      "factor": {
+        "type": "String",
+        "example": "31.1035"
+      },
+      "result": {
+        "type": "String",
+        "example": "46.655"
+      }
+    }
+  },
   "totalWeight": "Total Weight: {value} grams",
   "@totalWeight": {
     "description": "Total weight calculation result",
@@ -308,6 +342,16 @@
       }
     }
   },
+  "ounceResult": "Ounce: {value} oz",
+  "@ounceResult": {
+    "description": "Ounce result after conversion",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "1.5"
+      }
+    }
+  },
   "goldPrice": "Gold Price: {price}",
   "@goldPrice": {
     "description": "Gold price calculation result",
@@ -347,6 +391,10 @@
   "unitOneGram": "1 Gram",
   "@unitOneGram": {
     "description": "Unit name for 1 Gram"
+  },
+  "unitOunce": "Ounce",
+  "@unitOunce": {
+    "description": "Unit name for Ounce"
   },
   "enterValueHint": "Enter {label} value",
   "@enterValueHint": {

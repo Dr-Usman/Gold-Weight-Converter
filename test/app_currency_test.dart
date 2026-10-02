@@ -85,6 +85,14 @@ void main() {
         AppCurrency.resolveDefault(const Locale('es', 'VE')).code,
         equals('VES'),
       );
+      expect(
+        AppCurrency.resolveDefault(const Locale('en', 'TZ')).code,
+        equals('TZS'),
+      );
+      expect(
+        AppCurrency.resolveDefault(const Locale('en', 'ZW')).code,
+        equals('USD'),
+      );
     });
 
     test(

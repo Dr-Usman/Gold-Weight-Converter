@@ -20,12 +20,14 @@ class WeightConverter {
     double ana = 0,
     double ratti = 0,
     double gram = 0,
+    double ounce = 0,
   }) {
     return (tola * AppConstants.tolaToGram) +
         (lal * AppConstants.lalToGram) +
         (masha * AppConstants.mashaToGram) +
         (ana * AppConstants.anaToGram) +
         (ratti * AppConstants.rattiToGram) +
+        (ounce * AppConstants.ounceToGram) +
         gram;
   }
 
@@ -40,6 +42,11 @@ class WeightConverter {
     return fromGrams(grams, WeightUnitEnum.tola);
   }
 
+  /// Converts total grams into troy ounce.
+  static double gramsToOunce(double grams) {
+    return fromGrams(grams, WeightUnitEnum.ounce);
+  }
+
   /// Converts a market rate quoted per [rateUnit] into rate per gram.
   static double ratePerGram(double rate, UnitEnum rateUnit) {
     if (rate <= 0) return 0;
@@ -47,6 +54,7 @@ class WeightConverter {
       UnitEnum.tola => rate / AppConstants.tolaToGram,
       UnitEnum.tenGram => rate / 10,
       UnitEnum.oneGram => rate,
+      UnitEnum.ounce => rate / AppConstants.ounceToGram,
     };
   }
 }

@@ -90,6 +90,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get gramSemanticLabel => 'حقل إدخال وزن الجرام';
 
   @override
+  String get ounceLabel => 'Ounce';
+
+  @override
+  String get ounceInfo => '1 Troy Ounce = 31.1035 grams';
+
+  @override
+  String get ounceHint => 'e.g. 1.5';
+
+  @override
+  String get ounceSemanticLabel => 'Ounce weight input field';
+
+  @override
   String get goldRateLabel => 'سعر الذهب';
 
   @override
@@ -147,6 +159,11 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String ounceConversion(String value, String factor, String result) {
+    return 'Ounce: $value × $factor = $result grams';
+  }
+
+  @override
   String totalWeight(String value) {
     return 'الوزن الإجمالي: $value جرام';
   }
@@ -180,6 +197,11 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String ounceResult(String value) {
+    return 'Ounce: $value oz';
+  }
+
+  @override
   String goldPrice(String price) {
     return 'سعر الذهب: $price';
   }
@@ -200,6 +222,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unitOneGram => '1 جرام';
+
+  @override
+  String get unitOunce => 'Ounce';
 
   @override
   String enterValueHint(String label) {

@@ -7,6 +7,7 @@ class AppConstants {
   static const double mashaToGram = 0.972; // 1 masha = 0.972 grams
   static const double anaToGram = 0.72875; // 1 ana = 0.72875 grams (6.25 lal)
   static const double rattiToGram = 0.1215; // 1 ratti = 0.1215 grams
+  static const double ounceToGram = 31.1035; // 1 troy ounce = 31.1035 grams
 
   static const String privacyPolicyUrl =
       'https://dr-usman.github.io/Gold-Weight-Converter/privacy-policy.html';

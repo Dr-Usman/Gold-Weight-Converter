@@ -111,6 +111,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
         UnitEnum.tola => 'tola',
         UnitEnum.tenGram => 'ten_gram',
         UnitEnum.oneGram => 'one_gram',
+        UnitEnum.ounce => 'ounce',
       },
       hasGoldRate: state.rateValue > 0,
       totalGrams: double.parse(
@@ -150,6 +151,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
       WeightUnitEnum.ana => l10n.anaLabel,
       WeightUnitEnum.ratti => l10n.rattiLabel,
       WeightUnitEnum.gram => l10n.gramLabel,
+      WeightUnitEnum.ounce => l10n.ounceLabel,
     };
   }
 

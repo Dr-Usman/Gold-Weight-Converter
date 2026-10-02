@@ -227,5 +227,11 @@ class Currencies {
       symbol: 'Bs. ',
       locale: 'es_VE',
     ),
+    AppCurrency(
+      code: 'TZS',
+      name: 'Tanzanian Shilling',
+      symbol: 'TSh ',
+      locale: 'en_TZ',
+    ),
   ];
 }

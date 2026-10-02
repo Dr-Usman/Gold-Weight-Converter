@@ -150,6 +150,7 @@ class _GoldItemSheetState extends ConsumerState<GoldItemSheet> {
       WeightUnitEnum.ana => l10n.anaLabel,
       WeightUnitEnum.ratti => l10n.rattiLabel,
       WeightUnitEnum.gram => l10n.gramLabel,
+      WeightUnitEnum.ounce => l10n.ounceLabel,
     };
   }
 

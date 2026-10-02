@@ -150,6 +150,19 @@ class AppCurrency {
       'PH' => _byCode['PHP'],
       'GH' => _byCode['GHS'],
       'MM' => _byCode['MMK'],
+      'TZ' => _byCode['TZS'],
+      'ZW' ||
+      'GY' ||
+      'IQ' ||
+      'LB' ||
+      'LR' ||
+      'SO' ||
+      'MW' ||
+      'PG' ||
+      'SD' ||
+      'YE' ||
+      'UZ' ||
+      'KH' => _byCode['USD'],
       'DE' ||
       'FR' ||
       'IT' ||

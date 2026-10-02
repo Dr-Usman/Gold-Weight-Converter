@@ -90,6 +90,18 @@ class AppLocalizationsAm extends AppLocalizations {
   String get gramSemanticLabel => 'የግራም ክብደት ማስገቢያ መስክ';
 
   @override
+  String get ounceLabel => 'Ounce';
+
+  @override
+  String get ounceInfo => '1 Troy Ounce = 31.1035 grams';
+
+  @override
+  String get ounceHint => 'e.g. 1.5';
+
+  @override
+  String get ounceSemanticLabel => 'Ounce weight input field';
+
+  @override
   String get goldRateLabel => 'የወርቅ ዋጋ';
 
   @override
@@ -147,6 +159,11 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
+  String ounceConversion(String value, String factor, String result) {
+    return 'Ounce: $value × $factor = $result grams';
+  }
+
+  @override
   String totalWeight(String value) {
     return 'ጠቅላላ ክብደት: $value ግራም';
   }
@@ -180,6 +197,11 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
+  String ounceResult(String value) {
+    return 'Ounce: $value oz';
+  }
+
+  @override
   String goldPrice(String price) {
     return 'የወርቅ ዋጋ: $price';
   }
@@ -200,6 +222,9 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get unitOneGram => '1 ግራም';
+
+  @override
+  String get unitOunce => 'Ounce';
 
   @override
   String enterValueHint(String label) {

@@ -229,6 +229,24 @@ void main() {
     expect(find.textContaining('(Rate: ₹3,000 per 1 Gram)'), findsOneWidget);
   });
 
+  testWidgets('calculates gold price and converts weight using Ounce unit', (
+    WidgetTester tester,
+  ) async {
+    await pumpConverterApp(tester);
+
+    await selectRateUnit(tester, 'Ounce');
+
+    // With Ounce selected, the Ounce field (index 5) appears before Rate field (index 6)
+    await enterField(tester, 5, '1'); // 1 Ounce
+    await enterField(tester, 6, '3000'); // 3000 per Ounce
+    await tapCalculate(tester);
+
+    expect(find.textContaining('Gold Price: ₹3,000'), findsOneWidget);
+    expect(find.textContaining('(Rate: ₹3,000 per Ounce)'), findsOneWidget);
+    expect(find.textContaining('Total Weight: 31.1035 grams'), findsOneWidget);
+    expect(find.textContaining('Ounce: 1.0000 oz'), findsOneWidget);
+  });
+
   testWidgets('formats decimals when rate contains fraction', (
     WidgetTester tester,
   ) async {

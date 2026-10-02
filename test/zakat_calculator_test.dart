@@ -59,6 +59,33 @@ void main() {
       );
     });
 
+    test('converts ounce to grams and back', () {
+      expect(WeightConverter.toGrams(1, WeightUnitEnum.ounce), 31.1035);
+      expect(
+        WeightConverter.fromGrams(31.1035, WeightUnitEnum.ounce),
+        closeTo(1.0, 0.0001),
+      );
+      expect(
+        WeightConverter.gramsToOunce(31.1035),
+        closeTo(1.0, 0.0001),
+      );
+    });
+
+    test('sums mixed units with ounce', () {
+      final double total = WeightConverter.totalGrams(
+        ounce: 2,
+        gram: 5,
+      );
+      expect(total, closeTo((2 * 31.1035) + 5, 0.0001));
+    });
+
+    test('converts rate per ounce to per gram', () {
+      expect(
+        WeightConverter.ratePerGram(3110.35, UnitEnum.ounce),
+        closeTo(100, 0.0001),
+      );
+    });
+
     test('converts ana to grams with exact 5-decimal precision', () {
       expect(WeightConverter.toGrams(1, WeightUnitEnum.ana), 0.72875);
       expect(

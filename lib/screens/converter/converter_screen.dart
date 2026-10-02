@@ -47,6 +47,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   final TextEditingController anaController = TextEditingController();
   final TextEditingController rattiController = TextEditingController();
   final TextEditingController gramController = TextEditingController();
+  final TextEditingController ounceController = TextEditingController();
   final TextEditingController goldRateController = TextEditingController();
   final ScrollController scrollController = ScrollController();
 
@@ -82,6 +83,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     anaController.dispose();
     rattiController.dispose();
     gramController.dispose();
+    ounceController.dispose();
     goldRateController.dispose();
     scrollController.dispose();
     super.dispose();
@@ -98,6 +100,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       UnitEnum.tola => l10n.unitTola,
       UnitEnum.tenGram => l10n.unitTenGram,
       UnitEnum.oneGram => l10n.unitOneGram,
+      UnitEnum.ounce => l10n.unitOunce,
     };
   }
 
@@ -110,6 +113,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     anaController.clear();
     rattiController.clear();
     gramController.clear();
+    ounceController.clear();
     goldRateController.clear();
 
     ref.read(goldResultNotifierProvider.notifier).clearResults();
@@ -156,10 +160,18 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     final double ana = _getDouble(anaController);
     final double ratti = _getDouble(rattiController);
     final double gram = _getDouble(gramController);
+    final UnitEnum selectedRateUnit = ref.read(rateUnitProvider);
+    final double ounce =
+        selectedRateUnit == UnitEnum.ounce ? _getDouble(ounceController) : 0.0;
 
     final bool hasAnyInput = isNepaliSystem
-        ? (tola > 0 || ana > 0 || lal > 0 || gram > 0)
-        : (tola > 0 || masha > 0 || ana > 0 || ratti > 0 || gram > 0);
+        ? (tola > 0 || ana > 0 || lal > 0 || gram > 0 || ounce > 0)
+        : (tola > 0 ||
+            masha > 0 ||
+            ana > 0 ||
+            ratti > 0 ||
+            gram > 0 ||
+            ounce > 0);
 
     if (!hasAnyInput) {
       ref.read(goldResultNotifierProvider.notifier).clearResults();
@@ -173,6 +185,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       ana: ana,
       ratti: isNepaliSystem ? 0 : ratti,
       gram: gram,
+      ounce: ounce,
     );
     final StringBuffer resultBuffer = StringBuffer();
 
@@ -242,6 +255,18 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     if (gram > 0) {
       resultBuffer.writeln(l10n.gramConversion('$gram'));
     }
+    if (ounce > 0) {
+      resultBuffer.writeln(
+        l10n.ounceConversion(
+          '$ounce',
+          '${AppConstants.ounceToGram}',
+          WeightConverter.toGrams(
+            ounce,
+            WeightUnitEnum.ounce,
+          ).toStringAsFixed(4),
+        ),
+      );
+    }
 
     resultBuffer.writeln(
       '\n${l10n.totalWeight(totalGrams.toStringAsFixed(4))}',
@@ -299,6 +324,15 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         ),
       );
     }
+
+    resultBuffer.writeln(
+      l10n.ounceResult(
+        WeightConverter.fromGrams(
+          totalGrams,
+          WeightUnitEnum.ounce,
+        ).toStringAsFixed(4),
+      ),
+    );
 
     String newResultText = resultBuffer.toString();
     String? newPriceText;
@@ -364,10 +398,18 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     final double ana = _getDouble(anaController);
     final double ratti = _getDouble(rattiController);
     final double gram = _getDouble(gramController);
+    final UnitEnum rateUnit = ref.read(rateUnitProvider);
+    final double ounce =
+        rateUnit == UnitEnum.ounce ? _getDouble(ounceController) : 0.0;
     final double rate = _getDouble(goldRateController);
     final bool hasInput = isNepaliSystem
-        ? (tola > 0 || ana > 0 || lal > 0 || gram > 0)
-        : (tola > 0 || masha > 0 || ana > 0 || ratti > 0 || gram > 0);
+        ? (tola > 0 || ana > 0 || lal > 0 || gram > 0 || ounce > 0)
+        : (tola > 0 ||
+            masha > 0 ||
+            ana > 0 ||
+            ratti > 0 ||
+            gram > 0 ||
+            ounce > 0);
 
     _calculate();
 
@@ -379,8 +421,8 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         if (!isNepaliSystem && masha > 0) 'masha',
         if (!isNepaliSystem && ratti > 0) 'ratti',
         if (gram > 0) 'gram',
+        if (ounce > 0) 'ounce',
       ];
-      final UnitEnum rateUnit = ref.read(rateUnitProvider);
       final double totalGrams = WeightConverter.totalGrams(
         tola: tola,
         lal: isNepaliSystem ? lal : 0,
@@ -388,6 +430,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         ana: ana,
         ratti: isNepaliSystem ? 0 : ratti,
         gram: gram,
+        ounce: ounce,
       );
 
       final double totalTola = WeightConverter.gramsToTola(totalGrams);
@@ -398,6 +441,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           UnitEnum.tola => 'tola',
           UnitEnum.tenGram => 'ten_gram',
           UnitEnum.oneGram => 'one_gram',
+          UnitEnum.ounce => 'ounce',
         },
         hasGoldRate: rate > 0,
         totalGrams: double.parse(totalGrams.toStringAsFixed(4)),
@@ -528,6 +572,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                           anaController: anaController,
                           rattiController: rattiController,
                           gramController: gramController,
+                          ounceController: ounceController,
                           lalController: lalController,
                           goldRateController: goldRateController,
                           isNepaliSystem: isNepaliSystem,

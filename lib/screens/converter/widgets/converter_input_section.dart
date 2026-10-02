@@ -11,6 +11,7 @@ class ConverterInputSection extends StatelessWidget {
   final TextEditingController anaController;
   final TextEditingController rattiController;
   final TextEditingController gramController;
+  final TextEditingController ounceController;
   final TextEditingController lalController;
   final TextEditingController goldRateController;
   final bool isNepaliSystem;
@@ -27,6 +28,7 @@ class ConverterInputSection extends StatelessWidget {
     required this.anaController,
     required this.rattiController,
     required this.gramController,
+    required this.ounceController,
     required this.lalController,
     required this.goldRateController,
     required this.isNepaliSystem,
@@ -139,6 +141,17 @@ class ConverterInputSection extends StatelessWidget {
             onChanged: onFieldChanged,
             hintText: l10n.gramHint,
           ),
+          if (selectedRateUnit == UnitEnum.ounce) ...[
+            GoldTextField(
+              label: l10n.ounceLabel,
+              info: l10n.ounceInfo,
+              controller: ounceController,
+              semanticLabel: l10n.ounceSemanticLabel,
+              validator: validator,
+              onChanged: onFieldChanged,
+              hintText: l10n.ounceHint,
+            ),
+          ],
           GoldTextField(
             label: l10n.goldRateLabel,
             info: l10n.goldRateInfo,

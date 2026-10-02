@@ -1,7 +1,8 @@
 enum UnitEnum {
   tola('Tola'),
   tenGram('10 Gram'),
-  oneGram('1 Gram');
+  oneGram('1 Gram'),
+  ounce('Ounce');
 
   // Define a final field to hold the string value
   final String name;
