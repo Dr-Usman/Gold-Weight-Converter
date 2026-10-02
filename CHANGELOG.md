@@ -9,6 +9,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.9.5] - 2026-10-02
+
+### Added
+- National flag emojis displayed beside all 20 supported languages in the Language selection sheet (with the US flag for English)
+- Support for Latin American display currencies: Argentine Peso (`ARS`), Colombian Peso (`COP`), and Venezuelan Bolívar (`VES`)
+- Automatic initial currency detection for devices configured with Argentina (`AR`), Colombia (`CO`), and Venezuela (`VE`) country codes
+- Unified `drawer_item_clicked` Mixpanel tracking for all navigation, settings, and external actions in the app drawer
+
+### Changed
+- Streamlined product analytics by consolidating drawer interactions into a single event and eliminating redundant standalone link events
+- Upgraded CI/CD GitHub Actions workflows to modern releases with Node 24 support
+
+### Play Store (en-US)
+```
+What's new in 1.9.5
+• Added national flag icons in the language selection menu
+• Added support for Argentine Peso (ARS), Colombian Peso (COP), and Venezuelan Bolívar (VES)
+• Automatic local currency detection for Argentina, Colombia, and Venezuela
+• Performance improvements and bug fixes
+```
+
+---
+
 ## [1.9.4] - 2026-09-30
 
 ### Added
