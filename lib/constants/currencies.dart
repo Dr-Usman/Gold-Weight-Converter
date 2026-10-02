@@ -209,5 +209,23 @@ class Currencies {
       symbol: 'CHF ',
       locale: 'en_CH',
     ),
+    AppCurrency(
+      code: 'ARS',
+      name: 'Argentine Peso',
+      symbol: 'AR\$',
+      locale: 'es_AR',
+    ),
+    AppCurrency(
+      code: 'COP',
+      name: 'Colombian Peso',
+      symbol: 'COL\$',
+      locale: 'es_CO',
+    ),
+    AppCurrency(
+      code: 'VES',
+      name: 'Venezuelan Bolívar',
+      symbol: 'Bs. ',
+      locale: 'es_VE',
+    ),
   ];
 }

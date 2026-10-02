@@ -190,28 +190,19 @@ class AnalyticsService {
     );
   }
 
-  static void trackAppShared() {
-    _mixpanel?.track('app_shared');
-  }
-
-  static void trackRateAppStoreOpened() {
-    _mixpanel?.track('rate_app_store_opened');
-  }
-
-  static void trackMoreAppsOpened() {
-    _mixpanel?.track('more_apps_opened');
-  }
-
-  static void trackPrivacyPolicyOpened() {
-    _mixpanel?.track('privacy_policy_opened');
-  }
-
   static void trackAppUpdatePrompted() {
     _mixpanel?.track('app_update_prompted');
   }
 
   static void trackAppUpdateCompleted() {
     _mixpanel?.track('app_update_completed');
+  }
+
+  static void trackDrawerItemClicked(String itemName) {
+    _mixpanel?.track(
+      'drawer_item_clicked',
+      properties: {'item_name': itemName},
+    );
   }
 
   static void trackCurrencyChanged({

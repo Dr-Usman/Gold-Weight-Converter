@@ -120,6 +120,7 @@ class _ZakatDrawerTile extends StatelessWidget {
           title: Text(l10n.zakatMenuLabel),
           trailing: const Icon(Icons.arrow_forward_ios, size: 16),
           onTap: () {
+            AnalyticsService.trackDrawerItemClicked('zakat');
             Navigator.of(context).pop();
             Navigator.of(context).push(
               MaterialPageRoute<void>(builder: (_) => const ZakatScreen()),
@@ -185,6 +186,7 @@ class _ThemeDrawerTile extends ConsumerWidget {
                 ],
                 selected: {themeMode},
                 onSelectionChanged: (Set<ThemeMode> selected) {
+                  AnalyticsService.trackDrawerItemClicked('theme');
                   ref
                       .read(themeModeProvider.notifier)
                       .setThemeMode(selected.first);
@@ -217,6 +219,7 @@ class _LanguageDrawerTile extends ConsumerWidget {
           subtitle: Text(Languages.nativeLabelFor(locale)),
           trailing: const Icon(Icons.arrow_forward_ios, size: 16),
           onTap: () {
+            AnalyticsService.trackDrawerItemClicked('language');
             showModalBottomSheet(
               context: context,
               useSafeArea: false,
@@ -253,6 +256,7 @@ class _CurrencyDrawerTile extends ConsumerWidget {
           subtitle: Text(currency.displayLabel),
           trailing: const Icon(Icons.arrow_forward_ios, size: 16),
           onTap: () {
+            AnalyticsService.trackDrawerItemClicked('currency');
             showModalBottomSheet(
               context: context,
               useSafeArea: false,
@@ -317,18 +321,18 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
             ListTile(
               leading: Icon(Icons.info_outline, color: scheme.primary),
               title: Text(l10n.settingsAboutLabel),
-              onTap: () => _showAbout(context, ref),
+              onTap: () {
+                AnalyticsService.trackDrawerItemClicked('about');
+                _showAbout(context, ref);
+              },
             ),
             const Divider(height: 1),
             ListTile(
               leading: Icon(Icons.privacy_tip_outlined, color: scheme.primary),
               title: Text(l10n.privacyPolicyLabel),
               onTap: () {
-                ExternalLinks.openUrl(
-                  context,
-                  AppConstants.privacyPolicyUrl,
-                  onOpened: AnalyticsService.trackPrivacyPolicyOpened,
-                );
+                AnalyticsService.trackDrawerItemClicked('privacy_policy');
+                ExternalLinks.openUrl(context, AppConstants.privacyPolicyUrl);
               },
             ),
             const Divider(height: 1),
@@ -336,11 +340,8 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
               leading: Icon(Icons.star_outline, color: scheme.primary),
               title: Text(l10n.rateAppLabel),
               onTap: () {
-                ExternalLinks.openUrl(
-                  context,
-                  AppConstants.playStoreUrl,
-                  onOpened: AnalyticsService.trackRateAppStoreOpened,
-                );
+                AnalyticsService.trackDrawerItemClicked('rate_app');
+                ExternalLinks.openUrl(context, AppConstants.playStoreUrl);
               },
             ),
             const Divider(height: 1),
@@ -348,6 +349,7 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
               leading: Icon(Icons.share_outlined, color: scheme.primary),
               title: Text(l10n.shareAppLabel),
               onTap: () {
+                AnalyticsService.trackDrawerItemClicked('share_app');
                 ExternalLinks.shareApp(
                   l10n.shareAppMessage(AppConstants.playStoreUrl),
                 );
@@ -358,10 +360,10 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
               leading: Icon(Icons.apps_outlined, color: scheme.primary),
               title: Text(l10n.moreAppsLabel),
               onTap: () {
+                AnalyticsService.trackDrawerItemClicked('more_apps');
                 ExternalLinks.openUrl(
                   context,
                   AppConstants.developerPlayStoreUrl,
-                  onOpened: AnalyticsService.trackMoreAppsOpened,
                 );
               },
             ),

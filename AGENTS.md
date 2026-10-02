@@ -91,10 +91,7 @@ These are the Mixpanel events currently tracked in this project. **All new Mixpa
 | `currency_changed` | User picks a different currency in the drawer | `currency`, `previous_currency` | `lib/providers/currency_provider.dart` |
 | `results_copied` | User copies converter or zakat results | `screen` (`converter` or `zakat`), `total_grams`, `total_tola` | `lib/widgets/result_actions.dart` |
 | `results_shared` | User shares converter or zakat results (share sheet not dismissed) | `screen` (`converter` or `zakat`), `total_grams`, `total_tola` | `lib/services/external_links.dart` |
-| `app_shared` | User shares the app from the drawer (share sheet not dismissed) | (none) | `lib/widgets/app_drawer.dart` |
-| `rate_app_store_opened` | Play Store listing opened from the drawer | (none) | `lib/widgets/app_drawer.dart` |
-| `more_apps_opened` | User opens the developer's other apps from the drawer | (none) | `lib/widgets/app_drawer.dart` |
-| `privacy_policy_opened` | User opens the privacy policy from the drawer | (none) | `lib/widgets/app_drawer.dart` |
+| `drawer_item_clicked` | User clicks any navigation tile or action in the drawer | `item_name` (`zakat`, `theme`, `language`, `currency`, `about`, `privacy_policy`, `rate_app`, `share_app`, `more_apps`) | `lib/widgets/app_drawer.dart` |
 | `app_update_prompted` | Play flexible in-app update download starts (Android + Play installs) | (none) | `lib/services/app_update_service.dart` |
 | `app_update_completed` | User taps Restart to apply a downloaded Play flexible update | (none) | `lib/services/app_update_service.dart` |
 

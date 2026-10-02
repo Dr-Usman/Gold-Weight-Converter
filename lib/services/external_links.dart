@@ -46,10 +46,6 @@ class ExternalLinks {
   }
 
   static Future<void> shareApp(String message) async {
-    final ShareResult result = await SharePlus.instance.share(
-      ShareParams(text: message),
-    );
-    if (result.status == ShareResultStatus.dismissed) return;
-    AnalyticsService.trackAppShared();
+    await SharePlus.instance.share(ShareParams(text: message));
   }
 }

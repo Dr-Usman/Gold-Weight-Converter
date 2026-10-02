@@ -102,6 +102,11 @@ class LanguageBottomSheet extends ConsumerWidget {
                           ),
                           child: Row(
                             children: [
+                              Text(
+                                language.flag,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              const SizedBox(width: 8),
                               Expanded(
                                 child: Text.rich(
                                   TextSpan(

@@ -73,6 +73,18 @@ void main() {
         AppCurrency.resolveDefault(const Locale('en', 'AE')).code,
         equals('AED'),
       );
+      expect(
+        AppCurrency.resolveDefault(const Locale('es', 'AR')).code,
+        equals('ARS'),
+      );
+      expect(
+        AppCurrency.resolveDefault(const Locale('es', 'CO')).code,
+        equals('COP'),
+      );
+      expect(
+        AppCurrency.resolveDefault(const Locale('es', 'VE')).code,
+        equals('VES'),
+      );
     });
 
     test(
