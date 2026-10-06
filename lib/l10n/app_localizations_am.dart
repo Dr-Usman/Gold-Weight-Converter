@@ -90,16 +90,16 @@ class AppLocalizationsAm extends AppLocalizations {
   String get gramSemanticLabel => 'የግራም ክብደት ማስገቢያ መስክ';
 
   @override
-  String get ounceLabel => 'Ounce';
+  String get ounceLabel => 'አውንስ';
 
   @override
-  String get ounceInfo => '1 Troy Ounce = 31.1035 grams';
+  String get ounceInfo => '1 ትሮይ አውንስ = 31.1035 ግራም';
 
   @override
-  String get ounceHint => 'e.g. 1.5';
+  String get ounceHint => 'ለምሳሌ 1.5';
 
   @override
-  String get ounceSemanticLabel => 'Ounce weight input field';
+  String get ounceSemanticLabel => 'የአውንስ ክብደት ማስገቢያ መስክ';
 
   @override
   String get goldRateLabel => 'የወርቅ ዋጋ';
@@ -160,7 +160,7 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String ounceConversion(String value, String factor, String result) {
-    return 'Ounce: $value × $factor = $result grams';
+    return 'አውንስ: $value × $factor = $result ግራም';
   }
 
   @override
@@ -198,7 +198,7 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String ounceResult(String value) {
-    return 'Ounce: $value oz';
+    return 'አውንስ: $value oz';
   }
 
   @override
@@ -224,7 +224,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get unitOneGram => '1 ግራም';
 
   @override
-  String get unitOunce => 'Ounce';
+  String get unitOunce => 'አውንስ';
 
   @override
   String enterValueHint(String label) {

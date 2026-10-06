@@ -90,16 +90,16 @@ class AppLocalizationsMs extends AppLocalizations {
   String get gramSemanticLabel => 'Bidang input berat Gram';
 
   @override
-  String get ounceLabel => 'Ounce';
+  String get ounceLabel => 'Auns';
 
   @override
-  String get ounceInfo => '1 Troy Ounce = 31.1035 grams';
+  String get ounceInfo => '1 Troy Auns = 31.1035 gram';
 
   @override
-  String get ounceHint => 'e.g. 1.5';
+  String get ounceHint => 'cth. 1.5';
 
   @override
-  String get ounceSemanticLabel => 'Ounce weight input field';
+  String get ounceSemanticLabel => 'Bidang input berat Auns';
 
   @override
   String get goldRateLabel => 'Harga Emas';
@@ -160,7 +160,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String ounceConversion(String value, String factor, String result) {
-    return 'Ounce: $value × $factor = $result grams';
+    return 'Auns: $value × $factor = $result gram';
   }
 
   @override
@@ -198,7 +198,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String ounceResult(String value) {
-    return 'Ounce: $value oz';
+    return 'Auns: $value oz';
   }
 
   @override
@@ -224,7 +224,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get unitOneGram => '1 Gram';
 
   @override
-  String get unitOunce => 'Ounce';
+  String get unitOunce => 'Auns';
 
   @override
   String enterValueHint(String label) {

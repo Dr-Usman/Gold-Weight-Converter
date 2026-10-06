@@ -16,14 +16,22 @@ void main() async {
   final preferencesService = PreferencesService();
   await preferencesService.init();
 
+  final Locale deviceLocale = PlatformDispatcher.instance.locale;
+  final Duration timeZoneOffset = DateTime.now().timeZoneOffset;
+
   final String preferredCurrency =
       preferencesService.getCurrencyCode() ??
-      AppCurrency.resolveDefault(PlatformDispatcher.instance.locale).code;
+      AppCurrency.resolveDefault(
+        deviceLocale,
+        timeZoneOffset: timeZoneOffset,
+      ).code;
 
   await AnalyticsService.init(
     initialLocale: preferencesService.getLocale(),
     initialThemeMode: preferencesService.getThemeMode(),
     initialPreferredCurrency: preferredCurrency,
+    deviceLocale: deviceLocale,
+    timeZoneOffset: timeZoneOffset,
   );
   await AdsService.init();
 

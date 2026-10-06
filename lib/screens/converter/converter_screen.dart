@@ -161,17 +161,18 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     final double ratti = _getDouble(rattiController);
     final double gram = _getDouble(gramController);
     final UnitEnum selectedRateUnit = ref.read(rateUnitProvider);
-    final double ounce =
-        selectedRateUnit == UnitEnum.ounce ? _getDouble(ounceController) : 0.0;
+    final double ounce = selectedRateUnit == UnitEnum.ounce
+        ? _getDouble(ounceController)
+        : 0.0;
 
     final bool hasAnyInput = isNepaliSystem
         ? (tola > 0 || ana > 0 || lal > 0 || gram > 0 || ounce > 0)
         : (tola > 0 ||
-            masha > 0 ||
-            ana > 0 ||
-            ratti > 0 ||
-            gram > 0 ||
-            ounce > 0);
+              masha > 0 ||
+              ana > 0 ||
+              ratti > 0 ||
+              gram > 0 ||
+              ounce > 0);
 
     if (!hasAnyInput) {
       ref.read(goldResultNotifierProvider.notifier).clearResults();
@@ -252,9 +253,6 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         );
       }
     }
-    if (gram > 0) {
-      resultBuffer.writeln(l10n.gramConversion('$gram'));
-    }
     if (ounce > 0) {
       resultBuffer.writeln(
         l10n.ounceConversion(
@@ -266,6 +264,9 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
           ).toStringAsFixed(4),
         ),
       );
+    }
+    if (gram > 0) {
+      resultBuffer.writeln(l10n.gramConversion('$gram'));
     }
 
     resultBuffer.writeln(
@@ -399,17 +400,18 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
     final double ratti = _getDouble(rattiController);
     final double gram = _getDouble(gramController);
     final UnitEnum rateUnit = ref.read(rateUnitProvider);
-    final double ounce =
-        rateUnit == UnitEnum.ounce ? _getDouble(ounceController) : 0.0;
+    final double ounce = rateUnit == UnitEnum.ounce
+        ? _getDouble(ounceController)
+        : 0.0;
     final double rate = _getDouble(goldRateController);
     final bool hasInput = isNepaliSystem
         ? (tola > 0 || ana > 0 || lal > 0 || gram > 0 || ounce > 0)
         : (tola > 0 ||
-            masha > 0 ||
-            ana > 0 ||
-            ratti > 0 ||
-            gram > 0 ||
-            ounce > 0);
+              masha > 0 ||
+              ana > 0 ||
+              ratti > 0 ||
+              gram > 0 ||
+              ounce > 0);
 
     _calculate();
 

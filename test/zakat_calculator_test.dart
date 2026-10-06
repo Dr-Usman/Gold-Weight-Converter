@@ -65,17 +65,11 @@ void main() {
         WeightConverter.fromGrams(31.1035, WeightUnitEnum.ounce),
         closeTo(1.0, 0.0001),
       );
-      expect(
-        WeightConverter.gramsToOunce(31.1035),
-        closeTo(1.0, 0.0001),
-      );
+      expect(WeightConverter.gramsToOunce(31.1035), closeTo(1.0, 0.0001));
     });
 
     test('sums mixed units with ounce', () {
-      final double total = WeightConverter.totalGrams(
-        ounce: 2,
-        gram: 5,
-      );
+      final double total = WeightConverter.totalGrams(ounce: 2, gram: 5);
       expect(total, closeTo((2 * 31.1035) + 5, 0.0001));
     });
 

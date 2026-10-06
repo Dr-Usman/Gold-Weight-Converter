@@ -91,16 +91,16 @@ class AppLocalizationsTa extends AppLocalizations {
   String get gramSemanticLabel => 'கிராம் எடை உள்ளீட்டு புலம்';
 
   @override
-  String get ounceLabel => 'Ounce';
+  String get ounceLabel => 'அவுன்ஸ்';
 
   @override
-  String get ounceInfo => '1 Troy Ounce = 31.1035 grams';
+  String get ounceInfo => '1 டிராய் அவுன்ஸ் = 31.1035 கிராம்';
 
   @override
-  String get ounceHint => 'e.g. 1.5';
+  String get ounceHint => 'எ.கா. 1.5';
 
   @override
-  String get ounceSemanticLabel => 'Ounce weight input field';
+  String get ounceSemanticLabel => 'அவுன்ஸ் எடை உள்ளீட்டு புலம்';
 
   @override
   String get goldRateLabel => 'தங்க விலை';
@@ -161,7 +161,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String ounceConversion(String value, String factor, String result) {
-    return 'Ounce: $value × $factor = $result grams';
+    return 'அவுன்ஸ்: $value × $factor = $result கிராம்';
   }
 
   @override
@@ -199,7 +199,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String ounceResult(String value) {
-    return 'Ounce: $value oz';
+    return 'அவுன்ஸ்: $value oz';
   }
 
   @override
@@ -225,7 +225,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get unitOneGram => '1 கிராம்';
 
   @override
-  String get unitOunce => 'Ounce';
+  String get unitOunce => 'அவுன்ஸ்';
 
   @override
   String enterValueHint(String label) {

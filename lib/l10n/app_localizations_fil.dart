@@ -94,13 +94,13 @@ class AppLocalizationsFil extends AppLocalizations {
   String get ounceLabel => 'Ounce';
 
   @override
-  String get ounceInfo => '1 Troy Ounce = 31.1035 grams';
+  String get ounceInfo => '1 Troy Ounce = 31.1035 gramo';
 
   @override
-  String get ounceHint => 'e.g. 1.5';
+  String get ounceHint => 'hal. 1.5';
 
   @override
-  String get ounceSemanticLabel => 'Ounce weight input field';
+  String get ounceSemanticLabel => 'Input field para sa bigat ng Ounce';
 
   @override
   String get goldRateLabel => 'Presyo ng Ginto';
@@ -162,7 +162,7 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String ounceConversion(String value, String factor, String result) {
-    return 'Ounce: $value × $factor = $result grams';
+    return 'Ounce: $value × $factor = $result gramo';
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
@@ -19,10 +20,19 @@ class AnalyticsService {
     Locale? initialLocale,
     ThemeMode? initialThemeMode,
     String? initialPreferredCurrency,
+    Locale? deviceLocale,
+    Duration? timeZoneOffset,
   }) async {
     if (_mixpanel != null) return;
 
+    final Locale resolvedDeviceLocale =
+        deviceLocale ?? PlatformDispatcher.instance.locale;
+    final Duration resolvedOffset =
+        timeZoneOffset ?? DateTime.now().timeZoneOffset;
+
     final initialSuperProperties = <String, dynamic>{
+      'device_locale': formatDeviceLocale(resolvedDeviceLocale),
+      'device_timezone_offset': formatTimeZoneOffset(resolvedOffset),
       if (initialLocale != null)
         'preferred_language': localeToAnalyticsCode(initialLocale),
       if (initialThemeMode != null)
@@ -78,8 +88,27 @@ class AnalyticsService {
     }
   }
 
+  static void flush() {
+    _mixpanel?.flush();
+  }
+
+  static void _track(
+    String eventName, [
+    Map<String, dynamic>? properties,
+    bool forceFlush = false,
+  ]) {
+    assert(() {
+      debugPrint('📊 [Mixpanel] Track: $eventName ${properties ?? ""}');
+      return true;
+    }());
+    _mixpanel?.track(eventName, properties: properties);
+    if (kDebugMode || forceFlush) {
+      _mixpanel?.flush();
+    }
+  }
+
   static void trackAppOpened() {
-    _mixpanel?.track('app_opened');
+    _track('app_opened');
   }
 
   static void trackConversionCompleted({
@@ -89,16 +118,13 @@ class AnalyticsService {
     required double totalGrams,
     required double totalTola,
   }) {
-    _mixpanel?.track(
-      'conversion_completed',
-      properties: {
-        'input_units_used': inputUnitsUsed,
-        'rate_unit': rateUnit,
-        'is_gold_rate_set': hasGoldRate,
-        'total_grams': totalGrams,
-        'total_tola': totalTola,
-      },
-    );
+    _track('conversion_completed', {
+      'input_units_used': inputUnitsUsed,
+      'rate_unit': rateUnit,
+      'is_gold_rate_set': hasGoldRate,
+      'total_grams': totalGrams,
+      'total_tola': totalTola,
+    }, true);
   }
 
   static void trackZakatCalculated({
@@ -111,19 +137,16 @@ class AnalyticsService {
     required List<String> weightUnitsUsed,
     required bool hasCustomKarat,
   }) {
-    _mixpanel?.track(
-      'zakat_calculated',
-      properties: {
-        'item_count': itemCount,
-        'rate_unit': rateUnit,
-        'is_gold_rate_set': hasGoldRate,
-        'total_grams': totalGrams,
-        'total_pure_grams': totalPureGrams,
-        'purities_used': puritiesUsed,
-        'weight_units_used': weightUnitsUsed,
-        'has_custom_karat': hasCustomKarat,
-      },
-    );
+    _track('zakat_calculated', {
+      'item_count': itemCount,
+      'rate_unit': rateUnit,
+      'is_gold_rate_set': hasGoldRate,
+      'total_grams': totalGrams,
+      'total_pure_grams': totalPureGrams,
+      'purities_used': puritiesUsed,
+      'weight_units_used': weightUnitsUsed,
+      'has_custom_karat': hasCustomKarat,
+    }, true);
   }
 
   static void trackLanguageChanged({
@@ -132,14 +155,11 @@ class AnalyticsService {
   }) {
     final String languageCode = localeToAnalyticsCode(language);
     _mixpanel?.registerSuperProperties({'preferred_language': languageCode});
-    _mixpanel?.track(
-      'language_changed',
-      properties: {
-        'language': languageCode,
-        if (previousLanguage != null)
-          'previous_language': localeToAnalyticsCode(previousLanguage),
-      },
-    );
+    _track('language_changed', {
+      'language': languageCode,
+      if (previousLanguage != null)
+        'previous_language': localeToAnalyticsCode(previousLanguage),
+    });
     _mixpanel?.getPeople().set('preferred_language', languageCode);
   }
 
@@ -149,14 +169,11 @@ class AnalyticsService {
   }) {
     final String themeValue = themeModeToAnalyticsValue(themeMode);
     _mixpanel?.registerSuperProperties({'theme_mode': themeValue});
-    _mixpanel?.track(
-      'theme_changed',
-      properties: {
-        'theme_mode': themeValue,
-        if (previousThemeMode != null)
-          'previous_theme_mode': themeModeToAnalyticsValue(previousThemeMode),
-      },
-    );
+    _track('theme_changed', {
+      'theme_mode': themeValue,
+      if (previousThemeMode != null)
+        'previous_theme_mode': themeModeToAnalyticsValue(previousThemeMode),
+    });
     _mixpanel?.getPeople().set('theme_mode', themeValue);
   }
 
@@ -165,14 +182,11 @@ class AnalyticsService {
     double? totalGrams,
     double? totalTola,
   }) {
-    _mixpanel?.track(
-      'results_copied',
-      properties: {
-        'screen': screen,
-        'total_grams': ?totalGrams,
-        'total_tola': ?totalTola,
-      },
-    );
+    _track('results_copied', {
+      'screen': screen,
+      'total_grams': ?totalGrams,
+      'total_tola': ?totalTola,
+    });
   }
 
   static void trackResultsShared({
@@ -180,29 +194,23 @@ class AnalyticsService {
     double? totalGrams,
     double? totalTola,
   }) {
-    _mixpanel?.track(
-      'results_shared',
-      properties: {
-        'screen': screen,
-        'total_grams': ?totalGrams,
-        'total_tola': ?totalTola,
-      },
-    );
+    _track('results_shared', {
+      'screen': screen,
+      'total_grams': ?totalGrams,
+      'total_tola': ?totalTola,
+    });
   }
 
   static void trackAppUpdatePrompted() {
-    _mixpanel?.track('app_update_prompted');
+    _track('app_update_prompted');
   }
 
   static void trackAppUpdateCompleted() {
-    _mixpanel?.track('app_update_completed');
+    _track('app_update_completed');
   }
 
   static void trackDrawerItemClicked(String itemName) {
-    _mixpanel?.track(
-      'drawer_item_clicked',
-      properties: {'item_name': itemName},
-    );
+    _track('drawer_item_clicked', {'item_name': itemName});
   }
 
   static void trackCurrencyChanged({
@@ -210,13 +218,10 @@ class AnalyticsService {
     String? previousCurrency,
   }) {
     _mixpanel?.registerSuperProperties({'preferred_currency': currency});
-    _mixpanel?.track(
-      'currency_changed',
-      properties: {
-        'currency': currency,
-        'previous_currency': ?previousCurrency,
-      },
-    );
+    _track('currency_changed', {
+      'currency': currency,
+      'previous_currency': ?previousCurrency,
+    });
     _mixpanel?.getPeople().set('preferred_currency', currency);
   }
 
@@ -234,5 +239,19 @@ class AnalyticsService {
       ThemeMode.light => 'light',
       ThemeMode.system => 'system',
     };
+  }
+
+  /// Formats a device locale into an analytics string (e.g. `en_US`, `fr_FR`, `en`).
+  static String formatDeviceLocale(Locale locale) {
+    return locale.toString();
+  }
+
+  /// Formats a timezone offset into an ISO-like offset string (e.g. `+02:00`, `-05:00`, `+05:30`).
+  static String formatTimeZoneOffset(Duration offset) {
+    final String sign = offset.isNegative ? '-' : '+';
+    final int totalMinutes = offset.inMinutes.abs();
+    final int hours = totalMinutes ~/ 60;
+    final int minutes = totalMinutes % 60;
+    return '$sign${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
   }
 }

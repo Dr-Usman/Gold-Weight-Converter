@@ -90,16 +90,16 @@ class AppLocalizationsUr extends AppLocalizations {
   String get gramSemanticLabel => 'گرام وزن درج کنے والا فیلڈ';
 
   @override
-  String get ounceLabel => 'Ounce';
+  String get ounceLabel => 'اونس';
 
   @override
-  String get ounceInfo => '1 Troy Ounce = 31.1035 grams';
+  String get ounceInfo => '1 ٹرائے اونس = 31.1035 گرام';
 
   @override
-  String get ounceHint => 'e.g. 1.5';
+  String get ounceHint => 'مثلاً 1.5';
 
   @override
-  String get ounceSemanticLabel => 'Ounce weight input field';
+  String get ounceSemanticLabel => 'اونس وزن درج کرنے والا فیلڈ';
 
   @override
   String get goldRateLabel => 'سونے کی شرح';
@@ -160,7 +160,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String ounceConversion(String value, String factor, String result) {
-    return 'Ounce: $value × $factor = $result grams';
+    return 'اونس: $value × $factor = $result گرام';
   }
 
   @override
@@ -198,7 +198,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String ounceResult(String value) {
-    return 'Ounce: $value oz';
+    return 'اونس: $value oz';
   }
 
   @override
@@ -224,7 +224,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get unitOneGram => '1 گرام';
 
   @override
-  String get unitOunce => 'Ounce';
+  String get unitOunce => 'اونس';
 
   @override
   String enterValueHint(String label) {
@@ -561,6 +561,18 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   String get gramSemanticLabel => 'Gram wazan darj karne wala field';
 
   @override
+  String get ounceLabel => 'Ounce';
+
+  @override
+  String get ounceInfo => '1 Troy Ounce = 31.1035 grams';
+
+  @override
+  String get ounceHint => 'maslan 1.5';
+
+  @override
+  String get ounceSemanticLabel => 'Ounce wazan darj karne wala field';
+
+  @override
   String get goldRateLabel => 'Sone Ki Sharah';
 
   @override
@@ -619,6 +631,11 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   }
 
   @override
+  String ounceConversion(String value, String factor, String result) {
+    return 'Ounce: $value × $factor = $result gram';
+  }
+
+  @override
   String totalWeight(String value) {
     return 'Kul Wazan: $value gram';
   }
@@ -652,6 +669,11 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
   }
 
   @override
+  String ounceResult(String value) {
+    return 'Ounce: $value oz';
+  }
+
+  @override
   String goldPrice(String price) {
     return 'Sone Ki Qeemat: $price';
   }
@@ -672,6 +694,9 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
 
   @override
   String get unitOneGram => '1 Gram';
+
+  @override
+  String get unitOunce => 'Ounce';
 
   @override
   String enterValueHint(String label) {

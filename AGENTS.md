@@ -104,6 +104,8 @@ The following properties are registered as **Mixpanel Super Properties** (automa
 | `preferred_language` | `en`, `ur`, `ur_ro`, `sd`, … | Last selected app language |
 | `theme_mode` | `light`, `dark`, `system` | Last selected theme preference |
 | `preferred_currency` | `INR`, `PKR`, `USD`, … | Last selected display currency |
+| `device_locale` | `en_US`, `fr_FR`, `ar_QA`, … | Host device system locale at launch |
+| `device_timezone_offset` | `+02:00`, `+05:30`, … | Host device UTC timezone offset at launch |
 
 Do **not** send a custom `platform` property. Mixpanel already provides `$os` (e.g. `Android`, `iOS`) and `mp_lib` (`flutter`).
 

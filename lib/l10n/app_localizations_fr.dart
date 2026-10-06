@@ -91,16 +91,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gramSemanticLabel => 'Champ de saisie du poids en grammes';
 
   @override
-  String get ounceLabel => 'Ounce';
+  String get ounceLabel => 'Once';
 
   @override
-  String get ounceInfo => '1 Troy Ounce = 31.1035 grams';
+  String get ounceInfo => '1 once troy = 31,1035 grammes';
 
   @override
-  String get ounceHint => 'e.g. 1.5';
+  String get ounceHint => 'ex. 1.5';
 
   @override
-  String get ounceSemanticLabel => 'Ounce weight input field';
+  String get ounceSemanticLabel => 'Champ de saisie du poids en onces';
 
   @override
   String get goldRateLabel => 'Prix de l\'Or';
@@ -161,7 +161,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String ounceConversion(String value, String factor, String result) {
-    return 'Ounce: $value × $factor = $result grams';
+    return 'Once : $value × $factor = $result grammes';
   }
 
   @override
@@ -199,7 +199,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String ounceResult(String value) {
-    return 'Ounce: $value oz';
+    return 'Once : $value oz';
   }
 
   @override
@@ -225,7 +225,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get unitOneGram => '1 Gramme';
 
   @override
-  String get unitOunce => 'Ounce';
+  String get unitOunce => 'Once';
 
   @override
   String enterValueHint(String label) {
