@@ -12,6 +12,12 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 - Calculate gold price by rate per Tola, per 10 Gram, or per 1 Gram
 - Localized conversion breakdown with copy and share actions
 - Converter gold rate and rate unit remembered across sessions
+- Offline conversion history (drawer → History)
+  - Automatically records every conversion with timestamp, input units, rate, and total price
+  - Tap Restore button to reload past weights and rates directly back into the converter
+  - Instant copy and share for each history card
+  - Swipe to delete with floating Undo action, and clear-all history option
+  - 100% private and persisted locally on device
 - Gold zakat calculator (drawer → Gold Zakat)
   - Add items with weight, unit, and purity (24K / 22K / 21K / 18K / custom karat)
   - Shared 24K market rate; applies 2.5% on listed items (no nisab gate)

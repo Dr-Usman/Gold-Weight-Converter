@@ -960,6 +960,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Restart'**
   String get appUpdateRestart;
+
+  /// Drawer item label for conversion history
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion History'**
+  String get historyMenuLabel;
+
+  /// AppBar title for conversion history screen
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion History'**
+  String get historyTitle;
+
+  /// Title displayed when there is no conversion history
+  ///
+  /// In en, this message translates to:
+  /// **'No History Yet'**
+  String get historyEmptyTitle;
+
+  /// Subtitle displayed when history list is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Calculations you make will appear here automatically.'**
+  String get historyEmptySubtitle;
+
+  /// Tooltip for clear history button
+  ///
+  /// In en, this message translates to:
+  /// **'Clear history'**
+  String get historyClearTooltip;
+
+  /// Dialog title for confirming history clear
+  ///
+  /// In en, this message translates to:
+  /// **'Clear History?'**
+  String get historyClearConfirmTitle;
+
+  /// Dialog message for confirming history clear
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete all conversion history?'**
+  String get historyClearConfirmMessage;
+
+  /// Button label to restore history values into the converter
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get historyRestoreButton;
+
+  /// SnackBar message when a history item is deleted
+  ///
+  /// In en, this message translates to:
+  /// **'History item deleted'**
+  String get historyItemDeleted;
+
+  /// Action label to undo history item deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get historyUndo;
 }
 
 class _AppLocalizationsDelegate

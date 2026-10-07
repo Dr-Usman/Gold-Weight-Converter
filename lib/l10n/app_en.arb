@@ -753,5 +753,45 @@
   "appUpdateRestart": "Restart",
   "@appUpdateRestart": {
     "description": "SnackBar action that applies a downloaded Play update"
+  },
+  "historyMenuLabel": "Conversion History",
+  "@historyMenuLabel": {
+    "description": "Drawer item label for conversion history"
+  },
+  "historyTitle": "Conversion History",
+  "@historyTitle": {
+    "description": "AppBar title for conversion history screen"
+  },
+  "historyEmptyTitle": "No History Yet",
+  "@historyEmptyTitle": {
+    "description": "Title displayed when there is no conversion history"
+  },
+  "historyEmptySubtitle": "Calculations you make will appear here automatically.",
+  "@historyEmptySubtitle": {
+    "description": "Subtitle displayed when history list is empty"
+  },
+  "historyClearTooltip": "Clear history",
+  "@historyClearTooltip": {
+    "description": "Tooltip for clear history button"
+  },
+  "historyClearConfirmTitle": "Clear History?",
+  "@historyClearConfirmTitle": {
+    "description": "Dialog title for confirming history clear"
+  },
+  "historyClearConfirmMessage": "Are you sure you want to delete all conversion history?",
+  "@historyClearConfirmMessage": {
+    "description": "Dialog message for confirming history clear"
+  },
+  "historyRestoreButton": "Restore",
+  "@historyRestoreButton": {
+    "description": "Button label to restore history values into the converter"
+  },
+  "historyItemDeleted": "History item deleted",
+  "@historyItemDeleted": {
+    "description": "SnackBar message when a history item is deleted"
+  },
+  "historyUndo": "Undo",
+  "@historyUndo": {
+    "description": "Action label to undo history item deletion"
   }
 }

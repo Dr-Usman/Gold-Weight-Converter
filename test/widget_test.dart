@@ -5,6 +5,7 @@ import 'package:gold_weight_converter/constants/purity_enum.dart';
 import 'package:gold_weight_converter/constants/unit_enum.dart';
 import 'package:gold_weight_converter/constants/weight_unit_enum.dart';
 import 'package:gold_weight_converter/main.dart';
+import 'package:gold_weight_converter/models/conversion_history_item.dart';
 import 'package:gold_weight_converter/models/gold_item_model.dart';
 import 'package:gold_weight_converter/services/preferences_service.dart';
 
@@ -63,6 +64,16 @@ class _TestPreferencesService extends PreferencesService {
 
   @override
   Future<void> saveConverterRateUnit(UnitEnum unit) async {}
+
+  List<ConversionHistoryItem> _history = [];
+
+  @override
+  List<ConversionHistoryItem> getConversionHistory() => _history;
+
+  @override
+  Future<void> saveConversionHistory(List<ConversionHistoryItem> items) async {
+    _history = items;
+  }
 }
 
 Future<void> pumpConverterApp(WidgetTester tester) async {

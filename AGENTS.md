@@ -88,10 +88,12 @@ These are the Mixpanel events currently tracked in this project. **All new Mixpa
 | `zakat_calculated` | User taps Calculate zakat with at least one gold item | `item_count`, `rate_unit`, `is_gold_rate_set`, `total_grams`, `total_pure_grams`, `purities_used`, `weight_units_used`, `has_custom_karat` | `lib/screens/zakat/zakat_screen.dart` → `_calculateZakat()` |
 | `language_changed` | User picks a different language in settings | `language`, `previous_language` | `lib/providers/locale_provider.dart` |
 | `theme_changed` | User changes theme (light / dark / system) | `theme_mode`, `previous_theme_mode` | `lib/providers/theme_provider.dart` |
-| `currency_changed` | User picks a different currency in the drawer | `currency`, `previous_currency` | `lib/providers/currency_provider.dart` |
-| `results_copied` | User copies converter or zakat results | `screen` (`converter` or `zakat`), `total_grams`, `total_tola` | `lib/widgets/result_actions.dart` |
-| `results_shared` | User shares converter or zakat results (share sheet not dismissed) | `screen` (`converter` or `zakat`), `total_grams`, `total_tola` | `lib/services/external_links.dart` |
-| `drawer_item_clicked` | User clicks any navigation tile or action in the drawer | `item_name` (`zakat`, `theme`, `language`, `currency`, `about`, `privacy_policy`, `rate_app`, `share_app`, `more_apps`) | `lib/widgets/app_drawer.dart` |
+| `results_copied` | User copies converter, zakat, or history results | `screen` (`converter`, `zakat`, or `history`), `total_grams`, `total_tola`, `total_price` | `lib/widgets/result_actions.dart` |
+| `results_shared` | User shares converter, zakat, or history results (share sheet not dismissed) | `screen` (`converter`, `zakat`, or `history`), `total_grams`, `total_tola`, `total_price` | `lib/services/external_links.dart` |
+| `drawer_item_clicked` | User clicks any navigation tile or action in the drawer | `item_name` (`zakat`, `history`, `theme`, `language`, `currency`, `about`, `privacy_policy`, `rate_app`, `share_app`, `more_apps`) | `lib/widgets/app_drawer.dart` |
+| `history_item_restored` | User restores a previous conversion from history into converter | `total_grams`, `total_tola`, `is_gold_rate_set` | `lib/screens/history/conversion_history_screen.dart` |
+| `history_item_deleted` | User deletes a conversion entry via swipe or action | `total_grams`, `total_tola`, `is_gold_rate_set`, `total_price` | `lib/screens/history/conversion_history_screen.dart` |
+| `history_cleared` | User clears all saved conversion history | `count_cleared` | `lib/providers/history_provider.dart` → `clearAll()` |
 | `app_update_prompted` | Play flexible in-app update download starts (Android + Play installs) | (none) | `lib/services/app_update_service.dart` |
 | `app_update_completed` | User taps Restart to apply a downloaded Play flexible update | (none) | `lib/services/app_update_service.dart` |
 

@@ -472,4 +472,36 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'Yeniden başlat';
+
+  @override
+  String get historyMenuLabel => 'Conversion History';
+
+  @override
+  String get historyTitle => 'Conversion History';
+
+  @override
+  String get historyEmptyTitle => 'No History Yet';
+
+  @override
+  String get historyEmptySubtitle =>
+      'Calculations you make will appear here automatically.';
+
+  @override
+  String get historyClearTooltip => 'Clear history';
+
+  @override
+  String get historyClearConfirmTitle => 'Clear History?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'Are you sure you want to delete all conversion history?';
+
+  @override
+  String get historyRestoreButton => 'Restore';
+
+  @override
+  String get historyItemDeleted => 'History item deleted';
+
+  @override
+  String get historyUndo => 'Undo';
 }

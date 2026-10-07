@@ -7,7 +7,9 @@ import '../../constants/unit_enum.dart';
 import '../../constants/weight_unit_enum.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/app_currency.dart';
+import '../../models/conversion_history_item.dart';
 import '../../providers/currency_provider.dart';
+import '../../providers/history_provider.dart';
 import '../../providers/locale_provider.dart';
 import '../../providers/unit_provider.dart';
 import '../../providers/weight_provider.dart';
@@ -449,6 +451,35 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         totalGrams: double.parse(totalGrams.toStringAsFixed(4)),
         totalTola: double.parse(totalTola.toStringAsFixed(4)),
       );
+
+      final String? priceText = ref.read(goldResultNotifierProvider).priceText;
+      final String? weightsText = ref
+          .read(goldResultNotifierProvider)
+          .weightsText;
+
+      final historyItem = ConversionHistoryItem(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        timestamp: DateTime.now(),
+        inputs: <String, double>{
+          if (tola > 0) 'tola': tola,
+          if (ana > 0) 'ana': ana,
+          if (isNepaliSystem && lal > 0) 'lal': lal,
+          if (!isNepaliSystem && masha > 0) 'masha': masha,
+          if (!isNepaliSystem && ratti > 0) 'ratti': ratti,
+          if (gram > 0) 'gram': gram,
+          if (ounce > 0) 'ounce': ounce,
+        },
+        goldRate: rate > 0 ? rate : null,
+        rateUnit: rate > 0 ? rateUnit.name : null,
+        currencyCode: currentCurrency.code,
+        totalGrams: double.parse(totalGrams.toStringAsFixed(4)),
+        totalTola: double.parse(totalTola.toStringAsFixed(4)),
+        priceFormatted: priceText,
+        resultText: weightsText,
+        isNepaliSystem: isNepaliSystem,
+      );
+
+      ref.read(conversionHistoryProvider.notifier).addEntry(historyItem);
     }
 
     // Scroll to bottom after calculation
@@ -461,6 +492,41 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
         );
       }
     });
+  }
+
+  void _restoreFromHistory(ConversionHistoryItem item) {
+    String formatVal(double? val) {
+      if (val == null || val <= 0) return '';
+      if (val == val.truncateToDouble()) return val.truncate().toString();
+      return val.toString();
+    }
+
+    tolaController.text = formatVal(item.inputs['tola']);
+    lalController.text = formatVal(item.inputs['lal']);
+    mashaController.text = formatVal(item.inputs['masha']);
+    anaController.text = formatVal(item.inputs['ana']);
+    rattiController.text = formatVal(item.inputs['ratti']);
+    gramController.text = formatVal(item.inputs['gram']);
+    ounceController.text = formatVal(item.inputs['ounce']);
+
+    if (item.goldRate != null && item.goldRate! > 0) {
+      goldRateController.text = formatVal(item.goldRate);
+      if (item.rateUnit != null) {
+        ref
+            .read(rateUnitProvider.notifier)
+            .setRateUnit(UnitEnum.fromString(item.rateUnit));
+      }
+    } else {
+      goldRateController.clear();
+    }
+
+    calculateAll();
+
+    AnalyticsService.trackHistoryItemRestored(
+      totalGrams: item.totalGrams,
+      totalTola: item.totalTola,
+      hasGoldRate: item.goldRate != null && item.goldRate! > 0,
+    );
   }
 
   String _shareableConverterText(String weightsText) {
@@ -490,6 +556,16 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) _calculate();
+        });
+      }
+    });
+    ref.listen<ConversionHistoryItem?>(pendingRestoreProvider, (_, next) {
+      if (next != null && mounted) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            _restoreFromHistory(next);
+            ref.read(pendingRestoreProvider.notifier).clear();
+          }
         });
       }
     });
