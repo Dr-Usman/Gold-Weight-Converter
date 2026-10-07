@@ -5,26 +5,31 @@ All notable changes to the Gold Weight Converter project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [1.9.6] - 2026-10-07
 
 ### Added
 - Troy Ounce (`Ounce`) rate and weight conversion support across gold converter and zakat calculations
 - Dynamic Ounce input field automatically displayed when the market rate unit is set to Ounce
 - Automatic Ounce equivalent weight displayed in conversion details (`Ounce: X.XXXX oz`)
+- Complete native translations for Troy Ounce across all 19 non-English languages
 - Support for Tanzanian Shilling (`TZS`) display currency with automatic country code detection (`TZ`)
 - Automatic USD default mapping for international markets including Zimbabwe (`ZW`), Guyana (`GY`), Iraq (`IQ`), Lebanon (`LB`), Liberia (`LR`), Somalia (`SO`), Malawi (`MW`), Papua New Guinea (`PG`), Sudan (`SD`), Yemen (`YE`), Uzbekistan (`UZ`), and Cambodia (`KH`)
+- Device system locale (`device_locale`) and timezone offset (`device_timezone_offset`) registered as Mixpanel Super Properties and synced to People profiles for improved geographical analytics
 
 ### Changed
+- Reordered Conversion Details breakdown so Ounce calculations are grouped with other multiplied unit formulas and direct Gram input appears cleanly at the end
 - Expanded the rate unit dropdown width and improved horizontal padding to provide clean, truncation-free unit labels
+- Implemented smart hybrid flushing in `AnalyticsService` for real-time debug tracking and guaranteed delivery of key conversions in release builds
+- Migrated Android application build configuration to Android Gradle Plugin Built-in Kotlin (removed legacy `kotlin-android`)
 
 ### Play Store (en-US)
 ```
 What's new in 1.9.6
 • Added Troy Ounce (Ounce) rate and weight conversion support
 • Dynamic Ounce input field appears when Ounce rate is selected
-• Always view Ounce equivalent weight in conversion results
+• Complete translations for Ounce across all 20 languages
 • Added Tanzanian Shilling (TZS) currency support
-• Expanded dropdown layout for clearer unit selection
+• Improved calculation breakdown and unit dropdown layout
 ```
 
 ---
