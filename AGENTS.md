@@ -148,6 +148,33 @@ AnalyticsService.instance?.track('event_name', properties: {
 
 ---
 
+## Pre-PR Quality Checks & Verification
+
+Before committing changes or creating a Pull Request, **always** run and pass the following quality checks:
+
+1. **Format Code**:
+   ```bash
+   dart format .
+   dart format --output=none --set-exit-if-changed .
+   ```
+2. **Localization Verification** (if any strings or `.arb` files changed):
+   ```bash
+   flutter gen-l10n
+   ```
+   Confirm 0 untranslated messages or placeholder mismatches.
+3. **Static Analysis**:
+   ```bash
+   dart analyze # or flutter analyze
+   ```
+   Must report `No issues found!`.
+4. **Full Test Suite**:
+   ```bash
+   flutter test
+   ```
+   Must exit with code 0 and all tests passing.
+
+---
+
 ## Release notes
 
 When creating a new app release:

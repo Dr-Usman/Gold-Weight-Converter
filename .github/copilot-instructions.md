@@ -13,6 +13,13 @@
   - `flutter build apk --release`
   - `flutter build apk --split-per-abi`
 
+## Pre-PR quality checks (mandatory before opening a PR)
+
+1. Format code: `dart format .` and `dart format --output=none --set-exit-if-changed .`
+2. Check localization: `flutter gen-l10n` (0 untranslated messages)
+3. Run static analysis: `flutter analyze` (0 issues found)
+4. Run test suite: `flutter test` (all tests pass)
+
 ## High-level architecture
 
 - `lib/main.dart` is the app bootstrap. It initializes `PreferencesService`, then injects it into Riverpod by overriding `preferencesServiceProvider` in the root `ProviderScope`.
