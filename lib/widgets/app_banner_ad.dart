@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gold_weight_converter/constants/ad_config.dart';
 import 'package:gold_weight_converter/services/ads_service.dart';
+import 'package:gold_weight_converter/services/preferences_service.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Inline adaptive banner for use inside scroll content (not sticky).
-/// Hides itself when ads are unsupported or fail to load.
-class AppBannerAd extends StatefulWidget {
-  const AppBannerAd({super.key});
+/// Hides itself when ads are unsupported, ad-free pass is active, or fails to load.
+class AppBannerAd extends ConsumerStatefulWidget {
+  final BannerPlacement placement;
+
+  const AppBannerAd({
+    super.key,
+    this.placement = BannerPlacement.converter,
+  });
 
   @override
-  State<AppBannerAd> createState() => _AppBannerAdState();
+  ConsumerState<AppBannerAd> createState() => _AppBannerAdState();
 }
 
-class _AppBannerAdState extends State<AppBannerAd> {
+class _AppBannerAdState extends ConsumerState<AppBannerAd> {
   BannerAd? _bannerAd;
   bool _isLoaded = false;
   bool _loadStarted = false;
@@ -24,7 +31,14 @@ class _AppBannerAdState extends State<AppBannerAd> {
   }
 
   Future<void> _loadAd() async {
-    if (!AdConfig.adsEnabled || !AdsService.isSupported || _loadStarted) {
+    final adFreeUntil = ref.read(adFreePassProvider);
+    final bool isAdFree =
+        adFreeUntil != null && DateTime.now().isBefore(adFreeUntil);
+
+    if (!AdConfig.adsEnabled ||
+        !AdsService.isSupported ||
+        isAdFree ||
+        _loadStarted) {
       return;
     }
     _loadStarted = true;
@@ -41,7 +55,7 @@ class _AppBannerAdState extends State<AppBannerAd> {
       if (size == null || !mounted) return;
 
       final BannerAd banner = BannerAd(
-        adUnitId: AdConfig.bannerAdUnitId,
+        adUnitId: AdConfig.getBannerAdUnitId(widget.placement),
         size: size,
         request: const AdRequest(),
         listener: BannerAdListener(
@@ -84,7 +98,11 @@ class _AppBannerAdState extends State<AppBannerAd> {
 
   @override
   Widget build(BuildContext context) {
-    if (!AdConfig.adsEnabled) {
+    final adFreeUntil = ref.watch(adFreePassProvider);
+    final bool isAdFree =
+        adFreeUntil != null && DateTime.now().isBefore(adFreeUntil);
+
+    if (!AdConfig.adsEnabled || isAdFree) {
       return const SizedBox.shrink();
     }
 

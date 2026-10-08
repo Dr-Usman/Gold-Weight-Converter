@@ -18,21 +18,23 @@ class ConversionHistoryCard extends StatelessWidget {
     this.onDelete,
   });
 
-  String _formatTimestamp(DateTime dt) {
+  String _formatTimestamp(BuildContext context, DateTime dt) {
+    final l10n = AppLocalizations.of(context)!;
+    final String locale = Localizations.localeOf(context).toString();
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = today.subtract(const Duration(days: 1));
     final itemDate = DateTime(dt.year, dt.month, dt.day);
-    final timeStr = DateFormat.jm().format(dt);
+    final timeStr = DateFormat.jm(locale).format(dt);
 
     if (itemDate == today) {
-      return 'Today, $timeStr';
+      return l10n.historyToday(timeStr);
     } else if (itemDate == yesterday) {
-      return 'Yesterday, $timeStr';
+      return l10n.historyYesterday(timeStr);
     } else if (now.year == dt.year) {
-      return '${DateFormat.MMMEd().format(dt)}, $timeStr';
+      return '${DateFormat.MMMEd(locale).format(dt)}, $timeStr';
     } else {
-      return '${DateFormat.yMMMEd().format(dt)}, $timeStr';
+      return '${DateFormat.yMMMEd(locale).format(dt)}, $timeStr';
     }
   }
 
@@ -63,7 +65,7 @@ class ConversionHistoryCard extends StatelessWidget {
     final scheme = theme.colorScheme;
     final bool isDark = theme.brightness == Brightness.dark;
 
-    final String timestampStr = _formatTimestamp(item.timestamp);
+    final String timestampStr = _formatTimestamp(context, item.timestamp);
     final String shareableText = _getShareableText();
 
     return Card(

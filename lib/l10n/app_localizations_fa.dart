@@ -474,34 +474,84 @@ class AppLocalizationsFa extends AppLocalizations {
   String get appUpdateRestart => 'راه‌اندازی مجدد';
 
   @override
-  String get historyMenuLabel => 'Conversion History';
+  String get historyMenuLabel => 'تاریخچه تبدیل';
 
   @override
-  String get historyTitle => 'Conversion History';
+  String get historyTitle => 'تاریخچه تبدیل';
 
   @override
-  String get historyEmptyTitle => 'No History Yet';
+  String get historyEmptyTitle => 'هنوز تاریخچه‌ای وجود ندارد';
 
   @override
   String get historyEmptySubtitle =>
-      'Calculations you make will appear here automatically.';
+      'محاسباتی که انجام می‌دهید به طور خودکار در اینجا نمایش داده می‌شوند.';
 
   @override
-  String get historyClearTooltip => 'Clear history';
+  String get historyClearTooltip => 'پاک کردن تاریخچه';
 
   @override
-  String get historyClearConfirmTitle => 'Clear History?';
+  String get historyClearConfirmTitle => 'پاک کردن تاریخچه؟';
 
   @override
   String get historyClearConfirmMessage =>
-      'Are you sure you want to delete all conversion history?';
+      'آیا مطمئن هستید که می‌خواهید تمام تاریخچه تبدیل را حذف کنید؟';
 
   @override
-  String get historyRestoreButton => 'Restore';
+  String get historyRestoreButton => 'بازیابی';
 
   @override
-  String get historyItemDeleted => 'History item deleted';
+  String get historyItemDeleted => 'مورد از تاریخچه حذف شد';
 
   @override
-  String get historyUndo => 'Undo';
+  String get historyUndo => 'لغو';
+
+  @override
+  String historyToday(String time) {
+    return 'امروز، $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'دیروز، $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'باز کردن محاسبات بیشتر';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'نمایش $visible از $total محاسبه';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'باز کردن سریع (مشاهده ۷)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'برای مشاهده حداکثر ۷ محاسبه در این جلسه، یک تبلیغ کوتاه تماشا کنید.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'باز کردن سریع (مشاهده همه $count)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'برای مشاهده همه $count محاسبه در این جلسه، یک تبلیغ کوتاه تماشا کنید.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'باز کردن همه + ۲۴ ساعت بدون تبلیغات';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'برای مشاهده همه محاسبات و حذف بنرهای تبلیغاتی به مدت ۲۴ ساعت، ویدیو را تماشا کنید.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'طرح بدون تبلیغات فعال است ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'در حال بارگیری تبلیغ...';
 }

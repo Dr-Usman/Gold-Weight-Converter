@@ -250,6 +250,16 @@ class AnalyticsService {
     _track('history_cleared', {'count_cleared': countCleared});
   }
 
+  static void trackHistoryTierUnlocked({
+    required String tier,
+    required int historyCount,
+  }) {
+    _track('history_tier_unlocked', {
+      'tier': tier,
+      'history_count': historyCount,
+    }, true);
+  }
+
   static void trackCurrencyChanged({
     required String currency,
     String? previousCurrency,

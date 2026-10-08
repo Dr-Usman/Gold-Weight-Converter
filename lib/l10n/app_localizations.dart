@@ -1020,6 +1020,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Undo'**
   String get historyUndo;
+
+  /// Relative timestamp for a history item created today
+  ///
+  /// In en, this message translates to:
+  /// **'Today, {time}'**
+  String historyToday(String time);
+
+  /// Relative timestamp for a history item created yesterday
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, {time}'**
+  String historyYesterday(String time);
+
+  /// Card title for unlocking additional history entries
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock More Calculations'**
+  String get historyUnlockTitle;
+
+  /// Subtitle showing number of visible items out of total
+  ///
+  /// In en, this message translates to:
+  /// **'Showing {visible} of {total} calculations'**
+  String historyUnlockSubtitle(int visible, int total);
+
+  /// Button label to unlock 7 items with an interstitial ad
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Unlock (View 7)'**
+  String get historyUnlockSevenButton;
+
+  /// Description for the 7 items quick unlock option
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a quick ad to view up to 7 calculations for this session.'**
+  String get historyUnlockSevenDesc;
+
+  /// Button label to unlock all items with quick ad when total is 7 or less
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Unlock (View All {count})'**
+  String historyUnlockAllQuickButton(int count);
+
+  /// Description to unlock all items with quick ad when total is 7 or less
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a quick ad to view all {count} calculations for this session.'**
+  String historyUnlockAllQuickDesc(int count);
+
+  /// Button label to unlock all items with a rewarded ad
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock All + 24h Ad-Free'**
+  String get historyUnlockAllButton;
+
+  /// Description for the full unlock + 24h ad-free pass option
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a video to unlock all calculations and remove banner ads across the app for 24 hours.'**
+  String get historyUnlockAllDesc;
+
+  /// Badge showing active 24h ad-free pass and remaining duration
+  ///
+  /// In en, this message translates to:
+  /// **'Ad-Free Pass Active ({timeRemaining})'**
+  String historyAdFreePassActive(String timeRemaining);
+
+  /// Indicator text shown while full-screen ad is loading
+  ///
+  /// In en, this message translates to:
+  /// **'Loading ad...'**
+  String get historyAdLoading;
 }
 
 class _AppLocalizationsDelegate

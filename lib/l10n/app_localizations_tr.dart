@@ -474,34 +474,84 @@ class AppLocalizationsTr extends AppLocalizations {
   String get appUpdateRestart => 'Yeniden başlat';
 
   @override
-  String get historyMenuLabel => 'Conversion History';
+  String get historyMenuLabel => 'Dönüşüm Geçmişi';
 
   @override
-  String get historyTitle => 'Conversion History';
+  String get historyTitle => 'Dönüşüm Geçmişi';
 
   @override
-  String get historyEmptyTitle => 'No History Yet';
+  String get historyEmptyTitle => 'Henüz Geçmiş Yok';
 
   @override
   String get historyEmptySubtitle =>
-      'Calculations you make will appear here automatically.';
+      'Yaptığınız hesaplamalar otomatik olarak burada görünecektir.';
 
   @override
-  String get historyClearTooltip => 'Clear history';
+  String get historyClearTooltip => 'Geçmişi temizle';
 
   @override
-  String get historyClearConfirmTitle => 'Clear History?';
+  String get historyClearConfirmTitle => 'Geçmiş Temizlensin mi?';
 
   @override
   String get historyClearConfirmMessage =>
-      'Are you sure you want to delete all conversion history?';
+      'Tüm dönüşüm geçmişini silmek istediğinizden emin misiniz?';
 
   @override
-  String get historyRestoreButton => 'Restore';
+  String get historyRestoreButton => 'Geri Yükle';
 
   @override
-  String get historyItemDeleted => 'History item deleted';
+  String get historyItemDeleted => 'Geçmiş öğesi silindi';
 
   @override
-  String get historyUndo => 'Undo';
+  String get historyUndo => 'Geri Al';
+
+  @override
+  String historyToday(String time) {
+    return 'Bugün, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'Dün, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'Daha Fazla Hesaplama Aç';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return '$total hesaplamadan $visible tanesi gösteriliyor';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'Hızlı Kilit Aç (7 Tane Gör)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'Bu oturumda en fazla 7 hesaplama görmek için kısa bir reklam izleyin.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'Hızlı Kilit Aç (Tümünü Gör: $count)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'Bu oturumda $count hesaplamanın tümünü görmek için kısa bir reklam izleyin.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'Tümünü Aç + 24 Saat Reklamsız';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'Tüm hesaplamaları görmek ve 24 saat boyunca reklamları kaldırmak için video izleyin.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'Reklamsız Geçiş Aktif ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'Reklam yükleniyor...';
 }

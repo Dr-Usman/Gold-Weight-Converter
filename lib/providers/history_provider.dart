@@ -29,6 +29,26 @@ class PendingRestoreNotifier extends Notifier<ConversionHistoryItem?> {
   }
 }
 
+/// In-memory session-level unlock for history (Tier 2).
+/// Persists for the active app session across screen navigations.
+final sessionHistoryUnlockedProvider =
+    NotifierProvider<SessionHistoryUnlockedNotifier, bool>(() {
+      return SessionHistoryUnlockedNotifier();
+    });
+
+class SessionHistoryUnlockedNotifier extends Notifier<bool> {
+  @override
+  bool build() => false;
+
+  void unlock() {
+    state = true;
+  }
+
+  void reset() {
+    state = false;
+  }
+}
+
 class ConversionHistoryNotifier extends Notifier<List<ConversionHistoryItem>> {
   static const int maxHistoryCount = 30;
 

@@ -472,34 +472,83 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appUpdateRestart => 'إعادة التشغيل';
 
   @override
-  String get historyMenuLabel => 'Conversion History';
+  String get historyMenuLabel => 'سجل التحويلات';
 
   @override
-  String get historyTitle => 'Conversion History';
+  String get historyTitle => 'سجل التحويلات';
 
   @override
-  String get historyEmptyTitle => 'No History Yet';
+  String get historyEmptyTitle => 'لا يوجد سجل حتى الآن';
 
   @override
-  String get historyEmptySubtitle =>
-      'Calculations you make will appear here automatically.';
+  String get historyEmptySubtitle => 'ستظهر الحسابات التي تجريها هنا تلقائياً.';
 
   @override
-  String get historyClearTooltip => 'Clear history';
+  String get historyClearTooltip => 'مسح السجل';
 
   @override
-  String get historyClearConfirmTitle => 'Clear History?';
+  String get historyClearConfirmTitle => 'مسح السجل؟';
 
   @override
   String get historyClearConfirmMessage =>
-      'Are you sure you want to delete all conversion history?';
+      'هل أنت متأكد من رغبتك في حذف كامل سجل التحويلات؟';
 
   @override
-  String get historyRestoreButton => 'Restore';
+  String get historyRestoreButton => 'استعادة';
 
   @override
-  String get historyItemDeleted => 'History item deleted';
+  String get historyItemDeleted => 'تم حذف العنصر من السجل';
 
   @override
-  String get historyUndo => 'Undo';
+  String get historyUndo => 'تراجع';
+
+  @override
+  String historyToday(String time) {
+    return 'اليوم، $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'أمس، $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'فتح المزيد من الحسابات';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'عرض $visible من أصل $total حسابات';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'فتح سريع (عرض 7)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'شاهد إعلاناً قصيراً لعرض حتى 7 حسابات لهذه الجلسة.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'فتح سريع (عرض الكل $count)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'شاهد إعلاناً قصيراً لعرض كافة الحسابات الـ $count لهذه الجلسة.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'فتح الكل + بدون إعلانات لمدة 24 ساعة';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'شاهد فيديو لفتح كافة الحسابات وإزالة إعلانات البانر من التطبيق لمدة 24 ساعة.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'اشتراك بدون إعلانات مفعّل ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'جارٍ تحميل الإعلان...';
 }

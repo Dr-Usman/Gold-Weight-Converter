@@ -473,34 +473,84 @@ class AppLocalizationsSd extends AppLocalizations {
   String get appUpdateRestart => 'ٻيهر شروع ڪريو';
 
   @override
-  String get historyMenuLabel => 'Conversion History';
+  String get historyMenuLabel => 'تبديليءَ جي تاريخ';
 
   @override
-  String get historyTitle => 'Conversion History';
+  String get historyTitle => 'تبديليءَ جي تاريخ';
 
   @override
-  String get historyEmptyTitle => 'No History Yet';
+  String get historyEmptyTitle => 'اڃا ڪابه تاريخ ناهي';
 
   @override
   String get historyEmptySubtitle =>
-      'Calculations you make will appear here automatically.';
+      'توهان جا ڪيل حساب هتي پاڻمرادو ظاهر ٿيندا.';
 
   @override
-  String get historyClearTooltip => 'Clear history';
+  String get historyClearTooltip => 'تاريخ صاف ڪريو';
 
   @override
-  String get historyClearConfirmTitle => 'Clear History?';
+  String get historyClearConfirmTitle => 'تاريخ صاف ڪريو؟';
 
   @override
   String get historyClearConfirmMessage =>
-      'Are you sure you want to delete all conversion history?';
+      'ڇا توهان واقعي سموري تبديليءَ جي تاريخ ختم ڪرڻ چاهيو ٿا؟';
 
   @override
-  String get historyRestoreButton => 'Restore';
+  String get historyRestoreButton => 'بحال ڪريو';
 
   @override
-  String get historyItemDeleted => 'History item deleted';
+  String get historyItemDeleted => 'تاريخ مان شي ختم ڪئي وئي';
 
   @override
-  String get historyUndo => 'Undo';
+  String get historyUndo => 'واپس وٺو';
+
+  @override
+  String historyToday(String time) {
+    return 'اڄ، $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'ڪالهه، $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'وڌيڪ حساب انلاڪ ڪريو';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return '$total مان $visible حساب ڏيکاريا پيا وڃن';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'تڪڙو انلاڪ (7 ڏسو)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'هن سيشن لاءِ 7 حسابن تائين ڏسڻ لاءِ هڪ ننڍڙو اشتهار ڏسو.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'تڪڙو انلاڪ (سمورا $count ڏسو)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'هن سيشن لاءِ سمورا $count حساب ڏسڻ لاءِ هڪ ننڍڙو اشتهار ڏسو.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'سڀ انلاڪ ڪريو + 24 ڪلاڪ بنا اشتهارن جي';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'سمورا حساب ڏسڻ ۽ 24 ڪلاڪن لاءِ اشتهار هٽائڻ واسطي وڊيو ڏسو.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'بنا اشتهارن وارو پاس فعال ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'اشتهار لوڊ ٿي رهيو آهي...';
 }

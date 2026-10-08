@@ -793,5 +793,88 @@
   "historyUndo": "Undo",
   "@historyUndo": {
     "description": "Action label to undo history item deletion"
+  },
+  "historyToday": "Today, {time}",
+  "@historyToday": {
+    "description": "Relative timestamp for a history item created today",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "3:45 PM"
+      }
+    }
+  },
+  "historyYesterday": "Yesterday, {time}",
+  "@historyYesterday": {
+    "description": "Relative timestamp for a history item created yesterday",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "3:45 PM"
+      }
+    }
+  },
+  "historyUnlockTitle": "Unlock More Calculations",
+  "@historyUnlockTitle": {
+    "description": "Card title for unlocking additional history entries"
+  },
+  "historyUnlockSubtitle": "Showing {visible} of {total} calculations",
+  "@historyUnlockSubtitle": {
+    "description": "Subtitle showing number of visible items out of total",
+    "placeholders": {
+      "visible": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "historyUnlockSevenButton": "Quick Unlock (View 7)",
+  "@historyUnlockSevenButton": {
+    "description": "Button label to unlock 7 items with an interstitial ad"
+  },
+  "historyUnlockSevenDesc": "Watch a quick ad to view up to 7 calculations for this session.",
+  "@historyUnlockSevenDesc": {
+    "description": "Description for the 7 items quick unlock option"
+  },
+  "historyUnlockAllQuickButton": "Quick Unlock (View All {count})",
+  "@historyUnlockAllQuickButton": {
+    "description": "Button label to unlock all items with quick ad when total is 7 or less",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historyUnlockAllQuickDesc": "Watch a quick ad to view all {count} calculations for this session.",
+  "@historyUnlockAllQuickDesc": {
+    "description": "Description to unlock all items with quick ad when total is 7 or less",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historyUnlockAllButton": "Unlock All + 24h Ad-Free",
+  "@historyUnlockAllButton": {
+    "description": "Button label to unlock all items with a rewarded ad"
+  },
+  "historyUnlockAllDesc": "Watch a video to unlock all calculations and remove banner ads across the app for 24 hours.",
+  "@historyUnlockAllDesc": {
+    "description": "Description for the full unlock + 24h ad-free pass option"
+  },
+  "historyAdFreePassActive": "Ad-Free Pass Active ({timeRemaining})",
+  "@historyAdFreePassActive": {
+    "description": "Badge showing active 24h ad-free pass and remaining duration",
+    "placeholders": {
+      "timeRemaining": {
+        "type": "String"
+      }
+    }
+  },
+  "historyAdLoading": "Loading ad...",
+  "@historyAdLoading": {
+    "description": "Indicator text shown while full-screen ad is loading"
   }
 }

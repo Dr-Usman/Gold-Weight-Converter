@@ -94,6 +94,7 @@ These are the Mixpanel events currently tracked in this project. **All new Mixpa
 | `history_item_restored` | User restores a previous conversion from history into converter | `total_grams`, `total_tola`, `is_gold_rate_set` | `lib/screens/history/conversion_history_screen.dart` |
 | `history_item_deleted` | User deletes a conversion entry via swipe or action | `total_grams`, `total_tola`, `is_gold_rate_set`, `total_price` | `lib/screens/history/conversion_history_screen.dart` |
 | `history_cleared` | User clears all saved conversion history | `count_cleared` | `lib/providers/history_provider.dart` → `clearAll()` |
+| `history_tier_unlocked` | User unlocks session history or 24h ad-free pass via ad | `tier` (`session_7` or `rewarded_24h`), `history_count` | `lib/screens/history/conversion_history_screen.dart` |
 | `app_update_prompted` | Play flexible in-app update download starts (Android + Play installs) | (none) | `lib/services/app_update_service.dart` |
 | `app_update_completed` | User taps Restart to apply a downloaded Play flexible update | (none) | `lib/services/app_update_service.dart` |
 

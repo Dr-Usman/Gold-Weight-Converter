@@ -1,19 +1,34 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../constants/ad_config.dart';
 import '../../constants/app_colors.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/conversion_history_item.dart';
 import '../../providers/history_provider.dart';
+import '../../services/ads_service.dart';
 import '../../services/analytics_service.dart';
+import '../../services/preferences_service.dart';
 import '../../widgets/app_banner_ad.dart';
 import '../../widgets/gold_ornament_painter.dart';
 import 'widgets/conversion_history_card.dart';
+import 'widgets/history_unlock_card.dart';
 
-class ConversionHistoryScreen extends ConsumerWidget {
+class ConversionHistoryScreen extends ConsumerStatefulWidget {
   const ConversionHistoryScreen({super.key});
 
-  Future<void> _confirmClearAll(BuildContext context, WidgetRef ref) async {
+  @override
+  ConsumerState<ConversionHistoryScreen> createState() =>
+      _ConversionHistoryScreenState();
+}
+
+class _ConversionHistoryScreenState
+    extends ConsumerState<ConversionHistoryScreen> {
+  bool _isLoadingAd = false;
+
+  Future<void> _confirmClearAll(BuildContext context) async {
     final l10n = AppLocalizations.of(context)!;
     final bool? confirmed = await showDialog<bool>(
       context: context,
@@ -42,24 +57,121 @@ class ConversionHistoryScreen extends ConsumerWidget {
     }
   }
 
-  void _restoreItem(
-    BuildContext context,
-    WidgetRef ref,
-    ConversionHistoryItem item,
-  ) {
+  void _restoreItem(BuildContext context, ConversionHistoryItem item) {
     ref.read(pendingRestoreProvider.notifier).requestRestore(item);
     Navigator.of(context).pop();
   }
 
+  Future<void> _handleQuickUnlock(int historyCount) async {
+    setState(() => _isLoadingAd = true);
+    final bool success = await AdsService.showInterstitial();
+    if (!mounted) return;
+    setState(() => _isLoadingAd = false);
+    if (success) {
+      ref.read(sessionHistoryUnlockedProvider.notifier).unlock();
+      AnalyticsService.trackHistoryTierUnlocked(
+        tier: 'items_7',
+        historyCount: historyCount,
+      );
+    }
+  }
+
+  Future<void> _handleFullUnlock(int historyCount) async {
+    setState(() => _isLoadingAd = true);
+    final bool earned = await AdsService.showRewarded();
+    if (!mounted) return;
+    setState(() => _isLoadingAd = false);
+    if (earned) {
+      await ref.read(adFreePassProvider.notifier).grant24HourPass();
+      AnalyticsService.trackHistoryTierUnlocked(
+        tier: 'rewarded_24h',
+        historyCount: historyCount,
+      );
+    }
+  }
+
+  String _formatTimeRemaining(Duration duration) {
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes.remainder(60);
+    if (hours > 0) {
+      return '${hours}h ${minutes}m';
+    }
+    return '${math.max(1, minutes)}m';
+  }
+
+  Widget _buildAdFreeBadge(
+    BuildContext context,
+    Duration remaining,
+    bool isDark,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    final String timeStr = _formatTimeRemaining(remaining);
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 10, 16, 4),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: isDark
+            ? AppColors.primary.withValues(alpha: 0.15)
+            : const Color(0xFFFFF7E6),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.4),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.workspace_premium_rounded,
+            color: AppColors.primary,
+            size: 18,
+          ),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              l10n.historyAdFreePassActive(timeStr),
+              style: TextStyle(
+                color: isDark ? const Color(0xFFFFDF88) : AppColors.primaryDark,
+                fontWeight: FontWeight.w700,
+                fontSize: 13,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final List<ConversionHistoryItem> history = ref.watch(
       conversionHistoryProvider,
     );
+    final DateTime? adFreeUntil = ref.watch(adFreePassProvider);
+    final bool isAdFree =
+        adFreeUntil != null && DateTime.now().isBefore(adFreeUntil);
+
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final bool isDark = theme.brightness == Brightness.dark;
+    final bool unlockedSeven = ref.watch(sessionHistoryUnlockedProvider);
+
+    // Determine visible item count based on Option C tier
+    final int visibleCount;
+    if (isAdFree) {
+      visibleCount = history.length;
+    } else if (unlockedSeven) {
+      visibleCount = math.min(history.length, 7);
+    } else {
+      visibleCount = math.min(history.length, 1);
+    }
+
+    final bool hasMoreToUnlock = history.length > visibleCount;
 
     return PopScope(
       onPopInvokedWithResult: (didPop, _) {
@@ -103,7 +215,7 @@ class ConversionHistoryScreen extends ConsumerWidget {
                     IconButton(
                       icon: const Icon(Icons.delete_sweep_outlined),
                       tooltip: l10n.historyClearTooltip,
-                      onPressed: () => _confirmClearAll(context, ref),
+                      onPressed: () => _confirmClearAll(context),
                     ),
                 ],
               ),
@@ -137,6 +249,12 @@ class ConversionHistoryScreen extends ConsumerWidget {
                     SafeArea(
                       child: Column(
                         children: [
+                          if (isAdFree)
+                            _buildAdFreeBadge(
+                              context,
+                              adFreeUntil.difference(DateTime.now()),
+                              isDark,
+                            ),
                           Expanded(
                             child: history.isEmpty
                                 ? Center(
@@ -181,8 +299,25 @@ class ConversionHistoryScreen extends ConsumerWidget {
                                     padding: const EdgeInsets.symmetric(
                                       vertical: 8,
                                     ),
-                                    itemCount: history.length,
+                                    itemCount:
+                                        visibleCount +
+                                        (hasMoreToUnlock ? 1 : 0),
                                     itemBuilder: (context, index) {
+                                      if (index == visibleCount) {
+                                        return HistoryUnlockCard(
+                                          visibleCount: visibleCount,
+                                          totalCount: history.length,
+                                          canQuickUnlock: !unlockedSeven,
+                                          isLoading: _isLoadingAd,
+                                          onQuickUnlock: () =>
+                                              _handleQuickUnlock(
+                                                history.length,
+                                              ),
+                                          onFullUnlock: () =>
+                                              _handleFullUnlock(history.length),
+                                        );
+                                      }
+
                                       final item = history[index];
                                       return Dismissible(
                                         key: ValueKey(item.id),
@@ -250,7 +385,7 @@ class ConversionHistoryScreen extends ConsumerWidget {
                                         child: ConversionHistoryCard(
                                           item: item,
                                           onRestore: () =>
-                                              _restoreItem(context, ref, item),
+                                              _restoreItem(context, item),
                                           onDelete: () {
                                             ref
                                                 .read(
@@ -272,7 +407,7 @@ class ConversionHistoryScreen extends ConsumerWidget {
                                     },
                                   ),
                           ),
-                          const AppBannerAd(),
+                          const AppBannerAd(placement: BannerPlacement.history),
                         ],
                       ),
                     ),

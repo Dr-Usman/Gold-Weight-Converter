@@ -503,4 +503,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get historyUndo => 'Undo';
+
+  @override
+  String historyToday(String time) {
+    return 'Today, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'Yesterday, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'Unlock More Calculations';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'Showing $visible of $total calculations';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'Quick Unlock (View 7)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'Watch a quick ad to view up to 7 calculations for this session.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'Quick Unlock (View All $count)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'Watch a quick ad to view all $count calculations for this session.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'Unlock All + 24h Ad-Free';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'Watch a video to unlock all calculations and remove banner ads across the app for 24 hours.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'Ad-Free Pass Active ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'Loading ad...';
 }

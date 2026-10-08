@@ -336,7 +336,7 @@ def main():
         'ur': {
             'name': 'Pakistan (Urdu / اردو)',
             'lang': 'ur',
-            'screenshot': os.path.join(PROJECT_ROOT, 'docs/screenshots/pakistan/01-converter-inputs.png'),
+            'screenshot': os.path.join(PROJECT_ROOT, 'docs/screenshots/pakistan/01-converter-inputs-ur.png'),
             'flag_icon': os.path.join(PROJECT_ROOT, 'docs/screenshots/scratch_flag_pk.png'),
             'title_size': 48,
             'title_lines': [
@@ -361,7 +361,7 @@ def main():
         'bn': {
             'name': 'Bangladesh (Bengali / বাংলা)',
             'lang': 'bn',
-            'screenshot': os.path.join(PROJECT_ROOT, 'docs/screenshots/bangladesh/01-converter-inputs.png'),
+            'screenshot': os.path.join(PROJECT_ROOT, 'docs/screenshots/bangladesh/01-converter-inputs-bn.png'),
             'flag_icon': os.path.join(PROJECT_ROOT, 'docs/screenshots/scratch_flag_bd.png'),
             'title_size': 50,
             'title_lines': [

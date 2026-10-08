@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../constants/ad_config.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_constants.dart';
 import '../../constants/unit_enum.dart';
@@ -36,11 +37,16 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
   /// Prefills sample weights/rate and runs Calculate (README screenshots).
   ///
   /// ```bash
-  /// flutter run --dart-define=HIDE_ADS=true --dart-define=SCREENSHOT_DEMO=true
+  /// flutter run --dart-define=HIDE_ADS=true --dart-define=SCREENSHOT_DEMO=true \
+  ///   --dart-define=SCREENSHOT_RATE=150,000
   /// ```
   static const bool _screenshotDemo = bool.fromEnvironment(
     'SCREENSHOT_DEMO',
     defaultValue: false,
+  );
+  static const String _screenshotRate = String.fromEnvironment(
+    'SCREENSHOT_RATE',
+    defaultValue: '',
   );
 
   final TextEditingController tolaController = TextEditingController();
@@ -61,7 +67,14 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
       mashaController.text = '4';
       anaController.text = '7';
       rattiController.text = '18';
-      goldRateController.text = '150,000';
+      // Nepali / NPR system shows Lal instead of Masha & Ratti.
+      lalController.text = '25';
+      final savedRate = ref
+          .read(preferencesServiceProvider)
+          .getConverterRateText();
+      goldRateController.text = _screenshotRate.isNotEmpty
+          ? _screenshotRate
+          : (savedRate.isNotEmpty ? savedRate : '150,000');
     } else {
       goldRateController.text = ref
           .read(preferencesServiceProvider)
@@ -706,7 +719,9 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                             return ConverterPriceCard(priceText: priceText);
                           },
                         ),
-                        const AppBannerAd(),
+                        const AppBannerAd(
+                          placement: BannerPlacement.converter,
+                        ),
                       ],
                     ),
                   ),

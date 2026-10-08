@@ -75,13 +75,13 @@ This document is the single source of truth for all Google Play Store listings f
 - **Feature Graphic** (`1024 × 500 px`):
   `docs/feature-graphics/feature-graphic-hi.png`
 - **Play Store Phone Mockups** (`1242 × 2688 px`):
-  1. `docs/mockups/india/01-converter-inputs-mockup.png` — *सटीक कनवर्टर: तोला, माशा, रत्ती और ग्राम*
-  2. `docs/mockups/india/02-results-and-price-mockup.png` — *विस्तृत हिसाब: तुरंत परिणाम और सोने की कीमत (₹)*
-  3. `docs/mockups/india/03-gold-zakat-mockup.png` — *ज़कात क्याल्कुलेटर: सोने की 2.5% ज़कात का हिसाब*
-  4. `docs/mockups/india/04-drawer-menu-mockup.png` — *स्मार्ट सेटिंग्स: भारतीय रुपया (₹) और डार्क मोड*
-  5. `docs/mockups/india/05-languages-mockup.png` — *बहुभाषी समर्थन: हिंदी सहित 20+ भाषाओं में*
-  6. `docs/mockups/india/06-light-dark-mode-mockup.png` — *आकर्षक थीम्स: लाइट और डार्क थीम समर्थन (Dual 3D Phones)*
-- **Source Screenshots**: `docs/screenshots/india/`
+  1. `docs/mockups/india/01-converter-inputs-mockup-hi.png` — *सटीक कनवर्टर: तोला, माशा और ग्राम*
+  2. `docs/mockups/india/02-results-and-price-mockup-hi.png` — *विस्तृत हिसाब: तुरंत परिणाम और सोने की कीमत (₹)*
+  3. `docs/mockups/india/03-gold-zakat-mockup-hi.png` — *ज़कात कैलकुलेटर: सोने की 2.5% ज़कात का हिसाब*
+  4. `docs/mockups/india/04-conversion-history-mockup-hi.png` — *रूपांतरण इतिहास: पिछले हिसाब दोबारा देखें*
+  5. `docs/mockups/india/05-languages-mockup-hi.png` — *बहुभाषी समर्थन: हिंदी सहित 20+ भाषाएँ*
+  6. `docs/mockups/india/06-dark-converter-mockup-hi.png` — *डार्क मोड: रात में आरामदायक दृश्य*
+- **Source Screenshots**: `docs/screenshots/india/` (demo rate ₹1,50,000 / tola)
 
 ---
 
@@ -142,13 +142,13 @@ This document is the single source of truth for all Google Play Store listings f
 - **Feature Graphic** (`1024 × 500 px`):
   `docs/feature-graphics/feature-graphic-ne.png`
 - **Play Store Phone Mockups** (`1242 × 2688 px`):
-  1. `docs/mockups/nepal/01-converter-inputs-mockup.png` — *सटीक सुन तौल कनवर्टर: तोला, लाल, आना र ग्राम*
-  2. `docs/mockups/nepal/02-results-and-price-mockup.png` — *विस्तृत हिसाब र मूल्य: तुरुन्त नतिजा र सुनको मूल्य (रु)*
-  3. `docs/mockups/nepal/03-gold-zakat-mockup.png` — *सुनको जकात क्यालकुलेटर: २.५% जकातको सही हिसाब*
-  4. `docs/mockups/nepal/04-drawer-menu-mockup.png` — *स्मार्ट सेटिङहरू: रु (NPR) र गाढा मोड (Dark Mode)*
-  5. `docs/mockups/nepal/05-languages-mockup.png` — *बहुभाषिक समर्थन: नेपालीसहित २०+ भाषाहरूमा*
-  6. `docs/mockups/nepal/06-light-dark-mode-mockup.png` — *आधुनिक डिजाइन: लाइट र डार्क थिम समर्थन (Dual 3D Phones)*
-- **Source Screenshots**: `docs/screenshots/nepal/`
+  1. `docs/mockups/nepal/01-converter-inputs-mockup-ne.png` — *सटीक रूपान्तरक: तोला, लाल र ग्राम*
+  2. `docs/mockups/nepal/02-results-and-price-mockup-ne.png` — *विस्तृत हिसाब: तुरुन्त नतिजा र सुनको मूल्य (रु)*
+  3. `docs/mockups/nepal/03-gold-zakat-mockup-ne.png` — *जकात क्यालकुलेटर: सुनको २.५% जकात हिसाब*
+  4. `docs/mockups/nepal/04-conversion-history-mockup-ne.png` — *रूपान्तरण इतिहास: पुराना हिसाब हेर्नुहोस्*
+  5. `docs/mockups/nepal/05-languages-mockup-ne.png` — *बहुभाषिक समर्थन: नेपालीसहित २०+ भाषाहरू*
+  6. `docs/mockups/nepal/06-dark-converter-mockup-ne.png` — *डार्क मोड: रातको आरामदायी दृश्य*
+- **Source Screenshots**: `docs/screenshots/nepal/` (demo rate रु 2,92,800 / tola)
 
 ---
 
@@ -182,13 +182,13 @@ This document is the single source of truth for all Google Play Store listings f
 - **Feature Graphic** (`1024 × 500 px`):
   `docs/feature-graphics/feature-graphic-ur.png`
 - **Play Store Phone Mockups** (`1242 × 2688 px`):
-  1. `docs/mockups/pakistan/01-converter-inputs-mockup.png` — *پاکستان کے لیے خاص: تولہ، ماشہ، آنہ اور گرام*
-  2. `docs/mockups/pakistan/02-results-and-price-mockup.png` — *مکمل حساب تفصیل: فوری نتائج اور سونے کی قیمت (Rs)*
-  3. `docs/mockups/pakistan/03-gold-zakat-mockup.png` — *زکوٰۃ کیلکولیٹر: سونے کی ۲.۵٪ زکوٰۃ کا حساب*
-  4. `docs/mockups/pakistan/04-drawer-menu-mockup.png` — *کرنسی اور ڈارک موڈ: پاکستانی روپیہ اور جدید تھیم*
-  5. `docs/mockups/pakistan/05-languages-mockup.png` — *کثیر لسانی سپورٹ: اردو اور ۲۰ سے زائد زبانیں*
-  6. `docs/mockups/pakistan/06-light-dark-mode-mockup.png` — *خوبصورت تھیمز: لائٹ اور ڈارک موڈ سپورٹ (Dual 3D Phones)*
-- **Source Screenshots**: `docs/screenshots/pakistan/`
+  1. `docs/mockups/pakistan/01-converter-inputs-mockup-ur.png` — *درست کنورٹر: تولہ، ماشہ اور گرام*
+  2. `docs/mockups/pakistan/02-results-and-price-mockup-ur.png` — *مکمل تفصیل: فوری نتائج اور سونے کی قیمت (Rs)*
+  3. `docs/mockups/pakistan/03-gold-zakat-mockup-ur.png` — *زکوٰۃ کیلکولیٹر: سونے کی ۲.۵٪ زکوٰۃ کا حساب*
+  4. `docs/mockups/pakistan/04-conversion-history-mockup-ur.png` — *تبدیلی کی تاریخ: پرانا حساب دوبارہ دیکھیں*
+  5. `docs/mockups/pakistan/05-languages-mockup-ur.png` — *کثیر لسانی سپورٹ: اردو اور ۲۰+ زبانیں*
+  6. `docs/mockups/pakistan/06-dark-converter-mockup-ur.png` — *ڈارک موڈ: رات کے لیے آرام دہ منظر*
+- **Source Screenshots**: `docs/screenshots/pakistan/` (demo rate Rs 438,000 / tola)
 
 ---
 
@@ -222,13 +222,13 @@ This document is the single source of truth for all Google Play Store listings f
 - **Feature Graphic** (`1024 × 500 px`):
   `docs/feature-graphics/feature-graphic-bn.png`
 - **Play Store Phone Mockups** (`1242 × 2688 px`):
-  1. `docs/mockups/bangladesh/01-converter-inputs-mockup.png` — *বাংলাদেশ স্পেশাল: তোলা, মাশা, আনা ও গ্রাম*
-  2. `docs/mockups/bangladesh/02-results-and-price-mockup.png` — *হিসাবের পূর্ণ বিবরণ: বিস্তারিত রূপান্তর ও স্বর্ণের মূল্য (৳)*
-  3. `docs/mockups/bangladesh/03-gold-zakat-mockup.png` — *যাকাত ক্যালকুলেটর: স্বর্ণের ২.৫% যাকাতের হিসাব*
-  4. `docs/mockups/bangladesh/04-drawer-menu-mockup.png` — *মুদ্রা ও ডার্ক থিম: বাংলাদেশি টাকা (৳) ও নাইট মোড*
-  5. `docs/mockups/bangladesh/05-languages-mockup.png` — *বহুভাষিক সুবিধা: বাংলা সহ ২০+ আন্তর্জাতিক ভাষা*
-  6. `docs/mockups/bangladesh/06-light-dark-mode-mockup.png` — *আকর্ষণীয় থিমসমূহ: লাইট ও ডার্ক মোড সাপোর্ট (Dual 3D Phones)*
-- **Source Screenshots**: `docs/screenshots/bangladesh/`
+  1. `docs/mockups/bangladesh/01-converter-inputs-mockup-bn.png` — *নিখুঁত রূপান্তরকারী: তোলা, মাশা ও গ্রাম*
+  2. `docs/mockups/bangladesh/02-results-and-price-mockup-bn.png` — *বিস্তারিত হিসাব: তাৎক্ষণিক ফল ও স্বর্ণের মূল্য (৳)*
+  3. `docs/mockups/bangladesh/03-gold-zakat-mockup-bn.png` — *যাকাত ক্যালকুলেটর: স্বর্ণের ২.৫% যাকাতের হিসাব*
+  4. `docs/mockups/bangladesh/04-conversion-history-mockup-bn.png` — *রূপান্তর ইতিহাস: আগের হিসাব আবার দেখুন*
+  5. `docs/mockups/bangladesh/05-languages-mockup-bn.png` — *বহুভাষিক সুবিধা: বাংলাসহ ২০+ ভাষা*
+  6. `docs/mockups/bangladesh/06-dark-converter-mockup-bn.png` — *ডার্ক মোড: রাতে আরামদায়ক দেখা*
+- **Source Screenshots**: `docs/screenshots/bangladesh/` (demo rate ৳190,800 / tola)
 
 ---
 
@@ -287,13 +287,13 @@ Whether you are shopping for gold jewelry, calculating bullion value, or determi
 - **Feature Graphic** (`1024 × 500 px`):
   `docs/feature-graphics/feature-graphic-en.png`
 - **Play Store Phone Mockups** (`1242 × 2688 px`):
-  1. `docs/mockups/english/01-converter-inputs-mockup.png` — *ACCURATE CONVERTER: Tola, Masha, Ratti & Gram*
-  2. `docs/mockups/english/02-results-and-price-mockup.png` — *DETAILED BREAKDOWN: Instant Results & Gold Price*
-  3. `docs/mockups/english/03-gold-zakat-mockup.png` — *ZAKAT CALCULATOR: 2.5% Gold Zakat Estimation*
-  4. `docs/mockups/english/04-drawer-menu-mockup.png` — *SMART PREFERENCES: 36 Currencies & Dark Theme*
-  5. `docs/mockups/english/05-languages-mockup.png` — *GLOBAL LANGUAGES: Available in 20+ Languages*
-  6. `docs/mockups/english/06-light-dark-mode-mockup.png` — *MODERN INTERFACE: Light & Dark Theme Support (Dual 3D Phones)*
-- **Source Screenshots**: `docs/screenshots/english/`
+  1. `docs/mockups/english/01-converter-inputs-mockup-en.png` — *PRECISION CONVERTER: Convert Tola, Masha & Gram (Also Ana, Ratti & traditional units)*
+  2. `docs/mockups/english/02-results-and-price-mockup-en.png` — *DETAILED BREAKDOWN: Instant Results & Gold Value*
+  3. `docs/mockups/english/03-gold-zakat-mockup-en.png` — *ZAKAT CALCULATOR: Calculate 2.5% Gold Zakat*
+  4. `docs/mockups/english/04-conversion-history-mockup-en.png` — *CONVERSION HISTORY: Revisit Past Calculations*
+  5. `docs/mockups/english/05-languages-mockup-en.png` — *GLOBAL REACH: Available in 20+ Languages*
+  6. `docs/mockups/english/06-dark-converter-mockup-en.png` — *DARK MODE: Comfortable Night Viewing*
+- **Source Screenshots**: `docs/screenshots/english/` (demo rate ₹1,50,000 / tola)
 
 ---
 
@@ -313,8 +313,8 @@ python3 docs/mockups/generate_mockups.py pakistan bangladesh
 - **Output Dimensions**: `1242 × 2688 px` (High DPI, 9:19.5 aspect ratio)
 - **Framing**: Titanium bezel with realistic speaker notch, rounded glass corners, and unclipped 3D drop shadows
 - **Device Mockup Types**:
-  - Mockups 1–5: Single centered device
-  - Mockup 6: Dual angled 3D floating perspective (Light Mode foreground + Dark Mode background)
+  - All 6 slides: Single centered device (soft amber Sample B)
+  - Slide set: converter → results → zakat → conversion history → languages → dark converter
 
 ### 6.2 Feature Graphics (1024 × 500 px)
 Google Play Store promotional feature graphics are located under `docs/feature-graphics/`:

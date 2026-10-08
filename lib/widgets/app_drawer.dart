@@ -90,19 +90,15 @@ class _AppDrawerHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(
-            Icons.balance,
-            color: Colors.white,
-            size: 30,
-          ),
+          const Icon(Icons.balance, color: Colors.white, size: 30),
           const SizedBox(width: 12),
           Flexible(
             child: Text(
               l10n.appTitle,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
@@ -410,7 +406,7 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
                     icon: Icons.currency_exchange_outlined,
                     title: 'Live Gold Valuation',
                     description:
-                        'Calculate estimated gold values per Tola, 10g, or 1g in 36+ global currencies.',
+                        'Calculate estimated gold values per Tola, 10g, or 1g in 40+ global currencies.',
                   ),
                   const SizedBox(height: 10),
                   const _DrawerMenuItem(

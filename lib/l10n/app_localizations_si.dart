@@ -475,34 +475,85 @@ class AppLocalizationsSi extends AppLocalizations {
   String get appUpdateRestart => 'නැවත ආරම්භ කරන්න';
 
   @override
-  String get historyMenuLabel => 'Conversion History';
+  String get historyMenuLabel => 'පරිවර්තන ඉතිහාසය';
 
   @override
-  String get historyTitle => 'Conversion History';
+  String get historyTitle => 'පරිවර්තන ඉතිහාසය';
 
   @override
-  String get historyEmptyTitle => 'No History Yet';
+  String get historyEmptyTitle => 'තවමත් ඉතිහාසයක් නැත';
 
   @override
   String get historyEmptySubtitle =>
-      'Calculations you make will appear here automatically.';
+      'ඔබ කරන ගණනය කිරීම් ස්වයංක්‍රීයව මෙහි දිස්වනු ඇත.';
 
   @override
-  String get historyClearTooltip => 'Clear history';
+  String get historyClearTooltip => 'ඉතිහාසය මකන්න';
 
   @override
-  String get historyClearConfirmTitle => 'Clear History?';
+  String get historyClearConfirmTitle => 'ඉතිහාසය මකන්නද?';
 
   @override
   String get historyClearConfirmMessage =>
-      'Are you sure you want to delete all conversion history?';
+      'ඔබට සියලු පරිවර්තන ඉතිහාසය මැකීමට අවශ්‍ය බව විශ්වාසද?';
 
   @override
-  String get historyRestoreButton => 'Restore';
+  String get historyRestoreButton => 'ප්‍රතිස්ථාපනය කරන්න';
 
   @override
-  String get historyItemDeleted => 'History item deleted';
+  String get historyItemDeleted => 'ඉතිහාස අයිතමය මකා දමන ලදී';
 
   @override
-  String get historyUndo => 'Undo';
+  String get historyUndo => 'අහෝසි කරන්න';
+
+  @override
+  String historyToday(String time) {
+    return 'අද, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'ඊයේ, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'තවත් ගණනය කිරීම් අගුළු හරින්න';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return '$total කින් $visible ක් පෙන්වයි';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'ක්ෂණික අගුළු ඇරීම (7ක් බලන්න)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'මෙම සැසිය සඳහා ගණනය කිරීම් 7ක් දක්වා බැලීමට කෙටි දැන්වීමක් නරඹන්න.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'ක්ෂණික අගුළු ඇරීම (සියලු $countම බලන්න)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'මෙම සැසිය සඳහා සියලු $countම ගණනය කිරීම් බැලීමට කෙටි දැන්වීමක් නරඹන්න.';
+  }
+
+  @override
+  String get historyUnlockAllButton =>
+      'සියල්ල අගුළු හරින්න + පැය 24 දැන්වීම් රහිතව';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'සියලු ගණනය කිරීම් බැලීමට සහ පැය 24ක් සඳහා දැන්වීම් ඉවත් කිරීමට වීඩියෝවක් නරඹන්න.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'දැන්වීම් රහිත අවසරය ක්‍රියාත්මකයි ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'දැන්වීම පූරණය වෙමින් පවතී...';
 }
