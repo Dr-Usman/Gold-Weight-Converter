@@ -429,7 +429,9 @@ void main() {
       'Option C: active 24h pass shows ad-free badge and unlocks all items',
       (tester) async {
         final fakePrefs = _FakePreferencesService();
-        fakePrefs.saveAdFreeUntil(DateTime.now().add(const Duration(hours: 12)));
+        fakePrefs.saveAdFreeUntil(
+          DateTime.now().add(const Duration(hours: 12)),
+        );
 
         final container = ProviderContainer(
           overrides: [preferencesServiceProvider.overrideWithValue(fakePrefs)],

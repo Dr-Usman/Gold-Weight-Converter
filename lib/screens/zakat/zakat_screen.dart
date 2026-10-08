@@ -315,9 +315,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
                       hasRateFraction: hasRateFraction,
                     ),
                   ),
-                  const AppBannerAd(
-                    placement: BannerPlacement.zakat,
-                  ),
+                  const AppBannerAd(placement: BannerPlacement.zakat),
                 ],
               ),
             ),

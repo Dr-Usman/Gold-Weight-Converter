@@ -719,9 +719,7 @@ class _GoldConverterScreenState extends ConsumerState<GoldConverterScreen> {
                             return ConverterPriceCard(priceText: priceText);
                           },
                         ),
-                        const AppBannerAd(
-                          placement: BannerPlacement.converter,
-                        ),
+                        const AppBannerAd(placement: BannerPlacement.converter),
                       ],
                     ),
                   ),

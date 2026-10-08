@@ -10,10 +10,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AppBannerAd extends ConsumerStatefulWidget {
   final BannerPlacement placement;
 
-  const AppBannerAd({
-    super.key,
-    this.placement = BannerPlacement.converter,
-  });
+  const AppBannerAd({super.key, this.placement = BannerPlacement.converter});
 
   @override
   ConsumerState<AppBannerAd> createState() => _AppBannerAdState();

@@ -1,10 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-enum BannerPlacement {
-  converter,
-  zakat,
-  history,
-}
+enum BannerPlacement { converter, zakat, history }
 
 /// AdMob IDs for Gold Weight Converter.
 ///
@@ -47,12 +43,10 @@ class AdConfig {
       'ca-app-pub-2544985250210456/7669644949';
 
   // Google Test Ad Units (Official Sample Units)
-  static const String _testBanner =
-      'ca-app-pub-3940256099942544/6300978111';
+  static const String _testBanner = 'ca-app-pub-3940256099942544/6300978111';
   static const String _testInterstitial =
       'ca-app-pub-3940256099942544/1033173712';
-  static const String _testRewarded =
-      'ca-app-pub-3940256099942544/5224354917';
+  static const String _testRewarded = 'ca-app-pub-3940256099942544/5224354917';
 
   /// Whether ads should load for this build.
   static bool get adsEnabled => !hideAds;
