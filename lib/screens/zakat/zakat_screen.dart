@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../constants/ad_config.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/purity_enum.dart';
 import '../../constants/unit_enum.dart';
@@ -314,7 +315,7 @@ class _ZakatScreenState extends ConsumerState<ZakatScreen> {
                       hasRateFraction: hasRateFraction,
                     ),
                   ),
-                  const AppBannerAd(),
+                  const AppBannerAd(placement: BannerPlacement.zakat),
                 ],
               ),
             ),

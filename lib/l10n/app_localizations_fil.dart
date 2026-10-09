@@ -477,4 +477,87 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'I-restart';
+
+  @override
+  String get historyMenuLabel => 'Kasaysayan ng Pag-convert';
+
+  @override
+  String get historyTitle => 'Kasaysayan ng Pag-convert';
+
+  @override
+  String get historyEmptyTitle => 'Wala Pang Kasaysayan';
+
+  @override
+  String get historyEmptySubtitle =>
+      'Ang mga kalkulasyon na gagawin mo ay awtomatikong lalabas dito.';
+
+  @override
+  String get historyClearTooltip => 'I-clear ang kasaysayan';
+
+  @override
+  String get historyClearConfirmTitle => 'I-clear ang Kasaysayan?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'Sigurado ka bang gusto mong tanggalin ang lahat ng kasaysayan ng pag-convert?';
+
+  @override
+  String get historyRestoreButton => 'Ibalik';
+
+  @override
+  String get historyItemDeleted => 'Tinanggal ang item sa kasaysayan';
+
+  @override
+  String get historyUndo => 'I-undo';
+
+  @override
+  String historyToday(String time) {
+    return 'Ngayon, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'Kahapon, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'I-unlock ang Higit Pang Kalkulasyon';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'Ipinapakita ang $visible sa $total na kalkulasyon';
+  }
+
+  @override
+  String get historyUnlockSevenButton =>
+      'Mabilisang Pag-unlock (Tingnan ang 7)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'Manood ng maikling ad para makita ang hanggang 7 kalkulasyon para sa session na ito.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'Mabilisang Pag-unlock (Tingnan Lahat $count)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'Manood ng maikling ad para makita ang lahat ng $count kalkulasyon para sa session na ito.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'I-unlock Lahat + 24 oras Walang Ad';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'Manood ng video para ma-unlock ang lahat ng kalkulasyon at maalis ang mga banner ad nang 24 oras.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'Aktibo ang Ad-Free Pass ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'Naglo-load ng ad...';
 }

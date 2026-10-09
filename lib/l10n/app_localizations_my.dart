@@ -475,4 +475,86 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'ပြန်လည်စတင်မည်';
+
+  @override
+  String get historyMenuLabel => 'တွက်ချက်မှုမှတ်တမ်း';
+
+  @override
+  String get historyTitle => 'တွက်ချက်မှုမှတ်တမ်း';
+
+  @override
+  String get historyEmptyTitle => 'မှတ်တမ်းမရှိသေးပါ';
+
+  @override
+  String get historyEmptySubtitle =>
+      'သင်ပြုလုပ်သော တွက်ချက်မှုများသည် ဤနေရာတွင် အလိုအလျောက် ပေါ်လာပါမည်။';
+
+  @override
+  String get historyClearTooltip => 'မှတ်တမ်းရှင်းလင်းရန်';
+
+  @override
+  String get historyClearConfirmTitle => 'မှတ်တမ်းရှင်းလင်းမလား?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'တွက်ချက်မှုမှတ်တမ်းအားလုံးကို ဖျက်ရန် သေချာပါသလား?';
+
+  @override
+  String get historyRestoreButton => 'ပြန်လည်ရယူရန်';
+
+  @override
+  String get historyItemDeleted => 'မှတ်တမ်းအရာ ဖျက်ပြီးပါပြီ';
+
+  @override
+  String get historyUndo => 'ပြန်ပြင်ရန်';
+
+  @override
+  String historyToday(String time) {
+    return 'ယနေ့၊ $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'မနေ့က၊ $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'တွက်ချက်မှုများ ထပ်မံဖွင့်ရန်';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'တွက်ချက်မှု $total ခုအနက် $visible ခု ပြသနေသည်';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'အမြန်ဖွင့်ရန် (၇ ခုကြည့်ပါ)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'ဤအကြိမ်အတွက် တွက်ချက်မှု ၇ ခုအထိ ကြည့်ရှုရန် ကြော်ငြာတိုကို ကြည့်ပါ။';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'အမြန်ဖွင့်ရန် (အားလုံး $count ခု ကြည့်ပါ)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'ဤအကြိမ်အတွက် တွက်ချက်မှုအားလုံး $count ခု ကြည့်ရှုရန် ကြော်ငြာတိုကို ကြည့်ပါ။';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'အားလုံးဖွင့်ရန် + ၂၄ နာရီ ကြော်ငြာမပါ';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'တွက်ချက်မှုအားလုံး ဖွင့်ရန်နှင့် ၂၄ နာရီကြာ ကြော်ငြာများဖယ်ရှားရန် ဗီဒီယို ကြည့်ပါ။';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'ကြော်ငြာမပါ အသုံးပြုခွင့် သက်ဝင်နေသည် ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'ကြော်ငြာ တင်နေသည်...';
 }

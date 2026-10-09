@@ -33,6 +33,7 @@ class ExternalLinks {
     required String screen,
     double? totalGrams,
     double? totalTola,
+    String? totalPrice,
   }) async {
     final ShareResult result = await SharePlus.instance.share(
       ShareParams(text: text),
@@ -42,6 +43,7 @@ class ExternalLinks {
       screen: screen,
       totalGrams: totalGrams,
       totalTola: totalTola,
+      totalPrice: totalPrice,
     );
   }
 

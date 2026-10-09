@@ -5,11 +5,41 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/unit_enum.dart';
+import '../models/conversion_history_item.dart';
 import '../models/gold_item_model.dart';
 
 final preferencesServiceProvider = Provider<PreferencesService>((ref) {
   throw UnimplementedError('preferencesServiceProvider must be overridden');
 });
+
+/// Manages reactive state for the 24-hour ad-free pass earned via rewarded ad.
+final adFreePassProvider = NotifierProvider<AdFreePassNotifier, DateTime?>(
+  AdFreePassNotifier.new,
+);
+
+class AdFreePassNotifier extends Notifier<DateTime?> {
+  @override
+  DateTime? build() {
+    final prefs = ref.watch(preferencesServiceProvider);
+    final until = prefs.getAdFreeUntil();
+    if (until != null && DateTime.now().isBefore(until)) {
+      return until;
+    }
+    return null;
+  }
+
+  bool get isActive {
+    final until = state;
+    return until != null && DateTime.now().isBefore(until);
+  }
+
+  Future<void> grant24HourPass() async {
+    final until = DateTime.now().add(const Duration(hours: 24));
+    final prefs = ref.read(preferencesServiceProvider);
+    await prefs.saveAdFreeUntil(until);
+    state = until;
+  }
+}
 
 class PreferencesService {
   static const String _themeModeKey = 'theme_mode';
@@ -20,6 +50,8 @@ class PreferencesService {
   static const String _zakatRateUnitKey = 'zakat_rate_unit';
   static const String _converterRateKey = 'converter_gold_rate';
   static const String _converterRateUnitKey = 'converter_rate_unit';
+  static const String _conversionHistoryKey = 'conversion_history';
+  static const String _adFreeUntilKey = 'ad_free_until';
 
   late SharedPreferences _prefs;
 
@@ -151,6 +183,66 @@ class PreferencesService {
 
   Future<void> saveConverterRateUnit(UnitEnum unit) async {
     await _prefs.setString(_converterRateUnitKey, unit.name);
+  }
+
+  // ============ History Methods ============
+
+  List<ConversionHistoryItem> getConversionHistory() {
+    final String? raw = _prefs.getString(_conversionHistoryKey);
+    if (raw == null || raw.isEmpty) return const [];
+
+    try {
+      final dynamic decoded = jsonDecode(raw);
+      if (decoded is! List) return const [];
+      return decoded
+          .whereType<Map>()
+          .map(
+            (item) =>
+                ConversionHistoryItem.fromJson(Map<String, dynamic>.from(item)),
+          )
+          .where((item) => item.id.isNotEmpty)
+          .toList();
+    } catch (_) {
+      return const [];
+    }
+  }
+
+  Future<void> saveConversionHistory(List<ConversionHistoryItem> items) async {
+    final List<Map<String, dynamic>> encoded = items
+        .map((item) => item.toJson())
+        .toList();
+    await _prefs.setString(_conversionHistoryKey, jsonEncode(encoded));
+  }
+
+  // ============ Ad-Free Pass Methods ============
+
+  /// Returns expiration date of active ad-free pass, or null if none.
+  DateTime? getAdFreeUntil() {
+    try {
+      final String? raw = _prefs.getString(_adFreeUntilKey);
+      if (raw == null || raw.isEmpty) return null;
+      return DateTime.tryParse(raw);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Saves or clears expiration date of ad-free pass.
+  Future<void> saveAdFreeUntil(DateTime? until) async {
+    try {
+      if (until == null) {
+        await _prefs.remove(_adFreeUntilKey);
+      } else {
+        await _prefs.setString(_adFreeUntilKey, until.toIso8601String());
+      }
+    } catch (_) {}
+  }
+
+  /// Whether user currently holds an active ad-free pass.
+  bool isAdFreeActive() {
+    final until = getAdFreeUntil();
+    if (until == null) return false;
+    return DateTime.now().isBefore(until);
   }
 
   // ============ Helper Methods ============

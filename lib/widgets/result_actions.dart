@@ -10,6 +10,7 @@ class ResultActions extends StatelessWidget {
   final String screen;
   final double? totalGrams;
   final double? totalTola;
+  final String? totalPrice;
 
   const ResultActions({
     super.key,
@@ -17,6 +18,7 @@ class ResultActions extends StatelessWidget {
     required this.screen,
     this.totalGrams,
     this.totalTola,
+    this.totalPrice,
   });
 
   Future<void> _copy(BuildContext context) async {
@@ -25,6 +27,7 @@ class ResultActions extends StatelessWidget {
       screen: screen,
       totalGrams: totalGrams,
       totalTola: totalTola,
+      totalPrice: totalPrice,
     );
     if (!context.mounted) return;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -61,6 +64,7 @@ class ResultActions extends StatelessWidget {
                   screen: screen,
                   totalGrams: totalGrams,
                   totalTola: totalTola,
+                  totalPrice: totalPrice,
                 ),
           icon: Icon(
             Icons.share_outlined,

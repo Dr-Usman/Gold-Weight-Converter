@@ -960,6 +960,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Restart'**
   String get appUpdateRestart;
+
+  /// Drawer item label for conversion history
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion History'**
+  String get historyMenuLabel;
+
+  /// AppBar title for conversion history screen
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion History'**
+  String get historyTitle;
+
+  /// Title displayed when there is no conversion history
+  ///
+  /// In en, this message translates to:
+  /// **'No History Yet'**
+  String get historyEmptyTitle;
+
+  /// Subtitle displayed when history list is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Calculations you make will appear here automatically.'**
+  String get historyEmptySubtitle;
+
+  /// Tooltip for clear history button
+  ///
+  /// In en, this message translates to:
+  /// **'Clear history'**
+  String get historyClearTooltip;
+
+  /// Dialog title for confirming history clear
+  ///
+  /// In en, this message translates to:
+  /// **'Clear History?'**
+  String get historyClearConfirmTitle;
+
+  /// Dialog message for confirming history clear
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete all conversion history?'**
+  String get historyClearConfirmMessage;
+
+  /// Button label to restore history values into the converter
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get historyRestoreButton;
+
+  /// SnackBar message when a history item is deleted
+  ///
+  /// In en, this message translates to:
+  /// **'History item deleted'**
+  String get historyItemDeleted;
+
+  /// Action label to undo history item deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get historyUndo;
+
+  /// Relative timestamp for a history item created today
+  ///
+  /// In en, this message translates to:
+  /// **'Today, {time}'**
+  String historyToday(String time);
+
+  /// Relative timestamp for a history item created yesterday
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, {time}'**
+  String historyYesterday(String time);
+
+  /// Card title for unlocking additional history entries
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock More Calculations'**
+  String get historyUnlockTitle;
+
+  /// Subtitle showing number of visible items out of total
+  ///
+  /// In en, this message translates to:
+  /// **'Showing {visible} of {total} calculations'**
+  String historyUnlockSubtitle(int visible, int total);
+
+  /// Button label to unlock 7 items with an interstitial ad
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Unlock (View 7)'**
+  String get historyUnlockSevenButton;
+
+  /// Description for the 7 items quick unlock option
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a quick ad to view up to 7 calculations for this session.'**
+  String get historyUnlockSevenDesc;
+
+  /// Button label to unlock all items with quick ad when total is 7 or less
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Unlock (View All {count})'**
+  String historyUnlockAllQuickButton(int count);
+
+  /// Description to unlock all items with quick ad when total is 7 or less
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a quick ad to view all {count} calculations for this session.'**
+  String historyUnlockAllQuickDesc(int count);
+
+  /// Button label to unlock all items with a rewarded ad
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock All + 24h Ad-Free'**
+  String get historyUnlockAllButton;
+
+  /// Description for the full unlock + 24h ad-free pass option
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a video to unlock all calculations and remove banner ads across the app for 24 hours.'**
+  String get historyUnlockAllDesc;
+
+  /// Badge showing active 24h ad-free pass and remaining duration
+  ///
+  /// In en, this message translates to:
+  /// **'Ad-Free Pass Active ({timeRemaining})'**
+  String historyAdFreePassActive(String timeRemaining);
+
+  /// Indicator text shown while full-screen ad is loading
+  ///
+  /// In en, this message translates to:
+  /// **'Loading ad...'**
+  String get historyAdLoading;
 }
 
 class _AppLocalizationsDelegate

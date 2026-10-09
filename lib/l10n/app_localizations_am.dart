@@ -470,4 +470,85 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'እንደገና አስጀምር';
+
+  @override
+  String get historyMenuLabel => 'የልወጣ ታሪክ';
+
+  @override
+  String get historyTitle => 'የልወጣ ታሪክ';
+
+  @override
+  String get historyEmptyTitle => 'እስካሁን ምንም ታሪክ የለም';
+
+  @override
+  String get historyEmptySubtitle => 'የሚያሰሏቸው ስሌቶች እዚህ በራስ-ሰር ይታያሉ።';
+
+  @override
+  String get historyClearTooltip => 'ታሪክን አጽዳ';
+
+  @override
+  String get historyClearConfirmTitle => 'ታሪክ ይጽዳ?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'እርግጠኛ ነዎት ሁሉንም የልወጣ ታሪክ መሰረዝ ይፈልጋሉ?';
+
+  @override
+  String get historyRestoreButton => 'ወደነበረበት መልስ';
+
+  @override
+  String get historyItemDeleted => 'የታሪክ ንጥል ተሰርዟል';
+
+  @override
+  String get historyUndo => 'መልስ';
+
+  @override
+  String historyToday(String time) {
+    return 'ዛሬ፣ $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'ትናንት፣ $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'ተጨማሪ ስሌቶችን ይክፈቱ';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'ከ$total ስሌቶች ውስጥ $visible እየታዩ ነው';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'ፈጣن መክፈቻ (7 ይመልከቱ)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'ለዚህ ክፍለ ጊዜ እስከ 7 ስሌቶችን ለማየት ፈጣን ማስታወቂያ ይመልከቱ።';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'ፈጣን መክፈቻ (ሁሉንም $count ይመልከቱ)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'ለዚህ ክፍለ ጊዜ ሁሉንም $count ስሌቶች ለማየት ፈጣን ማስታወቂያ ይመልከቱ።';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'ሁሉንም ይክፈቱ + ለ24 ሰዓታት ከማስታወቂያ ነፃ';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'ሁሉንም ስሌቶች ለመክፈት እና ለ24 ሰዓታት ማስታወቂያዎችን ለማስወገድ ቪዲዮ ይመልከቱ።';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'ከማስታወቂያ ነፃ ማለፊያ ገቢር ነው ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'ማስታወቂያ በመጫን ላይ...';
 }

@@ -473,4 +473,86 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'Reiniciar';
+
+  @override
+  String get historyMenuLabel => 'Historial de conversiones';
+
+  @override
+  String get historyTitle => 'Historial de conversiones';
+
+  @override
+  String get historyEmptyTitle => 'Aún no hay historial';
+
+  @override
+  String get historyEmptySubtitle =>
+      'Los cálculos que realices aparecerán aquí automáticamente.';
+
+  @override
+  String get historyClearTooltip => 'Borrar historial';
+
+  @override
+  String get historyClearConfirmTitle => '¿Borrar historial?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      '¿Estás seguro de que deseas eliminar todo el historial de conversiones?';
+
+  @override
+  String get historyRestoreButton => 'Restaurar';
+
+  @override
+  String get historyItemDeleted => 'Elemento del historial eliminado';
+
+  @override
+  String get historyUndo => 'Deshacer';
+
+  @override
+  String historyToday(String time) {
+    return 'Hoy, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'Ayer, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'Desbloquear más cálculos';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'Mostrando $visible de $total cálculos';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'Desbloqueo rápido (Ver 7)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'Mira un anuncio rápido para ver hasta 7 cálculos durante esta sesión.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'Desbloqueo rápido (Ver los $count)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'Mira un anuncio rápido para ver los $count cálculos durante esta sesión.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'Desbloquear todo + 24 h sin anuncios';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'Mira un video para desbloquear todos los cálculos y eliminar anuncios publicitarios durante 24 horas.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'Pase sin anuncios activo ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'Cargando anuncio...';
 }

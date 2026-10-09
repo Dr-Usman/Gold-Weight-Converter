@@ -8,6 +8,7 @@ import '../providers/currency_provider.dart';
 import '../providers/locale_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/version_provider.dart';
+import '../screens/history/conversion_history_screen.dart';
 import '../screens/zakat/zakat_screen.dart';
 import '../services/analytics_service.dart';
 import '../services/external_links.dart';
@@ -21,7 +22,6 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     final ColorScheme scheme = Theme.of(context).colorScheme;
 
     return Drawer(
@@ -31,62 +31,23 @@ class AppDrawer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const _AppDrawerHeader(),
+            // Scrollable Menu Items
             Expanded(
               child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).padding.top,
-                        left: 18,
-                        right: 18,
-                        bottom: 18,
-                      ),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [scheme.primary, scheme.secondary],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.balance,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          const SizedBox(width: 12),
-                          Flexible(
-                            child: Text(
-                              l10n.appTitle,
-                              style: Theme.of(context).textTheme.titleLarge
-                                  ?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 14),
-                    const _ZakatDrawerTile(),
-                    const SizedBox(height: 10),
-                    const _ThemeDrawerTile(),
-                    const SizedBox(height: 10),
-                    const _LanguageDrawerTile(),
-                    const SizedBox(height: 10),
-                    const _CurrencyDrawerTile(),
-                    const SizedBox(height: 10),
-                    const _AboutLinksDrawerCard(),
-                    const SizedBox(height: 16),
+                  children: const [
+                    _FeaturesDrawerCard(),
+                    SizedBox(height: 10),
+                    _ThemeDrawerTile(),
+                    SizedBox(height: 10),
+                    _LanguageDrawerTile(),
+                    SizedBox(height: 10),
+                    _CurrencyDrawerTile(),
+                    SizedBox(height: 10),
+                    _AboutLinksDrawerCard(),
                   ],
                 ),
               ),
@@ -100,8 +61,54 @@ class AppDrawer extends StatelessWidget {
   }
 }
 
-class _ZakatDrawerTile extends StatelessWidget {
-  const _ZakatDrawerTile();
+class _AppDrawerHeader extends StatelessWidget {
+  const _AppDrawerHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top,
+        left: 18,
+        right: 18,
+        bottom: 18,
+      ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [scheme.primary, scheme.secondary],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.balance, color: Colors.white, size: 30),
+          const SizedBox(width: 12),
+          Flexible(
+            child: Text(
+              l10n.appTitle,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FeaturesDrawerCard extends StatelessWidget {
+  const _FeaturesDrawerCard();
 
   @override
   Widget build(BuildContext context) {
@@ -109,23 +116,43 @@ class _ZakatDrawerTile extends StatelessWidget {
     final ColorScheme scheme = Theme.of(context).colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
+        margin: EdgeInsets.zero,
         color: scheme.surfaceContainerHighest,
-        child: ListTile(
-          leading: Icon(
-            Icons.volunteer_activism_outlined,
-            color: scheme.primary,
-          ),
-          title: Text(l10n.zakatMenuLabel),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-          onTap: () {
-            AnalyticsService.trackDrawerItemClicked('zakat');
-            Navigator.of(context).pop();
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const ZakatScreen()),
-            );
-          },
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(
+                Icons.volunteer_activism_outlined,
+                color: scheme.primary,
+              ),
+              title: Text(l10n.zakatMenuLabel),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                AnalyticsService.trackDrawerItemClicked('zakat');
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const ZakatScreen()),
+                );
+              },
+            ),
+            const Divider(height: 1),
+            ListTile(
+              leading: Icon(Icons.history_rounded, color: scheme.primary),
+              title: Text(l10n.historyMenuLabel),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                AnalyticsService.trackDrawerItemClicked('history');
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ConversionHistoryScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -142,8 +169,9 @@ class _ThemeDrawerTile extends ConsumerWidget {
     final ThemeMode themeMode = ref.watch(themeModeProvider);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
+        margin: EdgeInsets.zero,
         color: scheme.surfaceContainerHighest,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
@@ -210,8 +238,9 @@ class _LanguageDrawerTile extends ConsumerWidget {
     final Locale locale = ref.watch(localeProvider);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
+        margin: EdgeInsets.zero,
         color: scheme.surfaceContainerHighest,
         child: ListTile(
           leading: Icon(Icons.translate, color: scheme.primary),
@@ -247,8 +276,9 @@ class _CurrencyDrawerTile extends ConsumerWidget {
     final currency = ref.watch(currencyProvider);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
+        margin: EdgeInsets.zero,
         color: scheme.surfaceContainerHighest,
         child: ListTile(
           leading: Icon(Icons.currency_exchange, color: scheme.primary),
@@ -279,6 +309,8 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
 
   void _showAbout(BuildContext context, WidgetRef ref) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme scheme = theme.colorScheme;
     final String version =
         ref.read(appVersionProvider).asData?.value ?? l10n.unknownLabel;
 
@@ -286,18 +318,139 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(l10n.settingsAboutLabel),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(22),
+          ),
+          titlePadding: const EdgeInsets.fromLTRB(22, 22, 22, 0),
+          contentPadding: const EdgeInsets.fromLTRB(22, 16, 22, 12),
+          title: Row(
             children: [
-              Text(l10n.aboutDescription),
-              const SizedBox(height: 12),
-              Text('${l10n.aboutVersion} $version'),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [scheme.primary, scheme.secondary],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: [
+                    BoxShadow(
+                      color: scheme.primary.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: const Icon(Icons.balance, color: Colors.white, size: 26),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.appTitle,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: scheme.primaryContainer.withValues(alpha: 0.5),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        '${l10n.aboutVersion} $version',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: scheme.onPrimaryContainer,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
+          content: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 420),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.aboutDescription,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      height: 1.4,
+                      color: scheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Divider(height: 1),
+                  const SizedBox(height: 10),
+                  const _DrawerMenuItem(
+                    icon: Icons.scale_outlined,
+                    title: 'Traditional & Metric Units',
+                    description:
+                        'High-precision conversion across Tola, Masha, Ratti, Grams, Ana, and Lal.',
+                  ),
+                  const SizedBox(height: 10),
+                  const _DrawerMenuItem(
+                    icon: Icons.currency_exchange_outlined,
+                    title: 'Live Gold Valuation',
+                    description:
+                        'Calculate estimated gold values per Tola, 10g, or 1g in 40+ global currencies.',
+                  ),
+                  const SizedBox(height: 10),
+                  const _DrawerMenuItem(
+                    icon: Icons.volunteer_activism_outlined,
+                    title: 'Gold Zakat Calculator',
+                    description:
+                        'Calculate 2.5% zakat with 24K, 22K, 21K, and 18K purity assessments.',
+                  ),
+                  const SizedBox(height: 10),
+                  const _DrawerMenuItem(
+                    icon: Icons.history_rounded,
+                    title: 'Conversion History',
+                    description:
+                        'Automatically save calculations, restore inputs anytime, copy, or share results.',
+                  ),
+                  const SizedBox(height: 10),
+                  const _DrawerMenuItem(
+                    icon: Icons.translate_outlined,
+                    title: 'Global & Multilingual',
+                    description:
+                        'Supports 20+ localized languages and Dark, Light, and System themes.',
+                  ),
+                  const SizedBox(height: 10),
+                  const _DrawerMenuItem(
+                    icon: Icons.lock_outline_rounded,
+                    title: 'Private & Offline',
+                    description:
+                        'No accounts or tracking of personal inputs. All calculations stay on your device.',
+                  ),
+                ],
+              ),
+            ),
+          ),
           actions: [
-            TextButton(
+            TextButton.icon(
+              icon: const Icon(Icons.star_outline, size: 18),
+              onPressed: () {
+                Navigator.of(context).pop();
+                AnalyticsService.trackDrawerItemClicked('rate_app');
+                ExternalLinks.openUrl(context, AppConstants.playStoreUrl);
+              },
+              label: Text(l10n.rateAppLabel),
+            ),
+            FilledButton(
               onPressed: () => Navigator.of(context).pop(),
               child: Text(MaterialLocalizations.of(context).okButtonLabel),
             ),
@@ -313,8 +466,9 @@ class _AboutLinksDrawerCard extends ConsumerWidget {
     final ColorScheme scheme = Theme.of(context).colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
+        margin: EdgeInsets.zero,
         color: scheme.surfaceContainerHighest,
         child: Column(
           children: [
@@ -408,6 +562,54 @@ class _VersionDrawerFooter extends ConsumerWidget {
           ).textTheme.bodySmall?.copyWith(color: scheme.onSurfaceVariant),
         ),
       ),
+    );
+  }
+}
+
+class _DrawerMenuItem extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String description;
+
+  const _DrawerMenuItem({
+    required this.icon,
+    required this.title,
+    required this.description,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, size: 18, color: scheme.primary),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: scheme.onSurface,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                description,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                  height: 1.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

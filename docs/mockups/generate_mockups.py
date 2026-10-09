@@ -288,7 +288,7 @@ def generate_dual_mockup(base_bg, light_screenshot_path, dark_screenshot_path, b
     # Load light screenshot (harmonize status bar for clean presentation if needed)
     light_img = Image.open(light_screenshot_path).convert('RGBA')
     if lang == 'ne':
-        en_ref = os.path.join(os.path.dirname(light_screenshot_path), '../english/01-converter-inputs.png')
+        en_ref = os.path.join(os.path.dirname(light_screenshot_path), '../english/01-converter-inputs-en.png')
         if os.path.exists(en_ref):
             ref_bar = Image.open(en_ref).crop((0, 0, 1080, 110))
             light_img.paste(ref_bar, (0, 0))
@@ -403,297 +403,293 @@ def main():
     )
     shadow_layer = shadow_layer.filter(ImageFilter.GaussianBlur(36))
 
-    # Mockup Definitions for Nepal Store Listing
+    # Soft amber Sample B — Nepal (Nepali) listing
     nepal_mockups = [
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/nepal/01-converter-inputs.png'),
-            'badge': 'नेपाल विशेष',
-            'title': 'तोला, लाल र ग्राम रूपान्तरक',
-            'subtitle': 'नेपाली सुन बजारको सही र भरपर्दो हिसाब',
-            'out': os.path.join(project_root, 'docs/mockups/nepal/01-converter-inputs-mockup.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/nepal/01-converter-inputs-ne.png'),
+            'badge': 'सटीक रूपान्तरक',
+            'title': 'तोला, लाल र ग्राम',
+            'subtitle': 'आना सहित नेपाली सुन तौल प्रणाली',
+            'out': os.path.join(project_root, 'docs/mockups/nepal/01-converter-inputs-mockup-ne.png'),
             'lang': 'ne'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/nepal/02-results-and-price.png'),
-            'badge': 'हिसाब विवरण',
-            'title': 'विस्तृत हिसाब र सुनको मूल्य',
+            'shot': os.path.join(project_root, 'docs/screenshots/nepal/02-results-and-price-ne.png'),
+            'badge': 'विस्तृत हिसाब',
+            'title': 'तुरुन्त नतिजा र सुनको मूल्य',
             'subtitle': 'नेपाली रुपैयाँ (रु) मा तत्काल बजार भाउ',
-            'out': os.path.join(project_root, 'docs/mockups/nepal/02-results-and-price-mockup.png'),
+            'out': os.path.join(project_root, 'docs/mockups/nepal/02-results-and-price-mockup-ne.png'),
             'lang': 'ne'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/nepal/03-gold-zakat.png'),
-            'badge': 'जकात क्याल्कुलेटर',
+            'shot': os.path.join(project_root, 'docs/screenshots/nepal/03-gold-zakat-ne.png'),
+            'badge': 'जकात क्यालकुलेटर',
             'title': 'सुनको २.५% जकात हिसाब',
-            'subtitle': 'गहना, २४ क्यारेट र २२ क्यारेट अनुसार',
-            'out': os.path.join(project_root, 'docs/mockups/nepal/03-gold-zakat-mockup.png'),
+            'subtitle': '२४ र २२ क्यारेट गहना अनुसार',
+            'out': os.path.join(project_root, 'docs/mockups/nepal/03-gold-zakat-mockup-ne.png'),
             'lang': 'ne'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/nepal/04-drawer-menu.png'),
-            'badge': 'मुद्रा र थिम',
-            'title': 'नेपाली रुपैयाँ र डार्क थिम',
-            'subtitle': 'आफ्नो रोजाइको मुद्रा र आकर्षक दृश्य',
-            'out': os.path.join(project_root, 'docs/mockups/nepal/04-drawer-menu-mockup.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/nepal/04-conversion-history-ne.png'),
+            'badge': 'रूपान्तरण इतिहास',
+            'title': 'पुराना हिसाब हेर्नुहोस्',
+            'subtitle': 'पुनर्स्थापना, कपी र सेयर गर्नुहोस्',
+            'out': os.path.join(project_root, 'docs/mockups/nepal/04-conversion-history-mockup-ne.png'),
             'lang': 'ne'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/nepal/05-languages.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/nepal/05-languages-ne.png'),
             'badge': 'बहुभाषिक समर्थन',
-            'title': 'नेपाली भाषा र २०+ भाषाहरू',
-            'subtitle': 'आफ्नै मातृभाषामा सरल र सहज प्रयोग',
-            'out': os.path.join(project_root, 'docs/mockups/nepal/05-languages-mockup.png'),
+            'title': 'नेपालीसहित २०+ भाषाहरू',
+            'subtitle': 'आफ्नै मातृभाषामा सरल प्रयोग',
+            'out': os.path.join(project_root, 'docs/mockups/nepal/05-languages-mockup-ne.png'),
             'lang': 'ne'
         },
         {
-            'type': 'dual',
-            'shot_light': os.path.join(project_root, 'docs/screenshots/nepal/01-converter-inputs.png'),
-            'shot_dark': os.path.join(project_root, 'docs/screenshots/nepal/01-converter-inputs-dark.png'),
-            'badge': 'आकर्षक थिमहरू',
-            'title': 'लाइट र डार्क थिम समर्थन',
-            'subtitle': 'दिन वा रात, जुनसुकै समयमा आँखालाई आरामदायी',
-            'out': os.path.join(project_root, 'docs/mockups/nepal/06-light-dark-mode-mockup.png'),
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/nepal/06-dark-converter-inputs-ne.png'),
+            'badge': 'डार्क मोड',
+            'title': 'रातको आरामदायी दृश्य',
+            'subtitle': 'उही सटीक रूपान्तरक गाढा थिममा',
+            'out': os.path.join(project_root, 'docs/mockups/nepal/06-dark-converter-mockup-ne.png'),
             'lang': 'ne'
         }
     ]
 
     # Mockup Definitions for English Store Listing
+    # Soft amber Sample B — English main listing (Play phone shots)
     english_mockups = [
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/english/01-converter-inputs.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/english/01-converter-inputs-en.png'),
             'badge': 'PRECISION CONVERTER',
             'title': 'Convert Tola, Masha & Gram',
-            'subtitle': 'Accurate Tola, Masha, Ana, Ratti & Gram units',
-            'out': os.path.join(project_root, 'docs/mockups/english/01-converter-inputs-mockup.png'),
+            'subtitle': 'Also Ana, Ratti & traditional units',
+            'out': os.path.join(project_root, 'docs/mockups/english/01-converter-inputs-mockup-en.png'),
             'lang': 'en'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/english/02-results-and-price.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/english/02-results-and-price-en.png'),
             'badge': 'DETAILED BREAKDOWN',
             'title': 'Instant Results & Gold Value',
-            'subtitle': 'Live calculation breakdown and pricing estimates',
-            'out': os.path.join(project_root, 'docs/mockups/english/02-results-and-price-mockup.png'),
+            'subtitle': 'Live calculation with ₹ price estimates',
+            'out': os.path.join(project_root, 'docs/mockups/english/02-results-and-price-mockup-en.png'),
             'lang': 'en'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/english/03-gold-zakat.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/english/03-gold-zakat-en.png'),
             'badge': 'ZAKAT CALCULATOR',
             'title': 'Calculate 2.5% Gold Zakat',
-            'subtitle': 'Add jewelry items with 24K & 22K purity breakdown',
-            'out': os.path.join(project_root, 'docs/mockups/english/03-gold-zakat-mockup.png'),
+            'subtitle': 'Add jewelry with 24K & 22K purity',
+            'out': os.path.join(project_root, 'docs/mockups/english/03-gold-zakat-mockup-en.png'),
             'lang': 'en'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/english/04-drawer-menu.png'),
-            'badge': 'SMART CUSTOMIZATION',
-            'title': '36 Currencies & Dark Mode',
-            'subtitle': 'Tailor units, themes & local display preferences',
-            'out': os.path.join(project_root, 'docs/mockups/english/04-drawer-menu-mockup.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/english/04-conversion-history-en.png'),
+            'badge': 'CONVERSION HISTORY',
+            'title': 'Revisit Past Calculations',
+            'subtitle': 'Restore, copy & share saved conversions',
+            'out': os.path.join(project_root, 'docs/mockups/english/04-conversion-history-mockup-en.png'),
             'lang': 'en'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/english/05-languages.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/english/05-languages-en.png'),
             'badge': 'GLOBAL REACH',
             'title': 'Available in 20+ Languages',
-            'subtitle': 'Designed for jewellers, traders & buyers worldwide',
-            'out': os.path.join(project_root, 'docs/mockups/english/05-languages-mockup.png'),
+            'subtitle': 'For jewellers, traders & buyers worldwide',
+            'out': os.path.join(project_root, 'docs/mockups/english/05-languages-mockup-en.png'),
             'lang': 'en'
         },
         {
-            'type': 'dual',
-            'shot_light': os.path.join(project_root, 'docs/screenshots/english/01-converter-inputs.png'),
-            'shot_dark': os.path.join(project_root, 'docs/screenshots/english/01-converter-inputs-dark.png'),
-            'badge': 'ADAPTIVE THEMES',
-            'title': 'Stunning in Light & Dark',
-            'subtitle': 'Designed for seamless comfort, day and night',
-            'out': os.path.join(project_root, 'docs/mockups/english/06-light-dark-mode-mockup.png'),
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/english/06-dark-converter-inputs-en.png'),
+            'badge': 'DARK MODE',
+            'title': 'Comfortable Night Viewing',
+            'subtitle': 'Same precise converter in dark theme',
+            'out': os.path.join(project_root, 'docs/mockups/english/06-dark-converter-mockup-en.png'),
             'lang': 'en'
         }
     ]
 
-    # Mockup Definitions for India (Hindi) Store Listing
+    # Soft amber Sample B — India (Hindi) listing
     india_mockups = [
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/india/01-converter-inputs.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/india/01-converter-inputs-hi.png'),
             'badge': 'सटीक कनवर्टर',
-            'title': 'तोला, माशा, रत्ती और ग्राम',
-            'subtitle': 'पारंपरिक भारतीय इकाइयों का सटीक और आसान हिसाब',
-            'out': os.path.join(project_root, 'docs/mockups/india/01-converter-inputs-mockup.png'),
+            'title': 'तोला, माशा और ग्राम',
+            'subtitle': 'आना, रत्ती व पारंपरिक इकाइयाँ भी',
+            'out': os.path.join(project_root, 'docs/mockups/india/01-converter-inputs-mockup-hi.png'),
             'lang': 'hi'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/india/02-results-and-price.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/india/02-results-and-price-hi.png'),
             'badge': 'विस्तृत हिसाब',
             'title': 'तुरंत परिणाम और सोने की कीमत',
-            'subtitle': 'भारतीय रुपये (₹) में लाइव व सटीक बाज़ार भाव',
-            'out': os.path.join(project_root, 'docs/mockups/india/02-results-and-price-mockup.png'),
+            'subtitle': '₹ में लाइव बाज़ार भाव के साथ',
+            'out': os.path.join(project_root, 'docs/mockups/india/02-results-and-price-mockup-hi.png'),
             'lang': 'hi'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/india/03-gold-zakat.png'),
-            'badge': 'ज़कात क्याल्कुलेटर',
+            'shot': os.path.join(project_root, 'docs/screenshots/india/03-gold-zakat-hi.png'),
+            'badge': 'ज़कात कैलकुलेटर',
             'title': 'सोने की 2.5% ज़कात का हिसाब',
-            'subtitle': '24K और 22K हॉलमार्क आभूषणों के अनुसार गणना',
-            'out': os.path.join(project_root, 'docs/mockups/india/03-gold-zakat-mockup.png'),
+            'subtitle': '24K और 22K आभूषणों के अनुसार',
+            'out': os.path.join(project_root, 'docs/mockups/india/03-gold-zakat-mockup-hi.png'),
             'lang': 'hi'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/india/04-drawer-menu.png'),
-            'badge': 'स्मार्ट सेटिंग्स',
-            'title': 'भारतीय रुपया (₹) और डार्क मोड',
-            'subtitle': '36 मुद्राएं और आंखों के लिए आरामदायक थीम',
-            'out': os.path.join(project_root, 'docs/mockups/india/04-drawer-menu-mockup.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/india/04-conversion-history-hi.png'),
+            'badge': 'रूपांतरण इतिहास',
+            'title': 'पिछले हिसाब दोबारा देखें',
+            'subtitle': 'पुनर्स्थापित करें, कॉपी और शेयर करें',
+            'out': os.path.join(project_root, 'docs/mockups/india/04-conversion-history-mockup-hi.png'),
             'lang': 'hi'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/india/05-languages.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/india/05-languages-hi.png'),
             'badge': 'बहुभाषी समर्थन',
-            'title': 'हिंदी सहित 20+ भाषाओं में',
-            'subtitle': 'ज्वैलर्स, सर्राफा व्यापारियों और ग्राहकों के लिए',
-            'out': os.path.join(project_root, 'docs/mockups/india/05-languages-mockup.png'),
+            'title': 'हिंदी सहित 20+ भाषाएँ',
+            'subtitle': 'ज्वैलर्स, व्यापारी और खरीदारों के लिए',
+            'out': os.path.join(project_root, 'docs/mockups/india/05-languages-mockup-hi.png'),
             'lang': 'hi'
         },
         {
-            'type': 'dual',
-            'shot_light': os.path.join(project_root, 'docs/screenshots/india/01-converter-inputs.png'),
-            'shot_dark': os.path.join(project_root, 'docs/screenshots/india/01-converter-inputs-dark.png'),
-            'badge': 'आकर्षक थीम्स',
-            'title': 'लाइट और डार्क थीम समर्थन',
-            'subtitle': 'दिन या रात, हर समय सहज और प्रीमियम अनुभव',
-            'out': os.path.join(project_root, 'docs/mockups/india/06-light-dark-mode-mockup.png'),
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/india/06-dark-converter-inputs-hi.png'),
+            'badge': 'डार्क मोड',
+            'title': 'रात में आरामदायक दृश्य',
+            'subtitle': 'वही सटीक कनवर्टर डार्क थीम में',
+            'out': os.path.join(project_root, 'docs/mockups/india/06-dark-converter-mockup-hi.png'),
             'lang': 'hi'
         }
     ]
 
-    # Mockup Definitions for Pakistan (Urdu) Store Listing
+    # Soft amber Sample B — Pakistan (Urdu) listing
     pakistan_mockups = [
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/01-converter-inputs.png'),
-            'badge': 'پاکستان کے لیے خاص',
-            'title': 'تولہ، ماشہ، آنہ اور گرام',
-            'subtitle': 'پاکستانی صرافہ مارکیٹ کے روایتی اوزان کا درست حساب',
-            'out': os.path.join(project_root, 'docs/mockups/pakistan/01-converter-inputs-mockup.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/01-converter-inputs-ur.png'),
+            'badge': 'درست کنورٹر',
+            'title': 'تولہ، ماشہ اور گرام',
+            'subtitle': 'آنہ، رتی اور روایتی اوزان بھی',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/01-converter-inputs-mockup-ur.png'),
             'lang': 'ur'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/02-results-and-price.png'),
-            'badge': 'مکمل حساب تفصیل',
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/02-results-and-price-ur.png'),
+            'badge': 'مکمل تفصیل',
             'title': 'فوری نتائج اور سونے کی قیمت',
-            'subtitle': 'پاکستانی روپے اور ریٹ کے مطابق درست حساب',
-            'out': os.path.join(project_root, 'docs/mockups/pakistan/02-results-and-price-mockup.png'),
+            'subtitle': 'روپے میں لائیو ریٹ کے ساتھ حساب',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/02-results-and-price-mockup-ur.png'),
             'lang': 'ur'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/03-gold-zakat.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/03-gold-zakat-ur.png'),
             'badge': 'زکوٰۃ کیلکولیٹر',
             'title': 'سونے کی ۲.۵٪ زکوٰۃ کا حساب',
-            'subtitle': '۲۴ اور ۲۲ قیراط زیورات اور خالص سونا',
-            'out': os.path.join(project_root, 'docs/mockups/pakistan/03-gold-zakat-mockup.png'),
+            'subtitle': '۲۴ اور ۲۲ قیراط زیورات کے مطابق',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/03-gold-zakat-mockup-ur.png'),
             'lang': 'ur'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/04-drawer-menu.png'),
-            'badge': 'کرنسی اور ڈارک موڈ',
-            'title': 'پاکستانی روپیہ اور جدید تھیم',
-            'subtitle': '۳۶ کرنسیاں اور آنکھوں کے لیے پرسکون ڈارک موڈ',
-            'out': os.path.join(project_root, 'docs/mockups/pakistan/04-drawer-menu-mockup.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/04-conversion-history-ur.png'),
+            'badge': 'تبدیلی کی تاریخ',
+            'title': 'پرانا حساب دوبارہ دیکھیں',
+            'subtitle': 'بحال کریں، کاپی اور شیئر کریں',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/04-conversion-history-mockup-ur.png'),
             'lang': 'ur'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/05-languages.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/05-languages-ur.png'),
             'badge': 'کثیر لسانی سپورٹ',
-            'title': 'اردو اور ۲۰ سے زائد زبانیں',
-            'subtitle': 'سناروں، تاجروں اور خریداروں کے لیے انتہائی آسان',
-            'out': os.path.join(project_root, 'docs/mockups/pakistan/05-languages-mockup.png'),
+            'title': 'اردو اور ۲۰+ زبانیں',
+            'subtitle': 'سناروں، تاجروں اور خریداروں کے لیے',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/05-languages-mockup-ur.png'),
             'lang': 'ur'
         },
         {
-            'type': 'dual',
-            'shot_light': os.path.join(project_root, 'docs/screenshots/pakistan/01-converter-inputs.png'),
-            'shot_dark': os.path.join(project_root, 'docs/screenshots/pakistan/01-converter-inputs-dark.png'),
-            'badge': 'خوبصورت تھیمز',
-            'title': 'لائٹ اور ڈارک موڈ سپورٹ',
-            'subtitle': 'دن ہو یا رات، سونے کا حساب ہر وقت آسان',
-            'out': os.path.join(project_root, 'docs/mockups/pakistan/06-light-dark-mode-mockup.png'),
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/pakistan/06-dark-converter-inputs-ur.png'),
+            'badge': 'ڈارک موڈ',
+            'title': 'رات کے لیے آرام دہ منظر',
+            'subtitle': 'وہی درست کنورٹر ڈارک تھیم میں',
+            'out': os.path.join(project_root, 'docs/mockups/pakistan/06-dark-converter-mockup-ur.png'),
             'lang': 'ur'
         }
     ]
 
-    # Mockup Definitions for Bangladesh (Bengali) Store Listing
+    # Soft amber Sample B — Bangladesh (Bengali) listing
     bangladesh_mockups = [
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/01-converter-inputs.png'),
-            'badge': 'বাংলাদেশ স্পেশাল',
-            'title': 'তোলা, মাশা, আনা ও গ্রাম',
-            'subtitle': 'বাংলাদেশি স্বর্ণ বাজারের সঠিক ও নিখুঁত রূপান্তর',
-            'out': os.path.join(project_root, 'docs/mockups/bangladesh/01-converter-inputs-mockup.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/01-converter-inputs-bn.png'),
+            'badge': 'নিখুঁত রূপান্তরকারী',
+            'title': 'তোলা, মাশা ও গ্রাম',
+            'subtitle': 'আনা, রতি ও ঐতিহ্যবাহী এককও',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/01-converter-inputs-mockup-bn.png'),
             'lang': 'bn'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/02-results-and-price.png'),
-            'badge': 'হিসাবের পূর্ণ বিবরণ',
-            'title': 'বিস্তারিত রূপান্তর ও স্বর্ণের মূল্য',
-            'subtitle': 'বাংলাদেশি টাকা (৳) তে তাৎক্ষণিক সঠিক দর ও হিসাব',
-            'out': os.path.join(project_root, 'docs/mockups/bangladesh/02-results-and-price-mockup.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/02-results-and-price-bn.png'),
+            'badge': 'বিস্তারিত হিসাব',
+            'title': 'তাৎক্ষণিক ফল ও স্বর্ণের মূল্য',
+            'subtitle': '৳ তে লাইভ বাজারদরসহ হিসাব',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/02-results-and-price-mockup-bn.png'),
             'lang': 'bn'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/03-gold-zakat.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/03-gold-zakat-bn.png'),
             'badge': 'যাকাত ক্যালকুলেটর',
             'title': 'স্বর্ণের ২.৫% যাকাতের হিসাব',
-            'subtitle': '২৪ ক্যারেট ও ২২ ক্যারেট গহনার নিখুঁত বিশুদ্ধতা ও মান',
-            'out': os.path.join(project_root, 'docs/mockups/bangladesh/03-gold-zakat-mockup.png'),
+            'subtitle': '২৪ ও ২২ ক্যারেট গহনা অনুসারে',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/03-gold-zakat-mockup-bn.png'),
             'lang': 'bn'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/04-drawer-menu.png'),
-            'badge': 'মুদ্রা ও ডার্ক থিম',
-            'title': 'বাংলাদেশি টাকা (৳) ও নাইট মোড',
-            'subtitle': '৩৬টি মুদ্রা এবং চোখের জন্য আরামদায়ক ডার্ক থিম',
-            'out': os.path.join(project_root, 'docs/mockups/bangladesh/04-drawer-menu-mockup.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/04-conversion-history-bn.png'),
+            'badge': 'রূপান্তর ইতিহাস',
+            'title': 'আগের হিসাব আবার দেখুন',
+            'subtitle': 'পুনরুদ্ধার, কপি ও শেয়ার করুন',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/04-conversion-history-mockup-bn.png'),
             'lang': 'bn'
         },
         {
             'type': 'single',
-            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/05-languages.png'),
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/05-languages-bn.png'),
             'badge': 'বহুভাষিক সুবিধা',
-            'title': 'বাংলা সহ ২০+ আন্তর্জাতিক ভাষা',
-            'subtitle': 'স্বর্ণ ব্যবসায়ী ও গ্রাহকদের জন্য সহজ ব্যবহার',
-            'out': os.path.join(project_root, 'docs/mockups/bangladesh/05-languages-mockup.png'),
+            'title': 'বাংলাসহ ২০+ ভাষা',
+            'subtitle': 'স্বর্ণ ব্যবসায়ী ও ক্রেতাদের জন্য',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/05-languages-mockup-bn.png'),
             'lang': 'bn'
         },
         {
-            'type': 'dual',
-            'shot_light': os.path.join(project_root, 'docs/screenshots/bangladesh/01-converter-inputs.png'),
-            'shot_dark': os.path.join(project_root, 'docs/screenshots/bangladesh/01-converter-inputs-dark.png'),
-            'badge': 'আকর্ষণীয় থিমসমূহ',
-            'title': 'লাইট ও ডার্ক মোড সাপোর্ট',
-            'subtitle': 'দিন বা রাত, যেকোনো সময় হিসাব করুন স্বাচ্ছন্দ্যে',
-            'out': os.path.join(project_root, 'docs/mockups/bangladesh/06-light-dark-mode-mockup.png'),
+            'type': 'single',
+            'shot': os.path.join(project_root, 'docs/screenshots/bangladesh/06-dark-converter-inputs-bn.png'),
+            'badge': 'ডার্ক মোড',
+            'title': 'রাতে আরামদায়ক দেখা',
+            'subtitle': 'একই নিখুঁত কনভার্টার ডার্ক থিমে',
+            'out': os.path.join(project_root, 'docs/mockups/bangladesh/06-dark-converter-mockup-bn.png'),
             'lang': 'bn'
         }
     ]

@@ -181,11 +181,14 @@ class AnalyticsService {
     required String screen,
     double? totalGrams,
     double? totalTola,
+    String? totalPrice,
   }) {
     _track('results_copied', {
       'screen': screen,
       'total_grams': ?totalGrams,
       'total_tola': ?totalTola,
+      if (totalPrice != null && totalPrice.isNotEmpty)
+        'total_price': totalPrice,
     });
   }
 
@@ -193,11 +196,14 @@ class AnalyticsService {
     required String screen,
     double? totalGrams,
     double? totalTola,
+    String? totalPrice,
   }) {
     _track('results_shared', {
       'screen': screen,
       'total_grams': ?totalGrams,
       'total_tola': ?totalTola,
+      if (totalPrice != null && totalPrice.isNotEmpty)
+        'total_price': totalPrice,
     });
   }
 
@@ -211,6 +217,47 @@ class AnalyticsService {
 
   static void trackDrawerItemClicked(String itemName) {
     _track('drawer_item_clicked', {'item_name': itemName});
+  }
+
+  static void trackHistoryItemRestored({
+    required double totalGrams,
+    required double totalTola,
+    required bool hasGoldRate,
+  }) {
+    _track('history_item_restored', {
+      'total_grams': totalGrams,
+      'total_tola': totalTola,
+      'is_gold_rate_set': hasGoldRate,
+    });
+  }
+
+  static void trackHistoryItemDeleted({
+    required double totalGrams,
+    required double totalTola,
+    required bool hasGoldRate,
+    String? totalPrice,
+  }) {
+    _track('history_item_deleted', {
+      'total_grams': totalGrams,
+      'total_tola': totalTola,
+      'is_gold_rate_set': hasGoldRate,
+      if (totalPrice != null && totalPrice.isNotEmpty)
+        'total_price': totalPrice,
+    });
+  }
+
+  static void trackHistoryCleared(int countCleared) {
+    _track('history_cleared', {'count_cleared': countCleared});
+  }
+
+  static void trackHistoryTierUnlocked({
+    required String tier,
+    required int historyCount,
+  }) {
+    _track('history_tier_unlocked', {
+      'tier': tier,
+      'history_count': historyCount,
+    }, true);
   }
 
   static void trackCurrencyChanged({

@@ -476,4 +476,87 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'மீண்டும் தொடங்கு';
+
+  @override
+  String get historyMenuLabel => 'மாற்ற வரலாறு';
+
+  @override
+  String get historyTitle => 'மாற்ற வரலாறு';
+
+  @override
+  String get historyEmptyTitle => 'இன்னும் வரலாறு இல்லை';
+
+  @override
+  String get historyEmptySubtitle =>
+      'நீங்கள் செய்யும் கணக்கீடுகள் தானாகவே இங்கு தோன்றும்.';
+
+  @override
+  String get historyClearTooltip => 'வரலாற்றை அழிக்கவும்';
+
+  @override
+  String get historyClearConfirmTitle => 'வரலாற்றை அழிக்கவா?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'அனைத்து மாற்ற வரலாற்றையும் நிச்சயமாக நீக்க விரும்புகிறீர்களா?';
+
+  @override
+  String get historyRestoreButton => 'மீட்டமை';
+
+  @override
+  String get historyItemDeleted => 'வரலாற்று உருப்படி நீக்கப்பட்டது';
+
+  @override
+  String get historyUndo => 'செயல்தவிர்';
+
+  @override
+  String historyToday(String time) {
+    return 'இன்று, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'நேற்று, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'மேலும் கணக்கீடுகளைத் திறக்கவும்';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return '$total இல் $visible கணக்கீடுகள் காட்டப்படுகின்றன';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'விரைவு திறப்பு (7 ஐக் காண்க)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'இந்த அமர்வுக்கு 7 கணக்கீடுகள் வரை பார்க்க விரைவு விளம்பரத்தைப் பாருங்கள்.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'விரைவு திறப்பு (அனைத்து $count ஐக் காண்க)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'இந்த அமர்வுக்கு அனைத்து $count கணக்கீடுகளையும் பார்க்க விரைவு விளம்பரத்தைப் பாருங்கள்.';
+  }
+
+  @override
+  String get historyUnlockAllButton =>
+      'அனைத்தையும் திற + 24 மணி நேர விளம்பரமின்மை';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'அனைத்து கணக்கீடுகளையும் பார்க்கவும் 24 மணி நேரத்திற்கு விளம்பரங்களை அகற்றவும் வீடியோவைப் பாருங்கள்.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'விளம்பரமில்லா அனுமதி செயலில் உள்ளது ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'விளம்பரம் ஏற்றப்படுகிறது...';
 }

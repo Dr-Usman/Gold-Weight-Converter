@@ -474,4 +474,86 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'Redémarrer';
+
+  @override
+  String get historyMenuLabel => 'Historique des conversions';
+
+  @override
+  String get historyTitle => 'Historique des conversions';
+
+  @override
+  String get historyEmptyTitle => 'Aucun historique pour le moment';
+
+  @override
+  String get historyEmptySubtitle =>
+      'Les calculs que vous effectuez apparaîtront automatiquement ici.';
+
+  @override
+  String get historyClearTooltip => 'Effacer l\'historique';
+
+  @override
+  String get historyClearConfirmTitle => 'Effacer l\'historique ?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'Êtes-vous sûr de vouloir supprimer tout l\'historique des conversions ?';
+
+  @override
+  String get historyRestoreButton => 'Restaurer';
+
+  @override
+  String get historyItemDeleted => 'Élément d\'historique supprimé';
+
+  @override
+  String get historyUndo => 'Annuler';
+
+  @override
+  String historyToday(String time) {
+    return 'Aujourd\'hui, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'Hier, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'Débloquer plus de calculs';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'Affichage de $visible sur $total calculs';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'Déblocage rapide (Voir 7)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'Regardez une courte publicité pour voir jusqu\'à 7 calculs pour cette session.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'Déblocage rapide (Voir les $count)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'Regardez une courte publicité pour voir l\'ensemble des $count calculs pour cette session.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'Tout débloquer + 24 h sans pub';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'Regardez une vidéo pour débloquer tous les calculs et supprimer les bannières pendant 24 heures.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'Pass sans publicité actif ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'Chargement de la publicité...';
 }

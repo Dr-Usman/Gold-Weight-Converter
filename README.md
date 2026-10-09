@@ -12,6 +12,12 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 - Calculate gold price by rate per Tola, per 10 Gram, or per 1 Gram
 - Localized conversion breakdown with copy and share actions
 - Converter gold rate and rate unit remembered across sessions
+- Offline conversion history (drawer → History)
+  - Automatically records every conversion with timestamp, input units, rate, and total price
+  - Tap Restore button to reload past weights and rates directly back into the converter
+  - Instant copy and share for each history card
+  - Swipe to delete with floating Undo action, and clear-all history option
+  - 100% private and persisted locally on device
 - Gold zakat calculator (drawer → Gold Zakat)
   - Add items with weight, unit, and purity (24K / 22K / 21K / 18K / custom karat)
   - Shared 24K market rate; applies 2.5% on listed items (no nisab gate)
@@ -42,13 +48,13 @@ A clean, open-source Flutter app to convert gold weight between traditional Sout
 
 | Converter | Results & price |
 | --- | --- |
-| <img width="300" alt="Convert Tola, Masha, Ana, Ratti and Gram" src="docs/screenshots/01-converter-light.png" /> | <img width="300" alt="Conversion details with copy/share and gold price summary" src="docs/screenshots/02-results-and-price.png" /> |
-| **Gold zakat** | **Currency** |
-| <img width="300" alt="Gold zakat calculator with item purity, 2.5% summary, and copy/share" src="docs/screenshots/03-gold-zakat.png" /> | <img width="300" alt="Searchable display currency picker" src="docs/screenshots/04-currency.png" /> |
-| **Languages** | **Dark mode** |
-| <img width="300" alt="Language selection with 20 supported locales" src="docs/screenshots/05-languages.png" /> | <img width="300" alt="Converter screen in dark mode" src="docs/screenshots/06-dark-mode.png" /> |
-| **Menu & settings** | |
-| <img width="300" alt="App drawer with zakat, Light/Dark/System theme, language, currency, and about links" src="docs/screenshots/07-menu-settings.png" /> | |
+| <img width="300" alt="Convert Tola, Masha, Ana, Ratti and Gram" src="docs/screenshots/01-converter-light-en.png" /> | <img width="300" alt="Conversion details with copy/share and gold price summary" src="docs/screenshots/02-results-and-price-en.png" /> |
+| **Gold zakat** | **Conversion history** |
+| <img width="300" alt="Gold zakat calculator with item purity, 2.5% summary, and copy/share" src="docs/screenshots/03-gold-zakat-en.png" /> | <img width="300" alt="Conversion history with restore, copy, and share" src="docs/screenshots/08-conversion-history-en.png" /> |
+| **Languages** | **Currency** |
+| <img width="300" alt="Language selection with 20 supported locales" src="docs/screenshots/05-languages-en.png" /> | <img width="300" alt="Searchable display currency picker" src="docs/screenshots/04-currency-en.png" /> |
+| **Dark mode** | **Menu & settings** |
+| <img width="300" alt="Converter screen in dark mode" src="docs/screenshots/06-dark-mode-en.png" /> | <img width="300" alt="App drawer with zakat, history, theme, language, currency, and about links" src="docs/screenshots/07-menu-settings-en.png" /> |
 
 ## Conversion Table
 
@@ -66,45 +72,47 @@ These are standard traditional conversion factors used in the app calculations.
 
 The app supports 20 locales:
 
-| Language | Code | Language | Code |
-|---|---|---|---|
-| English | `en` | हिंदी (Hindi) | `hi` |
-| اردو (Urdu) | `ur` | Roman Urdu | `ur-RO` |
-| বাংলা (Bengali) | `bn` | नेपाली (Nepali) | `ne` |
-| العربية (Arabic) | `ar` | Español (Spanish) | `es` |
-| Français (French) | `fr` | Filipino | `fil` |
-| தமிழ் (Tamil) | `ta` | မြန်မာစာ (Burmese) | `my` |
-| සිංහල (Sinhala) | `si` | አማርኛ (Amharic) | `am` |
-| فارسی (Persian) | `fa` | پښتو (Pashto) | `ps` |
-| سنڌي (Sindhi) | `sd` | Indonesia (Indonesian) | `id` |
-| Melayu (Malay) | `ms` | Türkçe (Turkish) | `tr` |
+| Flag | Language | Code | Flag | Language | Code |
+|:---:|---|:---:|:---:|---|:---:|
+| 🇺🇸 | English | `en` | 🇮🇳 | हिंदी (Hindi) | `hi` |
+| 🇵🇰 | اردو (Urdu) | `ur` | 🇵🇰 | Roman Urdu | `ur-RO` |
+| 🇧🇩 | বাংলা (Bengali) | `bn` | 🇳🇵 | नेपाली (Nepali) | `ne` |
+| 🇸🇦 | العربية (Arabic) | `ar` | 🇪🇸 | Español (Spanish) | `es` |
+| 🇫🇷 | Français (French) | `fr` | 🇵🇭 | Filipino | `fil` |
+| 🇮🇳 | தமிழ் (Tamil) | `ta` | 🇲🇲 | မြန်မာစာ (Burmese) | `my` |
+| 🇱🇰 | සිංහල (Sinhala) | `si` | 🇪🇹 | አማርኛ (Amharic) | `am` |
+| 🇮🇷 | فارسی (Persian) | `fa` | 🇦🇫 | پښتو (Pashto) | `ps` |
+| 🇵🇰 | سنڌي (Sindhi) | `sd` | 🇮🇩 | Indonesia (Indonesian) | `id` |
+| 🇲🇾 | Melayu (Malay) | `ms` | 🇹🇷 | Türkçe (Turkish) | `tr` |
 
 Language can be changed from the settings drawer and is persisted across sessions.
 
 ## Supported Currencies
 
-The app supports 36 display currencies with locale-aware number and symbol formatting:
+The app supports 40 display currencies ordered by audience volume, with locale-aware number and symbol formatting:
 
 | Currency | Code | Symbol | Currency | Code | Symbol |
 |---|---|---|---|---|---|
 | Indian Rupee | `INR` | ₹ | Pakistani Rupee | `PKR` | Rs. |
-| Bangladeshi Taka | `BDT` | ৳ | US Dollar | `USD` | $ |
-| Nepalese Rupee | `NPR` | Rs. | Saudi Riyal | `SAR` | SAR |
-| UAE Dirham | `AED` | AED | British Pound | `GBP` | £ |
-| Euro | `EUR` | € | Sri Lankan Rupee | `LKR` | Rs. |
-| Malaysian Ringgit | `MYR` | RM | Philippine Peso | `PHP` | ₱ |
-| Indonesian Rupiah | `IDR` | Rp | Qatari Riyal | `QAR` | QAR |
-| Kuwaiti Dinar | `KWD` | KD | Omani Rial | `OMR` | OMR |
-| Bahraini Dinar | `BHD` | BD | Canadian Dollar | `CAD` | CA$ |
-| Australian Dollar | `AUD` | A$ | Japanese Yen | `JPY` | ¥ |
-| Turkish Lira | `TRY` | ₺ | Egyptian Pound | `EGP` | E£ |
-| Afghan Afghani | `AFN` | ؋ | Iranian Rial | `IRR` | ﷼ |
-| Ethiopian Birr | `ETB` | Br | Ghanaian Cedi | `GHS` | GH₵ |
-| Myanmar Kyat | `MMK` | K | South African Rand | `ZAR` | R |
-| Nigerian Naira | `NGN` | ₦ | Kenyan Shilling | `KES` | KSh |
-| Sierra Leonean Leone | `SLE` | Le | Thai Baht | `THB` | ฿ |
-| Hong Kong Dollar | `HKD` | HK$ | Singapore Dollar | `SGD` | S$ |
-| Chinese Yuan | `CNY` | ¥ | Swiss Franc | `CHF` | CHF |
+| Bangladeshi Taka | `BDT` | ৳ | Nepalese Rupee | `NPR` | Rs. |
+| Saudi Riyal | `SAR` | SAR | Ethiopian Birr | `ETB` | Br |
+| US Dollar | `USD` | $ | Ghanaian Cedi | `GHS` | GH₵ |
+| Myanmar Kyat | `MMK` | K | Malaysian Ringgit | `MYR` | RM |
+| Philippine Peso | `PHP` | ₱ | British Pound | `GBP` | £ |
+| Iranian Rial | `IRR` | ﷼ | Sri Lankan Rupee | `LKR` | Rs. |
+| Nigerian Naira | `NGN` | ₦ | Euro | `EUR` | € |
+| Kenyan Shilling | `KES` | KSh | South African Rand | `ZAR` | R |
+| UAE Dirham | `AED` | AED | Afghan Afghani | `AFN` | ؋ |
+| Egyptian Pound | `EGP` | E£ | Indonesian Rupiah | `IDR` | Rp |
+| Qatari Riyal | `QAR` | QAR | Singapore Dollar | `SGD` | S$ |
+| Sierra Leonean Leone | `SLE` | Le | Tanzanian Shilling | `TZS` | TSh |
+| Australian Dollar | `AUD` | A$ | Canadian Dollar | `CAD` | CA$ |
+| Japanese Yen | `JPY` | ¥ | Turkish Lira | `TRY` | ₺ |
+| Hong Kong Dollar | `HKD` | HK$ | Kuwaiti Dinar | `KWD` | KD |
+| Omani Rial | `OMR` | OMR | Thai Baht | `THB` | ฿ |
+| Bahraini Dinar | `BHD` | BD | Chinese Yuan | `CNY` | ¥ |
+| Swiss Franc | `CHF` | CHF | Argentine Peso | `ARS` | AR$ |
+| Colombian Peso | `COP` | COL$ | Venezuelan Bolívar | `VES` | Bs. |
 
 *Currency selection formats gold price and zakat calculations for your region; there is no live currency exchange (FX) conversion.*
 

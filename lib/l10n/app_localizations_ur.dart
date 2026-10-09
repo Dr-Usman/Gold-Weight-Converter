@@ -472,6 +472,89 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'دوبارہ شروع کریں';
+
+  @override
+  String get historyMenuLabel => 'تبدیلی کی تاریخ';
+
+  @override
+  String get historyTitle => 'تبدیلی کی تاریخ';
+
+  @override
+  String get historyEmptyTitle => 'ابھی کوئی ہسٹری نہیں ہے';
+
+  @override
+  String get historyEmptySubtitle =>
+      'آپ کے تمام حسابات یہاں خودکار طور پر ظاہر ہوں گے۔';
+
+  @override
+  String get historyClearTooltip => 'ہسٹری صاف کریں';
+
+  @override
+  String get historyClearConfirmTitle => 'ہسٹری صاف کریں؟';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'کیا آپ واقعی تمام تبدیلی کی ہسٹری حذف کرنا چاہتے ہیں؟';
+
+  @override
+  String get historyRestoreButton => 'بحال کریں';
+
+  @override
+  String get historyItemDeleted => 'ہسٹری آئٹم حذف کر دیا گیا';
+
+  @override
+  String get historyUndo => 'واپس کریں';
+
+  @override
+  String historyToday(String time) {
+    return 'آج، $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'کل، $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'مزید حسابات دیکھیں';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return '$total میں سے $visible حسابات دکھائے جا رہے ہیں';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'فوری انلاک (7 دیکھیں)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'اس سیشن کے لیے 7 حسابات تک دیکھنے کے لیے ایک مختصر اشتہار دیکھیں۔';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'فوری انلاک (تمام $count دیکھیں)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'اس سیشن کے لیے تمام $count حسابات دیکھنے کے لیے ایک مختصر اشتہار دیکھیں۔';
+  }
+
+  @override
+  String get historyUnlockAllButton =>
+      'سب انلاک کریں + 24 گھنٹے اشتہارات کے بغیر';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'تمام حسابات دیکھنے اور 24 گھنٹوں کے لیے اشتہارات ہٹانے کے لیے ویڈیو دیکھیں۔';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'اشتہار سے پاک پاس فعال ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'اشتہار لوڈ ہو رہا ہے...';
 }
 
 /// The translations for Urdu, as used in Romania (`ur_RO`).
@@ -946,4 +1029,86 @@ class AppLocalizationsUrRo extends AppLocalizationsUr {
 
   @override
   String get appUpdateRestart => 'Restart';
+
+  @override
+  String get historyMenuLabel => 'Conversion History';
+
+  @override
+  String get historyTitle => 'Conversion History';
+
+  @override
+  String get historyEmptyTitle => 'Abhi Koi History Nahi Hai';
+
+  @override
+  String get historyEmptySubtitle =>
+      'Aap ke hisabat yahan automatically show honge.';
+
+  @override
+  String get historyClearTooltip => 'History saaf karein';
+
+  @override
+  String get historyClearConfirmTitle => 'History Saaf Karein?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'Kya aap waqai tamaam conversion history delete karna chahte hain?';
+
+  @override
+  String get historyRestoreButton => 'Restore';
+
+  @override
+  String get historyItemDeleted => 'History item delete ho gaya';
+
+  @override
+  String get historyUndo => 'Wapis lein';
+
+  @override
+  String historyToday(String time) {
+    return 'Aaj, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'Kal, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'Mazeed Calculations Unlock Karein';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return '$total mein se $visible calculations dikhayi ja rahi hain';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'Quick Unlock (7 Dekhein)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'Is session ke liye 7 calculations tak dekhne ke liye chota ad dekhein.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'Quick Unlock (Tamaam $count Dekhein)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'Is session ke liye tamaam $count calculations dekhne ke liye chota ad dekhein.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'Sub Unlock Karein + 24 Ghantay Ad-Free';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'Tamaam calculations dekhne aur 24 ghante ads hatane ke liye video dekhein.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'Ad-Free Pass Active ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'Ad load ho raha hai...';
 }

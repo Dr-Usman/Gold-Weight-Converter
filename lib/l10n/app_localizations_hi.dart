@@ -472,4 +472,87 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'रीस्टार्ट';
+
+  @override
+  String get historyMenuLabel => 'रूपांतरण इतिहास';
+
+  @override
+  String get historyTitle => 'रूपांतरण इतिहास';
+
+  @override
+  String get historyEmptyTitle => 'अभी कोई इतिहास नहीं है';
+
+  @override
+  String get historyEmptySubtitle =>
+      'आपकी की गई गणनाएं यहां अपने आप दिखाई देंगी।';
+
+  @override
+  String get historyClearTooltip => 'इतिहास साफ़ करें';
+
+  @override
+  String get historyClearConfirmTitle => 'इतिहास साफ़ करें?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'क्या आप वाकई सारा रूपांतरण इतिहास हटाना चाहते हैं?';
+
+  @override
+  String get historyRestoreButton => 'पुनर्स्थापित करें';
+
+  @override
+  String get historyItemDeleted => 'इतिहास आइटम हटा दिया गया';
+
+  @override
+  String get historyUndo => 'पूर्ववत करें';
+
+  @override
+  String historyToday(String time) {
+    return 'आज, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'कल, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'और गणनाएं अनलॉक करें';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return '$total में से $visible गणनाएं दिखाई जा रही हैं';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'त्वरित अनलॉक (7 देखें)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'इस सत्र के लिए 7 गणनाओं तक देखने के लिए एक छोटा विज्ञापन देखें।';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'त्वरित अनलॉक (सभी $count देखें)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'इस सत्र के लिए सभी $count गणनाओं को देखने के लिए एक छोटा विज्ञापन देखें।';
+  }
+
+  @override
+  String get historyUnlockAllButton =>
+      'सभी अनलॉक करें + 24 घंटे विज्ञापन-मुक्त';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'सभी गणनाएं अनलॉक करने और 24 घंटे के लिए विज्ञापन हटाने हेतु एक वीडियो देखें।';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'विज्ञापन-मुक्त पास सक्रिय ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'विज्ञापन लोड हो रहा है...';
 }

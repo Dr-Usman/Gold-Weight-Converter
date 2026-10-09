@@ -471,4 +471,86 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'بیا پیل';
+
+  @override
+  String get historyMenuLabel => 'د بدلون تاریخچه';
+
+  @override
+  String get historyTitle => 'د بدلون تاریخچه';
+
+  @override
+  String get historyEmptyTitle => 'تر اوسه هیڅ تاریخچه نشته';
+
+  @override
+  String get historyEmptySubtitle =>
+      'ستاسو ټول حسابونه به دلته په خپله ښکاره شي.';
+
+  @override
+  String get historyClearTooltip => 'تاریخچه پاکول';
+
+  @override
+  String get historyClearConfirmTitle => 'تاریخچه پاکه کړئ؟';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'ایا تاسو باوري یاست چې غواړئ د بدلون ټوله تاریخچه ړنګه کړئ؟';
+
+  @override
+  String get historyRestoreButton => 'بیا رغونه';
+
+  @override
+  String get historyItemDeleted => 'د تاریخچې توکی ړنګ شو';
+
+  @override
+  String get historyUndo => 'بېرته ګرځول';
+
+  @override
+  String historyToday(String time) {
+    return 'نن، $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'پرون، $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'نور حسابونه پرانیزئ';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'له $total څخه $visible حسابونه ښودل کیږي';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'ګړندی پرانیستل (۷ وګورئ)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'د دې ناستې لپاره تر ۷ پورې حسابونو لیدو لپاره لنډ اعلان وګورئ.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'ګړندی پرانیستل (ټول $count وګورئ)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'د دې ناستې لپاره ټول $count حسابونه لیدو لپاره لنډ اعلان وګورئ.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'ټول پرانیزئ + ۲۴ ساعته له اعلان پرته';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'د ټولو حسابونو لیدو او ۲۴ ساعتونو لپاره د اعلان بندولو لپاره ویډیو وګورئ.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'له اعلان پرته فعال دی ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'اعلان لوډ کیږي...';
 }

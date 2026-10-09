@@ -474,4 +474,86 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'রিস্টার্ট';
+
+  @override
+  String get historyMenuLabel => 'রূপান্তর ইতিহাস';
+
+  @override
+  String get historyTitle => 'রূপান্তর ইতিহাস';
+
+  @override
+  String get historyEmptyTitle => 'এখনও কোনো ইতিহাস নেই';
+
+  @override
+  String get historyEmptySubtitle =>
+      'আপনার করা গণনাগুলো এখানে স্বয়ংক্রিয়ভাবে প্রদর্শিত হবে।';
+
+  @override
+  String get historyClearTooltip => 'ইতিহাস মুছুন';
+
+  @override
+  String get historyClearConfirmTitle => 'ইতিহাস মুছে ফেলবেন?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'আপনি কি নিশ্চিতভাবে সমস্ত রূপান্তর ইতিহাস মুছে ফেলতে চান?';
+
+  @override
+  String get historyRestoreButton => 'পুনরুদ্ধার করুন';
+
+  @override
+  String get historyItemDeleted => 'ইতিহাস আইটেম মুছে ফেলা হয়েছে';
+
+  @override
+  String get historyUndo => 'পূর্বাবস্থায় ফেরান';
+
+  @override
+  String historyToday(String time) {
+    return 'আজ, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'গতকাল, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'আরও গণনা আনলক করুন';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return '$total টির মধ্যে $visible টি গণনা প্রদর্শিত হচ্ছে';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'দ্রুত আনলক (৭টি দেখুন)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'এই সেশনের জন্য ৭টি পর্যন্ত গণনা দেখতে একটি সংক্ষিপ্ত বিজ্ঞাপন দেখুন।';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'দ্রুত আনলক (সব $countটি দেখুন)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'এই সেশনের জন্য সব $countটি গণনা দেখতে একটি সংক্ষিপ্ত বিজ্ঞাপন দেখুন।';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'সব আনলক করুন + ২৪ ঘণ্টা বিজ্ঞাপনমুক্ত';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'সব গণনা দেখতে এবং ২৪ ঘণ্টার জন্য ব্যানার বিজ্ঞাপন সরাতে একটি ভিডিও দেখুন।';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'বিজ্ঞাপনমুক্ত পাস সক্রিয় ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'বিজ্ঞাপন লোড হচ্ছে...';
 }

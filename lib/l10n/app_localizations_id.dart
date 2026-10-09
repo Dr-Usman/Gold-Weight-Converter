@@ -471,4 +471,86 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get appUpdateRestart => 'Mulai ulang';
+
+  @override
+  String get historyMenuLabel => 'Riwayat Konversi';
+
+  @override
+  String get historyTitle => 'Riwayat Konversi';
+
+  @override
+  String get historyEmptyTitle => 'Belum Ada Riwayat';
+
+  @override
+  String get historyEmptySubtitle =>
+      'Perhitungan yang Anda buat akan muncul di sini secara otomatis.';
+
+  @override
+  String get historyClearTooltip => 'Hapus riwayat';
+
+  @override
+  String get historyClearConfirmTitle => 'Hapus Riwayat?';
+
+  @override
+  String get historyClearConfirmMessage =>
+      'Apakah Anda yakin ingin menghapus semua riwayat konversi?';
+
+  @override
+  String get historyRestoreButton => 'Pulihkan';
+
+  @override
+  String get historyItemDeleted => 'Item riwayat dihapus';
+
+  @override
+  String get historyUndo => 'Urungkan';
+
+  @override
+  String historyToday(String time) {
+    return 'Hari ini, $time';
+  }
+
+  @override
+  String historyYesterday(String time) {
+    return 'Kemarin, $time';
+  }
+
+  @override
+  String get historyUnlockTitle => 'Buka Lebih Banyak Perhitungan';
+
+  @override
+  String historyUnlockSubtitle(int visible, int total) {
+    return 'Menampilkan $visible dari $total perhitungan';
+  }
+
+  @override
+  String get historyUnlockSevenButton => 'Buka Cepat (Lihat 7)';
+
+  @override
+  String get historyUnlockSevenDesc =>
+      'Tonton iklan singkat untuk melihat hingga 7 perhitungan untuk sesi ini.';
+
+  @override
+  String historyUnlockAllQuickButton(int count) {
+    return 'Buka Cepat (Lihat Semua $count)';
+  }
+
+  @override
+  String historyUnlockAllQuickDesc(int count) {
+    return 'Tonton iklan singkat untuk melihat semua $count perhitungan untuk sesi ini.';
+  }
+
+  @override
+  String get historyUnlockAllButton => 'Buka Semua + 24 Jam Bebas Iklan';
+
+  @override
+  String get historyUnlockAllDesc =>
+      'Tonton video untuk membuka semua perhitungan dan menghapus iklan banner selama 24 jam.';
+
+  @override
+  String historyAdFreePassActive(String timeRemaining) {
+    return 'Bebas Iklan Aktif ($timeRemaining)';
+  }
+
+  @override
+  String get historyAdLoading => 'Memuat iklan...';
 }
