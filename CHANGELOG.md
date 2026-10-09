@@ -5,6 +5,33 @@ All notable changes to the Gold Weight Converter project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2026-10-09
+
+### Added
+- Offline conversion history that automatically saves each converter calculation with timestamp, inputs, rate, and price
+- Restore, copy, share, and swipe-to-delete with undo for history entries (drawer → History)
+- History unlock tiers: free recent entries, session unlock of up to 7 via a short ad, or full history plus a 24-hour ad-free pass via rewarded video
+- Localized relative history timestamps (`Today` / `Yesterday`) across all 20 supported languages
+- Grouped drawer navigation with clearer Tools / Settings / About sections
+- Enriched About dialog covering supported units, currencies, history, and languages
+- Full localization for history and unlock UI strings across all supported languages
+
+### Changed
+- Reordered display currencies by Play Store audience volume so the most-used options appear first
+- Refreshed Play Store screenshots and soft-amber phone mockups for English, Hindi, Urdu, Bengali, and Nepali listings (locale-suffixed assets)
+
+### Play Store (en-US)
+```
+What's new in 1.10.0
+• Conversion history saves your calculations offline — restore, copy, or share anytime
+• Unlock more history with a short ad, or get full history + 24 hours ad-free
+• Clearer drawer menu with Tools, Settings, and About sections
+• Today/Yesterday timestamps in your language
+• Currencies sorted by popularity for faster selection
+```
+
+---
+
 ## [1.9.6] - 2026-10-07
 
 ### Added
