@@ -1,6 +1,8 @@
 # Google Play Store Listings Guide & Metadata
 
-This document is the single source of truth for all Google Play Store listings for **Gold Weight Converter**. It details the target criteria, localized copy (Title, Short Description, Full Description with verified character counts), visual asset locations, and regional unit distinctions for each market.
+This document is the guide for all Google Play Store listings for **Gold Weight Converter**. It covers target criteria, titles/short descriptions, visual assets, and regional unit distinctions.
+
+**Copy-paste full descriptions** live in [`docs/store-listings/`](store-listings/) (`store-listing-en.md`, `hi`, `ur`, `bn`, `ne`) — those files are the source of truth for listing text (ASO-tuned for v1.10.0 conversion history).
 
 ---
 
@@ -32,43 +34,13 @@ This document is the single source of truth for all Google Play Store listings f
 गोल्ड वेट कनवर्टर: तोला-ग्राम
 ```
 
-#### **Short Description** *(74 / 80 characters)*:
+#### **Short Description** *(79 / 80 characters)*:
 ```text
-तोला, माशा, रत्ती व ग्राम कनवर्टर, सोने का भाव और 2.5% ज़कात क्याल्कुलेटर।
+तोला, माशा, आना, रत्ती व ग्राम कनवर्टर। भाव गणना, 2.5% ज़कात और ऑफ़लाइन इतिहास।
 ```
 
 #### **Full Description** *(Google Play Store)*:
-```text
-गोल्ड वेट कनवर्टर (Gold Weight Converter) सर्राफा व्यापारियों, सुनारों, ज्वैलर्स और ग्राहकों के लिए एक संपूर्ण, तेज़ और अत्यंत सटीक सोने का वजन कनवर्टर और क्याल्कुलेटर है।
-
-पारंपरिक भारतीय वजन इकाइयों जैसे तोला, माशा, आना, रत्ती और आधुनिक मानक इकाइयों (ग्राम, मिलीग्राम, किलोग्राम, ट्रॉय औंस) के बीच आसानी से और तुरंत हिसाब करें।
-
-मुख्य विशेषताएं:
-★ पारंपरिक और आधुनिक इकाइयां:
-  - तोला (Tola)
-  - माशा (Masha)
-  - आना (Ana)
-  - रत्ती (Ratti)
-  - ग्राम (Gram), मिलीग्राम (mg), किलोग्राम (kg), ट्रॉय औंस (oz t)
-
-★ सोने के भाव और कुल मूल्य की गणना:
-  - प्रति तोला या प्रति ग्राम सोने का ताज़ा भाव दर्ज करें
-  - भारतीय रुपये (₹ / INR) सहित विश्व की प्रमुख मुद्राओं में कुल कीमत तुरंत जानें
-
-★ सोने की ज़कात क्याल्कुलेटर (2.5% Zakat Calculator):
-  - 24K, 22K, 21K, 18K आदि विभिन्न कैरेट के आभूषणों और सोने का अलग-अलग वजन जोड़ें
-  - सटीक शुद्ध सोने की मात्रा और 2.5% ज़कात का तुरंत हिसाब निकालें
-
-★ आधुनिक और सहज यूज़र इंटरफ़ेस:
-  - आकर्षक लाइट और डार्क मोड (दिन और रात दोनों समय आरामदायक अनुभव)
-  - त्वरित कॉपी और शेयर की सुविधा
-  - पूरी तरह से ऑफलाइन काम करता है — किसी इंटरनेट की आवश्यकता नहीं
-
-★ बहुभाषी समर्थन:
-  - हिंदी, अंग्रेजी सहित 20 से अधिक भाषाओं में उपलब्ध
-
-चाहे आप नया सोना खरीद रहे हों, आभूषणों का हिसाब कर रहे हों या दैनिक सर्राफा व्यापार का प्रबंधन कर रहे हों — यह ऐप आपके हिसाब को बनाएगा सरल, पारदर्शी और सटीक।
-```
+*(See complete copy-paste markdown in [`store-listing-hi.md`](store-listings/store-listing-hi.md) — includes conversion history, unlock tiers, and ASO-tuned copy.)*
 
 ### Visual Assets & Mockups
 
@@ -100,42 +72,13 @@ This document is the single source of truth for all Google Play Store listings f
 गोल्ड वेट कनवर्टर: तोला-लाल
 ```
 
-#### **Short Description** *(75 / 80 characters)*:
+#### **Short Description** *(76 / 80 characters)*:
 ```text
-तोला, लाल, आना र ग्रामको सटीक कनवर्टर, सुनको मूल्य र २.५% जकात क्यालकुलेटर।
+तोला, लाल, आना र ग्राम कनवर्टर। सुनको मूल्य गणना, २.५% जकात र अफलाइन इतिहास।
 ```
 
 #### **Full Description** *(Google Play Store)*:
-```text
-गोल्ड वेट कनवर्टर (Gold Weight Converter) सुनचाँदी व्यवसायी, कालिगड, सुनका गहना खरिदकर्ता र लगानीकर्ताहरूका लागि तयार गरिएको एक सरल, भरपर्दो र अत्यन्त सटीक सुन तौल क्यालकुलेटर हो।
-
-नेपालमा प्रचलित परम्परागत एकाइहरू (तोला, लाल, आना) र आधुनिक अन्तर्राष्ट्रिय एकाइहरू (ग्राम, किलोग्राम, ट्रोय औन्स) बीच तुरुन्त र सही रूपान्तरण गर्नुहोस्।
-
-मुख्य विशेषताहरू:
-★ नेपाली सुन तौल प्रणाली समर्थन:
-  - तोला (Tola)
-  - लाल (Lal — १०० लाल = १ तोला)
-  - आना (Ana)
-  - ग्राम (Gram), मिलिग्राम (mg), किलोग्राम (kg), ट्रोय औन्स (oz t)
-
-★ सुनको मूल्य र हिसाब:
-  - प्रति तोला वा प्रति ग्राम सुनको ताजा दर प्रविष्ट गर्नुहोस्
-  - नेपाली रुपैयाँ (रु / NPR) मा कुल मूल्य तुरुन्त प्राप्त गर्नुहोस्
-
-★ सुनको जकात क्यालकुलेटर (२.५% जकात):
-  - २४ क्यारेट (छापावाल), २२ क्यारेट (तेजाबी), २१K र १८K गहनाको अलग-अलग तौल प्रविष्ट गर्नुहोस्
-  - कुल शुद्ध सुन र २.५% जकातको सही हिसाब तुरुन्त निकाल्नुहोस्
-
-★ सुन्दर तथा सहज इन्टरफेस:
-  - दिन र रात दुवै समयमा सहज प्रयोगका लागि लाइट तथा डार्क थिम
-  - नतिजा एक ट्यापमै कपी वा सेयर गर्ने सुविधा
-  - पूर्ण रूपमा अफलाइन चल्ने — इन्टरनेट नभए पनि काम गर्ने
-
-★ बहुभाषिक समर्थन:
-  - नेपालीसहित २० भन्दा बढी भाषाहरूमा उपलब्ध
-
-सुन खरिद-बिक्री गर्दा वा दैनिक कारोबार गर्दा आफ्नो हिसाबलाई छिटो, पारदर्शी र त्रुटिरहित बनाउनुहोस्।
-```
+*(See complete copy-paste markdown in [`store-listing-ne.md`](store-listings/store-listing-ne.md) — includes conversion history, unlock tiers, and ASO-tuned copy.)*
 
 ### Visual Assets & Mockups
 
@@ -164,18 +107,18 @@ This document is the single source of truth for all Google Play Store listings f
 
 ### Store Listing Copy
 
-#### **App Title** *(27 / 30 characters)*:
+#### **App Title** *(30 / 30 characters)*:
 ```text
-گولڈ ویٹ کنورٹر: تولہ، ماشہ انا
+گولڈ ویٹ کنورٹر: تولہ ماشہ انا
 ```
 
-#### **Short Description** *(72 / 80 characters)*:
+#### **Short Description** *(76 / 80 characters)*:
 ```text
-تولہ، ماشہ، رتی اور گرام میں سونے کا وزن، قیمت اور 2.5% زکوٰۃ کیلکولیٹر۔
+تولہ، ماشہ، انا، رتی اور گرام کنورٹر۔ سونے کی قیمت کا حساب، زکوٰۃ اور ہسٹری۔
 ```
 
 #### **Full Description** *(Google Play Store)*:
-*(See complete copy-paste markdown in [`store-listing-ur.md`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-ur.md))*
+*(See complete copy-paste markdown in [`store-listing-ur.md`](store-listings/store-listing-ur.md) — includes conversion history, unlock tiers, and ASO-tuned copy.)*
 
 ### Visual Assets & Mockups
 
@@ -209,13 +152,13 @@ This document is the single source of truth for all Google Play Store listings f
 সোনার ওজন ও দাম: ভরি, আনা
 ```
 
-#### **Short Description** *(73 / 80 characters)*:
+#### **Short Description** *(80 / 80 characters)*:
 ```text
-ভরি, আনা, রতি ও গ্রাম কনভার্টার, স্বর্ণের দাম এবং ২.৫% যাকাত ক্যালকুলেটর।
+ভরি, আনা, রতি ও গ্রাম কনভার্টার। স্বর্ণের দাম হিসাব, ২.৫% যাকাত ও অফলাইন ইতিহাস।
 ```
 
 #### **Full Description** *(Google Play Store)*:
-*(See complete copy-paste markdown in [`store-listing-bn.md`](file:///Users/usman/Development/Projects/Others/gold_weight_converter/docs/store-listings/store-listing-bn.md))*
+*(See complete copy-paste markdown in [`store-listing-bn.md`](store-listings/store-listing-bn.md) — includes conversion history, unlock tiers, and ASO-tuned copy.)*
 
 ### Visual Assets & Mockups
 
@@ -246,41 +189,13 @@ This document is the single source of truth for all Google Play Store listings f
 Gold Weight Converter & Zakat
 ```
 
-#### **Short Description** *(77 / 80 characters)*:
+#### **Short Description** *(78 / 80 characters)*:
 ```text
-Convert Tola, Masha, Ratti & Gram with gold prices and 2.5% Zakat calculator.
+Convert Tola, Masha, Ana, Ratti & Gram. Gold price calc, 2.5% Zakat & history.
 ```
 
 #### **Full Description** *(Google Play Store)*:
-```text
-Gold Weight Converter is the most accurate, versatile, and easy-to-use weight converter and valuation calculator designed for jewelers, bullion traders, buyers, and gold investors worldwide.
-
-Seamlessly convert between traditional Asian bullion units (Tola, Masha, Ana, Ratti, Lal) and international metric units (Grams, Milligrams, Kilograms, Troy Ounces) with zero rounding errors.
-
-Key Features:
-★ Comprehensive Unit Support:
-  - Tola, Masha, Ana, Ratti (South Asian bullion system)
-  - Lal (Nepali bullion system: 100 Lal = 1 Tola)
-  - Gram (g), Milligram (mg), Kilogram (kg), Troy Ounce (oz t)
-
-★ Live Gold Rate & Price Valuation:
-  - Enter the latest gold rate per tola or per gram
-  - Instant price valuation in your chosen currency (supports 36 currencies including USD, INR, PKR, NPR, AED, SAR, GBP, EUR)
-
-★ 2.5% Gold Zakat Calculator:
-  - Enter multiple gold items across various purities (24K, 22K, 21K, 18K)
-  - Calculates pure gold weight equivalent and payable 2.5% Zakat amount instantly
-
-★ Modern & Intuitive User Experience:
-  - Beautiful Light and Dark modes designed for comfortable daytime and nighttime use
-  - Instant copy and share features for sending calculation summaries to clients or family
-  - 100% offline functionality — no internet connection required for weight conversions
-
-★ Localized in 20+ Languages:
-  - English, Hindi, Urdu, Nepali, Arabic, Bengali, Spanish, French, Tamil, and more
-
-Whether you are shopping for gold jewelry, calculating bullion value, or determining annual Zakat obligations, Gold Weight Converter makes your calculations transparent, fast, and effortless.
-```
+*(See complete copy-paste markdown in [`store-listing-en.md`](store-listings/store-listing-en.md) — includes conversion history, unlock tiers, and ASO-tuned copy.)*
 
 ### Visual Assets & Mockups
 

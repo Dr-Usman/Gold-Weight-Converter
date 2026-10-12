@@ -16,49 +16,87 @@ Gold Weight Converter & Zakat
 
 ---
 
-## Short Description (71 / 80 chars)
+## Short Description (78 / 80 chars)
 
 ```text
-Convert Tola, Masha, Ratti & Grams. Gold price & 2.5% Zakat calculator.
+Convert Tola, Masha, Ana, Ratti & Gram. Gold price calc, 2.5% Zakat & history.
 ```
 
 ---
 
-## Full Description (2,010 / 4,000 chars)
+## Full Description (3,967 / 4,000 chars)
 
 ```text
-Gold Weight Converter & Zakat Calculator is an accurate, versatile, and easy-to-use gold jewelry weight conversion and valuation app designed for bullion traders, jewelers, gold buyers, and investors worldwide.
+Gold Weight Converter is a fast, accurate gold unit converter, gold price calculator, and gold zakat calculator designed for jewelers, bullion traders, investors, and everyday gold buyers.
 
-Convert effortlessly between traditional bullion units (Tola, Masha, Ana, Ratti, Lal, Vori) and international standard metric units (Grams, Milligrams, Kilograms, Troy Ounces) with zero rounding errors.
+Easily convert between traditional South Asian weight units (Tola, Lal, Masha, Ana, Ratti) and Grams / Troy Ounce. Enter your market rate per Tola, Gram, or Ounce to calculate instant gold price estimates, customize your display currency, save conversions in offline history, and calculate zakat on gold jewelry with confidence.
 
-★ Key Features & Capabilities:
+✨ KEY FEATURES
 
-• Complete Gold Weight Conversion System:
-  • Tola, Masha, Ana, Ratti (Traditional South Asian bullion system)
-  • Lal (Nepali gold system: 100 Lal = 1 Tola)
-  • Gram (g), Milligram (mg), Kilogram (kg), Troy Ounce (oz t)
-  • Instant multi-unit conversions calculated simultaneously
+⚖️ Accurate Gold Weight Converter
+• Convert seamlessly between Tola, Lal, Masha, Ana, Ratti, Gram, and Troy Ounce
+• Fast multi-unit results: traditional units, grams, and ounce together
+• Supports Nepal's traditional Lal unit (100 Lal = 1 Tola)
+• Troy Ounce (oz t) weight support; Ounce input appears when rate unit is Ounce
+• Transparent calculation formulas shown for every conversion
+• One-tap Clear All button for quick calculations
 
-• Gold Rate & Price Valuation Calculator:
-  • Enter your gold rate per tola or per gram
-  • Calculate total gold price and value instantly in your chosen currency
-  • Multi-currency support across 36 currencies (USD, INR, PKR, BDT, NPR, AED, SAR, GBP, EUR)
-  • Instant valuation for gold bullion bars, coins, and jewelry
+💰 Gold Price Calculator & Estimator
+• Calculate gold value using rate per Tola, per 10 Grams, per 1 Gram, or per Ounce
+• Smart numeric formatting with regional thousand separators
+• Instant price breakdowns for clear customer estimates
+• Automatically remembers your last entered gold rate and rate unit
+• Quick Copy & Share actions to send price quotes via WhatsApp, SMS, or Notes
 
-• 2.5% Gold Zakat Calculator:
-  • Calculate annual Islamic Zakat on gold with complete accuracy
-  • Multi-item entry: Add necklaces, rings, coins, and bangles separately
-  • Karat purity conversion: Supports 24K, 22K, 21K, and 18K gold items
-  • Automatic pure 24K gold weight equivalent and total payable Zakat amount
+📜 Offline Conversion History
+• Every converter calculation is saved automatically with time, inputs, rate, and price
+• Restore any past entry into the converter in one tap
+• Copy or share history results anytime
+• Unlock more history with a short ad, or get full history + 24 hours ad-free
 
-• Built for Daily Jewelry & Trading Use:
-  • Clean, modern interface with Dark Mode and Light Mode
-  • One-tap copy and share results directly via WhatsApp, SMS, or Email
-  • 100% Offline converter — calculate gold weight and value anywhere without internet
-  • Transparent calculations with zero hidden formulas or rounding discrepancies
+🤝 Gold Zakat Calculator (2.5%)
+• Add multiple gold jewelry items with custom weights and units
+• Support for popular gold purities: 24K, 22K, 21K, 18K, or custom karat
+• Calculates pure gold weight (24K equivalent) across all items
+• Instant 2.5% zakat calculation based on your current market rate
+• Saves your jewelry items list and rates securely on your device
 
-• Multilingual Support (20+ Languages):
-  • English, Hindi, Urdu, Bengali, Nepali, Arabic, Spanish, French, Tamil, and more
+🌍 Multi-Currency & 20+ Languages
+• Searchable list of 40 display currencies (INR ₹, PKR Rs, NPR Rs, BDT ৳, AED, SAR, USD $, EUR €, GBP £, and more)
+• Available in 20 languages: English, Hindi, Urdu, Roman Urdu, Bengali, Nepali, Arabic, Spanish, French, Filipino, Tamil, Burmese, Sinhala, Amharic, Persian, Pashto, Sindhi, Indonesian, Malay, and Turkish
+• Switch languages instantly inside the app
 
-Whether you are shopping at a jewelry store, calculating bullion and jewelry value, or fulfilling religious Zakat obligations, Gold Weight Converter delivers instant, reliable results every time.
+📱 Sleek, Private & Offline
+• Offline conversions, pricing, and zakat — no internet required for calculations
+• No sign-up or login required: Your financial calculations stay private
+• Beautiful Light, Dark, and System theme modes
+• Clean, accessible interface optimized for all screen sizes
+
+👥 WHO IS THIS APP FOR?
+• Gold jewelers, goldsmiths, and bullion dealers
+• Retail gold buyers checking jewelry prices before purchasing
+• Investors tracking physical gold portfolio value
+• Anyone calculating annual Zakat on gold ornaments and bullion
+• Users across Pakistan, India, Nepal, Bangladesh, Middle East, and worldwide
+
+📏 TRADITIONAL CONVERSION STANDARDS
+• 1 Tola = 11.66 Grams (= 12 Masha = 16 Ana = 96 Ratti = 100 Lal)
+• 1 Masha = 0.972 Grams (= 1.333 Ana = 8 Ratti)
+• 1 Ana = 0.72875 Grams (= 6 Ratti = 6.25 Lal)
+• 1 Ratti = 0.1215 Grams
+• 1 Lal = 0.1166 Grams (Standard unit in Nepal)
+• 1 Troy Ounce = 31.1035 Grams
+
+⚠️ DISCLAIMER & NOTES
+• Gold market prices fluctuate: Always input your local market rate for accurate estimates.
+• Currency settings change display symbols and formatting only; no live FX conversion is performed.
+• The zakat calculator provides an estimate based on entered items (2.5%). Please consult a religious scholar for personal rulings.
+
+💡 OPEN SOURCE & TRANSPARENT
+This app is open-source and respects your privacy.
+Source code: https://github.com/Dr-Usman/Gold-Weight-Converter
+
+---
+Simple. Accurate. Reliable.
+Download Gold Weight Converter today for effortless gold conversions, pricing, history, and zakat calculations!
 ```
