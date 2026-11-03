@@ -86,5 +86,32 @@ void main() {
         equals('-03:30'),
       );
     });
+
+    test(
+      'trackHistoryUnlockClicked and trackHistoryTierUnlocked execute safely without init',
+      () {
+        expect(
+          () => AnalyticsService.trackHistoryUnlockClicked(
+            tier: 'items_7',
+            historyCount: 10,
+          ),
+          returnsNormally,
+        );
+        expect(
+          () => AnalyticsService.trackHistoryUnlockClicked(
+            tier: 'rewarded_24h',
+            historyCount: 10,
+          ),
+          returnsNormally,
+        );
+        expect(
+          () => AnalyticsService.trackHistoryTierUnlocked(
+            tier: 'items_7',
+            historyCount: 10,
+          ),
+          returnsNormally,
+        );
+      },
+    );
   });
 }

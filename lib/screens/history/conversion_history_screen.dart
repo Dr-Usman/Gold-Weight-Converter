@@ -63,6 +63,11 @@ class _ConversionHistoryScreenState
   }
 
   Future<void> _handleQuickUnlock(int historyCount) async {
+    if (_isLoadingAd) return;
+    AnalyticsService.trackHistoryUnlockClicked(
+      tier: 'items_7',
+      historyCount: historyCount,
+    );
     setState(() => _isLoadingAd = true);
     final bool success = await AdsService.showInterstitial();
     if (!mounted) return;
@@ -77,6 +82,11 @@ class _ConversionHistoryScreenState
   }
 
   Future<void> _handleFullUnlock(int historyCount) async {
+    if (_isLoadingAd) return;
+    AnalyticsService.trackHistoryUnlockClicked(
+      tier: 'rewarded_24h',
+      historyCount: historyCount,
+    );
     setState(() => _isLoadingAd = true);
     final bool earned = await AdsService.showRewarded();
     if (!mounted) return;
